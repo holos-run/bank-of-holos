@@ -29,7 +29,7 @@ data:
   AMBIENT_ENABLED: "true"
   AMBIENT_DNS_CAPTURE: "false"
   AMBIENT_IPV6: "true"
-  CNI_NET_DIR: /etc/cni/net.d # Directory where the CNI config file is going to be created. 
+  CNI_NET_DIR: /var/lib/rancher/k3s/agent/etc/cni/net.d # Directory where the CNI config file is going to be created. 
   CHAINED_CNI_PLUGIN: "true"
   EXCLUDED_NAMESPACES: "kube-system"
   REPAIR_ENABLED: "true"
@@ -297,7 +297,7 @@ spec:
         # Used to install CNI.
         - name: cni-bin-dir
           hostPath:
-            path: /opt/cni/bin
+            path: /bin
         - name: cni-host-procfs
           hostPath:
             path: /proc
@@ -308,7 +308,7 @@ spec:
             type: DirectoryOrCreate
         - name: cni-net-dir
           hostPath:
-            path: /etc/cni/net.d
+            path: /var/lib/rancher/k3s/agent/etc/cni/net.d
         # Used for UDS sockets for logging, ambient eventing
         - name: cni-socket-dir
           hostPath:
