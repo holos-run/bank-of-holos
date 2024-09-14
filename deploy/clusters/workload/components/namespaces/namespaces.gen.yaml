@@ -6,3 +6,11 @@ metadata:
     kubernetes.io/metadata.name: cert-manager
 kind: Namespace
 apiVersion: v1
+---
+# Source: CUE apiObjects.Namespace.istio-system
+metadata:
+  name: istio-system
+  labels:
+    kubernetes.io/metadata.name: istio-system
+kind: Namespace
+apiVersion: v1
