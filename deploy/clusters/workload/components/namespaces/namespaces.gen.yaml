@@ -1,0 +1,8 @@
+---
+# Source: CUE apiObjects.Namespace.cert-manager
+metadata:
+  name: cert-manager
+  labels:
+    kubernetes.io/metadata.name: cert-manager
+kind: Namespace
+apiVersion: v1
