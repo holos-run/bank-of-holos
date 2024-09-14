@@ -7,6 +7,14 @@ metadata:
 kind: Namespace
 apiVersion: v1
 ---
+# Source: CUE apiObjects.Namespace.istio-ingress
+metadata:
+  name: istio-ingress
+  labels:
+    kubernetes.io/metadata.name: istio-ingress
+kind: Namespace
+apiVersion: v1
+---
 # Source: CUE apiObjects.Namespace.istio-system
 metadata:
   name: istio-system

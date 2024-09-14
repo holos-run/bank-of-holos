@@ -1,0 +1,54 @@
+---
+# Source: CUE apiObjects.Certificate.gateway-cert
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gateway-cert
+  namespace: istio-ingress
+spec:
+  commonName: holos.localhost
+  dnsNames:
+    - holos.localhost
+    - '*.holos.localhost'
+  issuerRef:
+    kind: ClusterIssuer
+    name: local-ca
+  secretName: gateway-cert
+---
+# Source: CUE apiObjects.Gateway.default
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: default
+  namespace: istio-ingress
+spec:
+  gatewayClassName: istio
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: Same
+    - name: https
+      protocol: HTTPS
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: Same
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: gateway-cert
+        mode: Terminate
+---
+# Source: CUE apiObjects.ServiceAccount.default-istio
+metadata:
+  name: default-istio
+  namespace: istio-ingress
+  labels:
+    gateway.istio.io/managed: istio.io-gateway-controller
+    gateway.networking.k8s.io/gateway-name: default
+    istio.io/gateway-name: default
+kind: ServiceAccount
+apiVersion: v1
