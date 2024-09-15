@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: app-projects
   namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
   project: platform
   source:
-    path: ./deploy/clusters/workload/components/cert-manager
+    path: ./deploy/clusters/workload/components/app-projects
     repoURL: https://github.com/holos-run/holos-manage-a-project-guide
     targetRevision: main

@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-  project: default
+  project: platform
   source:
     path: ./deploy/clusters/workload/components/httproutes
     repoURL: https://github.com/holos-run/holos-manage-a-project-guide

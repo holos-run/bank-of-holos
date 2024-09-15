@@ -1,0 +1,9 @@
+---
+# Source: CUE apiObjects.AppProject.platform
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: platform
+  namespace: argocd
+spec:
+  description: Holos managed AppProject
