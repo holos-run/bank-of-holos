@@ -1,4 +1,12 @@
 ---
+# Source: CUE apiObjects.Namespace.argocd
+metadata:
+  name: argocd
+  labels:
+    kubernetes.io/metadata.name: argocd
+kind: Namespace
+apiVersion: v1
+---
 # Source: CUE apiObjects.Namespace.cert-manager
 metadata:
   name: cert-manager
