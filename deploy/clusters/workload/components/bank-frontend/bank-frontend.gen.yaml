@@ -159,6 +159,23 @@ spec:
 kind: Deployment
 apiVersion: apps/v1
 ---
+# Source: CUE apiObjects.ExternalSecret.jwt-key
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: jwt-key
+  namespace: bank-frontend
+spec:
+  dataFrom:
+    - extract:
+        key: jwt-key
+  refreshInterval: 5s
+  secretStoreRef:
+    kind: SecretStore
+    name: bank-security
+  target:
+    name: jwt-key
+---
 # Source: CUE apiObjects.ReferenceGrant.grant
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
@@ -173,6 +190,20 @@ spec:
   to:
     - group: ""
       kind: Service
+---
+# Source: CUE apiObjects.SecretStore.bank-of-holos
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: bank-security
+  namespace: bank-frontend
+spec:
+  provider:
+    kubernetes:
+      auth:
+        serviceAccount:
+          name: bank-of-holos
+      remoteNamespace: bank-security
 ---
 # Source: CUE apiObjects.Service.frontend
 metadata:
