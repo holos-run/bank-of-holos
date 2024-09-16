@@ -6,7 +6,7 @@ import (
 	ss "external-secrets.io/secretstore/v1beta1"
 )
 
-let BankName = "bank-of-holos"
+let BankName = #BankOfHolos.Name
 
 #BankOfHolos: {
 	// Resources to make available in each of the project namespaces.
@@ -20,9 +20,19 @@ let BankName = "bank-of-holos"
 		// SecretStore to fetch secrets owned by the security team
 		SecretStore: (BankName): ss.#SecretStore & {
 			metadata: name: #BankOfHolos.Security.Namespace
-			spec: provider: kubernetes: {
-				remoteNamespace: #BankOfHolos.Security.Namespace
-				auth: serviceAccount: name: ServiceAccount[BankName].metadata.name
+			spec: provider: {
+				kubernetes: {
+					remoteNamespace: #BankOfHolos.Security.Namespace
+					auth: serviceAccount: name: ServiceAccount[BankName].metadata.name
+					server: {
+						url: "https://kubernetes.default.svc"
+						caProvider: {
+							type: "ConfigMap"
+							name: "kube-root-ca.crt"
+							key:  "ca.crt"
+						}
+					}
+				}
 			}
 		}
 

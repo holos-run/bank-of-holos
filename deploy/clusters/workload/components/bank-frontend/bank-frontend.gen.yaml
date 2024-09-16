@@ -204,6 +204,12 @@ spec:
         serviceAccount:
           name: bank-of-holos
       remoteNamespace: bank-security
+      server:
+        caProvider:
+          key: ca.crt
+          name: kube-root-ca.crt
+          type: ConfigMap
+        url: https://kubernetes.default.svc
 ---
 # Source: CUE apiObjects.Service.frontend
 metadata:
