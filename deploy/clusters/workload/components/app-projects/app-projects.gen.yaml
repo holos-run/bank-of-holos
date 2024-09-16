@@ -1,4 +1,21 @@
 ---
+# Source: CUE apiObjects.AppProject.bank-backend
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: bank-backend
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  description: Holos managed AppProject
+  destinations:
+    - namespace: '*'
+      server: '*'
+  sourceRepos:
+    - '*'
+---
 # Source: CUE apiObjects.AppProject.bank-frontend
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -16,45 +33,11 @@ spec:
   sourceRepos:
     - '*'
 ---
-# Source: CUE apiObjects.AppProject.bank-identity
+# Source: CUE apiObjects.AppProject.bank-security
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: bank-identity
-  namespace: argocd
-spec:
-  clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
-  description: Holos managed AppProject
-  destinations:
-    - namespace: '*'
-      server: '*'
-  sourceRepos:
-    - '*'
----
-# Source: CUE apiObjects.AppProject.bank-ledger
-apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  name: bank-ledger
-  namespace: argocd
-spec:
-  clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
-  description: Holos managed AppProject
-  destinations:
-    - namespace: '*'
-      server: '*'
-  sourceRepos:
-    - '*'
----
-# Source: CUE apiObjects.AppProject.bank-tools
-apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  name: bank-tools
+  name: bank-security
   namespace: argocd
 spec:
   clusterResourceWhitelist:
