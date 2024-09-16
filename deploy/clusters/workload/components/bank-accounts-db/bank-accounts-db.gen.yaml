@@ -1,0 +1,180 @@
+---
+# Source: CUE apiObjects.ConfigMap.accounts-db-config
+apiVersion: v1
+data:
+  ACCOUNTS_DB_URI: postgresql://accounts-admin:accounts-pwd@accounts-db:5432/accounts-db
+  POSTGRES_DB: accounts-db
+  POSTGRES_PASSWORD: accounts-pwd
+  POSTGRES_USER: accounts-admin
+kind: ConfigMap
+metadata:
+  labels:
+    app: accounts-db
+    application: bank-of-holos
+    environment: development
+    team: accounts
+    tier: db
+  name: accounts-db-config
+  namespace: bank-backend
+---
+# Source: CUE apiObjects.ConfigMap.demo-data-config
+metadata:
+  name: demo-data-config
+  namespace: bank-backend
+data:
+  USE_DEMO_DATA: "True"
+  DEMO_LOGIN_USERNAME: testuser
+  DEMO_LOGIN_PASSWORD: bankofanthos
+kind: ConfigMap
+apiVersion: v1
+---
+# Source: CUE apiObjects.ConfigMap.environment-config
+metadata:
+  name: environment-config
+  namespace: bank-backend
+data:
+  LOCAL_ROUTING_NUM: "883745000"
+  PUB_KEY_PATH: /tmp/.ssh/publickey
+kind: ConfigMap
+apiVersion: v1
+---
+# Source: CUE apiObjects.ConfigMap.service-api-config
+metadata:
+  name: service-api-config
+  namespace: bank-backend
+data:
+  TRANSACTIONS_API_ADDR: ledgerwriterbank-backend.svc:8080
+  BALANCES_API_ADDR: balancereaderbank-backend.svc:8080
+  HISTORY_API_ADDR: transactionhistory.bank-backend.svc:8080
+  CONTACTS_API_ADDR: contacts.bank-backend.svc:8080
+  USERSERVICE_API_ADDR: userservice.bank-backend.svc:8080
+kind: ConfigMap
+apiVersion: v1
+---
+# Source: CUE apiObjects.ExternalSecret.jwt-key
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: jwt-key
+  namespace: bank-backend
+spec:
+  dataFrom:
+    - extract:
+        key: jwt-key
+  refreshInterval: 5s
+  secretStoreRef:
+    kind: SecretStore
+    name: bank-security
+  target:
+    name: jwt-key
+---
+# Source: CUE apiObjects.SecretStore.bank-of-holos
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: bank-security
+  namespace: bank-backend
+spec:
+  provider:
+    kubernetes:
+      auth:
+        serviceAccount:
+          name: bank-of-holos
+      remoteNamespace: bank-security
+      server:
+        caProvider:
+          key: ca.crt
+          name: kube-root-ca.crt
+          type: ConfigMap
+        url: https://kubernetes.default.svc
+---
+# Source: CUE apiObjects.Service.accounts-db
+apiVersion: v1
+kind: Service
+metadata:
+  name: accounts-db
+  namespace: bank-backend
+  labels:
+    application: bank-of-holos
+    environment: development
+    team: accounts
+    tier: db
+spec:
+  ports:
+    - name: tcp
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    app: accounts-db
+    application: bank-of-holos
+    environment: development
+    team: accounts
+    tier: db
+  type: ClusterIP
+---
+# Source: CUE apiObjects.ServiceAccount.bank-of-holos
+metadata:
+  name: bank-of-holos
+  namespace: bank-backend
+kind: ServiceAccount
+apiVersion: v1
+---
+# Source: CUE apiObjects.StatefulSet.accounts-db
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: accounts-db
+  namespace: bank-backend
+  labels:
+    application: bank-of-holos
+    environment: development
+    team: accounts
+    tier: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: accounts-db
+      application: bank-of-holos
+      environment: development
+      team: accounts
+      tier: db
+  serviceName: accounts-db
+  template:
+    metadata:
+      labels:
+        app: accounts-db
+        application: bank-of-holos
+        environment: development
+        team: accounts
+        tier: db
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: environment-config
+            - configMapRef:
+                name: accounts-db-config
+            - configMapRef:
+                name: demo-data-config
+          image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/accounts-db:v0.6.5@sha256:abb955756a82b115e0fd9c5fa1527ae1a744b398b357fd6d7a26348feccad181
+          name: accounts-db
+          ports:
+            - containerPort: 5432
+          resources:
+            limits:
+              cpu: 250m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdb
+              subPath: postgres
+      serviceAccount: bank-of-anthos
+      serviceAccountName: default
+      volumes:
+        - emptyDir: {}
+          name: postgresdb
