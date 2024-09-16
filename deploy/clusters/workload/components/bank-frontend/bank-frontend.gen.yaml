@@ -1,0 +1,282 @@
+---
+# Source: CUE apiObjects.ConfigMap.demo-data-config
+metadata:
+  name: demo-data-config
+  namespace: bank-frontend
+data:
+  USE_DEMO_DATA: "True"
+  DEMO_LOGIN_USERNAME: testuser
+  DEMO_LOGIN_PASSWORD: bankofholos
+kind: ConfigMap
+apiVersion: v1
+---
+# Source: CUE apiObjects.ConfigMap.environment-config
+metadata:
+  name: environment-config
+  namespace: bank-frontend
+data:
+  LOCAL_ROUTING_NUM: "883745000"
+  PUB_KEY_PATH: /tmp/.ssh/publickey
+kind: ConfigMap
+apiVersion: v1
+---
+# Source: CUE apiObjects.ConfigMap.service-api-config
+metadata:
+  name: service-api-config
+  namespace: bank-frontend
+data:
+  TRANSACTIONS_API_ADDR: ledgerwriter:8080
+  BALANCES_API_ADDR: balancereader:8080
+  HISTORY_API_ADDR: transactionhistory:8080
+  CONTACTS_API_ADDR: contacts:8080
+  USERSERVICE_API_ADDR: userservice:8080
+kind: ConfigMap
+apiVersion: v1
+---
+# Source: CUE apiObjects.Deployment.frontend
+metadata:
+  name: frontend
+  namespace: bank-frontend
+  labels:
+    application: bank-of-holos
+    environment: development
+    team: frontend
+    tier: web
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+      application: bank-of-holos
+      environment: development
+      team: frontend
+      tier: web
+  template:
+    metadata:
+      labels:
+        app: frontend
+        application: bank-of-holos
+        environment: development
+        team: frontend
+        tier: web
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      serviceAccountName: bank-of-holos
+      terminationGracePeriodSeconds: 5
+      containers:
+        - env:
+            - name: BANK_NAME
+              value: Bank of Holos
+            - name: ENV_PLATFORM
+              value: local
+            - name: VERSION
+              value: v0.6.5
+            - name: PORT
+              value: "8080"
+            - name: ENABLE_TRACING
+              value: "false"
+            - name: SCHEME
+              value: http
+            - name: LOG_LEVEL
+              value: info
+            - name: DEFAULT_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: DEMO_LOGIN_USERNAME
+                  name: demo-data-config
+            - name: DEFAULT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: DEMO_LOGIN_PASSWORD
+                  name: demo-data-config
+            - name: REGISTERED_OAUTH_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: DEMO_OAUTH_CLIENT_ID
+                  name: oauth-config
+                  optional: true
+            - name: ALLOWED_OAUTH_REDIRECT_URI
+              valueFrom:
+                configMapKeyRef:
+                  key: DEMO_OAUTH_REDIRECT_URI
+                  name: oauth-config
+                  optional: true
+          envFrom:
+            - configMapRef:
+                name: environment-config
+            - configMapRef:
+                name: service-api-config
+          image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend:v0.6.5@sha256:d72050f70d12383e4434ad04d189b681dc625f696087ddf0b5df641645c9dafa
+          livenessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 30
+          name: front
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 10
+          resources:
+            limits:
+              cpu: 250m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+            privileged: false
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+            - mountPath: /tmp/.ssh
+              name: publickey
+              readOnly: true
+      volumes:
+        - emptyDir: {}
+          name: tmp
+        - name: publickey
+          secret:
+            items:
+              - key: jwtRS256.key.pub
+                path: publickey
+            secretName: jwt-key
+kind: Deployment
+apiVersion: apps/v1
+---
+# Source: CUE apiObjects.ReferenceGrant.grant
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: istio-ingress
+  namespace: bank-frontend
+spec:
+  from:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: istio-ingress
+  to:
+    - group: ""
+      kind: Service
+---
+# Source: CUE apiObjects.Secret.jwt-key
+metadata:
+  name: jwt-key
+  namespace: bank-frontend
+stringData:
+  jwtRS256.key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    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
+    -----END RSA PRIVATE KEY-----
+  jwtRS256.key.pub: |
+    -----BEGIN PUBLIC KEY-----
+    MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA4GvZNSkj5iiWb2DZM2fC
+    x5bGGYgwaK4SMsyI8K8oFQepL13YROXKw5S+lELH9AetTdcTAdkbCzyapSdk3Pqw
+    xhCaf4knvKeRi76csG6mc0krx1GItY65X+Nq0qaRvLdOObFQGmIHx75zkZ654+ft
+    vnvCY5OPjV44Lktu1wlrBmr225QSFbIa8A96BSpJzKm0ahK+6r8VvvOq1BHGZIIK
+    KGQ7/zLuxPOn+c3wCF0VQY20Y4Xoo+DVt/+0MI8OZvdAuab2UXub+TiwAgG768yn
+    JPh7eklLtdtA1BGglXmoER4xvhhXQsORtTi60FZPX7C3V1rlUe+rU9BY6ClrWleJ
+    tgBf1XR/tBmLdfB4YVnKtzB7vLClOKultaduSVnfv8C0uz1zPBZIwXnsVO7XySVP
+    AJBT8PVGR3kbg9nEDk/rVlKYMInDSO8SHNyKO+k6pThmamoqMBJBCpcC+G1UPUqY
+    euK8w66ZSpKWfPctmYebPskiJbKeOrHVU2Dj7zzdimL2behqSwSi3zAklWf4FSAz
+    h/4zpD4Wq3ICwcXlPqa59OB0qqACx5AmEFlvQuUI0q6wZ6vrlAYK+Mdm4DvFAUlX
+    s5mfl6OFvtbFSdqurE6ItNVyRVQAlzXWmhC8GrWBIht1OJLWDKO5lvZmJQ/lk7bs
+    Ur4+2+NNnssMpnMB6C+Iz6sCAwEAAQ==
+    -----END PUBLIC KEY-----
+type: Opaque
+kind: Secret
+apiVersion: v1
+---
+# Source: CUE apiObjects.Service.frontend
+metadata:
+  name: frontend
+  namespace: bank-frontend
+  labels:
+    application: bank-of-holos
+    environment: development
+    team: frontend
+    tier: web
+spec:
+  selector:
+    app: frontend
+    application: bank-of-holos
+    environment: development
+    team: frontend
+    tier: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+kind: Service
+apiVersion: v1
+---
+# Source: CUE apiObjects.ServiceAccount.bank-of-holos
+metadata:
+  name: bank-of-holos
+  namespace: bank-frontend
+kind: ServiceAccount
+apiVersion: v1

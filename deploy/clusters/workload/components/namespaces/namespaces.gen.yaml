@@ -7,6 +7,38 @@ metadata:
 kind: Namespace
 apiVersion: v1
 ---
+# Source: CUE apiObjects.Namespace.bank-frontend
+metadata:
+  name: bank-frontend
+  labels:
+    kubernetes.io/metadata.name: bank-frontend
+kind: Namespace
+apiVersion: v1
+---
+# Source: CUE apiObjects.Namespace.bank-identity
+metadata:
+  name: bank-identity
+  labels:
+    kubernetes.io/metadata.name: bank-identity
+kind: Namespace
+apiVersion: v1
+---
+# Source: CUE apiObjects.Namespace.bank-ledger
+metadata:
+  name: bank-ledger
+  labels:
+    kubernetes.io/metadata.name: bank-ledger
+kind: Namespace
+apiVersion: v1
+---
+# Source: CUE apiObjects.Namespace.bank-tools
+metadata:
+  name: bank-tools
+  labels:
+    kubernetes.io/metadata.name: bank-tools
+kind: Namespace
+apiVersion: v1
+---
 # Source: CUE apiObjects.Namespace.cert-manager
 metadata:
   name: cert-manager
