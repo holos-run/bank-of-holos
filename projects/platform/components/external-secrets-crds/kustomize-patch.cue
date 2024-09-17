@@ -38,4 +38,13 @@ let KustomizePatches = #KustomizePatches & {
 		}
 		patch: yaml.Marshal(Patch)
 	}
+	secretstores: {
+		target: {
+			group:   "apiextensions.k8s.io"
+			version: "v1"
+			kind:    "CustomResourceDefinition"
+			name:    "secretstores.external-secrets.io"
+		}
+		patch: yaml.Marshal(Patch)
+	}
 }
