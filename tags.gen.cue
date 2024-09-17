@@ -6,7 +6,7 @@ import (
 )
 
 // _ClusterName is the --cluster-name flag value provided by the holos cli.
-_ClusterName: string @tag(cluster, type=string)
+_ClusterName: string | *"no-name" @tag(cluster, type=string)
 
 // _PlatformConfig represents all of the data passed from holos to cue, used to
 // carry the platform and project models.
