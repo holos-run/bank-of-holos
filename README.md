@@ -6,6 +6,9 @@ The Holos Authors use this repository to demonstrate how platform, security, and
 
 ## Get Started
 
+> [!WARNING]
+> These guides are currently in development.  Check back in a week or two for the finished guides.
+
 1. Read the [Quickstart] to learn the core concepts of Holos.
 2. Create a [Local Cluster] to explore the platform locally.
 3. [Manage a Project] to learn how Holos enables teams to work together.
