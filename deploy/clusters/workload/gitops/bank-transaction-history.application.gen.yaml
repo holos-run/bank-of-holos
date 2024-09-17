@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bank-transaction-history
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: bank-backend
+  source:
+    path: ./deploy/clusters/workload/components/bank-transaction-history
+    repoURL: https://github.com/holos-run/holos-manage-a-project-guide
+    targetRevision: main
