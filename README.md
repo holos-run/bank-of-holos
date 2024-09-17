@@ -1,6 +1,6 @@
 # Bank of Holos
 
-**Bank of Holos** is an example software development platform built for a retail bank using [Holos], an open source tool to holistically manage your software development platform.
+**Bank of Holos** is an example software development platform built for a retail bank using [Holos].  Holos is an open source tool that holistically manages software development platforms.
 
 The Holos Authors use this repository to demonstrate how platform, security, and software development teams are able to deliver services safer, easier, and more consistently with Holos.  This repository is also used extensively in our [Guides] to show real world examples of Holos in action.
 
@@ -10,8 +10,8 @@ The Holos Authors use this repository to demonstrate how platform, security, and
 > These guides are currently in development.  Check back in a week or two for the finished guides.
 
 1. Read the [Quickstart] to learn the core concepts of Holos.
-2. Create a [Local Cluster] to explore the platform locally.
-3. [Manage a Project] to learn how Holos enables teams to work together.
+2. Create a [Local Cluster] to apply our guides to your local device.
+3. [Manage a Project] to learn how Holos enables collaboration between teams building on the platform.
 
 ## Screenshots
 
