@@ -32,7 +32,7 @@ let KustomizePatches = #KustomizePatches & {
 		let Patch = [{
 			op:    "replace"
 			path:  "/webhooks/0/failurePolicy"
-			value: "Ignore"
+			value: "Fail"
 		}]
 		patch: yaml.Marshal(Patch)
 	}
