@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "cspell": "cspell '**/*.{go,ts,js,md,mdx}'"
+  },
+  "devDependencies": {
+    "cspell": "^8.14.3"
+  }
+}
