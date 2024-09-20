@@ -66,4 +66,7 @@ kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-tra
 # Bank Frontend
 kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-frontend/bank-frontend.gen.yaml
 
+# ArgoCD Applications
+kubectl apply --server-side=true -f deploy/clusters/workload/gitops
+
 exit 0
