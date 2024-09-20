@@ -1,0 +1,69 @@
+#! /bin/bash
+
+# cd to the repository root
+TOPLEVEL="$(cd $(dirname "$0") && git rev-parse --show-toplevel)"
+cd "$TOPLEVEL"
+
+set -xeuo pipefail
+
+# Namespaces first
+kubectl apply --server-side=true -f deploy/clusters/workload/components/namespaces/namespaces.gen.yaml
+
+# Custom Resource Definitions
+kubectl apply --server-side=true -f deploy/clusters/workload/components/argocd-crds/argocd-crds.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/gateway-api/gateway-api.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/external-secrets-crds/external-secrets-crds.gen.yaml
+kubectl wait --for=condition=Established crd --all --timeout=300s
+
+# External Secrets
+kubectl apply --server-side=true -f deploy/clusters/workload/components/external-secrets/external-secrets.gen.yaml
+
+# Cert Manager (CRDs are included)
+kubectl apply --server-side=true -f deploy/clusters/workload/components/cert-manager/cert-manager.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/local-ca/local-ca.gen.yaml
+if ! kubectl wait --for=condition=Ready clusterissuer/local-ca --timeout=30s; then
+  echo 'Did you forget to apply your local CA?  See: https://holos.run/docs/guides/local-cluster/#reset-the-cluster' >&2
+  exit 1
+fi
+
+# ArgoCD
+kubectl apply --server-side=true -f deploy/clusters/workload/components/argocd/argocd.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/app-projects/app-projects.gen.yaml
+
+# Istio ()
+kubectl apply --server-side=true -f deploy/clusters/workload/components/istio-base/istio-base.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/istiod/istiod.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/istio-cni/istio-cni.gen.yaml
+if ! kubectl wait --for=condition=Ready pod -l k8s-app=istio-cni-node --timeout=300s -n istio-system; then
+  echo 'istio-cni-node not ready, try: holos generate component istio-k3d' >&2
+  exit 1
+fi
+kubectl apply --server-side=true -f deploy/clusters/workload/components/istio-ztunnel/istio-ztunnel.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/istio-gateway/istio-gateway.gen.yaml
+if ! kubectl wait --for=condition=Ready pod -l istio.io/gateway-name=default --timeout=300s -n istio-ingress; then
+  echo 'default gateway is not ready' >&2
+  exit 1
+fi
+
+# Routes should be accepted, but all backends aren't valid yet.
+kubectl apply --server-side=true -f deploy/clusters/workload/components/httproutes/httproutes.gen.yaml
+
+# Generate the private-key in-cluster.
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-secrets/bank-secrets.gen.yaml
+kubectl wait --for=condition=complete job.batch/jwt-key-writer -n bank-security --timeout=300s
+
+# Bank Config
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-backend-config/bank-backend-config.gen.yaml
+# Bank Databases
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-accounts-db/bank-accounts-db.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-ledger-db/bank-ledger-db.gen.yaml
+# Bank Backend Services
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-contacts/bank-contacts.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-balance-reader/bank-balance-reader.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-userservice/bank-userservice.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-ledger-writer/bank-ledger-writer.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-transaction-history/bank-transaction-history.gen.yaml
+# Bank Frontend
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-frontend/bank-frontend.gen.yaml
+
+exit 0
