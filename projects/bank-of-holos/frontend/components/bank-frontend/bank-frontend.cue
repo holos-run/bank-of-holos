@@ -75,7 +75,7 @@ let Objects = {
 						containers: [{
 							env: [{
 								name:  "BANK_NAME"
-								value: "Bank of Gary"
+								value: #Organization.DisplayName
 							}, {
 								name:  "ENV_PLATFORM"
 								value: "local"

@@ -71,7 +71,7 @@ spec:
       containers:
         - env:
             - name: BANK_NAME
-              value: Bank of Gary
+              value: Bank of Holos
             - name: ENV_PLATFORM
               value: local
             - name: VERSION

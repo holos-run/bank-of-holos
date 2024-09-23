@@ -181,3 +181,9 @@ import (
 	// platform operators to define.
 	Domain: string & (string | *"holos.localhost")
 }
+
+// Organization represents organizational metadata useful across the platform.
+#Organization: {
+	Name:        string & (=~"^[a-z][0-9a-z-]{1,61}[0-9a-z]$" & !~"--")
+	DisplayName: string
+}
