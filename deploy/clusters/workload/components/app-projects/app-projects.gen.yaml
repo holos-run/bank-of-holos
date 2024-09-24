@@ -9,7 +9,7 @@ spec:
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
-  description: Holos managed AppProject
+  description: Holos managed AppProject for Bank of Holos
   destinations:
     - namespace: '*'
       server: '*'
@@ -26,7 +26,7 @@ spec:
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
-  description: Holos managed AppProject
+  description: Holos managed AppProject for Bank of Holos
   destinations:
     - namespace: '*'
       server: '*'
@@ -43,7 +43,7 @@ spec:
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
-  description: Holos managed AppProject
+  description: Holos managed AppProject for Bank of Holos
   destinations:
     - namespace: '*'
       server: '*'
@@ -60,7 +60,7 @@ spec:
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
-  description: Holos managed AppProject
+  description: Holos managed AppProject for Bank of Holos
   destinations:
     - namespace: '*'
       server: '*'
