@@ -1,13 +1,8 @@
 # Bank of Holos
 
-**Bank of Holos** is an example software development platform built for a
-*fictional retail bank using [Holos].  Holos is an open source tool that makes
-*it easier and safer to manage a software development platform.
+**Bank of Holos** is an example software development platform built for a fictional retail bank using [Holos].  Holos is an open source tool that makes it easier and safer to manage a software development platform.
 
-The Holos Authors use this repository to show how platform, security, and dev
-teams build golden paths for each other.  Teams deliver services safer, easier,
-and more consistently with Holos and these golden paths.  This repository is
-used extensively in our [Guides] to apply the configuration to a real Kubernetes cluster.
+The Holos Authors use this repository to show how platform, security, and dev teams build golden paths for each other.  Teams deliver services safer, easier, and more consistently with Holos and these golden paths.  This repository is used extensively in our [Guides] to apply the configuration to a real Kubernetes cluster.
 
 ## Get Started
 
