@@ -1,17 +1,21 @@
 # Bank of Holos
 
-**Bank of Holos** is an example software development platform built for a retail bank using [Holos].  Holos is an open source tool that holistically manages software development platforms.
+**Bank of Holos** is an example software development platform built for a
+*fictional retail bank using [Holos].  Holos is an open source tool that makes
+*it easier and safer to manage a software development platform.
 
-The Holos Authors use this repository to demonstrate how platform, security, and software development teams are able to deliver services safer, easier, and more consistently with Holos.  This repository is also used extensively in our [Guides] to show real world examples of Holos in action.
+The Holos Authors use this repository to show how platform, security, and dev
+teams build golden paths for each other.  Teams deliver services safer, easier,
+and more consistently with Holos and these golden paths.  This repository is
+used extensively in our [Guides] to apply the configuration to a real Kubernetes cluster.
 
 ## Get Started
 
-> [!WARNING]
-> These guides are currently in development.  Check back in a week or two for the finished guides.
-
-1. Read the [Quickstart] to learn the core concepts of Holos.
-2. Create a [Local Cluster] to apply our guides to your local device.
-3. [Manage a Project] to learn how Holos enables collaboration between teams building on the platform.
+1. Read the [Quickstart] to learn the core concepts of Holos and see how to re-use an existing Helm chart.
+2. Create a [Local Cluster] to apply our guides to your local machine.
+3. [Deploy a Service] explores how the platform team at the bank provides golden paths for a dev team to migrate a service from an acquired company.
+3. [Change a Service] walks through a common Day 2 task, making a simple
+configuration change to a web app.
 
 ## Screenshots
 
@@ -63,4 +67,5 @@ rendered platform in 1.248310167s
 [Quickstart]: https://holos.run/docs/quickstart/
 [Guides]: https://holos.run/docs/guides/
 [Local Cluster]: https://holos.run/docs/guides/local-cluster/
-[Manage a Project]: https://holos.run/docs/guides/manage-a-project/
+[Deploy a Service]: https://holos.run/docs/guides/deploy-a-service/
+[Change a Service]: https://holos.run/docs/guides/change-a-service/
