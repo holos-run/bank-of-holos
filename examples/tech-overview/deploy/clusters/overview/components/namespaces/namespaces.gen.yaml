@@ -9,3 +9,14 @@ metadata:
     example.com/owner.email: sg-dev-team@example.com
 kind: Namespace
 apiVersion: v1
+---
+# Source: CUE apiObjects.Namespace.platform
+metadata:
+  name: platform
+  labels:
+    kubernetes.io/metadata.name: platform
+    example.com/project.name: platform
+    example.com/owner.name: platform-team
+    example.com/owner.email: sg-platform-team@example.com
+kind: Namespace
+apiVersion: v1

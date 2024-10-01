@@ -25,6 +25,14 @@ import api "github.com/holos-run/holos/api/author/v1alpha3"
 			Service:   HOST
 			Port:      number | *80
 		}
+
+		// CommonLabels is not part of the Projects API, so we use a hidden field to
+		// provide common labels to components that render resources from CUE.
+		_CommonLabels: {
+			"\(#Organization.Domain)/project.name": Name
+			"\(#Organization.Domain)/owner.name":   Owner.Name
+			"\(#Organization.Domain)/owner.email":  Owner.Email
+		}
 	}
 }
 

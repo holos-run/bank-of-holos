@@ -14,21 +14,13 @@ let Objects = {
 
 _Resources: {
 	for Project in #Projects {
-		let CommonLabels = {
-			"\(#Organization.Domain)/project.name": Project.Name
-			"\(#Organization.Domain)/owner.name":   Project.Owner.Name
-			"\(#Organization.Domain)/owner.email":  Project.Owner.Email
-		}
-
-		// Add common labels to all of the standard resources.
-		[_]: [_]: metadata: labels: CommonLabels
-
 		// Manage standard resources in each project namespace.
 		for Namespace in Project.Namespaces {
 			// Grant the project team admin access to their namespace.
 			RoleBinding: "\(Namespace.Name)/admin": {
 				metadata: name:      "admin"
 				metadata: namespace: Namespace.Name
+				metadata: labels:    Project._CommonLabels
 				roleRef: {
 					apiGroup: "rbac.authorization.k8s.io"
 					kind:     "ClusterRole"
@@ -51,6 +43,7 @@ _Resources: {
 			SecretStore: "\(Namespace.Name)/default": {
 				metadata: name:      "default"
 				metadata: namespace: Namespace.Name
+				metadata: labels:    Project._CommonLabels
 				spec: provider: {
 					kubernetes: {
 						remoteNamespace: metadata.namespace
@@ -66,6 +59,7 @@ _Resources: {
 			ReferenceGrant: "\(Namespace.Name)/istio-ingress": {
 				metadata: name:      IngressNamespace
 				metadata: namespace: Namespace.Name
+				metadata: labels:    Project._CommonLabels
 				spec: from: [{
 					group:     "gateway.networking.k8s.io"
 					kind:      "HTTPRoute"
@@ -76,16 +70,6 @@ _Resources: {
 					kind:  "Service"
 				}]
 			}
-		}
-
-		// Manage an AppProject for the project.
-		AppProject: (Project.Name): {
-			metadata: name:      Project.Name
-			metadata: namespace: "argocd"
-			spec: description:   string | *"Managed AppProject for \(#Organization.DisplayName)"
-			spec: clusterResourceWhitelist: [{group: "*", kind: "*"}]
-			spec: destinations: [{namespace: "*", server: "*"}]
-			spec: sourceRepos: ["*"]
 		}
 	}
 }

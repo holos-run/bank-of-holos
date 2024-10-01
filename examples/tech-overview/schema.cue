@@ -10,6 +10,7 @@ import api "github.com/holos-run/holos/api/author/v1alpha3"
 
 #ArgoConfig: api.#ArgoConfig & {
 	ClusterName: _ClusterName
+	DeployRoot:  "./examples/tech-overview"
 }
 
 _ComponentConfig: {

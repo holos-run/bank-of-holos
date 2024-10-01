@@ -10,19 +10,11 @@ let Objects = {
 
 let RESOURCES = {
 	for Project in #Projects {
-		let CommonLabels = {
-			"\(#Organization.Domain)/project.name": Project.Name
-			"\(#Organization.Domain)/owner.name":   Project.Owner.Name
-			"\(#Organization.Domain)/owner.email":  Project.Owner.Email
-		}
-
-		// Add common labels to all of the standard resources.
-		[_]: [_]: metadata: labels: CommonLabels
-
 		for Hostname in Project.Hostnames {
 			HTTPRoute: "\(Project.Name)/\(Hostname.Name)": {
 				metadata: name:      Hostname.Name + "." + #Platform.Domain
 				metadata: namespace: IngressNamespace
+				metadata: labels:    Project._CommonLabels
 				spec: hostnames: [metadata.name]
 				spec: parentRefs: [{
 					name:      "default"
