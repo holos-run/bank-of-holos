@@ -20,12 +20,15 @@ _Resources: {
 			"\(#Organization.Domain)/owner.email":  Project.Owner.Email
 		}
 
+		// Add common labels to all of the standard resources.
+		[_]: [_]: metadata: labels: CommonLabels
+
+		// Manage standard resources in each project namespace.
 		for Namespace in Project.Namespaces {
 			// Grant the project team admin access to their namespace.
 			RoleBinding: "\(Namespace.Name)/admin": {
 				metadata: name:      "admin"
 				metadata: namespace: Namespace.Name
-				metadata: labels:    CommonLabels
 				roleRef: {
 					apiGroup: "rbac.authorization.k8s.io"
 					kind:     "ClusterRole"
@@ -48,7 +51,6 @@ _Resources: {
 			SecretStore: "\(Namespace.Name)/default": {
 				metadata: name:      "default"
 				metadata: namespace: Namespace.Name
-				metadata: labels:    CommonLabels
 				spec: provider: {
 					kubernetes: {
 						remoteNamespace: metadata.namespace
@@ -58,11 +60,39 @@ _Resources: {
 					}
 				}
 			}
+
+			// Allow HTTPRoutes in the ingress gateway namespace to reference Services
+			// in the project namespace.
+			ReferenceGrant: "\(Namespace.Name)/istio-ingress": {
+				metadata: name:      IngressNamespace
+				metadata: namespace: Namespace.Name
+				spec: from: [{
+					group:     "gateway.networking.k8s.io"
+					kind:      "HTTPRoute"
+					namespace: IngressNamespace
+				}]
+				spec: to: [{
+					group: ""
+					kind:  "Service"
+				}]
+			}
+		}
+
+		// Manage an AppProject for the project.
+		AppProject: (Project.Name): {
+			metadata: name:      Project.Name
+			metadata: namespace: "argocd"
+			spec: description:   string | *"Managed AppProject for \(#Organization.DisplayName)"
+			spec: clusterResourceWhitelist: [{group: "*", kind: "*"}]
+			spec: destinations: [{namespace: "*", server: "*"}]
+			spec: sourceRepos: ["*"]
 		}
 	}
 }
 
+let IngressNamespace = "istio-ingress"
+
 let ManagementCluster = {
-	url:      "https://127.0.0.1"
+	url:      "https://management.example.com:6443"
 	caBundle: "LS0tLS1CRUd...QVRFLS0tLS0K"
 }

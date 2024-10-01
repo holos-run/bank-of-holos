@@ -23,6 +23,7 @@ import api "github.com/holos-run/holos/api/author/v1alpha3"
 			Name:      HOST
 			Namespace: Namespaces[NAME].Name
 			Service:   HOST
+			Port:      number | *80
 		}
 	}
 }

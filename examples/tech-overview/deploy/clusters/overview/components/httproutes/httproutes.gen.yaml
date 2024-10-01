@@ -1,0 +1,26 @@
+---
+# Source: CUE apiObjects.HTTPRoute.experiment/podinfo
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: podinfo.holos.localhost
+  namespace: istio-ingress
+  labels:
+    example.com/project.name: experiment
+    example.com/owner.name: dev-team
+    example.com/owner.email: sg-dev-team@example.com
+spec:
+  hostnames:
+    - podinfo.holos.localhost
+  parentRefs:
+    - name: default
+      namespace: istio-ingress
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: podinfo
+          namespace: experiment
+          port: 80

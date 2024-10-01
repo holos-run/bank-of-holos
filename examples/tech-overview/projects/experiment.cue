@@ -1,8 +1,11 @@
 package holos
 
-// The development team registers a project name.   The struct fields for this
-// project are filled in by the platform team automatically from their
-// definition of #Projects in projects.cue.
+// The development team registers a project name.
 #Projects: experiment: {
+	// The project owner must be named.
 	Owner: Name: "dev-team"
+	// The project exposes zero or more subdomains.  In this example
+	// "podinfo.example.com" routes to the podinfo Service in the experiment
+	// Namespace.
+	Hostnames: podinfo: _
 }

@@ -1,4 +1,44 @@
 ---
+# Source: CUE apiObjects.AppProject.experiment
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: experiment
+  namespace: argocd
+  labels:
+    example.com/project.name: experiment
+    example.com/owner.name: dev-team
+    example.com/owner.email: sg-dev-team@example.com
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  description: Managed AppProject for Bank of Holos
+  destinations:
+    - namespace: '*'
+      server: '*'
+  sourceRepos:
+    - '*'
+---
+# Source: CUE apiObjects.ReferenceGrant.experiment/istio-ingress
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: istio-ingress
+  namespace: experiment
+  labels:
+    example.com/project.name: experiment
+    example.com/owner.name: dev-team
+    example.com/owner.email: sg-dev-team@example.com
+spec:
+  from:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: istio-ingress
+  to:
+    - group: ""
+      kind: Service
+---
 # Source: CUE apiObjects.RoleBinding.experiment/admin
 metadata:
   name: admin
@@ -38,5 +78,5 @@ spec:
             key: token
             name: eso-reader
       server:
-        url: https://127.0.0.1
+        url: https://management.example.com:6443
         caBundle: LS0tLS1CRUd...QVRFLS0tLS0K

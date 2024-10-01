@@ -248,4 +248,7 @@ import (
 	// Service represents the Service metadata.name field of backend object
 	// reference.
 	Service: string
+
+	// Port represents the Service port of the backend object reference.
+	Port: int
 }
