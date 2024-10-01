@@ -18,25 +18,6 @@ spec:
     - group: ""
       kind: Service
 ---
-# Source: CUE apiObjects.ReferenceGrant.platform/istio-ingress
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: ReferenceGrant
-metadata:
-  name: istio-ingress
-  namespace: platform
-  labels:
-    example.com/project.name: platform
-    example.com/owner.name: platform-team
-    example.com/owner.email: sg-platform-team@example.com
-spec:
-  from:
-    - group: gateway.networking.k8s.io
-      kind: HTTPRoute
-      namespace: istio-ingress
-  to:
-    - group: ""
-      kind: Service
----
 # Source: CUE apiObjects.RoleBinding.experiment/admin
 metadata:
   name: admin
@@ -56,25 +37,6 @@ subjects:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 ---
-# Source: CUE apiObjects.RoleBinding.platform/admin
-metadata:
-  name: admin
-  namespace: platform
-  labels:
-    example.com/project.name: platform
-    example.com/owner.name: platform-team
-    example.com/owner.email: sg-platform-team@example.com
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: admin
-subjects:
-  - apiGroup: rbac.authorization.k8s.io
-    kind: Group
-    name: oidc:sg-platform-team@example.com
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
----
 # Source: CUE apiObjects.SecretStore.experiment/default
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
@@ -89,29 +51,6 @@ spec:
   provider:
     kubernetes:
       remoteNamespace: experiment
-      auth:
-        token:
-          bearerToken:
-            key: token
-            name: eso-reader
-      server:
-        url: https://management.example.com:6443
-        caBundle: LS0tLS1CRUd...QVRFLS0tLS0K
----
-# Source: CUE apiObjects.SecretStore.platform/default
-apiVersion: external-secrets.io/v1beta1
-kind: SecretStore
-metadata:
-  name: default
-  namespace: platform
-  labels:
-    example.com/project.name: platform
-    example.com/owner.name: platform-team
-    example.com/owner.email: sg-platform-team@example.com
-spec:
-  provider:
-    kubernetes:
-      remoteNamespace: platform
       auth:
         token:
           bearerToken:

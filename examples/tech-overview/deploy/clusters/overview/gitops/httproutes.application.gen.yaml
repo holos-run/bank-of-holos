@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-  project: platform
+  project: default
   source:
     path: ./examples/tech-overview/deploy/clusters/overview/components/httproutes
     repoURL: https://github.com/holos-run/bank-of-holos

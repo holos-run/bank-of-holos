@@ -19,24 +19,3 @@ spec:
       server: '*'
   sourceRepos:
     - '*'
----
-# Source: CUE apiObjects.AppProject.platform
-apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  name: platform
-  namespace: argocd
-  labels:
-    example.com/project.name: platform
-    example.com/owner.name: platform-team
-    example.com/owner.email: sg-platform-team@example.com
-spec:
-  clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
-  description: Managed AppProject for Bank of Holos
-  destinations:
-    - namespace: '*'
-      server: '*'
-  sourceRepos:
-    - '*'
