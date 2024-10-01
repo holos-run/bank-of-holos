@@ -4,8 +4,6 @@ package holos
 #Projects: experiment: {
 	// The project owner must be named.
 	Owner: Name: "dev-team"
-	// The project exposes zero or more subdomains.  In this example
-	// "podinfo.example.com" routes to the podinfo Service in the experiment
-	// Namespace.
+	// Expose Service podinfo at https://podinfo.example.com
 	Hostnames: podinfo: Port: 9898
 }
