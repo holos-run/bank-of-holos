@@ -1,0 +1,42 @@
+---
+# Source: CUE apiObjects.RoleBinding.experiment/admin
+metadata:
+  name: admin
+  namespace: experiment
+  labels:
+    example.com/project.name: experiment
+    example.com/owner.name: dev-team
+    example.com/owner.email: sg-dev-team@example.com
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: oidc:sg-dev-team@example.com
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+---
+# Source: CUE apiObjects.SecretStore.experiment/default
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: default
+  namespace: experiment
+  labels:
+    example.com/project.name: experiment
+    example.com/owner.name: dev-team
+    example.com/owner.email: sg-dev-team@example.com
+spec:
+  provider:
+    kubernetes:
+      remoteNamespace: experiment
+      auth:
+        token:
+          bearerToken:
+            key: token
+            name: eso-reader
+      server:
+        url: https://127.0.0.1
+        caBundle: LS0tLS1CRUd...QVRFLS0tLS0K
