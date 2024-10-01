@@ -23,4 +23,4 @@ spec:
       backendRefs:
         - name: podinfo
           namespace: experiment
-          port: 80
+          port: 9898

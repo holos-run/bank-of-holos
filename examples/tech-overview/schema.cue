@@ -17,4 +17,6 @@ _ComponentConfig: {
 	ArgoConfig: #ArgoConfig
 }
 
+#Helm:       api.#Helm & _ComponentConfig
+#Kustomize:  api.#Kustomize & _ComponentConfig
 #Kubernetes: api.#Kubernetes & _ComponentConfig

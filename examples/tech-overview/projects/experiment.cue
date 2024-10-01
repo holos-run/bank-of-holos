@@ -7,5 +7,5 @@ package holos
 	// The project exposes zero or more subdomains.  In this example
 	// "podinfo.example.com" routes to the podinfo Service in the experiment
 	// Namespace.
-	Hostnames: podinfo: _
+	Hostnames: podinfo: Port: 9898
 }
