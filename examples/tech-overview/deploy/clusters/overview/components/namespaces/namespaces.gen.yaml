@@ -1,0 +1,11 @@
+---
+# Source: CUE apiObjects.Namespace.experiment
+metadata:
+  name: experiment
+  labels:
+    kubernetes.io/metadata.name: experiment
+    example.com/project.name: experiment
+    example.com/owner.name: dev-team
+    example.com/owner.email: sg-dev-team@example.com
+kind: Namespace
+apiVersion: v1
