@@ -37,16 +37,10 @@ import api "github.com/holos-run/holos/api/author/v1alpha3"
 }
 
 for Project in #Projects {
-	let CommonLabels = {
-		"\(#Organization.Domain)/project.name": Project.Name
-		"\(#Organization.Domain)/owner.name":   Project.Owner.Name
-		"\(#Organization.Domain)/owner.email":  Project.Owner.Email
-	}
-
 	// Register project namespaces with the namespaces component.
 	#Namespaces: {
 		for Namespace in Project.Namespaces {
-			(Namespace.Name): metadata: labels: CommonLabels
+			(Namespace.Name): metadata: labels: Project._CommonLabels
 		}
 	}
 }
