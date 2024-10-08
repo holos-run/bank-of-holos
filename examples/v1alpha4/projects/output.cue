@@ -3,6 +3,7 @@ package holos
 import (
 	core "github.com/holos-run/holos/api/core/v1alpha4"
 	ks "sigs.k8s.io/kustomize/api/types"
+	app "argoproj.io/application/v1alpha1"
 )
 
 // TODO: Lift this up into the Author API.
@@ -11,6 +12,20 @@ import (
 
 	// Mix-ins are the most common case, so name it simply "Resources"
 	Resources: #Resources
+
+	Application: app.#Application & {
+		metadata: name:      ComponentName
+		metadata: namespace: "argocd"
+		spec: {
+			destination: server: "https://kubernetes.default.svc"
+			project: ArgoConfig.AppProject
+			source: {
+				path:           "\(ArgoConfig.DeployRoot)/deploy/clusters/\(ArgoConfig.ClusterName)/components/\(ComponentName)"
+				repoURL:        ArgoConfig.RepoURL
+				targetRevision: ArgoConfig.TargetRevision
+			}
+		}
+	}
 
 	Generator: {
 		helm?: core.#Helm
@@ -39,14 +54,15 @@ import (
 	Resource: core.#BuildPlan & {
 		metadata: name:  Name
 		spec: component: _Tags.component
-		spec: steps: [{
-			name:      metadata.name
-			generator: Generator
-			if Transformer != _|_ {
-				transformers: [Transformer]
-			}
-			manifest: "clusters/\(_Tags.cluster)/components/\(name)/\(name).gen.yaml"
-		}]
+		spec: steps: [
+			{
+				manifest:  "clusters/\(_Tags.cluster)/components/\(metadata.name)/\(metadata.name).gen.yaml"
+				generator: Generator
+				if Transformer != _|_ {
+					transformers: [Transformer]
+				}
+			},
+		]
 	}
 }
 
