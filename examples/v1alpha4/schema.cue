@@ -14,13 +14,13 @@ import (
 	Domain: "example.com"
 }
 
-#Fleets: api.#StandardFleets
+#Fleets: api.#StandardFleets & {workload: clusters: local: _}
 
 // BEGIN Refactor to output #Component.BuildPlan
 // if the render component tag is set.
 
 #ArgoConfig: api.#ArgoConfig & {
-	ClusterName: _ClusterName
+	ClusterName: _Tags.cluster
 	DeployRoot:  "./examples/tech-overview"
 }
 

@@ -25,46 +25,118 @@ import "google.golang.org/protobuf/types/known/structpb"
 // tools, for example loading from CUE.
 #APIObject: structpb.#Struct
 
-// APIObjectMap represents the marshalled yaml representation of kubernetes api
-// objects.  Do not produce an APIObjectMap directly, instead use [APIObjects]
-// to produce the marshalled yaml representation from CUE data, then provide the
-// result to [Component].
-#APIObjectMap: {[string]: [string]: string}
+// APIObjects represents kubernetes resources generated from CUE.
+#APIObjects: {[string]: [string]: #APIObject}
 
-// APIObjects represents Kubernetes API objects defined directly from CUE code.
-// Useful to mix in resources to any kind of [Component], for example
-// adding an ExternalSecret resource to a [HelmChart].
-//
-// [Kind] must be the resource kind, e.g. Deployment or Service.
-//
-// [InternalLabel] is an arbitrary internal identifier to uniquely identify the resource
-// within the context of a `holos` command.  Holos will never write the
-// intermediate label to rendered output.
-//
-// Refer to [Component] which accepts an [APIObjectMap] field provided by
-// [APIObjects].
-#APIObjects: {
-	apiObjects: {[string]: [string]: #APIObject} @go(APIObjects,map[Kind]map[InternalLabel]APIObject)
-	apiObjectMap: #APIObjectMap @go(APIObjectMap)
-}
+// HelmValues represents helm chart values generated from CUE.
+#HelmValues: structpb.#Struct
 
-// BuildPlan represents a build plan for the holos cli to execute.  The purpose
-// of a BuildPlan is to define one or more [Component] kinds.  For example a
-// [HelmChart], [KustomizeBuild], or [KubernetesObjects].
-//
-// A BuildPlan usually has an additional empty [KubernetesObjects] for the
-// purpose of using the [Component] DeployFiles field to deploy an ArgoCD
-// or Flux gitops resource for the holos component.
+// Kustomization represents a kustomization.yaml file.
+#Kustomization: structpb.#Struct
+
+// BuildPlan represents a build plan for holos to execute.
 #BuildPlan: {
-	kind:       string & "BuildPlan"            @go(Kind)
+	// Kind represents the type of the resource.
+	kind: string & "BuildPlan" @go(Kind)
+
+	// APIVersion represents the versioned schema of the resource.
 	apiVersion: string & (string | *"v1alpha4") @go(APIVersion)
-	spec:       #BuildPlanSpec                  @go(Spec)
+
+	// Metadata represents data about the resource such as the Name.
+	metadata: #Metadata @go(Metadata)
+
+	// Spec specifies the desired state of the resource.
+	spec: #BuildPlanSpec @go(Spec)
 }
 
 // BuildPlanSpec represents the specification of the build plan.
 #BuildPlanSpec: {
-	// Disabled causes the holos cli to take no action over the [BuildPlan].
+	// Disabled causes the holos cli to disregard the build plan.
 	disabled?: bool @go(Disabled)
+	steps: [...#BuildStep] @go(Steps,[]BuildStep)
+}
+
+#BuildStep: {
+	// Skip causes holos to skip over this build step.
+	skip?:      bool       @go(Skip)
+	generator?: #Generator @go(Generator)
+	transformers?: [...#Transformer] @go(Transformers,[]Transformer)
+	paths: #BuildPaths @go(Paths)
+}
+
+// Generator generates an artifact.
+#Generator: {
+	helmEnabled?:       bool        @go(HelmEnabled)
+	helm?:              #Helm       @go(Helm)
+	kustomizeEnabled?:  bool        @go(KustomizeEnabled)
+	kustomize?:         #Kustomize  @go(Kustomize)
+	apiObjectsEnabled?: bool        @go(APIObjectsEnabled)
+	apiObjects?:        #APIObjects @go(APIObjects)
+}
+
+#Transformer: {
+	kind:       string & "Kustomize" @go(Kind)
+	kustomize?: #Kustomize           @go(Kustomize)
+}
+
+// Kustomize represents resources necessary to execute a kustomize build.
+#Kustomize: {
+	// Kustomization represents the decoded kustomization.yaml file
+	kustomization: #Kustomization @go(Kustomization)
+
+	// Files holds file contents for kustomize, e.g. patch files.
+	files?: #FileContentMap @go(Files)
+}
+
+// BuildPaths represents filesystem paths relative to the platform root.
+#BuildPaths: {
+	// Component represents the component directory producing a build plan.
+	component: string @go(Component)
+
+	// Manifest represents the directory to store fully rendered resource manifest
+	// artifacts.
+	manifest?: string @go(Manifest)
+
+	// Application represents the directory to store ArgoCD Application manifests
+	// for GitOps.
+	application?: string @go(Application)
+
+	// Flux represents the directory to store Flux Kustomization manifests
+	// for GitOps.
+	flux?: string @go(Flux)
+}
+
+#Helm: {
+	// Chart represents a helm chart to manage.
+	chart: #Chart @go(Chart)
+
+	// Values represents values for holos to marshal into values.yaml when
+	// rendering the chart.
+	values: #HelmValues @go(Values)
+
+	// EnableHooks enables helm hooks when executing the `helm template` command.
+	enableHooks?: bool @go(EnableHooks)
+}
+
+// Chart represents a helm chart.
+#Chart: {
+	// Name represents the chart name.
+	name: string @go(Name)
+
+	// Version represents the chart version.
+	version: string @go(Version)
+
+	// Release represents the chart release when executing helm template.
+	release: string @go(Release)
+
+	// Repository represents the repository to fetch the chart from.
+	repository?: #Repository @go(Repository)
+}
+
+// Repository represents a helm chart repository.
+#Repository: {
+	name: string @go(Name)
+	url:  string @go(URL)
 }
 
 // FileContent represents file contents.
@@ -104,30 +176,22 @@ import "google.golang.org/protobuf/types/known/structpb"
 // primary use case is to collect the cluster names, cluster types, platform
 // model, and holos components to build into one resource.
 #Platform: {
-	// Kind is a string value representing the resource this object represents.
+	// Kind is a string value representing the resource.
 	kind: string & "Platform" @go(Kind)
 
-	// APIVersion represents the versioned schema of this representation of an object.
+	// APIVersion represents the versioned schema of this resource.
 	apiVersion: string & (string | *"v1alpha4") @go(APIVersion)
 
-	// Metadata represents data about the object such as the Name.
-	metadata: #PlatformMetadata @go(Metadata)
+	// Metadata represents data about the resource such as the Name.
+	metadata: #Metadata @go(Metadata)
 
 	// Spec represents the specification.
 	spec: #PlatformSpec @go(Spec)
 }
 
-// PlatformComponent represents a holos component providing a BuildPlan.
-#PlatformComponent: {
-	// Path is the path of the component relative to the platform root.
-	path: string @go(Path)
-
-	// Cluster is the cluster name to provide when rendering the component.
-	cluster: string @go(Cluster)
-}
-
-#PlatformMetadata: {
-	// Name represents the Platform name.
+// Metadata represents data about the resource such as the Name.
+#Metadata: {
+	// Name represents the resource name.
 	name: string @go(Name)
 }
 
@@ -135,10 +199,27 @@ import "google.golang.org/protobuf/types/known/structpb"
 // specification as a list of platform components to apply to a list of
 // kubernetes clusters combined with the user-specified Platform Model.
 #PlatformSpec: {
+	// Components represents a list of holos components to manage.
+	components: [...#BuildContext] @go(Components,[]BuildContext)
+}
+
+// BuildContext represents the context necessary to render a component into a
+// BuildPlan.  Useful to capture parameters passed down from a Platform spec for
+// the purpose of idempotent rebuilds.
+#BuildContext: {
+	// Path is the path of the component relative to the platform root.
+	path: string @go(Path)
+
+	// Cluster is the cluster name to provide when rendering the component.
+	cluster: string @go(Cluster)
+
+	// Environment for example, dev, test, stage, prod
+	environment?: string @go(Environment)
+
 	// Model represents the platform model holos gets from from the
 	// PlatformService.GetPlatform rpc method and provides to CUE using a tag.
 	model: structpb.#Struct & {...} @go(Model)
 
-	// Components represents a list of holos components to manage.
-	components: [...#PlatformComponent] @go(Components,[]PlatformComponent)
+	// Tags represents cue tags to provide when rendering the component.
+	tags?: [...string] @go(Tags,[]string)
 }
