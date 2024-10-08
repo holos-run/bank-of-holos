@@ -8,14 +8,14 @@ import core "github.com/holos-run/holos/api/core/v1alpha4"
 	Resources: #Resources
 
 	Resource: core.#BuildPlan & {
-		metadata: name: Name
+		metadata: name:  Name
+		spec: component: _Tags.component
 		spec: steps: [
 			{
 				generator: {
 					apiObjectsEnabled: true
 					apiObjects:        Resources
 				}
-				paths: component: _Tags.component
 			},
 		]
 	}
