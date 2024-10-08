@@ -9,6 +9,9 @@ import (
 #BuildPlan: {
 	Name: string
 
+	// Mix-ins are the most common case, so name it simply "Resources"
+	Resources: #Resources
+
 	Generator: {
 		helm?: core.#Helm
 		if helm != _|_ {
@@ -21,6 +24,9 @@ import (
 		}
 
 		apiObjects?: core.#APIObjects
+		for k, v in Resources {
+			apiObjects: (k): v
+		}
 		if apiObjects != _|_ {
 			apiObjectsEnabled: true
 		}
@@ -39,13 +45,12 @@ import (
 			if Transformer != _|_ {
 				transformers: [Transformer]
 			}
-			paths: {
-				manifest: "clusters/\(_Tags.cluster)/components/\(name)/\(name).gen.yaml"
-				gitops:   "clusters/\(_Tags.cluster)/gitops/\(name).gen.yaml"
-			}
+			manifest: "clusters/\(_Tags.cluster)/components/\(name)/\(name).gen.yaml"
 		}]
 	}
 }
 
+_BuildPlan: #BuildPlan
+
 // Constrain the output to the BuldPlan resource.
-#BuildPlan.Resource
+_BuildPlan.Resource

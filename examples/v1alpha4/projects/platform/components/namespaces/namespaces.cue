@@ -2,7 +2,7 @@ package holos
 
 let Env = _Tags.environment
 
-#BuildPlan: {
+_BuildPlan: {
 	Name: "\(Env)-namespaces"
 	Resources: Namespace: #Namespaces
 }
