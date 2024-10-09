@@ -15,16 +15,9 @@ import (
 
 	// Kustomize all generators of all build steps to add common labels.
 	Transformer: {
+		kind: "Kustomize"
 		kustomize: kustomization: ks.#Kustomization & {
 			commonLabels: "holos.run/component.name": Name
-			_resources: {
-				for artifact in Resource.spec.artifacts {
-					for generator in artifact.generators {
-						(generator.manifest): generator.manifest
-					}
-				}
-			}
-			resources: [for x in _resources {x}]
 		}
 	}
 
@@ -35,18 +28,24 @@ import (
 		spec: artifacts: [
 			{
 				artifact: "clusters/\(_Tags.cluster)/components/\(Name)/\(Name).gen.yaml"
+				let Output = "resources.gen.yaml"
 				generators: [{
 					kind:      "Resources"
-					manifest:  "resources.gen.yaml"
+					output:    Output
 					resources: Resources
 				}]
-				transformers: [Transformer]
+				transformers: [Transformer & {
+					inputs: [Output]
+					output: artifact
+					kustomize: kustomization: resources: inputs
+				}]
 			},
 			{
 				artifact: "clusters/\(_Tags.cluster)/gitops/\(Name).gen.yaml"
+				let Output = "application.gen.yaml"
 				generators: [{
-					kind:     "Resources"
-					manifest: "application.gen.yaml"
+					kind:   "Resources"
+					output: Output
 					resources: Application: argocd: app.#Application & {
 						metadata: name:      Name
 						metadata: namespace: "argocd"
@@ -61,7 +60,11 @@ import (
 						}
 					}
 				}]
-				transformers: [Transformer]
+				transformers: [Transformer & {
+					inputs: [Output]
+					output: artifact
+					kustomize: kustomization: resources: inputs
+				}]
 			},
 		]
 	}
