@@ -18,8 +18,8 @@ import (
 		kustomize: kustomization: ks.#Kustomization & {
 			commonLabels: "holos.run/component.name": Name
 			_resources: {
-				for step in Resource.spec.steps {
-					for generator in step.generators {
+				for artifact in Resource.spec.artifacts {
+					for generator in artifact.generators {
 						(generator.manifest): generator.manifest
 					}
 				}
@@ -32,7 +32,7 @@ import (
 		metadata: name:  Name
 		spec: component: _Tags.component
 		// We use to build steps for two distinct build artifacts.
-		spec: steps: [
+		spec: artifacts: [
 			{
 				artifact: "clusters/\(_Tags.cluster)/components/\(Name)/\(Name).gen.yaml"
 				generators: [{
