@@ -13,44 +13,15 @@ import (
 	// Mix-ins are the most common case, so name it simply "Resources"
 	Resources: #Resources
 
-	Generator: {
-		helm?: core.#Helm
-		if helm != _|_ {
-			helmEnabled: true
-			helmFile:    "helm.gen.yaml"
-		}
-		helmFile?: _
-
-		kustomize?: core.#Kustomize
-		if kustomize != _|_ {
-			kustomizeEnabled: true
-			kustomizeFile:    "kustomize.gen.yaml"
-		}
-		kustomizeFile?: _
-
-		apiObjects?: core.#APIObjects
-		for k, v in Resources {
-			apiObjects: (k): v
-		}
-		if apiObjects != _|_ {
-			apiObjectsEnabled: true
-			apiObjectsFile:    "api-objects.gen.yaml"
-		}
-		apiObjectsFile?: _
-	}
-
+	// Kustomize all generators of all build steps to add common labels.
 	Transformer: {
 		kustomize: kustomization: ks.#Kustomization & {
 			commonLabels: "holos.run/component.name": Name
 			_resources: {
-				if Generator.helmFile != _|_ {
-					helm: Generator.helmFile
-				}
-				if Generator.kustomizeFile != _|_ {
-					kustomize: Generator.kustomizeFile
-				}
-				if Generator.apiObjectsFile != _|_ {
-					kustomize: Generator.apiObjectsFile
+				for step in Resource.spec.steps {
+					for generator in step.generators {
+						(generator.manifest): generator.manifest
+					}
 				}
 			}
 			resources: [for x in _resources {x}]
@@ -60,19 +31,23 @@ import (
 	Resource: core.#BuildPlan & {
 		metadata: name:  Name
 		spec: component: _Tags.component
+		// We use to build steps for two distinct build artifacts.
 		spec: steps: [
 			{
-				manifest:  "clusters/\(_Tags.cluster)/components/\(metadata.name)/\(metadata.name).gen.yaml"
-				generator: Generator
-				if Transformer != _|_ {
-					transformers: [Transformer]
-				}
+				artifact: "clusters/\(_Tags.cluster)/components/\(Name)/\(Name).gen.yaml"
+				generators: [{
+					kind:      "Resources"
+					manifest:  "resources.gen.yaml"
+					resources: Resources
+				}]
+				transformers: [Transformer]
 			},
 			{
-				manifest: "clusters/\(_Tags.cluster)/gitops/\(metadata.name).gen.yaml"
-				generator: {
-					apiObjectsEnabled: true
-					apiObjects: Application: argocd: app.#Application & {
+				artifact: "clusters/\(_Tags.cluster)/gitops/\(Name).gen.yaml"
+				generators: [{
+					kind:     "Resources"
+					manifest: "application.gen.yaml"
+					resources: Application: argocd: app.#Application & {
 						metadata: name:      Name
 						metadata: namespace: "argocd"
 						spec: {
@@ -85,10 +60,8 @@ import (
 							}
 						}
 					}
-				}
-				if Transformer != _|_ {
-					transformers: [Transformer]
-				}
+				}]
+				transformers: [Transformer]
 			},
 		]
 	}
