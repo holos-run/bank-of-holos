@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    holos.run/component.name: test-namespaces
+  name: test-namespaces
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: examples/v1alpha4/deploy/clusters/local/components/test-namespaces
+    repoURL: https://github.com/holos-run/bank-of-holos
+    targetRevision: main

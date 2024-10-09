@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    holos.run/component.name: test-namespaces
+    kubernetes.io/metadata.name: test-gary
+  name: test-gary
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    holos.run/component.name: test-namespaces
+    kubernetes.io/metadata.name: test-jeff
+  name: test-jeff
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    holos.run/component.name: test-namespaces
+    kubernetes.io/metadata.name: test-nate
+  name: test-nate

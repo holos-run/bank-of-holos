@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    holos.run/component.name: stage-namespaces
+    kubernetes.io/metadata.name: stage-gary
+  name: stage-gary
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    holos.run/component.name: stage-namespaces
+    kubernetes.io/metadata.name: stage-jeff
+  name: stage-jeff
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    holos.run/component.name: stage-namespaces
+    kubernetes.io/metadata.name: stage-nate
+  name: stage-nate
