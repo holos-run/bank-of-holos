@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    holos.run/component.name: test-file-generator
+  name: test-file-generator
+  namespace: test-file-test
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: examples/v1alpha4/deploy/clusters/local/components/test-file-generator
+    repoURL: https://github.com/holos-run/bank-of-holos
+    targetRevision: main

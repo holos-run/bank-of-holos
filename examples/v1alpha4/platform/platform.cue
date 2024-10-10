@@ -35,6 +35,14 @@ for Fleet in #Fleets {
 				cluster:     Cluster.name
 				environment: Env.name
 			}
+
+			// File + Kustomize test
+			#Platform: Components: "\(Cluster.name):\(Env.name):file": {
+				name:        "\(Env.name)-file-generator"
+				component:   "projects/tests/file-generator"
+				cluster:     Cluster.name
+				environment: Env.name
+			}
 		}
 	}
 }
