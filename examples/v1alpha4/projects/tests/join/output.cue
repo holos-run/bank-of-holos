@@ -31,19 +31,19 @@ import (
 				artifact: "clusters/\(_Tags.cluster)/components/\(Name)/\(Name).gen.yaml"
 				generators: [
 					{
-						kind:      "Resources"
-						output:    "1.yaml"
-						resources: Resources
+						kind:   "Resources"
+						output: "1.yaml"
+						resources: Namespace: jeff: #Namespaces["\(_Tags.environment)-jeff"]
 					},
 					{
-						kind:      "Resources"
-						output:    "2.yaml"
-						resources: Resources
+						kind:   "Resources"
+						output: "2.yaml"
+						resources: Namespace: gary: #Namespaces["\(_Tags.environment)-gary"]
 					},
 					{
-						kind:      "Resources"
-						output:    "3.yaml"
-						resources: Resources
+						kind:   "Resources"
+						output: "3.yaml"
+						resources: Namespace: nate: #Namespaces["\(_Tags.environment)-nate"]
 					},
 				]
 				transformers: [{
