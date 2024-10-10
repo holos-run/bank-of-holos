@@ -13,7 +13,8 @@ for Fleet in #Fleets {
 	for Cluster in Fleet.clusters {
 		for Env in _Environments {
 			#Platform: Components: "\(Cluster.name):\(Env.name):namespaces": {
-				path:        "projects/platform/components/namespaces"
+				name:        "\(Env.name)-namespaces"
+				component:   "projects/platform/components/namespaces"
 				cluster:     Cluster.name
 				environment: Env.name
 			}

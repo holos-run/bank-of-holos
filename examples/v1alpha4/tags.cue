@@ -14,8 +14,8 @@ _PlatformConfig:     dto.#PlatformConfig & json.Unmarshal(_PlatformConfigJSON)
 _PlatformConfigJSON: string | *"{}" @tag(platform_config, type=string)
 
 _Tags: {
-	// cluster is the --cluster-name flag value provided by the holos cli.
 	cluster:     string | *"no-cluster"     @tag(cluster, type=string)
 	environment: string | *"no-environment" @tag(environment, type=string)
 	component:   string | *"no-component"   @tag(component, type=string)
+	name:        string | *"no-name"        @tag(name, type=string)
 }

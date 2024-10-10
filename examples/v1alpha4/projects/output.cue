@@ -8,7 +8,8 @@ import (
 
 // TODO: Lift this up into the Author API.
 #BuildPlan: {
-	Name: string
+	// Name is injected from the render platform command.
+	Name: _Tags.name
 
 	// Mix-ins are the most common case, so name it simply "Resources"
 	Resources: #Resources
