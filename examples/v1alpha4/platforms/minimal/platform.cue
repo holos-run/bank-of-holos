@@ -18,6 +18,12 @@ for Fleet in #Fleets {
 				cluster:     Cluster.name
 				environment: Env.name
 			}
+			#Platform: Components: "\(Cluster.name):\(Env.name):join": {
+				name:        "\(Env.name)-join"
+				component:   "projects/tests/join"
+				cluster:     Cluster.name
+				environment: Env.name
+			}
 		}
 	}
 }
