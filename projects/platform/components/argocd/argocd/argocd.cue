@@ -8,27 +8,23 @@ import "strings"
 let Chart = {
 	Name:      "argocd"
 	Namespace: #ArgoCD.Namespace
-	Version:   "7.5.2"
 
-	Repo: name: "argocd"
-	Repo: url:  "https://argoproj.github.io/argo-helm"
+	Chart: {
+		name:    "argo-cd"
+		version: "7.5.2"
+		release: Name
+		repository: {
+			name: "argocd"
+			url:  "https://argoproj.github.io/argo-helm"
+		}
+	}
+	EnableHooks: true
 
-	Chart: chart: name:    "argo-cd"
-	Chart: chart: release: Name
-	// Upstream uses a Kubernetes Job to create the argocd-redis Secret.  Enable
-	// hooks to enable the Job.
-	Chart: enableHooks: true
-
+	// Mix-in resources.
 	Resources: [_]: [_]: metadata: namespace: Namespace
 	// Grant the Gateway namespace the ability to refer to the backend service
 	// from HTTPRoute resources.
 	Resources: ReferenceGrant: (#Istio.Gateway.Namespace): #ReferenceGrant
-
-	EnableKustomizePostProcessor: true
-	// Force all resources into the component namespace, some resources in the
-	// helm chart may not specify the namespace so they may get mis-applied
-	// depending on the kubectl (client-go) context.
-	KustomizeFiles: "kustomization.yaml": namespace: Namespace
 
 	Values: #Values & {
 		kubeVersionOverride: "1.29.0"
