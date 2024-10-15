@@ -5,13 +5,16 @@ package holos
 
 let Chart = {
 	Name:      "istio-cni"
-	Version:   #Istio.Version
 	Namespace: #Istio.System.Namespace
 
-	Chart: chart: name: "cni"
-
-	Repo: name: "istio"
-	Repo: url:  "https://istio-release.storage.googleapis.com/charts"
+	Chart: {
+		name:    "cni"
+		version: #Istio.Version
+		repository: {
+			name: "istio"
+			url:  "https://istio-release.storage.googleapis.com/charts"
+		}
+	}
 
 	Values: #Istio.Values
 }
