@@ -11,5 +11,5 @@ spec:
   project: default
   source:
     path: deploy/clusters/workload/components/bank-transaction-history
-    repoURL: https://github.com/jeffmccune/bank-of-holos
-    targetRevision: jeff/280-authorapi-v1alpha4
+    repoURL: https://github.com/holos-run/bank-of-holos
+    targetRevision: main
