@@ -1,64 +1,74 @@
----
-# Source: CUE apiObjects.ConfigMap.demo-data-config
+apiVersion: v1
+kind: ServiceAccount
 metadata:
+  labels:
+    application: bank-of-holos
+    environment: development
+    holos.run/component.name: bank-backend-config
+    tier: backend
+  name: bank-of-holos
+  namespace: bank-backend
+---
+apiVersion: v1
+data:
+  DEMO_LOGIN_PASSWORD: bankofanthos
+  DEMO_LOGIN_USERNAME: testuser
+  USE_DEMO_DATA: "True"
+kind: ConfigMap
+metadata:
+  labels:
+    application: bank-of-holos
+    environment: development
+    holos.run/component.name: bank-backend-config
+    tier: backend
   name: demo-data-config
   namespace: bank-backend
-  labels:
-    application: bank-of-holos
-    environment: development
-    tier: backend
-data:
-  USE_DEMO_DATA: "True"
-  DEMO_LOGIN_USERNAME: testuser
-  DEMO_LOGIN_PASSWORD: bankofanthos
-kind: ConfigMap
-apiVersion: v1
 ---
-# Source: CUE apiObjects.ConfigMap.environment-config
-metadata:
-  name: environment-config
-  namespace: bank-backend
-  labels:
-    application: bank-of-holos
-    environment: development
-    tier: backend
+apiVersion: v1
 data:
   LOCAL_ROUTING_NUM: "883745000"
   PUB_KEY_PATH: /tmp/.ssh/publickey
 kind: ConfigMap
-apiVersion: v1
----
-# Source: CUE apiObjects.ConfigMap.service-api-config
 metadata:
-  name: service-api-config
-  namespace: bank-backend
   labels:
     application: bank-of-holos
     environment: development
+    holos.run/component.name: bank-backend-config
     tier: backend
+  name: environment-config
+  namespace: bank-backend
+---
+apiVersion: v1
 data:
-  TRANSACTIONS_API_ADDR: ledgerwriter.bank-backend.svc:8080
   BALANCES_API_ADDR: balancereader.bank-backend.svc:8080
-  HISTORY_API_ADDR: transactionhistory.bank-backend.svc:8080
   CONTACTS_API_ADDR: contacts.bank-backend.svc:8080
+  HISTORY_API_ADDR: transactionhistory.bank-backend.svc:8080
+  TRANSACTIONS_API_ADDR: ledgerwriter.bank-backend.svc:8080
   USERSERVICE_API_ADDR: userservice.bank-backend.svc:8080
 kind: ConfigMap
-apiVersion: v1
+metadata:
+  labels:
+    application: bank-of-holos
+    environment: development
+    holos.run/component.name: bank-backend-config
+    tier: backend
+  name: service-api-config
+  namespace: bank-backend
 ---
-# Source: CUE apiObjects.ExternalSecret.jwt-key
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: jwt-key
-  namespace: bank-backend
   labels:
     application: bank-of-holos
     environment: development
+    holos.run/component.name: bank-backend-config
     tier: backend
+  name: jwt-key
+  namespace: bank-backend
 spec:
   dataFrom:
-    - extract:
-        key: jwt-key
+  - extract:
+      key: jwt-key
   refreshInterval: 5s
   secretStoreRef:
     kind: SecretStore
@@ -66,35 +76,16 @@ spec:
   target:
     name: jwt-key
 ---
-# Source: CUE apiObjects.ReferenceGrant.grant
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: ReferenceGrant
-metadata:
-  name: istio-ingress
-  namespace: bank-backend
-  labels:
-    application: bank-of-holos
-    environment: development
-    tier: backend
-spec:
-  from:
-    - group: gateway.networking.k8s.io
-      kind: HTTPRoute
-      namespace: istio-ingress
-  to:
-    - group: ""
-      kind: Service
----
-# Source: CUE apiObjects.SecretStore.bank-of-holos
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
-  name: bank-security
-  namespace: bank-backend
   labels:
     application: bank-of-holos
     environment: development
+    holos.run/component.name: bank-backend-config
     tier: backend
+  name: bank-security
+  namespace: bank-backend
 spec:
   provider:
     kubernetes:
@@ -109,13 +100,21 @@ spec:
           type: ConfigMap
         url: https://kubernetes.default.svc
 ---
-# Source: CUE apiObjects.ServiceAccount.bank-of-holos
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
 metadata:
-  name: bank-of-holos
-  namespace: bank-backend
   labels:
     application: bank-of-holos
     environment: development
+    holos.run/component.name: bank-backend-config
     tier: backend
-kind: ServiceAccount
-apiVersion: v1
+  name: istio-ingress
+  namespace: bank-backend
+spec:
+  from:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    namespace: istio-ingress
+  to:
+  - group: ""
+    kind: Service

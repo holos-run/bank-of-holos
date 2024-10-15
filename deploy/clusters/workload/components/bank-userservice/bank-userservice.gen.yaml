@@ -1,19 +1,46 @@
----
-# Source: CUE apiObjects.Deployment.userservice
+apiVersion: v1
+kind: Service
 metadata:
-  name: userservice
-  namespace: bank-backend
   labels:
     application: bank-of-holos
     environment: development
+    holos.run/component.name: bank-userservice
     team: accounts
     tier: backend
+  name: userservice
+  namespace: bank-backend
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: userservice
+    application: bank-of-holos
+    environment: development
+    holos.run/component.name: bank-userservice
+    team: accounts
+    tier: backend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    application: bank-of-holos
+    environment: development
+    holos.run/component.name: bank-userservice
+    team: accounts
+    tier: backend
+  name: userservice
+  namespace: bank-backend
 spec:
   selector:
     matchLabels:
       app: userservice
       application: bank-of-holos
       environment: development
+      holos.run/component.name: bank-userservice
       team: accounts
       tier: backend
   template:
@@ -22,105 +49,80 @@ spec:
         app: userservice
         application: bank-of-holos
         environment: development
+        holos.run/component.name: bank-userservice
         team: accounts
         tier: backend
     spec:
-      serviceAccountName: bank-of-holos
-      terminationGracePeriodSeconds: 5
       containers:
-        - env:
-            - name: VERSION
-              value: v0.6.5
-            - name: PORT
-              value: "8080"
-            - name: ENABLE_TRACING
-              value: "false"
-            - name: LOG_LEVEL
-              value: info
-            - name: TOKEN_EXPIRY_SECONDS
-              value: "3600"
-            - name: PRIV_KEY_PATH
-              value: /tmp/.ssh/privatekey
-          envFrom:
-            - configMapRef:
-                name: environment-config
-            - configMapRef:
-                name: accounts-db-config
-          image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/userservice:v0.6.5@sha256:f91e0e5bd6cdb16f6b867b2e3e874b23dd01f11592de006776f1dfb136702941
-          name: userservice
-          ports:
-            - containerPort: 8080
-              name: http-server
-          readinessProbe:
-            httpGet:
-              path: /ready
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 10
-          resources:
-            limits:
-              cpu: 500m
-              ephemeral-storage: 0.25Gi
-              memory: 256Mi
-            requests:
-              cpu: 260m
-              ephemeral-storage: 0.25Gi
-              memory: 128Mi
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - all
-            privileged: false
-            readOnlyRootFilesystem: true
-          volumeMounts:
-            - mountPath: /tmp
-              name: tmp
-            - mountPath: /tmp/.ssh
-              name: keys
-              readOnly: true
-      volumes:
-        - emptyDir: {}
+      - env:
+        - name: VERSION
+          value: v0.6.5
+        - name: PORT
+          value: "8080"
+        - name: ENABLE_TRACING
+          value: "false"
+        - name: LOG_LEVEL
+          value: info
+        - name: TOKEN_EXPIRY_SECONDS
+          value: "3600"
+        - name: PRIV_KEY_PATH
+          value: /tmp/.ssh/privatekey
+        envFrom:
+        - configMapRef:
+            name: environment-config
+        - configMapRef:
+            name: accounts-db-config
+        image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/userservice:v0.6.5@sha256:f91e0e5bd6cdb16f6b867b2e3e874b23dd01f11592de006776f1dfb136702941
+        name: userservice
+        ports:
+        - containerPort: 8080
+          name: http-server
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 500m
+            ephemeral-storage: 0.25Gi
+            memory: 256Mi
+          requests:
+            cpu: 260m
+            ephemeral-storage: 0.25Gi
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp
           name: tmp
-        - name: keys
-          secret:
-            secretName: jwt-key
-            items:
-              - key: jwtRS256.key
-                path: privatekey
-              - key: jwtRS256.key.pub
-                path: publickey
+        - mountPath: /tmp/.ssh
+          name: keys
+          readOnly: true
       securityContext:
-        seccompProfile:
-          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
         runAsUser: 1000
-kind: Deployment
-apiVersion: apps/v1
----
-# Source: CUE apiObjects.Service.userservice
-metadata:
-  name: userservice
-  namespace: bank-backend
-  labels:
-    application: bank-of-holos
-    environment: development
-    team: accounts
-    tier: backend
-spec:
-  selector:
-    app: userservice
-    application: bank-of-holos
-    environment: development
-    team: accounts
-    tier: backend
-  ports:
-    - name: http
-      port: 8080
-      targetPort: 8080
-      protocol: TCP
-kind: Service
-apiVersion: v1
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: bank-of-holos
+      terminationGracePeriodSeconds: 5
+      volumes:
+      - emptyDir: {}
+        name: tmp
+      - name: keys
+        secret:
+          items:
+          - key: jwtRS256.key
+            path: privatekey
+          - key: jwtRS256.key.pub
+            path: publickey
+          secretName: jwt-key

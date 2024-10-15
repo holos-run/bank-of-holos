@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    holos.run/component.name: bank-balance-reader
+  name: bank-balance-reader
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: deploy/clusters/workload/components/bank-balance-reader
+    repoURL: https://github.com/jeffmccune/bank-of-holos
+    targetRevision: jeff/280-authorapi-v1alpha4

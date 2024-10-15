@@ -1,53 +1,91 @@
----
-# Source: CUE apiObjects.ConfigMap.demo-data-config
+apiVersion: v1
+kind: ServiceAccount
 metadata:
+  labels:
+    holos.run/component.name: bank-frontend
+  name: bank-of-holos
+  namespace: bank-frontend
+---
+apiVersion: v1
+data:
+  DEMO_LOGIN_PASSWORD: bankofanthos
+  DEMO_LOGIN_USERNAME: testuser
+  USE_DEMO_DATA: "True"
+kind: ConfigMap
+metadata:
+  labels:
+    holos.run/component.name: bank-frontend
   name: demo-data-config
   namespace: bank-frontend
-data:
-  USE_DEMO_DATA: "True"
-  DEMO_LOGIN_USERNAME: testuser
-  DEMO_LOGIN_PASSWORD: bankofanthos
-kind: ConfigMap
-apiVersion: v1
 ---
-# Source: CUE apiObjects.ConfigMap.environment-config
-metadata:
-  name: environment-config
-  namespace: bank-frontend
+apiVersion: v1
 data:
   LOCAL_ROUTING_NUM: "883745000"
   PUB_KEY_PATH: /tmp/.ssh/publickey
 kind: ConfigMap
-apiVersion: v1
----
-# Source: CUE apiObjects.ConfigMap.service-api-config
 metadata:
-  name: service-api-config
+  labels:
+    holos.run/component.name: bank-frontend
+  name: environment-config
   namespace: bank-frontend
+---
+apiVersion: v1
 data:
-  TRANSACTIONS_API_ADDR: ledgerwriter.bank-backend.svc:8080
   BALANCES_API_ADDR: balancereader.bank-backend.svc:8080
-  HISTORY_API_ADDR: transactionhistory.bank-backend.svc:8080
   CONTACTS_API_ADDR: contacts.bank-backend.svc:8080
+  HISTORY_API_ADDR: transactionhistory.bank-backend.svc:8080
+  TRANSACTIONS_API_ADDR: ledgerwriter.bank-backend.svc:8080
   USERSERVICE_API_ADDR: userservice.bank-backend.svc:8080
 kind: ConfigMap
-apiVersion: v1
----
-# Source: CUE apiObjects.Deployment.frontend
 metadata:
-  name: frontend
+  labels:
+    holos.run/component.name: bank-frontend
+  name: service-api-config
   namespace: bank-frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
   labels:
     application: bank-of-holos
     environment: development
+    holos.run/component.name: bank-frontend
     team: frontend
     tier: web
+  name: frontend
+  namespace: bank-frontend
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: frontend
+    application: bank-of-holos
+    environment: development
+    holos.run/component.name: bank-frontend
+    team: frontend
+    tier: web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    application: bank-of-holos
+    environment: development
+    holos.run/component.name: bank-frontend
+    team: frontend
+    tier: web
+  name: frontend
+  namespace: bank-frontend
 spec:
   selector:
     matchLabels:
       app: frontend
       application: bank-of-holos
       environment: development
+      holos.run/component.name: bank-frontend
       team: frontend
       tier: web
   template:
@@ -56,119 +94,119 @@ spec:
         app: frontend
         application: bank-of-holos
         environment: development
+        holos.run/component.name: bank-frontend
         team: frontend
         tier: web
     spec:
+      containers:
+      - env:
+        - name: BANK_NAME
+          value: Bank of Holos
+        - name: ENV_PLATFORM
+          value: local
+        - name: VERSION
+          value: v0.6.5
+        - name: PORT
+          value: "8080"
+        - name: ENABLE_TRACING
+          value: "false"
+        - name: SCHEME
+          value: https
+        - name: LOG_LEVEL
+          value: info
+        - name: DEFAULT_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              key: DEMO_LOGIN_USERNAME
+              name: demo-data-config
+        - name: DEFAULT_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: DEMO_LOGIN_PASSWORD
+              name: demo-data-config
+        - name: REGISTERED_OAUTH_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              key: DEMO_OAUTH_CLIENT_ID
+              name: oauth-config
+              optional: true
+        - name: ALLOWED_OAUTH_REDIRECT_URI
+          valueFrom:
+            configMapKeyRef:
+              key: DEMO_OAUTH_REDIRECT_URI
+              name: oauth-config
+              optional: true
+        envFrom:
+        - configMapRef:
+            name: environment-config
+        - configMapRef:
+            name: service-api-config
+        image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend:v0.6.5@sha256:d72050f70d12383e4434ad04d189b681dc625f696087ddf0b5df641645c9dafa
+        livenessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 15
+          timeoutSeconds: 30
+        name: front
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 250m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /tmp/.ssh
+          name: publickey
+          readOnly: true
       securityContext:
-        seccompProfile:
-          type: RuntimeDefault
         fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
         runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
       serviceAccountName: bank-of-holos
       terminationGracePeriodSeconds: 5
-      containers:
-        - env:
-            - name: BANK_NAME
-              value: Bank of Holos
-            - name: ENV_PLATFORM
-              value: local
-            - name: VERSION
-              value: v0.6.5
-            - name: PORT
-              value: "8080"
-            - name: ENABLE_TRACING
-              value: "false"
-            - name: SCHEME
-              value: https
-            - name: LOG_LEVEL
-              value: info
-            - name: DEFAULT_USERNAME
-              valueFrom:
-                configMapKeyRef:
-                  key: DEMO_LOGIN_USERNAME
-                  name: demo-data-config
-            - name: DEFAULT_PASSWORD
-              valueFrom:
-                configMapKeyRef:
-                  key: DEMO_LOGIN_PASSWORD
-                  name: demo-data-config
-            - name: REGISTERED_OAUTH_CLIENT_ID
-              valueFrom:
-                configMapKeyRef:
-                  key: DEMO_OAUTH_CLIENT_ID
-                  name: oauth-config
-                  optional: true
-            - name: ALLOWED_OAUTH_REDIRECT_URI
-              valueFrom:
-                configMapKeyRef:
-                  key: DEMO_OAUTH_REDIRECT_URI
-                  name: oauth-config
-                  optional: true
-          envFrom:
-            - configMapRef:
-                name: environment-config
-            - configMapRef:
-                name: service-api-config
-          image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend:v0.6.5@sha256:d72050f70d12383e4434ad04d189b681dc625f696087ddf0b5df641645c9dafa
-          livenessProbe:
-            httpGet:
-              path: /ready
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 15
-            timeoutSeconds: 30
-          name: front
-          readinessProbe:
-            httpGet:
-              path: /ready
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 10
-          resources:
-            limits:
-              cpu: 250m
-              memory: 128Mi
-            requests:
-              cpu: 100m
-              memory: 64Mi
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - all
-            privileged: false
-            readOnlyRootFilesystem: true
-          volumeMounts:
-            - mountPath: /tmp
-              name: tmp
-            - mountPath: /tmp/.ssh
-              name: publickey
-              readOnly: true
       volumes:
-        - emptyDir: {}
-          name: tmp
-        - name: publickey
-          secret:
-            items:
-              - key: jwtRS256.key.pub
-                path: publickey
-            secretName: jwt-key
-kind: Deployment
-apiVersion: apps/v1
+      - emptyDir: {}
+        name: tmp
+      - name: publickey
+        secret:
+          items:
+          - key: jwtRS256.key.pub
+            path: publickey
+          secretName: jwt-key
 ---
-# Source: CUE apiObjects.ExternalSecret.jwt-key
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
+  labels:
+    holos.run/component.name: bank-frontend
   name: jwt-key
   namespace: bank-frontend
 spec:
   dataFrom:
-    - extract:
-        key: jwt-key
+  - extract:
+      key: jwt-key
   refreshInterval: 5s
   secretStoreRef:
     kind: SecretStore
@@ -176,25 +214,11 @@ spec:
   target:
     name: jwt-key
 ---
-# Source: CUE apiObjects.ReferenceGrant.grant
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: ReferenceGrant
-metadata:
-  name: istio-ingress
-  namespace: bank-frontend
-spec:
-  from:
-    - group: gateway.networking.k8s.io
-      kind: HTTPRoute
-      namespace: istio-ingress
-  to:
-    - group: ""
-      kind: Service
----
-# Source: CUE apiObjects.SecretStore.bank-of-holos
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
+  labels:
+    holos.run/component.name: bank-frontend
   name: bank-security
   namespace: bank-frontend
 spec:
@@ -211,33 +235,18 @@ spec:
           type: ConfigMap
         url: https://kubernetes.default.svc
 ---
-# Source: CUE apiObjects.Service.frontend
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
 metadata:
-  name: frontend
-  namespace: bank-frontend
   labels:
-    application: bank-of-holos
-    environment: development
-    team: frontend
-    tier: web
-spec:
-  selector:
-    app: frontend
-    application: bank-of-holos
-    environment: development
-    team: frontend
-    tier: web
-  ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-      protocol: TCP
-kind: Service
-apiVersion: v1
----
-# Source: CUE apiObjects.ServiceAccount.bank-of-holos
-metadata:
-  name: bank-of-holos
+    holos.run/component.name: bank-frontend
+  name: istio-ingress
   namespace: bank-frontend
-kind: ServiceAccount
-apiVersion: v1
+spec:
+  from:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    namespace: istio-ingress
+  to:
+  - group: ""
+    kind: Service
