@@ -8,9 +8,7 @@ let Chart = {
 	Namespace: #CertManager.Namespace
 
 	Chart: {
-		name:    Name
 		version: #CertManager.Version
-		release: Name
 		repository: {
 			name: "jetstack"
 			url:  "https://charts.jetstack.io"

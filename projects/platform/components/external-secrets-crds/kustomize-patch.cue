@@ -9,6 +9,7 @@ import (
 _Kustomization: patches: [for x in KustomizePatches {x}]
 
 #KustomizePatches: [ArbitraryLabel=string]: ks.#Patch
+
 let KustomizePatches = #KustomizePatches & {
 	let Patch = [{
 		op:    "replace"

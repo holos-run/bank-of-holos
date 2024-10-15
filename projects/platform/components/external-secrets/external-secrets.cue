@@ -1,15 +1,19 @@
 package holos
 
-_Chart: {
+let Chart = {
 	Name:      "external-secrets"
-	Version:   "0.10.3"
 	Namespace: "external-secrets"
 
-	Repo: name: "external-secrets"
-	Repo: url:  "https://charts.external-secrets.io"
+	Chart: {
+		version: "0.10.3"
+		repository: {
+			name: "external-secrets"
+			url:  "https://charts.external-secrets.io"
+		}
+	}
 
 	Values: installCRDs: false
 }
 
 // Produce a helm chart build plan.
-(#Helm & _Chart).BuildPlan
+(#Helm & Chart).BuildPlan
