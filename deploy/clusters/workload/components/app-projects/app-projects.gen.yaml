@@ -1,68 +1,71 @@
----
-# Source: CUE apiObjects.AppProject.bank-backend
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
+  labels:
+    holos.run/component.name: app-projects
   name: bank-backend
   namespace: argocd
 spec:
   clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
+  - group: '*'
+    kind: '*'
   description: Holos managed AppProject for Bank of Holos
   destinations:
-    - namespace: '*'
-      server: '*'
+  - namespace: '*'
+    server: '*'
   sourceRepos:
-    - '*'
+  - '*'
 ---
-# Source: CUE apiObjects.AppProject.bank-frontend
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
+  labels:
+    holos.run/component.name: app-projects
   name: bank-frontend
   namespace: argocd
 spec:
   clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
+  - group: '*'
+    kind: '*'
   description: Holos managed AppProject for Bank of Holos
   destinations:
-    - namespace: '*'
-      server: '*'
+  - namespace: '*'
+    server: '*'
   sourceRepos:
-    - '*'
+  - '*'
 ---
-# Source: CUE apiObjects.AppProject.bank-security
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
+  labels:
+    holos.run/component.name: app-projects
   name: bank-security
   namespace: argocd
 spec:
   clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
+  - group: '*'
+    kind: '*'
   description: Holos managed AppProject for Bank of Holos
   destinations:
-    - namespace: '*'
-      server: '*'
+  - namespace: '*'
+    server: '*'
   sourceRepos:
-    - '*'
+  - '*'
 ---
-# Source: CUE apiObjects.AppProject.platform
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
+  labels:
+    holos.run/component.name: app-projects
   name: platform
   namespace: argocd
 spec:
   clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
+  - group: '*'
+    kind: '*'
   description: Holos managed AppProject for Bank of Holos
   destinations:
-    - namespace: '*'
-      server: '*'
+  - namespace: '*'
+    server: '*'
   sourceRepos:
-    - '*'
+  - '*'
