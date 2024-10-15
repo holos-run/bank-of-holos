@@ -5,12 +5,20 @@ package holos
 
 let Chart = {
 	Name:      "cert-manager"
-	Version:   #CertManager.Version
 	Namespace: #CertManager.Namespace
 
-	Repo: name: "jetstack"
-	Repo: url:  "https://charts.jetstack.io"
+	Chart: {
+		name:    Name
+		version: #CertManager.Version
+		release: Name
+		repository: {
+			name: "jetstack"
+			url:  "https://charts.jetstack.io"
+		}
+	}
 
-	Values: installCRDs: true
-	Values: startupapicheck: enabled: false
+	Values: {
+		installCRDs: true
+		startupapicheck: enabled: false
+	}
 }

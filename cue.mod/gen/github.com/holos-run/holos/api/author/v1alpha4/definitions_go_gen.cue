@@ -118,9 +118,16 @@ import core "github.com/holos-run/holos/api/core/v1alpha4"
 // transformed with Kustomize to consistently manage the metadata.namespace
 // field and common labels.
 //
+// See the following resources for additional details:
+//
+//   - [Resources]
+//   - [ArgoConfig]
+//   - [Kustomization]
+//   - [BuildPlan]
+//
 // [BuildPlan]: https://holos.run/docs/api/core/v1alpha4/#BuildPlan
+// [Kustomization]: https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/
 // [Resources]: https://holos.run/docs/api/core/v1alpha4/#Resources
-// [Kustomize]: https://holos.run/docs/api/core/v1alpha4/#Kustomize
 #Kubernetes: {
 	// Name represents the BuildPlan metadata.name field.  Used to construct the
 	// fully rendered manifest file path.
@@ -157,9 +164,20 @@ import core "github.com/holos-run/holos/api/core/v1alpha4"
 // This definition is a convenient way to produce a [BuildPlan] composed of
 // three [Resources] generators with one [Kustomize] transformer.
 //
+// See the following resources for additional details:
+//
+//   - [Resources]
+//   - [ArgoConfig]
+//   - [Chart]
+//   - [Values]
+//   - [Kustomization]
+//   - [BuildPlan]
+//
 // [BuildPlan]: https://holos.run/docs/api/core/v1alpha4/#BuildPlan
+// [Chart]: https://holos.run/docs/api/core/v1alpha4/#Chart
+// [Kustomization]: https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/
 // [Resources]: https://holos.run/docs/api/core/v1alpha4/#Resources
-// [Kustomize]: https://holos.run/docs/api/core/v1alpha4/#Kustomize
+// [Values]: https://holos.run/docs/api/core/v1alpha4/#Values
 #Helm: {
 	// Name represents the BuildPlan metadata.name field.  Used to construct the
 	// fully rendered manifest file path.
@@ -192,6 +210,9 @@ import core "github.com/holos-run/holos/api/core/v1alpha4"
 
 	// EnableHooks enables helm hooks when executing the `helm template` command.
 	EnableHooks: bool
+
+	// Kustomization represents the kustomization used to generate resources.
+	Kustomization?: {...} @go(,map[string]any)
 
 	// BuildPlan represents the derived BuildPlan produced for the holos render
 	// component command.
