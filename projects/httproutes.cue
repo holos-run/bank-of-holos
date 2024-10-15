@@ -8,7 +8,7 @@ import v1 "gateway.networking.k8s.io/httproute/v1"
 #HTTPRoutes: {
 	// For the guides, we simplify this down to a flat namespace.
 	[Name=string]: v1.#HTTPRoute & {
-		let HOST = Name + "." + #Platform.Domain
+		let HOST = Name + "." + _Organization.Domain
 
 		_backendRefs: [NAME=string]: {
 			name:      NAME

@@ -1,64 +1,63 @@
----
-# Source: CUE apiObjects.Namespace.argocd
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: argocd
   labels:
+    holos.run/component.name: namespaces
     kubernetes.io/metadata.name: argocd
-kind: Namespace
-apiVersion: v1
+  name: argocd
 ---
-# Source: CUE apiObjects.Namespace.bank-backend
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: bank-backend
   labels:
+    holos.run/component.name: namespaces
     kubernetes.io/metadata.name: bank-backend
-kind: Namespace
-apiVersion: v1
+  name: bank-backend
 ---
-# Source: CUE apiObjects.Namespace.bank-frontend
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: bank-frontend
   labels:
+    holos.run/component.name: namespaces
     kubernetes.io/metadata.name: bank-frontend
-kind: Namespace
-apiVersion: v1
+  name: bank-frontend
 ---
-# Source: CUE apiObjects.Namespace.bank-security
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: bank-security
   labels:
+    holos.run/component.name: namespaces
     kubernetes.io/metadata.name: bank-security
-kind: Namespace
-apiVersion: v1
+  name: bank-security
 ---
-# Source: CUE apiObjects.Namespace.cert-manager
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: cert-manager
   labels:
+    holos.run/component.name: namespaces
     kubernetes.io/metadata.name: cert-manager
-kind: Namespace
-apiVersion: v1
+  name: cert-manager
 ---
-# Source: CUE apiObjects.Namespace.external-secrets
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: external-secrets
   labels:
+    holos.run/component.name: namespaces
     kubernetes.io/metadata.name: external-secrets
-kind: Namespace
-apiVersion: v1
+  name: external-secrets
 ---
-# Source: CUE apiObjects.Namespace.istio-ingress
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: istio-ingress
   labels:
+    holos.run/component.name: namespaces
     kubernetes.io/metadata.name: istio-ingress
-kind: Namespace
-apiVersion: v1
+  name: istio-ingress
 ---
-# Source: CUE apiObjects.Namespace.istio-system
-metadata:
-  name: istio-system
-  labels:
-    kubernetes.io/metadata.name: istio-system
-kind: Namespace
 apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    holos.run/component.name: namespaces
+    kubernetes.io/metadata.name: istio-system
+  name: istio-system
