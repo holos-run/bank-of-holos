@@ -5,6 +5,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -591,6 +592,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -5862,6 +5864,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -6189,6 +6192,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -6699,6 +6703,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -6909,6 +6914,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -6990,6 +6996,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -7450,6 +7457,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -8023,6 +8031,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -9440,6 +9449,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -10216,6 +10226,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -13147,6 +13158,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -13440,6 +13452,7 @@ metadata:
     helm.sh/resource-policy: keep
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -13735,6 +13748,7 @@ kind: CustomResourceDefinition
 metadata:
   labels:
     app: istio-pilot
+    argocd.argoproj.io/instance: istio-base
     chart: istio
     heritage: Tiller
     holos.run/component.name: istio-base
@@ -14348,6 +14362,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: istio-reader
+    argocd.argoproj.io/instance: istio-base
     holos.run/component.name: istio-base
     release: base
   name: istio-reader-service-account
@@ -14358,6 +14373,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istio-base
     holos.run/component.name: istio-base
     istio: istiod
     istio.io/rev: default

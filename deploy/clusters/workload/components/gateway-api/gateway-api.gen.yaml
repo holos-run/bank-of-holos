@@ -7,6 +7,7 @@ metadata:
     gateway.networking.k8s.io/channel: standard
   creationTimestamp: null
   labels:
+    argocd.argoproj.io/instance: gateway-api
     holos.run/component.name: gateway-api
   name: gatewayclasses.gateway.networking.k8s.io
 spec:
@@ -534,6 +535,7 @@ metadata:
     gateway.networking.k8s.io/channel: standard
   creationTimestamp: null
   labels:
+    argocd.argoproj.io/instance: gateway-api
     holos.run/component.name: gateway-api
   name: gateways.gateway.networking.k8s.io
 spec:
@@ -2631,6 +2633,7 @@ metadata:
     gateway.networking.k8s.io/channel: standard
   creationTimestamp: null
   labels:
+    argocd.argoproj.io/instance: gateway-api
     holos.run/component.name: gateway-api
   name: grpcroutes.gateway.networking.k8s.io
 spec:
@@ -7028,6 +7031,7 @@ metadata:
     gateway.networking.k8s.io/channel: standard
   creationTimestamp: null
   labels:
+    argocd.argoproj.io/instance: gateway-api
     holos.run/component.name: gateway-api
   name: httproutes.gateway.networking.k8s.io
 spec:
@@ -13077,6 +13081,7 @@ metadata:
     gateway.networking.k8s.io/channel: standard
   creationTimestamp: null
   labels:
+    argocd.argoproj.io/instance: gateway-api
     holos.run/component.name: gateway-api
   name: referencegrants.gateway.networking.k8s.io
 spec:

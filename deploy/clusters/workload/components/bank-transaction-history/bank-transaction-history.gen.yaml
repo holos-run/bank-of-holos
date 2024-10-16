@@ -3,6 +3,7 @@ kind: Service
 metadata:
   labels:
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-transaction-history
     environment: development
     holos.run/component.name: bank-transaction-history
     team: ledger
@@ -17,6 +18,7 @@ spec:
   selector:
     app: transactionhistory
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-transaction-history
     environment: development
     holos.run/component.name: bank-transaction-history
     team: ledger
@@ -28,6 +30,7 @@ kind: Deployment
 metadata:
   labels:
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-transaction-history
     environment: development
     holos.run/component.name: bank-transaction-history
     team: ledger
@@ -39,6 +42,7 @@ spec:
     matchLabels:
       app: transactionhistory
       application: bank-of-holos
+      argocd.argoproj.io/instance: bank-transaction-history
       environment: development
       holos.run/component.name: bank-transaction-history
       team: ledger
@@ -48,6 +52,7 @@ spec:
       labels:
         app: transactionhistory
         application: bank-of-holos
+        argocd.argoproj.io/instance: bank-transaction-history
         environment: development
         holos.run/component.name: bank-transaction-history
         team: ledger

@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-application-controller
@@ -25,6 +26,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-applicationset-controller
@@ -41,6 +43,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-notifications-controller
@@ -60,6 +63,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-redis-secret-init
@@ -76,6 +80,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-repo-server
@@ -92,6 +97,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-server
@@ -107,6 +113,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-application-controller
@@ -160,6 +167,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-applicationset-controller
@@ -257,6 +265,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-notifications-controller
@@ -311,6 +320,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-redis-secret-init
@@ -341,6 +351,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-repo-server
@@ -357,6 +368,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-server
@@ -407,6 +419,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-application-controller
@@ -432,6 +445,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-notifications-controller
@@ -482,6 +496,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-server
@@ -540,6 +555,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-application-controller
@@ -563,6 +579,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-applicationset-controller
@@ -586,6 +603,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-notifications-controller
@@ -612,6 +630,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-redis-secret-init
@@ -635,6 +654,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-repo-server
@@ -658,6 +678,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-server
@@ -681,6 +702,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-application-controller
@@ -703,6 +725,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-notifications-controller
@@ -725,6 +748,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-server
@@ -758,6 +782,7 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-cm
@@ -803,6 +828,7 @@ metadata:
     app.kubernetes.io/name: argocd-cmd-params-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-cmd-params-cm
@@ -817,6 +843,7 @@ metadata:
     app.kubernetes.io/name: argocd-gpg-keys-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-gpg-keys-cm
@@ -835,6 +862,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-notifications-cm
@@ -859,6 +887,7 @@ metadata:
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-rbac-cm
@@ -901,6 +930,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-redis-health-configmap
@@ -931,6 +961,7 @@ metadata:
     app.kubernetes.io/name: argocd-ssh-known-hosts-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-ssh-known-hosts-cm
@@ -945,6 +976,7 @@ metadata:
     app.kubernetes.io/name: argocd-tls-certs-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-tls-certs-cm
@@ -960,6 +992,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-notifications-secret
@@ -977,6 +1010,7 @@ metadata:
     app.kubernetes.io/name: argocd-secret
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-secret
@@ -993,6 +1027,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-applicationset-controller
@@ -1005,6 +1040,7 @@ spec:
   selector:
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/name: argocd-applicationset-controller
+    argocd.argoproj.io/instance: argocd
     holos.run/component.name: argocd
   type: ClusterIP
 ---
@@ -1018,6 +1054,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-redis
@@ -1030,6 +1067,7 @@ spec:
   selector:
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/name: argocd-redis
+    argocd.argoproj.io/instance: argocd
     holos.run/component.name: argocd
 ---
 apiVersion: v1
@@ -1042,6 +1080,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-repo-server
@@ -1055,6 +1094,7 @@ spec:
   selector:
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/name: argocd-repo-server
+    argocd.argoproj.io/instance: argocd
     holos.run/component.name: argocd
 ---
 apiVersion: v1
@@ -1067,6 +1107,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-server
@@ -1084,6 +1125,7 @@ spec:
   selector:
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/name: argocd-server
+    argocd.argoproj.io/instance: argocd
     holos.run/component.name: argocd
   sessionAffinity: None
   type: ClusterIP
@@ -1098,6 +1140,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-applicationset-controller
@@ -1109,6 +1152,7 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: argocd
       app.kubernetes.io/name: argocd-applicationset-controller
+      argocd.argoproj.io/instance: argocd
       holos.run/component.name: argocd
   template:
     metadata:
@@ -1121,6 +1165,7 @@ spec:
         app.kubernetes.io/name: argocd-applicationset-controller
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v2.12.3
+        argocd.argoproj.io/instance: argocd
         helm.sh/chart: argo-cd-7.5.2
         holos.run/component.name: argocd
     spec:
@@ -1131,6 +1176,7 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: argocd-applicationset-controller
+                  argocd.argoproj.io/instance: argocd
                   holos.run/component.name: argocd
               topologyKey: kubernetes.io/hostname
             weight: 100
@@ -1347,6 +1393,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-notifications-controller
@@ -1358,6 +1405,7 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: argocd
       app.kubernetes.io/name: argocd-notifications-controller
+      argocd.argoproj.io/instance: argocd
       holos.run/component.name: argocd
   strategy:
     type: Recreate
@@ -1370,6 +1418,7 @@ spec:
         app.kubernetes.io/name: argocd-notifications-controller
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v2.12.3
+        argocd.argoproj.io/instance: argocd
         helm.sh/chart: argo-cd-7.5.2
         holos.run/component.name: argocd
     spec:
@@ -1380,6 +1429,7 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: argocd-notifications-controller
+                  argocd.argoproj.io/instance: argocd
                   holos.run/component.name: argocd
               topologyKey: kubernetes.io/hostname
             weight: 100
@@ -1470,6 +1520,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-redis
@@ -1480,6 +1531,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: argocd-redis
+      argocd.argoproj.io/instance: argocd
       holos.run/component.name: argocd
   template:
     metadata:
@@ -1490,6 +1542,7 @@ spec:
         app.kubernetes.io/name: argocd-redis
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v2.12.3
+        argocd.argoproj.io/instance: argocd
         helm.sh/chart: argo-cd-7.5.2
         holos.run/component.name: argocd
     spec:
@@ -1500,6 +1553,7 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: argocd-redis
+                  argocd.argoproj.io/instance: argocd
                   holos.run/component.name: argocd
               topologyKey: kubernetes.io/hostname
             weight: 100
@@ -1558,6 +1612,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-repo-server
@@ -1569,6 +1624,7 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: argocd
       app.kubernetes.io/name: argocd-repo-server
+      argocd.argoproj.io/instance: argocd
       holos.run/component.name: argocd
   template:
     metadata:
@@ -1582,6 +1638,7 @@ spec:
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v2.12.3
+        argocd.argoproj.io/instance: argocd
         helm.sh/chart: argo-cd-7.5.2
         holos.run/component.name: argocd
     spec:
@@ -1592,6 +1649,7 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: argocd-repo-server
+                  argocd.argoproj.io/instance: argocd
                   holos.run/component.name: argocd
               topologyKey: kubernetes.io/hostname
             weight: 100
@@ -1935,6 +1993,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-server
@@ -1946,6 +2005,7 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: argocd
       app.kubernetes.io/name: argocd-server
+      argocd.argoproj.io/instance: argocd
       holos.run/component.name: argocd
   template:
     metadata:
@@ -1959,6 +2019,7 @@ spec:
         app.kubernetes.io/name: argocd-server
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v2.12.3
+        argocd.argoproj.io/instance: argocd
         helm.sh/chart: argo-cd-7.5.2
         holos.run/component.name: argocd
     spec:
@@ -1969,6 +2030,7 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: argocd-server
+                  argocd.argoproj.io/instance: argocd
                   holos.run/component.name: argocd
               topologyKey: kubernetes.io/hostname
             weight: 100
@@ -2340,6 +2402,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-application-controller
@@ -2351,6 +2414,7 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: argocd
       app.kubernetes.io/name: argocd-application-controller
+      argocd.argoproj.io/instance: argocd
       holos.run/component.name: argocd
   serviceName: argocd-application-controller
   template:
@@ -2365,6 +2429,7 @@ spec:
         app.kubernetes.io/name: argocd-application-controller
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v2.12.3
+        argocd.argoproj.io/instance: argocd
         helm.sh/chart: argo-cd-7.5.2
         holos.run/component.name: argocd
     spec:
@@ -2375,6 +2440,7 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: argocd-application-controller
+                  argocd.argoproj.io/instance: argocd
                   holos.run/component.name: argocd
               topologyKey: kubernetes.io/hostname
             weight: 100
@@ -2654,6 +2720,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd
     helm.sh/chart: argo-cd-7.5.2
     holos.run/component.name: argocd
   name: argocd-redis-secret-init
@@ -2668,6 +2735,7 @@ spec:
         app.kubernetes.io/name: argocd-redis-secret-init
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v2.12.3
+        argocd.argoproj.io/instance: argocd
         helm.sh/chart: argo-cd-7.5.2
         holos.run/component.name: argocd
     spec:
@@ -2697,6 +2765,7 @@ apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
 metadata:
   labels:
+    argocd.argoproj.io/instance: argocd
     holos.run/component.name: argocd
   name: istio-ingress
   namespace: argocd

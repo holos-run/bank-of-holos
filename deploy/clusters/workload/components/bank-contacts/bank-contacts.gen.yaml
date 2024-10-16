@@ -3,6 +3,7 @@ kind: Service
 metadata:
   labels:
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-contacts
     environment: development
     holos.run/component.name: bank-contacts
     team: accounts
@@ -17,6 +18,7 @@ spec:
   selector:
     app: contacts
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-contacts
     environment: development
     holos.run/component.name: bank-contacts
     team: accounts
@@ -28,6 +30,7 @@ kind: Deployment
 metadata:
   labels:
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-contacts
     environment: development
     holos.run/component.name: bank-contacts
     team: accounts
@@ -39,6 +42,7 @@ spec:
     matchLabels:
       app: contacts
       application: bank-of-holos
+      argocd.argoproj.io/instance: bank-contacts
       environment: development
       holos.run/component.name: bank-contacts
       team: accounts
@@ -48,6 +52,7 @@ spec:
       labels:
         app: contacts
         application: bank-of-holos
+        argocd.argoproj.io/instance: bank-contacts
         environment: development
         holos.run/component.name: bank-contacts
         team: accounts

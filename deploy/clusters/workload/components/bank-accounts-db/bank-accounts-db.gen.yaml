@@ -9,6 +9,7 @@ metadata:
   labels:
     app: accounts-db
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-accounts-db
     environment: development
     holos.run/component.name: bank-accounts-db
     team: accounts
@@ -21,6 +22,7 @@ kind: Service
 metadata:
   labels:
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-accounts-db
     environment: development
     holos.run/component.name: bank-accounts-db
     team: accounts
@@ -36,6 +38,7 @@ spec:
   selector:
     app: accounts-db
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-accounts-db
     environment: development
     holos.run/component.name: bank-accounts-db
     team: accounts
@@ -47,6 +50,7 @@ kind: StatefulSet
 metadata:
   labels:
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-accounts-db
     environment: development
     holos.run/component.name: bank-accounts-db
     team: accounts
@@ -59,6 +63,7 @@ spec:
     matchLabels:
       app: accounts-db
       application: bank-of-holos
+      argocd.argoproj.io/instance: bank-accounts-db
       environment: development
       holos.run/component.name: bank-accounts-db
       team: accounts
@@ -69,6 +74,7 @@ spec:
       labels:
         app: accounts-db
         application: bank-of-holos
+        argocd.argoproj.io/instance: bank-accounts-db
         environment: development
         holos.run/component.name: bank-accounts-db
         team: accounts

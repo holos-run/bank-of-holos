@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   labels:
+    argocd.argoproj.io/instance: app-projects
     holos.run/component.name: app-projects
   name: bank-backend
   namespace: argocd
@@ -20,6 +21,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   labels:
+    argocd.argoproj.io/instance: app-projects
     holos.run/component.name: app-projects
   name: bank-frontend
   namespace: argocd
@@ -38,6 +40,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   labels:
+    argocd.argoproj.io/instance: app-projects
     holos.run/component.name: app-projects
   name: bank-security
   namespace: argocd
@@ -56,6 +59,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   labels:
+    argocd.argoproj.io/instance: app-projects
     holos.run/component.name: app-projects
   name: platform
   namespace: argocd

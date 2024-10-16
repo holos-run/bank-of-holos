@@ -3,6 +3,7 @@ kind: HTTPRoute
 metadata:
   labels:
     app: argocd
+    argocd.argoproj.io/instance: httproutes
     holos.run/component.name: httproutes
   name: argocd
   namespace: istio-ingress
@@ -27,6 +28,7 @@ kind: HTTPRoute
 metadata:
   labels:
     app: bank
+    argocd.argoproj.io/instance: httproutes
     holos.run/component.name: httproutes
   name: bank
   namespace: istio-ingress

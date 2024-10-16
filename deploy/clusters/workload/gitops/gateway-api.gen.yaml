@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
+    argocd.argoproj.io/instance: gateway-api
     holos.run/component.name: gateway-api
   name: gateway-api
   namespace: argocd

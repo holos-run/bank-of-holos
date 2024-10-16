@@ -3,6 +3,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     release: istiod
   name: istiod
@@ -13,6 +14,7 @@ kind: Role
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     release: istiod
   name: istiod
@@ -56,6 +58,7 @@ kind: ClusterRole
 metadata:
   labels:
     app: istio-reader
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     release: istiod
   name: istio-reader-clusterrole-istio-system
@@ -165,6 +168,7 @@ kind: ClusterRole
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     release: istiod
   name: istiod-clusterrole-istio-system
@@ -359,6 +363,7 @@ kind: ClusterRole
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     release: istiod
   name: istiod-gateway-controller-istio-system
@@ -405,6 +410,7 @@ kind: RoleBinding
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     release: istiod
   name: istiod
@@ -423,6 +429,7 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app: istio-reader
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     release: istiod
   name: istio-reader-clusterrole-istio-system
@@ -440,6 +447,7 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     release: istiod
   name: istiod-clusterrole-istio-system
@@ -457,6 +465,7 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     release: istiod
   name: istiod-gateway-controller-istio-system
@@ -488,6 +497,7 @@ data:
 kind: ConfigMap
 metadata:
   labels:
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
@@ -2460,6 +2470,7 @@ data:
 kind: ConfigMap
 metadata:
   labels:
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
@@ -2473,6 +2484,7 @@ kind: Service
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     install.operator.istio.io/owning-resource: unknown
     istio: pilot
@@ -2498,6 +2510,7 @@ spec:
     protocol: TCP
   selector:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     istio: pilot
 ---
@@ -2506,6 +2519,7 @@ kind: Deployment
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     install.operator.istio.io/owning-resource: unknown
     istio: pilot
@@ -2517,6 +2531,7 @@ metadata:
 spec:
   selector:
     matchLabels:
+      argocd.argoproj.io/instance: istiod
       holos.run/component.name: istiod
       istio: pilot
   strategy:
@@ -2531,6 +2546,7 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: istiod
+        argocd.argoproj.io/instance: istiod
         holos.run/component.name: istiod
         install.operator.istio.io/owning-resource: unknown
         istio: pilot
@@ -2673,6 +2689,7 @@ kind: PodDisruptionBudget
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     install.operator.istio.io/owning-resource: unknown
     istio: pilot
@@ -2686,6 +2703,7 @@ spec:
   selector:
     matchLabels:
       app: istiod
+      argocd.argoproj.io/instance: istiod
       holos.run/component.name: istiod
       istio: pilot
 ---
@@ -2694,6 +2712,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
@@ -2721,6 +2740,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   labels:
     app: sidecar-injector
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
@@ -2874,6 +2894,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   labels:
     app: istiod
+    argocd.argoproj.io/instance: istiod
     holos.run/component.name: istiod
     istio: istiod
     istio.io/rev: default

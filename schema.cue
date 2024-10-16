@@ -18,9 +18,10 @@ import api "github.com/holos-run/holos/api/author/v1alpha4"
 #ArgoConfig: api.#ArgoConfig
 
 let ComponentConfig = {
-	Name:       _Tags.name
-	Component:  _Tags.component
-	Cluster:    _Tags.cluster
+	Name:      _Tags.name
+	Component: _Tags.component
+	Cluster:   _Tags.cluster
+	CommonLabels: "argocd.argoproj.io/instance": Name
 	ArgoConfig: #ArgoConfig
 	Resources:  #Resources
 }

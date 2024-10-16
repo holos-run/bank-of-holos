@@ -11,6 +11,7 @@ metadata:
   labels:
     app: ledger-db
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-ledger-db
     environment: development
     holos.run/component.name: bank-ledger-db
     team: ledger
@@ -23,6 +24,7 @@ kind: Service
 metadata:
   labels:
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-ledger-db
     environment: development
     holos.run/component.name: bank-ledger-db
     team: ledger
@@ -37,6 +39,7 @@ spec:
   selector:
     app: ledger-db
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-ledger-db
     environment: development
     holos.run/component.name: bank-ledger-db
     team: ledger
@@ -48,6 +51,7 @@ kind: StatefulSet
 metadata:
   labels:
     application: bank-of-holos
+    argocd.argoproj.io/instance: bank-ledger-db
     environment: development
     holos.run/component.name: bank-ledger-db
     team: ledger
@@ -60,6 +64,7 @@ spec:
     matchLabels:
       app: ledger-db
       application: bank-of-holos
+      argocd.argoproj.io/instance: bank-ledger-db
       environment: development
       holos.run/component.name: bank-ledger-db
       team: ledger
@@ -70,6 +75,7 @@ spec:
       labels:
         app: ledger-db
         application: bank-of-holos
+        argocd.argoproj.io/instance: bank-ledger-db
         environment: development
         holos.run/component.name: bank-ledger-db
         team: ledger

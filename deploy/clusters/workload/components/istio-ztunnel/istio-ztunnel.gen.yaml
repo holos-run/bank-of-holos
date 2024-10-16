@@ -4,6 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: ztunnel
     app.kubernetes.io/part-of: istio
+    argocd.argoproj.io/instance: istio-ztunnel
     holos.run/component.name: istio-ztunnel
   name: ztunnel
   namespace: istio-system
@@ -14,6 +15,7 @@ metadata:
   labels:
     app.kubernetes.io/name: ztunnel
     app.kubernetes.io/part-of: istio
+    argocd.argoproj.io/instance: istio-ztunnel
     holos.run/component.name: istio-ztunnel
   name: ztunnel
   namespace: istio-system
@@ -21,6 +23,7 @@ spec:
   selector:
     matchLabels:
       app: ztunnel
+      argocd.argoproj.io/instance: istio-ztunnel
       holos.run/component.name: istio-ztunnel
   template:
     metadata:
@@ -30,6 +33,7 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: ztunnel
+        argocd.argoproj.io/instance: istio-ztunnel
         holos.run/component.name: istio-ztunnel
         istio.io/dataplane-mode: none
         sidecar.istio.io/inject: "false"
