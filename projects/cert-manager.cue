@@ -2,7 +2,7 @@ package holos
 
 // Platform wide configuration
 #CertManager: {
-	Version:   "1.15.3"
+	Version:   "v1.16.1"
 	Namespace: "cert-manager"
 }
 
