@@ -12,7 +12,7 @@ let RESOURCES = {
 	for Project in #Projects {
 		for Hostname in Project.Hostnames {
 			HTTPRoute: "\(Project.Name)/\(Hostname.Name)": {
-				metadata: name:      Hostname.Name + "." + #Platform.Domain
+				metadata: name:      Hostname.Name + "." + #Organization.Domain
 				metadata: namespace: IngressNamespace
 				metadata: labels:    Project._CommonLabels
 				spec: hostnames: [metadata.name]

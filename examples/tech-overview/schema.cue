@@ -1,23 +1,11 @@
 package holos
 
-import api "github.com/holos-run/holos/api/author/v1alpha3"
+import api "github.com/holos-run/holos/api/author/v1alpha4"
 
 #Organization: api.#Organization & {
 	Domain: "example.com"
 }
-#Platform: api.#Platform
-#Fleets:   api.#StandardFleets
 
 #ArgoConfig: api.#ArgoConfig & {
-	ClusterName: _ClusterName
-	DeployRoot:  "./examples/tech-overview"
+	Root: "./examples/tech-overview/deploy"
 }
-
-_ComponentConfig: {
-	Resources:  #Resources
-	ArgoConfig: #ArgoConfig
-}
-
-#Helm:       api.#Helm & _ComponentConfig
-#Kustomize:  api.#Kustomize & _ComponentConfig
-#Kubernetes: api.#Kubernetes & _ComponentConfig

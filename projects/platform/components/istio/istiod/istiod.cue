@@ -6,9 +6,9 @@ import (
 )
 
 // Produce a helm chart build plan.
-(#Helm & Chart).BuildPlan
+_HelmChart.BuildPlan
 
-let Chart = {
+_HelmChart: #Helm & {
 	Name:      "istiod"
 	Namespace: #Istio.System.Namespace
 
@@ -20,7 +20,7 @@ let Chart = {
 		}
 	}
 
-	Kustomization: patches: [for x in KustomizePatches {x}]
+	KustomizeConfig: Kustomization: patches: [for x in KustomizePatches {x}]
 
 	Values: #Istio.Values
 }
