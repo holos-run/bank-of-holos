@@ -1,9 +1,9 @@
 package holos
 
 // Produce a helm chart build plan.
-(#Helm & Chart).BuildPlan
+_HelmChart.BuildPlan
 
-let Chart = {
+_HelmChart: #Helm & {
 	Name:      "cert-manager"
 	Namespace: #CertManager.Namespace
 
@@ -14,9 +14,12 @@ let Chart = {
 			url:  "https://charts.jetstack.io"
 		}
 	}
+	EnableHooks: true
 
-	Values: {
-		installCRDs: true
+	Values: #Values & {
+		crds: enabled:            true
 		startupapicheck: enabled: false
+		// https://github.com/cert-manager/cert-manager/issues/6716
+		global: leaderElection: namespace: Namespace
 	}
 }

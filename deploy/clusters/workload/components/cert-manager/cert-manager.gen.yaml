@@ -14024,7 +14024,7 @@ spec:
       - args:
         - --v=2
         - --cluster-resource-namespace=$(POD_NAMESPACE)
-        - --leader-election-namespace=kube-system
+        - --leader-election-namespace=cert-manager
         - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.16.1
         - --max-concurrent-challenges=60
         env:
@@ -14108,7 +14108,7 @@ spec:
       containers:
       - args:
         - --v=2
-        - --leader-election-namespace=kube-system
+        - --leader-election-namespace=cert-manager
         env:
         - name: POD_NAMESPACE
           valueFrom:
