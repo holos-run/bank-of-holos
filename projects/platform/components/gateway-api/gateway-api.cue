@@ -1,9 +1,9 @@
 package holos
 
-_Kustomization: {
+_Kustomize: #Kustomize & {
 	Name: "gateway-api"
 
-	Files: {
+	KustomizeConfig: Files: {
 		"standard/gateway.networking.k8s.io_gatewayclasses.yaml":  _
 		"standard/gateway.networking.k8s.io_gateways.yaml":        _
 		"standard/gateway.networking.k8s.io_grpcroutes.yaml":      _
@@ -13,4 +13,4 @@ _Kustomization: {
 }
 
 // Produce a kubectl kustomize build plan.
-(#Kustomize & _Kustomization).BuildPlan
+_Kustomize.BuildPlan
