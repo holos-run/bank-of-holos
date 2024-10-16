@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-  project: default
+  project: bank-backend
   source:
     path: deploy/clusters/workload/components/bank-contacts
     repoURL: https://github.com/holos-run/bank-of-holos
