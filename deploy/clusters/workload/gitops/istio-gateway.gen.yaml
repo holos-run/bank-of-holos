@@ -2,7 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    argocd.argoproj.io/instance: istio-gateway
     holos.run/component.name: istio-gateway
   name: istio-gateway
   namespace: argocd

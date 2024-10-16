@@ -2,7 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    argocd.argoproj.io/instance: bank-backend-config
     holos.run/component.name: bank-backend-config
   name: bank-backend-config
   namespace: argocd

@@ -2,7 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    argocd.argoproj.io/instance: bank-ledger-writer
     holos.run/component.name: bank-ledger-writer
   name: bank-ledger-writer
   namespace: argocd

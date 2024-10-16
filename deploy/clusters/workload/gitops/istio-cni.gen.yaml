@@ -2,7 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    argocd.argoproj.io/instance: istio-cni
     holos.run/component.name: istio-cni
   name: istio-cni
   namespace: argocd

@@ -2,7 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    argocd.argoproj.io/instance: argocd-crds
     holos.run/component.name: argocd-crds
   name: argocd-crds
   namespace: argocd
