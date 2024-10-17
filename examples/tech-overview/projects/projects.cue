@@ -1,6 +1,6 @@
 package holos
 
-import api "github.com/holos-run/holos/api/author/v1alpha3"
+import api "github.com/holos-run/holos/api/author/v1alpha4"
 
 // Projects defines the structure other teams register with to manage project
 // resources.  The platform team defines the schema, development teams provide
@@ -26,9 +26,7 @@ import api "github.com/holos-run/holos/api/author/v1alpha3"
 			Port:      number | *80
 		}
 
-		// CommonLabels is not part of the Projects API, so we use a hidden field to
-		// provide common labels to components that render resources from CUE.
-		_CommonLabels: {
+		CommonLabels: {
 			"\(#Organization.Domain)/project.name": Name
 			"\(#Organization.Domain)/owner.name":   Owner.Name
 			"\(#Organization.Domain)/owner.email":  Owner.Email
@@ -40,7 +38,7 @@ for Project in #Projects {
 	// Register project namespaces with the namespaces component.
 	#Namespaces: {
 		for Namespace in Project.Namespaces {
-			(Namespace.Name): metadata: labels: Project._CommonLabels
+			(Namespace.Name): _
 		}
 	}
 }

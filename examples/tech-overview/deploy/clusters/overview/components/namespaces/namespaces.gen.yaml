@@ -1,11 +1,8 @@
----
-# Source: CUE apiObjects.Namespace.experiment
-metadata:
-  name: experiment
-  labels:
-    kubernetes.io/metadata.name: experiment
-    example.com/project.name: experiment
-    example.com/owner.name: dev-team
-    example.com/owner.email: sg-dev-team@example.com
-kind: Namespace
 apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: namespaces
+    holos.run/component.name: namespaces
+    kubernetes.io/metadata.name: experiment
+  name: experiment

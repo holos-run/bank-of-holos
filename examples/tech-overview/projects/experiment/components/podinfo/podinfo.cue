@@ -1,11 +1,15 @@
 package holos
 
 // Produce a helm chart build plan.
-(#Helm & Chart).BuildPlan
+_HelmChart.BuildPlan
 
-let Chart = {
-	Name:    "podinfo"
-	Version: "6.6.2"
-	Repo: name: "podinfo"
-	Repo: url:  "https://stefanprodan.github.io/podinfo"
+_HelmChart: #Helm & {
+	Name: "podinfo"
+	Chart: {
+		version: "6.6.2"
+		repository: {
+			name: "podinfo"
+			url:  "https://stefanprodan.github.io/podinfo"
+		}
+	}
 }

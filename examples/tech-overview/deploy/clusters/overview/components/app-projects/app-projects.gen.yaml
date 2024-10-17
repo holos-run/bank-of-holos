@@ -1,21 +1,18 @@
----
-# Source: CUE apiObjects.AppProject.experiment
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
+  labels:
+    argocd.argoproj.io/instance: app-projects
+    holos.run/component.name: app-projects
   name: experiment
   namespace: argocd
-  labels:
-    example.com/project.name: experiment
-    example.com/owner.name: dev-team
-    example.com/owner.email: sg-dev-team@example.com
 spec:
   clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
+  - group: '*'
+    kind: '*'
   description: Managed AppProject for Bank of Holos
   destinations:
-    - namespace: '*'
-      server: '*'
+  - namespace: '*'
+    server: '*'
   sourceRepos:
-    - '*'
+  - '*'

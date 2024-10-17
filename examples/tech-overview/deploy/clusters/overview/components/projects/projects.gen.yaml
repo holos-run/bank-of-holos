@@ -1,61 +1,54 @@
----
-# Source: CUE apiObjects.ReferenceGrant.experiment/istio-ingress
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: ReferenceGrant
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
 metadata:
-  name: istio-ingress
-  namespace: experiment
   labels:
-    example.com/project.name: experiment
-    example.com/owner.name: dev-team
-    example.com/owner.email: sg-dev-team@example.com
-spec:
-  from:
-    - group: gateway.networking.k8s.io
-      kind: HTTPRoute
-      namespace: istio-ingress
-  to:
-    - group: ""
-      kind: Service
----
-# Source: CUE apiObjects.RoleBinding.experiment/admin
-metadata:
+    argocd.argoproj.io/instance: projects
+    holos.run/component.name: projects
   name: admin
   namespace: experiment
-  labels:
-    example.com/project.name: experiment
-    example.com/owner.name: dev-team
-    example.com/owner.email: sg-dev-team@example.com
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: admin
 subjects:
-  - apiGroup: rbac.authorization.k8s.io
-    kind: Group
-    name: oidc:sg-dev-team@example.com
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: oidc:sg-dev-team@example.com
 ---
-# Source: CUE apiObjects.SecretStore.experiment/default
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
+  labels:
+    argocd.argoproj.io/instance: projects
+    holos.run/component.name: projects
   name: default
   namespace: experiment
-  labels:
-    example.com/project.name: experiment
-    example.com/owner.name: dev-team
-    example.com/owner.email: sg-dev-team@example.com
 spec:
   provider:
     kubernetes:
-      remoteNamespace: experiment
       auth:
         token:
           bearerToken:
             key: token
             name: eso-reader
+      remoteNamespace: experiment
       server:
-        url: https://management.example.com:6443
         caBundle: LS0tLS1CRUd...QVRFLS0tLS0K
+        url: https://management.example.com:6443
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  labels:
+    argocd.argoproj.io/instance: projects
+    holos.run/component.name: projects
+  name: istio-ingress
+  namespace: experiment
+spec:
+  from:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    namespace: istio-ingress
+  to:
+  - group: ""
+    kind: Service

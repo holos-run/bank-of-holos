@@ -5,12 +5,13 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: podinfo
     app.kubernetes.io/version: 6.6.2
+    argocd.argoproj.io/instance: podinfo
     example.com/owner.email: sg-dev-team@example.com
     example.com/owner.name: dev-team
     example.com/project.name: experiment
     helm.sh/chart: podinfo-6.6.2
+    holos.run/component.name: podinfo
   name: podinfo
-  namespace: experiment
 spec:
   ports:
   - name: http
@@ -23,9 +24,11 @@ spec:
     targetPort: grpc
   selector:
     app.kubernetes.io/name: podinfo
+    argocd.argoproj.io/instance: podinfo
     example.com/owner.email: sg-dev-team@example.com
     example.com/owner.name: dev-team
     example.com/project.name: experiment
+    holos.run/component.name: podinfo
   type: ClusterIP
 ---
 apiVersion: apps/v1
@@ -35,20 +38,23 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: podinfo
     app.kubernetes.io/version: 6.6.2
+    argocd.argoproj.io/instance: podinfo
     example.com/owner.email: sg-dev-team@example.com
     example.com/owner.name: dev-team
     example.com/project.name: experiment
     helm.sh/chart: podinfo-6.6.2
+    holos.run/component.name: podinfo
   name: podinfo
-  namespace: experiment
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: podinfo
+      argocd.argoproj.io/instance: podinfo
       example.com/owner.email: sg-dev-team@example.com
       example.com/owner.name: dev-team
       example.com/project.name: experiment
+      holos.run/component.name: podinfo
   strategy:
     rollingUpdate:
       maxUnavailable: 1
@@ -60,9 +66,11 @@ spec:
         prometheus.io/scrape: "true"
       labels:
         app.kubernetes.io/name: podinfo
+        argocd.argoproj.io/instance: podinfo
         example.com/owner.email: sg-dev-team@example.com
         example.com/owner.name: dev-team
         example.com/project.name: experiment
+        holos.run/component.name: podinfo
     spec:
       containers:
       - command:
