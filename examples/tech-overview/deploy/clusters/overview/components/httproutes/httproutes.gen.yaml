@@ -3,6 +3,9 @@ kind: HTTPRoute
 metadata:
   labels:
     argocd.argoproj.io/instance: httproutes
+    example.com/owner.email: sg-dev-team@example.com
+    example.com/owner.name: dev-team
+    example.com/project.name: experiment
     holos.run/component.name: httproutes
   name: podinfo.example.com
   namespace: istio-ingress

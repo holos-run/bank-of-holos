@@ -11,6 +11,7 @@ _Kubernetes: #Kubernetes & {
 				HTTPRoute: "\(Project.Name)/\(Hostname.Name)": {
 					metadata: name:      Hostname.Name + "." + #Organization.Domain
 					metadata: namespace: IngressNamespace
+					metadata: labels:    Project.CommonLabels
 					spec: hostnames: [metadata.name]
 					spec: parentRefs: [{
 						name:      "default"

@@ -3,6 +3,9 @@ kind: RoleBinding
 metadata:
   labels:
     argocd.argoproj.io/instance: projects
+    example.com/owner.email: sg-dev-team@example.com
+    example.com/owner.name: dev-team
+    example.com/project.name: experiment
     holos.run/component.name: projects
   name: admin
   namespace: experiment
@@ -20,6 +23,9 @@ kind: SecretStore
 metadata:
   labels:
     argocd.argoproj.io/instance: projects
+    example.com/owner.email: sg-dev-team@example.com
+    example.com/owner.name: dev-team
+    example.com/project.name: experiment
     holos.run/component.name: projects
   name: default
   namespace: experiment
@@ -41,6 +47,9 @@ kind: ReferenceGrant
 metadata:
   labels:
     argocd.argoproj.io/instance: projects
+    example.com/owner.email: sg-dev-team@example.com
+    example.com/owner.name: dev-team
+    example.com/project.name: experiment
     holos.run/component.name: projects
   name: istio-ingress
   namespace: experiment

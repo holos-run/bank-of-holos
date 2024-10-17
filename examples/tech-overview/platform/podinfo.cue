@@ -6,5 +6,6 @@ for Cluster in #Fleets.workload.clusters {
 		name:      "podinfo"
 		component: "projects/experiment/components/podinfo"
 		cluster:   Cluster.name
+		tags: project: "experiment"
 	}
 }

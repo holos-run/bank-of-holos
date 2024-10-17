@@ -38,7 +38,7 @@ for Project in #Projects {
 	// Register project namespaces with the namespaces component.
 	#Namespaces: {
 		for Namespace in Project.Namespaces {
-			(Namespace.Name): _
+			(Namespace.Name): metadata: labels: Project.CommonLabels
 		}
 	}
 }

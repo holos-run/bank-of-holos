@@ -1,9 +1,9 @@
 package holos
 
-let Objects = {
+_Kubernetes: #Kubernetes & {
 	Name: "namespaces"
 	Resources: Namespace: #Namespaces
 }
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan

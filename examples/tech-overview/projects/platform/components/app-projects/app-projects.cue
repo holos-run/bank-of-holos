@@ -11,6 +11,7 @@ _Kubernetes: #Kubernetes & {
 			AppProject: (Project.Name): {
 				metadata: name:      Project.Name
 				metadata: namespace: "argocd"
+				metadata: labels:    Project.CommonLabels
 				spec: description:   string | *"Managed AppProject for \(#Organization.DisplayName)"
 				spec: clusterResourceWhitelist: [{group: "*", kind: "*"}]
 				spec: destinations: [{namespace: "*", server: "*"}]

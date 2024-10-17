@@ -17,6 +17,7 @@ _Kubernetes: #Kubernetes & {
 				RoleBinding: "\(Namespace.Name)/admin": {
 					metadata: name:      "admin"
 					metadata: namespace: Namespace.Name
+					metadata: labels:    Project.CommonLabels
 					roleRef: {
 						apiGroup: "rbac.authorization.k8s.io"
 						kind:     "ClusterRole"
@@ -39,6 +40,7 @@ _Kubernetes: #Kubernetes & {
 				SecretStore: "\(Namespace.Name)/default": {
 					metadata: name:      "default"
 					metadata: namespace: Namespace.Name
+					metadata: labels:    Project.CommonLabels
 					spec: provider: {
 						kubernetes: {
 							remoteNamespace: metadata.namespace
@@ -54,6 +56,7 @@ _Kubernetes: #Kubernetes & {
 				ReferenceGrant: "\(Namespace.Name)/istio-ingress": {
 					metadata: name:      IngressNamespace
 					metadata: namespace: Namespace.Name
+					metadata: labels:    Project.CommonLabels
 					spec: from: [{
 						group:     "gateway.networking.k8s.io"
 						kind:      "HTTPRoute"

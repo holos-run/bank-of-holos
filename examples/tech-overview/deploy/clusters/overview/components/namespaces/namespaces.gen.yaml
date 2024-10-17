@@ -3,6 +3,9 @@ kind: Namespace
 metadata:
   labels:
     argocd.argoproj.io/instance: namespaces
+    example.com/owner.email: sg-dev-team@example.com
+    example.com/owner.name: dev-team
+    example.com/project.name: experiment
     holos.run/component.name: namespaces
     kubernetes.io/metadata.name: experiment
   name: experiment
