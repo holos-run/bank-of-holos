@@ -4,6 +4,7 @@ metadata:
   labels:
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
   name: sandbox-nate-bank-frontend
   namespace: argocd

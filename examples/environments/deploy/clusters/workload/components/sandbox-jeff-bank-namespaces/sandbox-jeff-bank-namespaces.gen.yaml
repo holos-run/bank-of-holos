@@ -5,6 +5,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
     example.com/environment.name: sandbox
     example.com/owner.name: jeff
+    example.com/tier.name: security
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-backend
   name: sandbox-jeff-bank-backend
@@ -16,6 +17,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
     example.com/environment.name: sandbox
     example.com/owner.name: jeff
+    example.com/tier.name: security
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-frontend
   name: sandbox-jeff-bank-frontend
@@ -27,6 +29,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
     example.com/environment.name: sandbox
     example.com/owner.name: jeff
+    example.com/tier.name: security
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-security
   name: sandbox-jeff-bank-security

@@ -4,6 +4,7 @@ metadata:
   labels:
     example.com/environment.name: test
     example.com/owner.name: backend
+    example.com/tier.name: backend
     holos.run/component.name: test-bank-backend-config
   name: test-bank-backend-config
   namespace: argocd

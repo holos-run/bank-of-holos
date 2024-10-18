@@ -5,6 +5,7 @@ metadata:
     argocd.argoproj.io/instance: prod-bank-namespaces
     example.com/environment.name: prod
     example.com/owner.name: security
+    example.com/tier.name: security
     holos.run/component.name: prod-bank-namespaces
     kubernetes.io/metadata.name: prod-bank-backend
   name: prod-bank-backend
@@ -16,6 +17,7 @@ metadata:
     argocd.argoproj.io/instance: prod-bank-namespaces
     example.com/environment.name: prod
     example.com/owner.name: security
+    example.com/tier.name: security
     holos.run/component.name: prod-bank-namespaces
     kubernetes.io/metadata.name: prod-bank-frontend
   name: prod-bank-frontend
@@ -27,6 +29,7 @@ metadata:
     argocd.argoproj.io/instance: prod-bank-namespaces
     example.com/environment.name: prod
     example.com/owner.name: security
+    example.com/tier.name: security
     holos.run/component.name: prod-bank-namespaces
     kubernetes.io/metadata.name: prod-bank-security
   name: prod-bank-security

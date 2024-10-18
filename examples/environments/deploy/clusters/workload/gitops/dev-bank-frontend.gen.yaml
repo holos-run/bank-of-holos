@@ -4,6 +4,7 @@ metadata:
   labels:
     example.com/environment.name: dev
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: dev-bank-frontend
   name: dev-bank-frontend
   namespace: argocd

@@ -5,6 +5,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-nate-bank-namespaces
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: security
     holos.run/component.name: sandbox-nate-bank-namespaces
     kubernetes.io/metadata.name: sandbox-nate-bank-backend
   name: sandbox-nate-bank-backend
@@ -16,6 +17,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-nate-bank-namespaces
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: security
     holos.run/component.name: sandbox-nate-bank-namespaces
     kubernetes.io/metadata.name: sandbox-nate-bank-frontend
   name: sandbox-nate-bank-frontend
@@ -27,6 +29,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-nate-bank-namespaces
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: security
     holos.run/component.name: sandbox-nate-bank-namespaces
     kubernetes.io/metadata.name: sandbox-nate-bank-security
   name: sandbox-nate-bank-security

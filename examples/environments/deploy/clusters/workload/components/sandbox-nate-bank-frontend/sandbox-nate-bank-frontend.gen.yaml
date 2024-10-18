@@ -5,6 +5,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-nate-bank-frontend
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
   name: bank-of-holos
   namespace: sandbox-nate-bank-frontend
@@ -20,6 +21,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-nate-bank-frontend
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
   name: demo-data-config
   namespace: sandbox-nate-bank-frontend
@@ -34,6 +36,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-nate-bank-frontend
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
   name: environment-config
   namespace: sandbox-nate-bank-frontend
@@ -51,6 +54,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-nate-bank-frontend
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
   name: service-api-config
   namespace: sandbox-nate-bank-frontend
@@ -64,6 +68,7 @@ metadata:
     environment: development
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
     team: frontend
     tier: web
@@ -82,6 +87,7 @@ spec:
     environment: development
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
     team: frontend
     tier: web
@@ -95,6 +101,7 @@ metadata:
     environment: development
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
     team: frontend
     tier: web
@@ -109,6 +116,7 @@ spec:
       environment: development
       example.com/environment.name: sandbox
       example.com/owner.name: nate
+      example.com/tier.name: frontend
       holos.run/component.name: sandbox-nate-bank-frontend
       team: frontend
       tier: web
@@ -121,6 +129,7 @@ spec:
         environment: development
         example.com/environment.name: sandbox
         example.com/owner.name: nate
+        example.com/tier.name: frontend
         holos.run/component.name: sandbox-nate-bank-frontend
         team: frontend
         tier: web
@@ -230,6 +239,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-nate-bank-frontend
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
   name: jwt-key
   namespace: sandbox-nate-bank-frontend
@@ -251,6 +261,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-nate-bank-frontend
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
   name: sandbox-nate-bank-security
   namespace: sandbox-nate-bank-frontend
@@ -275,6 +286,7 @@ metadata:
     argocd.argoproj.io/instance: sandbox-nate-bank-frontend
     example.com/environment.name: sandbox
     example.com/owner.name: nate
+    example.com/tier.name: frontend
     holos.run/component.name: sandbox-nate-bank-frontend
   name: istio-ingress
   namespace: sandbox-nate-bank-frontend

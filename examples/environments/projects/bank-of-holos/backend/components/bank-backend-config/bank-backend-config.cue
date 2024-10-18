@@ -6,7 +6,7 @@ _Kubernetes.BuildPlan
 let CommonLabels = {
 	application: _Stack.BankName
 	environment: _Stack.Tags.environment
-	tier:        "backend"
+	tier:        _Stack.Tags.tier
 }
 
 _Kubernetes: #Kubernetes & {

@@ -5,6 +5,7 @@ metadata:
     argocd.argoproj.io/instance: test-bank-frontend
     example.com/environment.name: test
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: test-bank-frontend
   name: bank-of-holos
   namespace: test-bank-frontend
@@ -20,6 +21,7 @@ metadata:
     argocd.argoproj.io/instance: test-bank-frontend
     example.com/environment.name: test
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: test-bank-frontend
   name: demo-data-config
   namespace: test-bank-frontend
@@ -34,6 +36,7 @@ metadata:
     argocd.argoproj.io/instance: test-bank-frontend
     example.com/environment.name: test
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: test-bank-frontend
   name: environment-config
   namespace: test-bank-frontend
@@ -51,6 +54,7 @@ metadata:
     argocd.argoproj.io/instance: test-bank-frontend
     example.com/environment.name: test
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: test-bank-frontend
   name: service-api-config
   namespace: test-bank-frontend
@@ -64,6 +68,7 @@ metadata:
     environment: development
     example.com/environment.name: test
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: test-bank-frontend
     team: frontend
     tier: web
@@ -82,6 +87,7 @@ spec:
     environment: development
     example.com/environment.name: test
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: test-bank-frontend
     team: frontend
     tier: web
@@ -95,6 +101,7 @@ metadata:
     environment: development
     example.com/environment.name: test
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: test-bank-frontend
     team: frontend
     tier: web
@@ -109,6 +116,7 @@ spec:
       environment: development
       example.com/environment.name: test
       example.com/owner.name: frontend
+      example.com/tier.name: frontend
       holos.run/component.name: test-bank-frontend
       team: frontend
       tier: web
@@ -121,6 +129,7 @@ spec:
         environment: development
         example.com/environment.name: test
         example.com/owner.name: frontend
+        example.com/tier.name: frontend
         holos.run/component.name: test-bank-frontend
         team: frontend
         tier: web
@@ -230,6 +239,7 @@ metadata:
     argocd.argoproj.io/instance: test-bank-frontend
     example.com/environment.name: test
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: test-bank-frontend
   name: jwt-key
   namespace: test-bank-frontend
@@ -251,6 +261,7 @@ metadata:
     argocd.argoproj.io/instance: test-bank-frontend
     example.com/environment.name: test
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: test-bank-frontend
   name: test-bank-security
   namespace: test-bank-frontend
@@ -275,6 +286,7 @@ metadata:
     argocd.argoproj.io/instance: test-bank-frontend
     example.com/environment.name: test
     example.com/owner.name: frontend
+    example.com/tier.name: frontend
     holos.run/component.name: test-bank-frontend
   name: istio-ingress
   namespace: test-bank-frontend

@@ -7,6 +7,7 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
+    example.com/tier.name: backend
     holos.run/component.name: sandbox-gary-bank-backend-config
     tier: backend
   name: bank-of-holos
@@ -25,6 +26,7 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
+    example.com/tier.name: backend
     holos.run/component.name: sandbox-gary-bank-backend-config
     tier: backend
   name: demo-data-config
@@ -42,6 +44,7 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
+    example.com/tier.name: backend
     holos.run/component.name: sandbox-gary-bank-backend-config
     tier: backend
   name: environment-config
@@ -62,6 +65,7 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
+    example.com/tier.name: backend
     holos.run/component.name: sandbox-gary-bank-backend-config
     tier: backend
   name: service-api-config
@@ -76,6 +80,7 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
+    example.com/tier.name: backend
     holos.run/component.name: sandbox-gary-bank-backend-config
     tier: backend
   name: jwt-key
@@ -100,6 +105,7 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
+    example.com/tier.name: backend
     holos.run/component.name: sandbox-gary-bank-backend-config
     tier: backend
   name: sandbox-gary-bank-security
@@ -127,6 +133,7 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
+    example.com/tier.name: backend
     holos.run/component.name: sandbox-gary-bank-backend-config
     tier: backend
   name: istio-ingress
