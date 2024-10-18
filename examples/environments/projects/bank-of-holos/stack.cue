@@ -12,8 +12,9 @@ _Stack: {
 	BankName: string | *"bank-of-holos"
 
 	Tags: {
-		environment: string @tag(environment, type=string)
 		owner:       string @tag(owner, type=string)
+		environment: string @tag(environment, type=string)
+		tier:        string @tag(tier, type=string)
 		// prefix represents the resource prefix.
 		prefix: string @tag(prefix, type=string)
 	}
@@ -112,6 +113,7 @@ _Stack: {
 	CommonLabels: {
 		"\(#Organization.Domain)/owner.name":       Tags.owner
 		"\(#Organization.Domain)/environment.name": Tags.environment
+		"\(#Organization.Domain)/tier.name":        Tags.tier
 	}
 
 	// TODO: AppProjects
