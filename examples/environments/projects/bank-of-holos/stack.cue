@@ -33,6 +33,12 @@ _Stack: {
 		(Security.Namespace): _
 	}
 
+	AppProjects: #AppProjects & {
+		"\(Tags.prefix)bank-frontend": _
+		"\(Tags.prefix)bank-backend":  _
+		"\(Tags.prefix)bank-security": _
+	}
+
 	// Resources to make available in each of the namespaces.
 	Resources: {
 		ServiceAccount: (BankName): k8s.#ServiceAccount & {

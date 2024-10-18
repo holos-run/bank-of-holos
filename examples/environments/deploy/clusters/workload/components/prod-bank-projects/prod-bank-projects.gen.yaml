@@ -1,0 +1,77 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: prod-bank-projects
+    environment: prod
+    example.com/environment.name: prod
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: prod-bank-projects
+    team: security
+    tier: foundation
+  name: prod-bank-backend
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject for Bank of Holos
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: prod-bank-projects
+    environment: prod
+    example.com/environment.name: prod
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: prod-bank-projects
+    team: security
+    tier: foundation
+  name: prod-bank-frontend
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject for Bank of Holos
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: prod-bank-projects
+    environment: prod
+    example.com/environment.name: prod
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: prod-bank-projects
+    team: security
+    tier: foundation
+  name: prod-bank-security
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject for Bank of Holos
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'

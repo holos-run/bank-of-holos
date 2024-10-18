@@ -1,0 +1,77 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: stage-bank-projects
+    environment: stage
+    example.com/environment.name: stage
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: stage-bank-projects
+    team: security
+    tier: foundation
+  name: stage-bank-backend
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject for Bank of Holos
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: stage-bank-projects
+    environment: stage
+    example.com/environment.name: stage
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: stage-bank-projects
+    team: security
+    tier: foundation
+  name: stage-bank-frontend
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject for Bank of Holos
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: stage-bank-projects
+    environment: stage
+    example.com/environment.name: stage
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: stage-bank-projects
+    team: security
+    tier: foundation
+  name: stage-bank-security
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject for Bank of Holos
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'

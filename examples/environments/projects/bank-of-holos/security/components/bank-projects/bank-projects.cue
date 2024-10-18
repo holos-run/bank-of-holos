@@ -4,5 +4,5 @@ package holos
 _Kubernetes.BuildPlan
 
 _Kubernetes: #Kubernetes & {
-	Resources: AppProject: _AppProjects
+	Resources: AppProject: _Stack.AppProjects
 }

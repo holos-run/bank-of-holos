@@ -1,3 +1,3 @@
 package holos
 
-#ArgoConfig: AppProject: #AppProjects.platform.metadata.name
+#ArgoConfig: AppProject: _AppProjects.platform.metadata.name

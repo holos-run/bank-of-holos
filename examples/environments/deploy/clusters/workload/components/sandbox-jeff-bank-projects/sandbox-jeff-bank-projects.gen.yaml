@@ -1,0 +1,77 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: sandbox-jeff-bank-projects
+    environment: sandbox
+    example.com/environment.name: sandbox
+    example.com/owner.name: jeff
+    example.com/tier.name: foundation
+    holos.run/component.name: sandbox-jeff-bank-projects
+    team: jeff
+    tier: foundation
+  name: sandbox-jeff-bank-backend
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject for Bank of Holos
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: sandbox-jeff-bank-projects
+    environment: sandbox
+    example.com/environment.name: sandbox
+    example.com/owner.name: jeff
+    example.com/tier.name: foundation
+    holos.run/component.name: sandbox-jeff-bank-projects
+    team: jeff
+    tier: foundation
+  name: sandbox-jeff-bank-frontend
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject for Bank of Holos
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: sandbox-jeff-bank-projects
+    environment: sandbox
+    example.com/environment.name: sandbox
+    example.com/owner.name: jeff
+    example.com/tier.name: foundation
+    holos.run/component.name: sandbox-jeff-bank-projects
+    team: jeff
+    tier: foundation
+  name: sandbox-jeff-bank-security
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject for Bank of Holos
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'

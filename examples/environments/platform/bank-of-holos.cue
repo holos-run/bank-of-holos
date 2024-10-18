@@ -72,11 +72,24 @@ let StackTemplate = {
 
 	Stack: {
 		Components: {
+			"bank-projects":            Security
+			"bank-namespaces":          Security
+			"bank-secrets":             Security
+			"bank-frontend":            Frontend
+			"bank-backend-config":      Backend
+			"bank-userservice":         Backend
+			"bank-ledger-writer":       Backend
+			"bank-balance-reader":      Backend
+			"bank-transaction-history": Backend
+			"bank-contacts":            Backend
+			"bank-accounts-db":         Database
+			"bank-ledger-db":           Database
+
 			[NAME=string]: {
 				name:  NamespacePrefix + NAME
 				env:   Env
 				owner: string
-				team:  string
+				team:  "frontend" | "backend" | "security"
 				tier:  "foundation" | "database" | "backend" | "web"
 				// the path to the source component
 				path: "projects/bank-of-holos/\(team)/components/\(NAME)"
@@ -94,18 +107,8 @@ let StackTemplate = {
 			let Security = {owner: Owners.security, team: "security", tier: "foundation"}
 			let Frontend = {owner: Owners.frontend, team: "frontend", tier: "web"}
 			let Backend = {owner: Owners.backend, team: "backend", tier: string | *"backend"}
+			let Database = Backend & {tier: "database"}
 
-			"bank-namespaces":     Security
-			"bank-secrets":        Security
-			"bank-frontend":       Frontend
-			"bank-backend-config": Backend
-			"bank-accounts-db": Backend & {tier: "database"}
-			"bank-userservice": Backend
-			"bank-ledger-db": Backend & {tier: "database"}
-			"bank-ledger-writer":       Backend
-			"bank-balance-reader":      Backend
-			"bank-transaction-history": Backend
-			"bank-contacts":            Backend
 		}
 	}
 }
