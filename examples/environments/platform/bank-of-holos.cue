@@ -89,14 +89,13 @@ let StackTemplate = {
 			}
 
 			let Security = {owner: Owners.security, dir: "security"}
-
 			let Frontend = {owner: Owners.frontend, dir: "frontend"}
-			// let Backend = {owner: Owners.backend, dir: "backend"}
+			let Backend = {owner: Owners.backend, dir: "backend"}
 
-			"bank-namespaces": Security
-			"bank-secrets":    Security
-			"bank-frontend":   Frontend
-			// "bank-backend-config":      Backend
+			"bank-namespaces":     Security
+			"bank-secrets":        Security
+			"bank-frontend":       Frontend
+			"bank-backend-config": Backend
 			// "bank-backend-config":      Backend
 			// "bank-accounts-db":         Backend
 			// "bank-userservice":         Backend
