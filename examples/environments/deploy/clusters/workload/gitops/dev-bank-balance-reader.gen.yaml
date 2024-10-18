@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    application: bank-of-holos
+    environment: dev
+    example.com/environment.name: dev
+    example.com/owner.name: backend
+    example.com/tier.name: backend
+    holos.run/component.name: dev-bank-balance-reader
+    team: backend
+    tier: backend
+  name: dev-bank-balance-reader
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: deploy/clusters/workload/components/dev-bank-balance-reader
+    repoURL: https://github.com/jeffmccune/bank-of-holos
+    targetRevision: main

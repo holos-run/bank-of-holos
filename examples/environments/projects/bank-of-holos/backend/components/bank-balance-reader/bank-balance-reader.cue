@@ -1,44 +1,29 @@
 package holos
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan
 
-let BankName = #BankOfHolos.Name
+let BankName = _Stack.BankName
 
-let CommonLabels = {
-	application: BankName
-	environment: "development"
-	team:        "ledger"
-	tier:        "backend"
-}
-
-let Objects = {
-	Name:      "bank-balance-reader"
-	Namespace: #BankOfHolos.Backend.Namespace
+_Kubernetes: #Kubernetes & {
+	Namespace: _Stack.Backend.Namespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace
-	Resources: [_]: [_]: metadata: labels:    CommonLabels
 
 	// https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/release/v0.6.5/kubernetes-manifests
 	Resources: {
 		Service: balancereader: {
 			apiVersion: "v1"
 			kind:       "Service"
-			metadata: {
-				name:   "balancereader"
-				labels: CommonLabels
-			}
+			metadata: name: "balancereader"
 			spec: {
 				ports: [{
 					name:       "http"
 					port:       8080
 					targetPort: 8080
 				}]
-				selector: {
-					app: "balancereader"
-					CommonLabels
-				}
+				selector: app: "balancereader"
 				type: "ClusterIP"
 			}
 		}
@@ -46,20 +31,11 @@ let Objects = {
 		Deployment: balancereader: {
 			apiVersion: "apps/v1"
 			kind:       "Deployment"
-			metadata: {
-				name:   "balancereader"
-				labels: CommonLabels
-			}
+			metadata: name: "balancereader"
 			spec: {
-				selector: matchLabels: {
-					app: "balancereader"
-					CommonLabels
-				}
+				selector: matchLabels: app: "balancereader"
 				template: {
-					metadata: labels: {
-						app: "balancereader"
-						CommonLabels
-					}
+					metadata: labels: app: "balancereader"
 					spec: {
 						containers: [{
 							env: [{
