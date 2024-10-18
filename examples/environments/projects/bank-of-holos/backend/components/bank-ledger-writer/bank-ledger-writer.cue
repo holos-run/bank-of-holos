@@ -1,44 +1,29 @@
 package holos
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan
 
-let BankName = #BankOfHolos.Name
+let BankName = _Stack.BankName
 
-let CommonLabels = {
-	application: BankName
-	environment: "development"
-	team:        "ledger"
-	tier:        "backend"
-}
-
-let Objects = {
-	Name:      "bank-ledger-writer"
-	Namespace: #BankOfHolos.Backend.Namespace
+_Kubernetes: #Kubernetes & {
+	Namespace: _Stack.Backend.Namespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace
-	Resources: [_]: [_]: metadata: labels:    CommonLabels
 
 	// https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/release/v0.6.5/kubernetes-manifests
 	Resources: {
 		Service: ledgerwriter: {
 			apiVersion: "v1"
 			kind:       "Service"
-			metadata: {
-				name:   "ledgerwriter"
-				labels: CommonLabels
-			}
+			metadata: name: "ledgerwriter"
 			spec: {
 				ports: [{
 					name:       "http"
 					port:       8080
 					targetPort: 8080
 				}]
-				selector: {
-					app: "ledgerwriter"
-					CommonLabels
-				}
+				selector: app: "ledgerwriter"
 				type: "ClusterIP"
 			}
 		}
@@ -46,21 +31,12 @@ let Objects = {
 		Deployment: ledgerwriter: {
 			apiVersion: "apps/v1"
 			kind:       "Deployment"
-			metadata: {
-				name:   "ledgerwriter"
-				labels: CommonLabels
-			}
+			metadata: name: "ledgerwriter"
 			spec: {
-				selector: matchLabels: {
-					app: "ledgerwriter"
-					CommonLabels
-				}
+				selector: matchLabels: app: "ledgerwriter"
 				template: {
 					metadata: {
-						labels: {
-							app: "ledgerwriter"
-							CommonLabels
-						}
+						labels: app: "ledgerwriter"
 					}
 					spec: {
 						containers: [{

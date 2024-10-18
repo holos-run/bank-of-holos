@@ -102,7 +102,7 @@ let StackTemplate = {
 			"bank-accounts-db": Backend & {tier: "database"}
 			"bank-userservice": Backend
 			"bank-ledger-db": Backend & {tier: "database"}
-			// "bank-ledger-writer":       Backend
+			"bank-ledger-writer": Backend
 			// "bank-balance-reader":      Backend
 			// "bank-transaction-history": Backend
 			// "bank-contacts":            Backend
