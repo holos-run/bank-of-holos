@@ -9,3 +9,6 @@ import corev1 "k8s.io/api/core/v1"
 		metadata: name: Name
 	}
 }
+
+// Registration point for namespaces
+_Namespaces: #Namespaces

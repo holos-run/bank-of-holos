@@ -1,0 +1,31 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: sandbox-jeff-bank
+    application: bank-of-holos
+    argocd.argoproj.io/instance: sandbox-jeff-bank-routes
+    environment: sandbox
+    example.com/environment.name: sandbox
+    example.com/owner.name: jeff
+    example.com/tier.name: foundation
+    holos.run/component.name: sandbox-jeff-bank-routes
+    team: jeff
+    tier: foundation
+  name: sandbox-jeff-bank
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - sandbox-jeff-bank.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: frontend
+      namespace: sandbox-jeff-bank-frontend
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /

@@ -16,7 +16,8 @@ _Stack: {
 		environment: string @tag(environment, type=string)
 		tier:        string @tag(tier, type=string)
 		// prefix represents the resource prefix.
-		prefix: string @tag(prefix, type=string)
+		prefix:      string @tag(prefix, type=string)
+		host_prefix: string @tag(host_prefix, type=string)
 	}
 
 	Frontend: Namespace: "\(Tags.prefix)bank-frontend"
@@ -39,6 +40,11 @@ _Stack: {
 		"\(Tags.prefix)bank-frontend": _
 		"\(Tags.prefix)bank-backend":  _
 		"\(Tags.prefix)bank-security": _
+	}
+
+	// HTTPRoutes for each stack.
+	HTTPRoutes: #HTTPRoutes & {
+		"\(Tags.host_prefix)bank": _backendRefs: frontend: namespace: Frontend.Namespace
 	}
 
 	// Resources to make available in each of the namespaces.
@@ -129,37 +135,7 @@ _Stack: {
 		team:        Tags.owner
 		tier:        Tags.tier
 	}
-
-	// TODO: AppProjects
 }
 
 // CommonLabels
 #ComponentConfig: CommonLabels: _Stack.CommonLabels
-
-// TODO: Migrate the definitions below to stack-wide definitions from
-// platform-wide definitions.
-
-// // Platform wide definitions
-// #BankOfHolos: {
-// 	Name: "bank-of-holos"
-
-// 	// Resources to manage in each of the namespaces.
-// 	Resources: #Resources
-// }
-
-// // Register namespaces
-// #Namespaces: (#BankOfHolos.Frontend.Namespace): _
-// #Namespaces: (#BankOfHolos.Backend.Namespace):  _
-// #Namespaces: (#BankOfHolos.Security.Namespace): _
-
-// // Register projects
-// #AppProjects: "bank-frontend": _
-// #AppProjects: "bank-backend":  _
-// #AppProjects: "bank-security": _
-
-// // Register HTTPRoutes.
-// // bank.example.com routes to Service frontend in the bank-frontend namespace.
-// #HTTPRoutes: bank: _backendRefs: frontend: namespace: #BankOfHolos.Frontend.Namespace
-
-// #BankOfHolos: {
-// }

@@ -4,4 +4,4 @@ package holos
 #Istio: Gateway: Namespace: "istio-ingress"
 
 // Register the Namespaces
-#Namespaces: (#Istio.Gateway.Namespace): _
+_Namespaces: (#Istio.Gateway.Namespace): _

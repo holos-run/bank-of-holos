@@ -1,0 +1,31 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: dev-bank
+    application: bank-of-holos
+    argocd.argoproj.io/instance: dev-bank-routes
+    environment: dev
+    example.com/environment.name: dev
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: dev-bank-routes
+    team: security
+    tier: foundation
+  name: dev-bank
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - dev-bank.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: frontend
+      namespace: dev-bank-frontend
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /

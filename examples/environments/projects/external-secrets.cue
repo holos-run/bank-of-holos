@@ -7,4 +7,4 @@ package holos
 }
 
 // Register the namespace
-#Namespaces: (#ExternalSecrets.Namespace): _
+_Namespaces: (#ExternalSecrets.Namespace): _

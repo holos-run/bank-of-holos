@@ -3,16 +3,15 @@ package holos
 import "strings"
 
 // Produce a helm chart build plan.
-(#Helm & Chart).BuildPlan
+_Helm.BuildPlan
 
-let Chart = {
-	Name:      "argocd"
-	Namespace: #ArgoCD.Namespace
+_Helm: #Helm & {
+	Namespace: _ArgoCD.Namespace
 
 	Chart: {
 		name:    "argo-cd"
 		version: "7.5.2"
-		release: Name
+		release: "argocd"
 		repository: {
 			name: "argocd"
 			url:  "https://argoproj.github.io/argo-helm"
@@ -31,7 +30,7 @@ let Chart = {
 		// handled in the argo-crds component
 		crds: install: false
 		// Configure the same fqdn the HTTPRoute is configured with.
-		global: domain: #HTTPRoutes.argocd.spec.hostnames[0]
+		global: domain: _HTTPRoutes.argocd.spec.hostnames[0]
 		dex: enabled:   false
 		// the platform handles mutual tls to the backend
 		configs: params: "server.insecure": true

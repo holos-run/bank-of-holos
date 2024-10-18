@@ -1,0 +1,31 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: sandbox-nate-bank
+    application: bank-of-holos
+    argocd.argoproj.io/instance: sandbox-nate-bank-routes
+    environment: sandbox
+    example.com/environment.name: sandbox
+    example.com/owner.name: nate
+    example.com/tier.name: foundation
+    holos.run/component.name: sandbox-nate-bank-routes
+    team: nate
+    tier: foundation
+  name: sandbox-nate-bank
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - sandbox-nate-bank.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: frontend
+      namespace: sandbox-nate-bank-frontend
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /

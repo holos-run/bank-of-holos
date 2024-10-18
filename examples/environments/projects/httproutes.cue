@@ -32,3 +32,5 @@ import v1 "gateway.networking.k8s.io/httproute/v1"
 		]
 	}
 }
+
+_HTTPRoutes: #HTTPRoutes

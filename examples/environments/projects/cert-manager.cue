@@ -7,4 +7,4 @@ package holos
 }
 
 // Register the namespace
-#Namespaces: (#CertManager.Namespace): _
+_Namespaces: (#CertManager.Namespace): _

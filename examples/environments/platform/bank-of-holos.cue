@@ -43,6 +43,8 @@ let StackTemplate = {
 	// The second most significant piece of information is the sandbox owner, if
 	// any.
 	NamespacePrefix: string
+	// HostPrefix represends the DNS host prefix, "" for prod
+	HostPrefix: string
 
 	Owners: {
 		security: string
@@ -70,11 +72,19 @@ let StackTemplate = {
 		}
 	}
 
+	if Env == "prod" {
+		HostPrefix: ""
+	}
+	if Env != "prod" {
+		HostPrefix: NamespacePrefix
+	}
+
 	Stack: {
 		Components: {
 			"bank-projects":            Security
 			"bank-namespaces":          Security
 			"bank-secrets":             Security
+			"bank-routes":              Security
 			"bank-frontend":            Frontend
 			"bank-backend-config":      Backend
 			"bank-userservice":         Backend
@@ -102,6 +112,7 @@ let StackTemplate = {
 				tags: environment: Env
 				tags: tier:        TIER
 				tags: prefix:      NamespacePrefix
+				tags: host_prefix: HostPrefix
 			}
 
 			let Security = {owner: Owners.security, team: "security", tier: "foundation"}

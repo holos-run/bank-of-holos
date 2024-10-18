@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    application: bank-of-holos
+    environment: stage
+    example.com/environment.name: stage
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: stage-bank-routes
+    team: security
+    tier: foundation
+  name: stage-bank-routes
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: stage-bank-security
+  source:
+    path: deploy/clusters/workload/components/stage-bank-routes
+    repoURL: https://github.com/jeffmccune/bank-of-holos
+    targetRevision: main

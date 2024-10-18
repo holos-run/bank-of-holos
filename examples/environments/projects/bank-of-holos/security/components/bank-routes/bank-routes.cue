@@ -4,5 +4,5 @@ package holos
 _Kubernetes.BuildPlan
 
 _Kubernetes: #Kubernetes & {
-	Resources: Namespace: _Namespaces
+	Resources: HTTPRoute: _Stack.HTTPRoutes
 }

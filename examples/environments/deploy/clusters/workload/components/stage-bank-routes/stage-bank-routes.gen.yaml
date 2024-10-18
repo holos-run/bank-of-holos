@@ -1,0 +1,31 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: stage-bank
+    application: bank-of-holos
+    argocd.argoproj.io/instance: stage-bank-routes
+    environment: stage
+    example.com/environment.name: stage
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: stage-bank-routes
+    team: security
+    tier: foundation
+  name: stage-bank
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - stage-bank.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: frontend
+      namespace: stage-bank-frontend
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
