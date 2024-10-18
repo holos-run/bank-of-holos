@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    example.com/environment.name: sandbox
+    example.com/owner.name: nate
+    holos.run/component.name: sandbox-nate-bank-frontend
+  name: sandbox-nate-bank-frontend
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: deploy/clusters/workload/components/sandbox-nate-bank-frontend
+    repoURL: https://github.com/jeffmccune/bank-of-holos
+    targetRevision: main

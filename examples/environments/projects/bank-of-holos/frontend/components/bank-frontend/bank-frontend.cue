@@ -4,8 +4,7 @@ package holos
 (#Kubernetes & Objects).BuildPlan
 
 let Objects = {
-	Name:      "bank-frontend"
-	Namespace: #BankOfHolos.Frontend.Namespace
+	Namespace: _Stack.Frontend.Namespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace
@@ -196,6 +195,6 @@ let Objects = {
 		}
 
 		// Include shared resources
-		#BankOfHolos.Resources
+		_Stack.Resources
 	}
 }
