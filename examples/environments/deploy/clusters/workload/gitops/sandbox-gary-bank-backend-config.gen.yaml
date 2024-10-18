@@ -15,7 +15,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-  project: default
+  project: sandbox-gary-bank-backend
   source:
     path: deploy/clusters/workload/components/sandbox-gary-bank-backend-config
     repoURL: https://github.com/jeffmccune/bank-of-holos

@@ -15,7 +15,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-  project: default
+  project: sandbox-jeff-bank-security
   source:
     path: deploy/clusters/workload/components/sandbox-jeff-bank-namespaces
     repoURL: https://github.com/jeffmccune/bank-of-holos

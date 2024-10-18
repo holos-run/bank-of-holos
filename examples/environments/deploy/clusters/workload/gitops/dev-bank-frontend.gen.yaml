@@ -15,7 +15,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-  project: default
+  project: dev-bank-frontend
   source:
     path: deploy/clusters/workload/components/dev-bank-frontend
     repoURL: https://github.com/jeffmccune/bank-of-holos

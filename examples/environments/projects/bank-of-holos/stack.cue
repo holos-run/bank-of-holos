@@ -33,6 +33,8 @@ _Stack: {
 		(Security.Namespace): _
 	}
 
+	AppProject: [NAME=string]: AppProjects[NAME]
+
 	AppProjects: #AppProjects & {
 		"\(Tags.prefix)bank-frontend": _
 		"\(Tags.prefix)bank-backend":  _
