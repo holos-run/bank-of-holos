@@ -1,24 +1,15 @@
 package holos
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan
 
-let BankName = #BankOfHolos.Name
+let BankName = _Stack.BankName
 
-let CommonLabels = {
-	application: BankName
-	environment: "development"
-	team:        "accounts"
-	tier:        "backend"
-}
-
-let Objects = {
-	Name:      "bank-contacts"
-	Namespace: #BankOfHolos.Backend.Namespace
+_Kubernetes: #Kubernetes & {
+	Namespace: _Stack.Backend.Namespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace
-	Resources: [_]: [_]: metadata: labels:    CommonLabels
 
 	// https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/release/v0.6.5/kubernetes-manifests
 	Resources: {
@@ -32,10 +23,7 @@ let Objects = {
 					port:       8080
 					targetPort: 8080
 				}]
-				selector: {
-					app: "contacts"
-					CommonLabels
-				}
+				selector: app: "contacts"
 				type: "ClusterIP"
 			}
 		}
@@ -45,17 +33,9 @@ let Objects = {
 			kind:       "Deployment"
 			metadata: name: "contacts"
 			spec: {
-				selector: matchLabels: {
-					app: "contacts"
-					CommonLabels
-				}
+				selector: matchLabels: app: "contacts"
 				template: {
-					metadata: {
-						labels: {
-							app: "contacts"
-							CommonLabels
-						}
-					}
+					metadata: labels: app: "contacts"
 					spec: {
 						containers: [{
 							env: [{

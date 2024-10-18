@@ -105,7 +105,7 @@ let StackTemplate = {
 			"bank-ledger-writer":       Backend
 			"bank-balance-reader":      Backend
 			"bank-transaction-history": Backend
-			// "bank-contacts":            Backend
+			"bank-contacts":            Backend
 		}
 	}
 }
