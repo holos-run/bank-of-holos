@@ -99,7 +99,7 @@ let StackTemplate = {
 			"bank-frontend":       Frontend
 			"bank-backend-config": Backend
 			"bank-accounts-db":    Backend
-			// "bank-userservice":         Backend
+			"bank-userservice":    Backend
 			// "bank-ledger-db":           Backend
 			// "bank-ledger-writer":       Backend
 			// "bank-balance-reader":      Backend

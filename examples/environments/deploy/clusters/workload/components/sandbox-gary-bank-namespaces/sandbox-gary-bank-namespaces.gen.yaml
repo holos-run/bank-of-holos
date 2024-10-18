@@ -2,34 +2,46 @@ apiVersion: v1
 kind: Namespace
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-gary-bank-namespaces
+    environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
     example.com/tier.name: security
     holos.run/component.name: sandbox-gary-bank-namespaces
     kubernetes.io/metadata.name: sandbox-gary-bank-backend
+    team: gary
+    tier: security
   name: sandbox-gary-bank-backend
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-gary-bank-namespaces
+    environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
     example.com/tier.name: security
     holos.run/component.name: sandbox-gary-bank-namespaces
     kubernetes.io/metadata.name: sandbox-gary-bank-frontend
+    team: gary
+    tier: security
   name: sandbox-gary-bank-frontend
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-gary-bank-namespaces
+    environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
     example.com/tier.name: security
     holos.run/component.name: sandbox-gary-bank-namespaces
     kubernetes.io/metadata.name: sandbox-gary-bank-security
+    team: gary
+    tier: security
   name: sandbox-gary-bank-security

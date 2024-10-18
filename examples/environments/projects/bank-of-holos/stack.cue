@@ -114,6 +114,12 @@ _Stack: {
 		"\(#Organization.Domain)/owner.name":       Tags.owner
 		"\(#Organization.Domain)/environment.name": Tags.environment
 		"\(#Organization.Domain)/tier.name":        Tags.tier
+
+		// These are the common labels from upstream
+		application: BankName
+		environment: Tags.environment
+		team:        Tags.owner
+		tier:        Tags.tier
 	}
 
 	// TODO: AppProjects

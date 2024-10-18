@@ -2,10 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
+    application: bank-of-holos
+    environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
     example.com/tier.name: security
     holos.run/component.name: sandbox-gary-bank-namespaces
+    team: gary
+    tier: security
   name: sandbox-gary-bank-namespaces
   namespace: argocd
 spec:

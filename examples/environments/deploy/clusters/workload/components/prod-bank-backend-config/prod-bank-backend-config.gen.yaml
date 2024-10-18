@@ -9,6 +9,7 @@ metadata:
     example.com/owner.name: backend
     example.com/tier.name: backend
     holos.run/component.name: prod-bank-backend-config
+    team: backend
     tier: backend
   name: bank-of-holos
   namespace: prod-bank-backend
@@ -28,6 +29,7 @@ metadata:
     example.com/owner.name: backend
     example.com/tier.name: backend
     holos.run/component.name: prod-bank-backend-config
+    team: backend
     tier: backend
   name: demo-data-config
   namespace: prod-bank-backend
@@ -46,6 +48,7 @@ metadata:
     example.com/owner.name: backend
     example.com/tier.name: backend
     holos.run/component.name: prod-bank-backend-config
+    team: backend
     tier: backend
   name: environment-config
   namespace: prod-bank-backend
@@ -67,6 +70,7 @@ metadata:
     example.com/owner.name: backend
     example.com/tier.name: backend
     holos.run/component.name: prod-bank-backend-config
+    team: backend
     tier: backend
   name: service-api-config
   namespace: prod-bank-backend
@@ -82,6 +86,7 @@ metadata:
     example.com/owner.name: backend
     example.com/tier.name: backend
     holos.run/component.name: prod-bank-backend-config
+    team: backend
     tier: backend
   name: jwt-key
   namespace: prod-bank-backend
@@ -107,6 +112,7 @@ metadata:
     example.com/owner.name: backend
     example.com/tier.name: backend
     holos.run/component.name: prod-bank-backend-config
+    team: backend
     tier: backend
   name: prod-bank-security
   namespace: prod-bank-backend
@@ -135,6 +141,7 @@ metadata:
     example.com/owner.name: backend
     example.com/tier.name: backend
     holos.run/component.name: prod-bank-backend-config
+    team: backend
     tier: backend
   name: istio-ingress
   namespace: prod-bank-backend

@@ -5,13 +5,6 @@ _Kubernetes.BuildPlan
 
 let BankName = _Stack.BankName
 
-let CommonLabels = {
-	application: BankName
-	environment: _Stack.Tags.environment
-	team:        _Stack.Tags.owner
-	tier:        _Stack.Tags.tier
-}
-
 _Kubernetes: #Kubernetes & {
 	Namespace: _Stack.Backend.Namespace
 
@@ -30,10 +23,7 @@ _Kubernetes: #Kubernetes & {
 			}
 			kind: "ConfigMap"
 			metadata: {
-				labels: {
-					app: "accounts-db"
-					CommonLabels
-				}
+				labels: app: "accounts-db"
 				name: "accounts-db-config"
 			}
 		}
@@ -41,10 +31,7 @@ _Kubernetes: #Kubernetes & {
 		Service: "accounts-db": {
 			apiVersion: "v1"
 			kind:       "Service"
-			metadata: {
-				name:   "accounts-db"
-				labels: CommonLabels
-			}
+			metadata: name: "accounts-db"
 			spec: {
 				ports: [{
 					name:       "tcp"
@@ -52,10 +39,7 @@ _Kubernetes: #Kubernetes & {
 					protocol:   "TCP"
 					targetPort: 5432
 				}]
-				selector: {
-					app: "accounts-db"
-					CommonLabels
-				}
+				selector: app: "accounts-db"
 				type: "ClusterIP"
 			}
 		}
@@ -63,22 +47,13 @@ _Kubernetes: #Kubernetes & {
 		StatefulSet: "accounts-db": {
 			apiVersion: "apps/v1"
 			kind:       "StatefulSet"
-			metadata: {
-				name:   "accounts-db"
-				labels: CommonLabels
-			}
+			metadata: name: "accounts-db"
 			spec: {
 				replicas: 1
-				selector: matchLabels: {
-					app: "accounts-db"
-					CommonLabels
-				}
+				selector: matchLabels: app: "accounts-db"
 				serviceName: "accounts-db"
 				template: {
-					metadata: labels: {
-						app: "accounts-db"
-						CommonLabels
-					}
+					metadata: labels: app: "accounts-db"
 					spec: {
 						containers: [{
 							envFrom: [{

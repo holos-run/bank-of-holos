@@ -2,34 +2,46 @@ apiVersion: v1
 kind: Namespace
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-namespaces
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: security
     example.com/tier.name: security
     holos.run/component.name: prod-bank-namespaces
     kubernetes.io/metadata.name: prod-bank-backend
+    team: security
+    tier: security
   name: prod-bank-backend
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-namespaces
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: security
     example.com/tier.name: security
     holos.run/component.name: prod-bank-namespaces
     kubernetes.io/metadata.name: prod-bank-frontend
+    team: security
+    tier: security
   name: prod-bank-frontend
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-namespaces
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: security
     example.com/tier.name: security
     holos.run/component.name: prod-bank-namespaces
     kubernetes.io/metadata.name: prod-bank-security
+    team: security
+    tier: security
   name: prod-bank-security

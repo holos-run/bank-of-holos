@@ -2,10 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
+    application: bank-of-holos
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: security
     example.com/tier.name: security
     holos.run/component.name: prod-bank-namespaces
+    team: security
+    tier: security
   name: prod-bank-namespaces
   namespace: argocd
 spec:

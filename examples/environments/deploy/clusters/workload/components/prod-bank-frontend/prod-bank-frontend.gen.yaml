@@ -2,11 +2,15 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-frontend
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: frontend
     example.com/tier.name: frontend
     holos.run/component.name: prod-bank-frontend
+    team: frontend
+    tier: frontend
   name: bank-of-holos
   namespace: prod-bank-frontend
 ---
@@ -18,11 +22,15 @@ data:
 kind: ConfigMap
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-frontend
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: frontend
     example.com/tier.name: frontend
     holos.run/component.name: prod-bank-frontend
+    team: frontend
+    tier: frontend
   name: demo-data-config
   namespace: prod-bank-frontend
 ---
@@ -33,11 +41,15 @@ data:
 kind: ConfigMap
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-frontend
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: frontend
     example.com/tier.name: frontend
     holos.run/component.name: prod-bank-frontend
+    team: frontend
+    tier: frontend
   name: environment-config
   namespace: prod-bank-frontend
 ---
@@ -51,11 +63,15 @@ data:
 kind: ConfigMap
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-frontend
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: frontend
     example.com/tier.name: frontend
     holos.run/component.name: prod-bank-frontend
+    team: frontend
+    tier: frontend
   name: service-api-config
   namespace: prod-bank-frontend
 ---
@@ -65,13 +81,13 @@ metadata:
   labels:
     application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-frontend
-    environment: development
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: frontend
     example.com/tier.name: frontend
     holos.run/component.name: prod-bank-frontend
     team: frontend
-    tier: web
+    tier: frontend
   name: frontend
   namespace: prod-bank-frontend
 spec:
@@ -84,13 +100,13 @@ spec:
     app: frontend
     application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-frontend
-    environment: development
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: frontend
     example.com/tier.name: frontend
     holos.run/component.name: prod-bank-frontend
     team: frontend
-    tier: web
+    tier: frontend
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -98,13 +114,13 @@ metadata:
   labels:
     application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-frontend
-    environment: development
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: frontend
     example.com/tier.name: frontend
     holos.run/component.name: prod-bank-frontend
     team: frontend
-    tier: web
+    tier: frontend
   name: frontend
   namespace: prod-bank-frontend
 spec:
@@ -113,26 +129,26 @@ spec:
       app: frontend
       application: bank-of-holos
       argocd.argoproj.io/instance: prod-bank-frontend
-      environment: development
+      environment: prod
       example.com/environment.name: prod
       example.com/owner.name: frontend
       example.com/tier.name: frontend
       holos.run/component.name: prod-bank-frontend
       team: frontend
-      tier: web
+      tier: frontend
   template:
     metadata:
       labels:
         app: frontend
         application: bank-of-holos
         argocd.argoproj.io/instance: prod-bank-frontend
-        environment: development
+        environment: prod
         example.com/environment.name: prod
         example.com/owner.name: frontend
         example.com/tier.name: frontend
         holos.run/component.name: prod-bank-frontend
         team: frontend
-        tier: web
+        tier: frontend
     spec:
       containers:
       - env:
@@ -236,11 +252,15 @@ apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-frontend
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: frontend
     example.com/tier.name: frontend
     holos.run/component.name: prod-bank-frontend
+    team: frontend
+    tier: frontend
   name: jwt-key
   namespace: prod-bank-frontend
 spec:
@@ -258,11 +278,15 @@ apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-frontend
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: frontend
     example.com/tier.name: frontend
     holos.run/component.name: prod-bank-frontend
+    team: frontend
+    tier: frontend
   name: prod-bank-security
   namespace: prod-bank-frontend
 spec:
@@ -283,11 +307,15 @@ apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
 metadata:
   labels:
+    application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-frontend
+    environment: prod
     example.com/environment.name: prod
     example.com/owner.name: frontend
     example.com/tier.name: frontend
     holos.run/component.name: prod-bank-frontend
+    team: frontend
+    tier: frontend
   name: istio-ingress
   namespace: prod-bank-frontend
 spec:

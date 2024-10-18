@@ -1,20 +1,12 @@
 package holos
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan
 
-let BankName = #BankOfHolos.Name
+let BankName = _Stack.BankName
 
-let CommonLabels = {
-	application: BankName
-	environment: "development"
-	team:        "accounts"
-	tier:        "backend"
-}
-
-let Objects = {
-	Name:      "bank-userservice"
-	Namespace: #BankOfHolos.Backend.Namespace
+_Kubernetes: #Kubernetes & {
+	Namespace: _Stack.Backend.Namespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace
@@ -22,13 +14,9 @@ let Objects = {
 	// https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/release/v0.6.5/kubernetes-manifests/userservice.yaml
 	Resources: {
 		Service: userservice: {
-			metadata: name:   "userservice"
-			metadata: labels: CommonLabels
+			metadata: name: "userservice"
 			spec: {
-				selector: {
-					app: "userservice"
-					CommonLabels
-				}
+				selector: app: "userservice"
 				_ports: http: {
 					name:       "http"
 					port:       8080
@@ -40,18 +28,11 @@ let Objects = {
 		}
 
 		Deployment: userservice: {
-			metadata: name:   "userservice"
-			metadata: labels: CommonLabels
+			metadata: name: "userservice"
 			spec: {
-				selector: matchLabels: {
-					app: "userservice"
-					CommonLabels
-				}
+				selector: matchLabels: app: "userservice"
 				template: {
-					metadata: labels: {
-						app: "userservice"
-						CommonLabels
-					}
+					metadata: labels: app: "userservice"
 					spec: {
 						serviceAccountName:            BankName
 						terminationGracePeriodSeconds: 5
