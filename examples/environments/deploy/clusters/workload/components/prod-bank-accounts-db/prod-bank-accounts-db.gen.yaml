@@ -13,10 +13,10 @@ metadata:
     environment: prod
     example.com/environment.name: prod
     example.com/owner.name: backend
-    example.com/tier.name: backend
+    example.com/tier.name: database
     holos.run/component.name: prod-bank-accounts-db
     team: backend
-    tier: backend
+    tier: database
   name: accounts-db-config
   namespace: prod-bank-backend
 ---
@@ -29,10 +29,10 @@ metadata:
     environment: prod
     example.com/environment.name: prod
     example.com/owner.name: backend
-    example.com/tier.name: backend
+    example.com/tier.name: database
     holos.run/component.name: prod-bank-accounts-db
     team: backend
-    tier: backend
+    tier: database
   name: accounts-db
   namespace: prod-bank-backend
 spec:
@@ -48,10 +48,10 @@ spec:
     environment: prod
     example.com/environment.name: prod
     example.com/owner.name: backend
-    example.com/tier.name: backend
+    example.com/tier.name: database
     holos.run/component.name: prod-bank-accounts-db
     team: backend
-    tier: backend
+    tier: database
   type: ClusterIP
 ---
 apiVersion: apps/v1
@@ -63,10 +63,10 @@ metadata:
     environment: prod
     example.com/environment.name: prod
     example.com/owner.name: backend
-    example.com/tier.name: backend
+    example.com/tier.name: database
     holos.run/component.name: prod-bank-accounts-db
     team: backend
-    tier: backend
+    tier: database
   name: accounts-db
   namespace: prod-bank-backend
 spec:
@@ -79,10 +79,10 @@ spec:
       environment: prod
       example.com/environment.name: prod
       example.com/owner.name: backend
-      example.com/tier.name: backend
+      example.com/tier.name: database
       holos.run/component.name: prod-bank-accounts-db
       team: backend
-      tier: backend
+      tier: database
   serviceName: accounts-db
   template:
     metadata:
@@ -93,10 +93,10 @@ spec:
         environment: prod
         example.com/environment.name: prod
         example.com/owner.name: backend
-        example.com/tier.name: backend
+        example.com/tier.name: database
         holos.run/component.name: prod-bank-accounts-db
         team: backend
-        tier: backend
+        tier: database
     spec:
       containers:
       - envFrom:

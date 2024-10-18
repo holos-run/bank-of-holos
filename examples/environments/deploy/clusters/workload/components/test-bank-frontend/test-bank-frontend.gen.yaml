@@ -7,10 +7,10 @@ metadata:
     environment: test
     example.com/environment.name: test
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: test-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
   name: bank-of-holos
   namespace: test-bank-frontend
 ---
@@ -27,10 +27,10 @@ metadata:
     environment: test
     example.com/environment.name: test
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: test-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
   name: demo-data-config
   namespace: test-bank-frontend
 ---
@@ -46,10 +46,10 @@ metadata:
     environment: test
     example.com/environment.name: test
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: test-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
   name: environment-config
   namespace: test-bank-frontend
 ---
@@ -68,10 +68,10 @@ metadata:
     environment: test
     example.com/environment.name: test
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: test-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
   name: service-api-config
   namespace: test-bank-frontend
 ---
@@ -84,10 +84,10 @@ metadata:
     environment: test
     example.com/environment.name: test
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: test-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
   name: frontend
   namespace: test-bank-frontend
 spec:
@@ -103,10 +103,10 @@ spec:
     environment: test
     example.com/environment.name: test
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: test-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -117,10 +117,10 @@ metadata:
     environment: test
     example.com/environment.name: test
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: test-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
   name: frontend
   namespace: test-bank-frontend
 spec:
@@ -132,10 +132,10 @@ spec:
       environment: test
       example.com/environment.name: test
       example.com/owner.name: frontend
-      example.com/tier.name: frontend
+      example.com/tier.name: web
       holos.run/component.name: test-bank-frontend
       team: frontend
-      tier: frontend
+      tier: web
   template:
     metadata:
       labels:
@@ -145,10 +145,10 @@ spec:
         environment: test
         example.com/environment.name: test
         example.com/owner.name: frontend
-        example.com/tier.name: frontend
+        example.com/tier.name: web
         holos.run/component.name: test-bank-frontend
         team: frontend
-        tier: frontend
+        tier: web
     spec:
       containers:
       - env:
@@ -257,10 +257,10 @@ metadata:
     environment: test
     example.com/environment.name: test
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: test-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
   name: jwt-key
   namespace: test-bank-frontend
 spec:
@@ -283,10 +283,10 @@ metadata:
     environment: test
     example.com/environment.name: test
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: test-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
   name: test-bank-security
   namespace: test-bank-frontend
 spec:
@@ -312,10 +312,10 @@ metadata:
     environment: test
     example.com/environment.name: test
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: test-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
   name: istio-ingress
   namespace: test-bank-frontend
 spec:

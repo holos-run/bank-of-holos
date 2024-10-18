@@ -6,10 +6,10 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: nate
-    example.com/tier.name: security
+    example.com/tier.name: foundation
     holos.run/component.name: sandbox-nate-bank-namespaces
     team: nate
-    tier: security
+    tier: foundation
   name: sandbox-nate-bank-namespaces
   namespace: argocd
 spec:

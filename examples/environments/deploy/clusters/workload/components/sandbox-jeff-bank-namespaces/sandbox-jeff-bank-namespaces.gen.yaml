@@ -7,11 +7,11 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: jeff
-    example.com/tier.name: security
+    example.com/tier.name: foundation
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-backend
     team: jeff
-    tier: security
+    tier: foundation
   name: sandbox-jeff-bank-backend
 ---
 apiVersion: v1
@@ -23,11 +23,11 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: jeff
-    example.com/tier.name: security
+    example.com/tier.name: foundation
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-frontend
     team: jeff
-    tier: security
+    tier: foundation
   name: sandbox-jeff-bank-frontend
 ---
 apiVersion: v1
@@ -39,9 +39,9 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: jeff
-    example.com/tier.name: security
+    example.com/tier.name: foundation
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-security
     team: jeff
-    tier: security
+    tier: foundation
   name: sandbox-jeff-bank-security

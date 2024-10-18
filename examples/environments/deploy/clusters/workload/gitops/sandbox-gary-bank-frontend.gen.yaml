@@ -6,10 +6,10 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: gary
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: sandbox-gary-bank-frontend
     team: gary
-    tier: frontend
+    tier: web
   name: sandbox-gary-bank-frontend
   namespace: argocd
 spec:

@@ -6,10 +6,10 @@ metadata:
     environment: prod
     example.com/environment.name: prod
     example.com/owner.name: backend
-    example.com/tier.name: backend
+    example.com/tier.name: database
     holos.run/component.name: prod-bank-accounts-db
     team: backend
-    tier: backend
+    tier: database
   name: prod-bank-accounts-db
   namespace: argocd
 spec:

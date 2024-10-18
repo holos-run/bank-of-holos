@@ -7,11 +7,11 @@ metadata:
     environment: dev
     example.com/environment.name: dev
     example.com/owner.name: security
-    example.com/tier.name: security
+    example.com/tier.name: foundation
     holos.run/component.name: dev-bank-namespaces
     kubernetes.io/metadata.name: dev-bank-backend
     team: security
-    tier: security
+    tier: foundation
   name: dev-bank-backend
 ---
 apiVersion: v1
@@ -23,11 +23,11 @@ metadata:
     environment: dev
     example.com/environment.name: dev
     example.com/owner.name: security
-    example.com/tier.name: security
+    example.com/tier.name: foundation
     holos.run/component.name: dev-bank-namespaces
     kubernetes.io/metadata.name: dev-bank-frontend
     team: security
-    tier: security
+    tier: foundation
   name: dev-bank-frontend
 ---
 apiVersion: v1
@@ -39,9 +39,9 @@ metadata:
     environment: dev
     example.com/environment.name: dev
     example.com/owner.name: security
-    example.com/tier.name: security
+    example.com/tier.name: foundation
     holos.run/component.name: dev-bank-namespaces
     kubernetes.io/metadata.name: dev-bank-security
     team: security
-    tier: security
+    tier: foundation
   name: dev-bank-security

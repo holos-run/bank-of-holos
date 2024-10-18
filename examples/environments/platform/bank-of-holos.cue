@@ -76,9 +76,10 @@ let StackTemplate = {
 				name:  NamespacePrefix + NAME
 				env:   Env
 				owner: string
-				tier:  string
+				team:  string
+				tier:  "foundation" | "database" | "backend" | "web"
 				// the path to the source component
-				path: "projects/bank-of-holos/\(tier)/components/\(NAME)"
+				path: "projects/bank-of-holos/\(team)/components/\(NAME)"
 
 				let OWNER = owner
 				let TIER = tier
@@ -86,21 +87,21 @@ let StackTemplate = {
 				// Tags to inject
 				tags: owner:       OWNER
 				tags: environment: Env
-				tags: prefix:      NamespacePrefix
 				tags: tier:        TIER
+				tags: prefix:      NamespacePrefix
 			}
 
-			let Security = {owner: Owners.security, tier: "security"}
-			let Frontend = {owner: Owners.frontend, tier: "frontend"}
-			let Backend = {owner: Owners.backend, tier: "backend"}
+			let Security = {owner: Owners.security, team: "security", tier: "foundation"}
+			let Frontend = {owner: Owners.frontend, team: "frontend", tier: "web"}
+			let Backend = {owner: Owners.backend, team: "backend", tier: string | *"backend"}
 
 			"bank-namespaces":     Security
 			"bank-secrets":        Security
 			"bank-frontend":       Frontend
 			"bank-backend-config": Backend
-			"bank-accounts-db":    Backend
-			"bank-userservice":    Backend
-			// "bank-ledger-db":           Backend
+			"bank-accounts-db": Backend & {tier: "database"}
+			"bank-userservice": Backend
+			"bank-ledger-db": Backend & {tier: "database"}
 			// "bank-ledger-writer":       Backend
 			// "bank-balance-reader":      Backend
 			// "bank-transaction-history": Backend

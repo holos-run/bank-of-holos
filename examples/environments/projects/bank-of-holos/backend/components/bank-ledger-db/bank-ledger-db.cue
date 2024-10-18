@@ -1,20 +1,12 @@
 package holos
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan
 
-let BankName = #BankOfHolos.Name
+let BankName = _Stack.BankName
 
-let CommonLabels = {
-	application: BankName
-	environment: "development"
-	team:        "ledger"
-	tier:        "db"
-}
-
-let Objects = {
-	Name:      "bank-ledger-db"
-	Namespace: #BankOfHolos.Backend.Namespace
+_Kubernetes: #Kubernetes & {
+	Namespace: _Stack.Backend.Namespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace
@@ -25,10 +17,7 @@ let Objects = {
 			apiVersion: "v1"
 			metadata: {
 				name: "ledger-db-config"
-				labels: {
-					app: "ledger-db"
-					CommonLabels
-				}
+				labels: app: "ledger-db"
 			}
 			data: {
 				POSTGRES_DB:                "postgresdb"
@@ -43,20 +32,14 @@ let Objects = {
 		Service: "ledger-db": {
 			apiVersion: "v1"
 			kind:       "Service"
-			metadata: {
-				name:   "ledger-db"
-				labels: CommonLabels
-			}
+			metadata: name: "ledger-db"
 			spec: {
 				ports: [{
 					name:       "tcp"
 					port:       5432
 					targetPort: 5432
 				}]
-				selector: {
-					app: "ledger-db"
-					CommonLabels
-				}
+				selector: app: "ledger-db"
 				type: "ClusterIP"
 			}
 		}
@@ -64,22 +47,13 @@ let Objects = {
 		StatefulSet: "ledger-db": {
 			apiVersion: "apps/v1"
 			kind:       "StatefulSet"
-			metadata: {
-				name:   "ledger-db"
-				labels: CommonLabels
-			}
+			metadata: name: "ledger-db"
 			spec: {
 				replicas: 1
-				selector: matchLabels: {
-					app: "ledger-db"
-					CommonLabels
-				}
+				selector: matchLabels: app: "ledger-db"
 				serviceName: "ledger-db"
 				template: {
-					metadata: labels: {
-						app: "ledger-db"
-						CommonLabels
-					}
+					metadata: labels: app: "ledger-db"
 					spec: {
 						containers: [{
 							envFrom: [{

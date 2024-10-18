@@ -6,10 +6,10 @@ metadata:
     environment: dev
     example.com/environment.name: dev
     example.com/owner.name: frontend
-    example.com/tier.name: frontend
+    example.com/tier.name: web
     holos.run/component.name: dev-bank-frontend
     team: frontend
-    tier: frontend
+    tier: web
   name: dev-bank-frontend
   namespace: argocd
 spec:

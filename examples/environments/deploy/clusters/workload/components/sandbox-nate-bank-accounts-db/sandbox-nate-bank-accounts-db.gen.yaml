@@ -13,10 +13,10 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: nate
-    example.com/tier.name: backend
+    example.com/tier.name: database
     holos.run/component.name: sandbox-nate-bank-accounts-db
     team: nate
-    tier: backend
+    tier: database
   name: accounts-db-config
   namespace: sandbox-nate-bank-backend
 ---
@@ -29,10 +29,10 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: nate
-    example.com/tier.name: backend
+    example.com/tier.name: database
     holos.run/component.name: sandbox-nate-bank-accounts-db
     team: nate
-    tier: backend
+    tier: database
   name: accounts-db
   namespace: sandbox-nate-bank-backend
 spec:
@@ -48,10 +48,10 @@ spec:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: nate
-    example.com/tier.name: backend
+    example.com/tier.name: database
     holos.run/component.name: sandbox-nate-bank-accounts-db
     team: nate
-    tier: backend
+    tier: database
   type: ClusterIP
 ---
 apiVersion: apps/v1
@@ -63,10 +63,10 @@ metadata:
     environment: sandbox
     example.com/environment.name: sandbox
     example.com/owner.name: nate
-    example.com/tier.name: backend
+    example.com/tier.name: database
     holos.run/component.name: sandbox-nate-bank-accounts-db
     team: nate
-    tier: backend
+    tier: database
   name: accounts-db
   namespace: sandbox-nate-bank-backend
 spec:
@@ -79,10 +79,10 @@ spec:
       environment: sandbox
       example.com/environment.name: sandbox
       example.com/owner.name: nate
-      example.com/tier.name: backend
+      example.com/tier.name: database
       holos.run/component.name: sandbox-nate-bank-accounts-db
       team: nate
-      tier: backend
+      tier: database
   serviceName: accounts-db
   template:
     metadata:
@@ -93,10 +93,10 @@ spec:
         environment: sandbox
         example.com/environment.name: sandbox
         example.com/owner.name: nate
-        example.com/tier.name: backend
+        example.com/tier.name: database
         holos.run/component.name: sandbox-nate-bank-accounts-db
         team: nate
-        tier: backend
+        tier: database
     spec:
       containers:
       - envFrom:
