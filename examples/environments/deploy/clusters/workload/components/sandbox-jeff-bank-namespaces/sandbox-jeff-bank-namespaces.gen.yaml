@@ -3,6 +3,8 @@ kind: Namespace
 metadata:
   labels:
     argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
+    example.com/environment.name: sandbox
+    example.com/owner.name: jeff
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-backend
   name: sandbox-jeff-bank-backend
@@ -12,6 +14,8 @@ kind: Namespace
 metadata:
   labels:
     argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
+    example.com/environment.name: sandbox
+    example.com/owner.name: jeff
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-frontend
   name: sandbox-jeff-bank-frontend
@@ -21,6 +25,8 @@ kind: Namespace
 metadata:
   labels:
     argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
+    example.com/environment.name: sandbox
+    example.com/owner.name: jeff
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-security
   name: sandbox-jeff-bank-security

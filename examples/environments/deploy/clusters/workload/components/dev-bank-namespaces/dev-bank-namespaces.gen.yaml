@@ -3,6 +3,8 @@ kind: Namespace
 metadata:
   labels:
     argocd.argoproj.io/instance: dev-bank-namespaces
+    example.com/environment.name: dev
+    example.com/owner.name: security
     holos.run/component.name: dev-bank-namespaces
     kubernetes.io/metadata.name: dev-bank-backend
   name: dev-bank-backend
@@ -12,6 +14,8 @@ kind: Namespace
 metadata:
   labels:
     argocd.argoproj.io/instance: dev-bank-namespaces
+    example.com/environment.name: dev
+    example.com/owner.name: security
     holos.run/component.name: dev-bank-namespaces
     kubernetes.io/metadata.name: dev-bank-frontend
   name: dev-bank-frontend
@@ -21,6 +25,8 @@ kind: Namespace
 metadata:
   labels:
     argocd.argoproj.io/instance: dev-bank-namespaces
+    example.com/environment.name: dev
+    example.com/owner.name: security
     holos.run/component.name: dev-bank-namespaces
     kubernetes.io/metadata.name: dev-bank-security
   name: dev-bank-security

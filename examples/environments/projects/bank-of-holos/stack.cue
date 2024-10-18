@@ -109,8 +109,16 @@ _Stack: {
 		}
 	}
 
+	CommonLabels: {
+		"\(#Organization.Domain)/owner.name":       Tags.owner
+		"\(#Organization.Domain)/environment.name": Tags.environment
+	}
+
 	// TODO: AppProjects
 }
+
+// CommonLabels
+#ComponentConfig: CommonLabels: _Stack.CommonLabels
 
 // TODO: Migrate the definitions below to stack-wide definitions from
 // platform-wide definitions.

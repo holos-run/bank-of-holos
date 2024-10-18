@@ -3,6 +3,8 @@ kind: Namespace
 metadata:
   labels:
     argocd.argoproj.io/instance: stage-bank-namespaces
+    example.com/environment.name: stage
+    example.com/owner.name: security
     holos.run/component.name: stage-bank-namespaces
     kubernetes.io/metadata.name: stage-bank-backend
   name: stage-bank-backend
@@ -12,6 +14,8 @@ kind: Namespace
 metadata:
   labels:
     argocd.argoproj.io/instance: stage-bank-namespaces
+    example.com/environment.name: stage
+    example.com/owner.name: security
     holos.run/component.name: stage-bank-namespaces
     kubernetes.io/metadata.name: stage-bank-frontend
   name: stage-bank-frontend
@@ -21,6 +25,8 @@ kind: Namespace
 metadata:
   labels:
     argocd.argoproj.io/instance: stage-bank-namespaces
+    example.com/environment.name: stage
+    example.com/owner.name: security
     holos.run/component.name: stage-bank-namespaces
     kubernetes.io/metadata.name: stage-bank-security
   name: stage-bank-security

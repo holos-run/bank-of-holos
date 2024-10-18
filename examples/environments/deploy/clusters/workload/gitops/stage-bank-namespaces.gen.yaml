@@ -2,6 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
+    example.com/environment.name: stage
+    example.com/owner.name: security
     holos.run/component.name: stage-bank-namespaces
   name: stage-bank-namespaces
   namespace: argocd

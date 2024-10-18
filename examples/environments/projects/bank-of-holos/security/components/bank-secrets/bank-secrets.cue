@@ -7,7 +7,7 @@ import (
 )
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan
 
 // This may be useful to copy and generate other secrets.
 let SecretName = "jwt-key"
@@ -18,11 +18,10 @@ let Writer = "\(SecretName)-writer"
 
 // AllowedName represents the service account allowed to read the generated
 // secret.
-let AllowedName = #BankOfHolos.Name
+let AllowedName = _Stack.BankName
 
-let Objects = {
-	Name:      "bank-secrets"
-	Namespace: #BankOfHolos.Security.Namespace
+_Kubernetes: #Kubernetes & {
+	Namespace: _Stack.Security.Namespace
 
 	Resources: [_]: [_]: metadata: namespace:    Namespace
 	Resources: [_]: [ID=string]: metadata: name: string | *ID
@@ -117,11 +116,11 @@ let Objects = {
 			subjects: [{
 				kind:      "ServiceAccount"
 				name:      AllowedName
-				namespace: #BankOfHolos.Frontend.Namespace
+				namespace: _Stack.Frontend.Namespace
 			}, {
 				kind:      "ServiceAccount"
 				name:      AllowedName
-				namespace: #BankOfHolos.Backend.Namespace
+				namespace: _Stack.Backend.Namespace
 			},
 			]
 		}

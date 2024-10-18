@@ -39,7 +39,7 @@ let Objects = {
 		Certificate: "gateway-cert": {
 			metadata: name:      "gateway-cert"
 			metadata: namespace: Namespace
-			spec: commonName:    #Organization.Domain
+			spec: commonName:    _Platform.Domain
 			spec: dnsNames: [spec.commonName, "*.\(spec.commonName)"]
 			spec: secretName: metadata.name
 			spec: issuerRef: {
