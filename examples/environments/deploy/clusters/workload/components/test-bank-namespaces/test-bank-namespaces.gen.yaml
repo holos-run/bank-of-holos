@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: test-bank-namespaces
+    holos.run/component.name: test-bank-namespaces
+    kubernetes.io/metadata.name: test-bank-backend
+  name: test-bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: test-bank-namespaces
+    holos.run/component.name: test-bank-namespaces
+    kubernetes.io/metadata.name: test-bank-frontend
+  name: test-bank-frontend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: test-bank-namespaces
+    holos.run/component.name: test-bank-namespaces
+    kubernetes.io/metadata.name: test-bank-security
+  name: test-bank-security

@@ -22,28 +22,3 @@ spec:
     - path:
         type: PathPrefix
         value: /
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  labels:
-    app: bank
-    argocd.argoproj.io/instance: httproutes
-    holos.run/component.name: httproutes
-  name: bank
-  namespace: istio-ingress
-spec:
-  hostnames:
-  - bank.holos.localhost
-  parentRefs:
-  - name: default
-    namespace: istio-ingress
-  rules:
-  - backendRefs:
-    - name: frontend
-      namespace: bank-frontend
-      port: 80
-    matches:
-    - path:
-        type: PathPrefix
-        value: /

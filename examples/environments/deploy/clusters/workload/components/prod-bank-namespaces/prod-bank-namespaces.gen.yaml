@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: prod-bank-namespaces
+    holos.run/component.name: prod-bank-namespaces
+    kubernetes.io/metadata.name: prod-bank-backend
+  name: prod-bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: prod-bank-namespaces
+    holos.run/component.name: prod-bank-namespaces
+    kubernetes.io/metadata.name: prod-bank-frontend
+  name: prod-bank-frontend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: prod-bank-namespaces
+    holos.run/component.name: prod-bank-namespaces
+    kubernetes.io/metadata.name: prod-bank-security
+  name: prod-bank-security

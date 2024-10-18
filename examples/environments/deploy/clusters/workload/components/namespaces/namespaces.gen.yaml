@@ -13,33 +13,6 @@ metadata:
   labels:
     argocd.argoproj.io/instance: namespaces
     holos.run/component.name: namespaces
-    kubernetes.io/metadata.name: bank-backend
-  name: bank-backend
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    argocd.argoproj.io/instance: namespaces
-    holos.run/component.name: namespaces
-    kubernetes.io/metadata.name: bank-frontend
-  name: bank-frontend
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    argocd.argoproj.io/instance: namespaces
-    holos.run/component.name: namespaces
-    kubernetes.io/metadata.name: bank-security
-  name: bank-security
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    argocd.argoproj.io/instance: namespaces
-    holos.run/component.name: namespaces
     kubernetes.io/metadata.name: cert-manager
   name: cert-manager
 ---

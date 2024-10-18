@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
+    holos.run/component.name: sandbox-jeff-bank-namespaces
+    kubernetes.io/metadata.name: sandbox-jeff-bank-backend
+  name: sandbox-jeff-bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
+    holos.run/component.name: sandbox-jeff-bank-namespaces
+    kubernetes.io/metadata.name: sandbox-jeff-bank-frontend
+  name: sandbox-jeff-bank-frontend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
+    holos.run/component.name: sandbox-jeff-bank-namespaces
+    kubernetes.io/metadata.name: sandbox-jeff-bank-security
+  name: sandbox-jeff-bank-security
