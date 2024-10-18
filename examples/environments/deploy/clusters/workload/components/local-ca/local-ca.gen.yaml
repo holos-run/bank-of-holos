@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  labels:
+    argocd.argoproj.io/instance: local-ca
+    holos.run/component.name: local-ca
+  name: local-ca
+  namespace: cert-manager
+spec:
+  ca:
+    secretName: local-ca

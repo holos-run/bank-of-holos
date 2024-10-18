@@ -1,0 +1,128 @@
+apiVersion: v1
+data:
+  POSTGRES_DB: postgresdb
+  POSTGRES_PASSWORD: password
+  POSTGRES_USER: admin
+  SPRING_DATASOURCE_PASSWORD: password
+  SPRING_DATASOURCE_URL: jdbc:postgresql://ledger-db:5432/postgresdb
+  SPRING_DATASOURCE_USERNAME: admin
+kind: ConfigMap
+metadata:
+  labels:
+    app: ledger-db
+    application: bank-of-holos
+    argocd.argoproj.io/instance: dev-bank-ledger-db
+    environment: dev
+    example.com/environment.name: dev
+    example.com/owner.name: backend
+    example.com/tier.name: database
+    holos.run/component.name: dev-bank-ledger-db
+    team: backend
+    tier: database
+  name: ledger-db-config
+  namespace: dev-bank-backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: dev-bank-ledger-db
+    environment: dev
+    example.com/environment.name: dev
+    example.com/owner.name: backend
+    example.com/tier.name: database
+    holos.run/component.name: dev-bank-ledger-db
+    team: backend
+    tier: database
+  name: ledger-db
+  namespace: dev-bank-backend
+spec:
+  ports:
+  - name: tcp
+    port: 5432
+    targetPort: 5432
+  selector:
+    app: ledger-db
+    application: bank-of-holos
+    argocd.argoproj.io/instance: dev-bank-ledger-db
+    environment: dev
+    example.com/environment.name: dev
+    example.com/owner.name: backend
+    example.com/tier.name: database
+    holos.run/component.name: dev-bank-ledger-db
+    team: backend
+    tier: database
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: dev-bank-ledger-db
+    environment: dev
+    example.com/environment.name: dev
+    example.com/owner.name: backend
+    example.com/tier.name: database
+    holos.run/component.name: dev-bank-ledger-db
+    team: backend
+    tier: database
+  name: ledger-db
+  namespace: dev-bank-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ledger-db
+      application: bank-of-holos
+      argocd.argoproj.io/instance: dev-bank-ledger-db
+      environment: dev
+      example.com/environment.name: dev
+      example.com/owner.name: backend
+      example.com/tier.name: database
+      holos.run/component.name: dev-bank-ledger-db
+      team: backend
+      tier: database
+  serviceName: ledger-db
+  template:
+    metadata:
+      labels:
+        app: ledger-db
+        application: bank-of-holos
+        argocd.argoproj.io/instance: dev-bank-ledger-db
+        environment: dev
+        example.com/environment.name: dev
+        example.com/owner.name: backend
+        example.com/tier.name: database
+        holos.run/component.name: dev-bank-ledger-db
+        team: backend
+        tier: database
+    spec:
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: environment-config
+        - configMapRef:
+            name: ledger-db-config
+        - configMapRef:
+            name: demo-data-config
+        image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/ledger-db:v0.6.5@sha256:cc4fd25f301ab6d46b1312244d6931babc4c6cb66c5cb6d31d4a1adfa318a321
+        name: postgres
+        ports:
+        - containerPort: 5432
+        resources:
+          limits:
+            cpu: 250m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 512Mi
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgresdb
+          subPath: postgres
+      serviceAccountName: bank-of-holos
+      volumes:
+      - emptyDir: {}
+        name: postgresdb

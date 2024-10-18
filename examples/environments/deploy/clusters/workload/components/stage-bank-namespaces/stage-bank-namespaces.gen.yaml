@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: stage-bank-namespaces
+    environment: stage
+    example.com/environment.name: stage
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: stage-bank-namespaces
+    kubernetes.io/metadata.name: stage-bank-backend
+    team: security
+    tier: foundation
+  name: stage-bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: stage-bank-namespaces
+    environment: stage
+    example.com/environment.name: stage
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: stage-bank-namespaces
+    kubernetes.io/metadata.name: stage-bank-frontend
+    team: security
+    tier: foundation
+  name: stage-bank-frontend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: stage-bank-namespaces
+    environment: stage
+    example.com/environment.name: stage
+    example.com/owner.name: security
+    example.com/tier.name: foundation
+    holos.run/component.name: stage-bank-namespaces
+    kubernetes.io/metadata.name: stage-bank-security
+    team: security
+    tier: foundation
+  name: stage-bank-security

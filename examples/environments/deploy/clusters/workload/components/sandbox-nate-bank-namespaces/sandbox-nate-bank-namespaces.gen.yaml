@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: sandbox-nate-bank-namespaces
+    environment: sandbox
+    example.com/environment.name: sandbox
+    example.com/owner.name: nate
+    example.com/tier.name: foundation
+    holos.run/component.name: sandbox-nate-bank-namespaces
+    kubernetes.io/metadata.name: sandbox-nate-bank-backend
+    team: nate
+    tier: foundation
+  name: sandbox-nate-bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: sandbox-nate-bank-namespaces
+    environment: sandbox
+    example.com/environment.name: sandbox
+    example.com/owner.name: nate
+    example.com/tier.name: foundation
+    holos.run/component.name: sandbox-nate-bank-namespaces
+    kubernetes.io/metadata.name: sandbox-nate-bank-frontend
+    team: nate
+    tier: foundation
+  name: sandbox-nate-bank-frontend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: sandbox-nate-bank-namespaces
+    environment: sandbox
+    example.com/environment.name: sandbox
+    example.com/owner.name: nate
+    example.com/tier.name: foundation
+    holos.run/component.name: sandbox-nate-bank-namespaces
+    kubernetes.io/metadata.name: sandbox-nate-bank-security
+    team: nate
+    tier: foundation
+  name: sandbox-nate-bank-security
