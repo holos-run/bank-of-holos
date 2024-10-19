@@ -16,6 +16,42 @@ let SecretName = "jwt-key"
 let Reader = "\(SecretName)-reader"
 let Writer = "\(SecretName)-writer"
 
+#JobSpec: {
+	_configMap:         string
+	serviceAccountName: Writer
+	restartPolicy:      "OnFailure"
+	securityContext: {
+		seccompProfile: type: "RuntimeDefault"
+		runAsNonRoot: true
+		runAsUser:    8192 // app
+	}
+	containers: [
+		{
+			name:  "toolkit"
+			image: "quay.io/holos-run/toolkit:2024-10-19"
+			securityContext: {
+				capabilities: drop: ["ALL"]
+				allowPrivilegeEscalation: false
+			}
+			command: ["/bin/bash"]
+			args: ["/config/entrypoint"]
+			env: [{
+				name:  "HOME"
+				value: "/tmp"
+			}]
+			volumeMounts: [{
+				name:      "config"
+				mountPath: "/config"
+				readOnly:  true
+			}]
+		},
+	]
+	volumes: [{
+		name: "config"
+		configMap: name: _configMap
+	}]
+}
+
 // AllowedName represents the service account allowed to read the generated
 // secret.
 let AllowedName = _Stack.BankName
@@ -51,43 +87,16 @@ _Kubernetes: #Kubernetes & {
 			}]
 		}
 
-		let JobSpec = {
-			serviceAccountName: Writer
-			restartPolicy:      "OnFailure"
-			securityContext: {
-				seccompProfile: type: "RuntimeDefault"
-				runAsNonRoot: true
-				runAsUser:    8192 // app
+		Job: (Writer): batchv1.#Job & {
+			spec: template: spec: #JobSpec & {
+				_configMap: Writer
 			}
-			containers: [
-				{
-					name:  "toolkit"
-					image: "quay.io/holos-run/toolkit:2024-09-16"
-					securityContext: {
-						capabilities: drop: ["ALL"]
-						allowPrivilegeEscalation: false
-					}
-					command: ["/bin/bash"]
-					args: ["/config/entrypoint"]
-					env: [{
-						name:  "HOME"
-						value: "/tmp"
-					}]
-					volumeMounts: [{
-						name:      "config"
-						mountPath: "/config"
-						readOnly:  true
-					}]
-				},
-			]
-			volumes: [{
-				name: "config"
-				configMap: name: Writer
-			}]
 		}
 
 		Job: (Writer): batchv1.#Job & {
-			spec: template: spec: JobSpec
+			spec: template: spec: #JobSpec & {
+				_configMap: Writer
+			}
 		}
 
 		ConfigMap: (Writer): corev1.#ConfigMap & {
