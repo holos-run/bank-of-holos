@@ -1,9 +1,12 @@
 package holos
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan
 
-let Objects = {
+let BankName = _Stack.BankName
+
+_Kubernetes: #Kubernetes & {
+	Name:      string
 	Namespace: _Stack.Frontend.Namespace
 
 	// Ensure resources go in the correct namespace
@@ -13,19 +16,11 @@ let Objects = {
 	Resources: {
 		Service: frontend: {
 			metadata: name: "frontend"
-			metadata: labels: {
-				application: "bank-of-holos"
-				environment: "development"
-				team:        "frontend"
-				tier:        "web"
-			}
+			metadata: labels: application: BankName
 			spec: {
 				selector: {
 					app:         "frontend"
-					application: "bank-of-holos"
-					environment: "development"
-					team:        "frontend"
-					tier:        "web"
+					application: BankName
 				}
 				_ports: http: {
 					name:       "http"
@@ -39,28 +34,14 @@ let Objects = {
 
 		Deployment: frontend: {
 			metadata: name: "frontend"
-			metadata: labels: {
-				application: "bank-of-holos"
-				environment: "development"
-				team:        "frontend"
-				tier:        "web"
-			}
+			metadata: labels: application: BankName
 			spec: {
 				selector: matchLabels: {
 					app:         "frontend"
-					application: "bank-of-holos"
-					environment: "development"
-					team:        "frontend"
-					tier:        "web"
+					application: BankName
 				}
 				template: {
-					metadata: labels: {
-						app:         "frontend"
-						application: "bank-of-holos"
-						environment: "development"
-						team:        "frontend"
-						tier:        "web"
-					}
+					metadata: labels: selector.matchLabels
 					spec: {
 						securityContext: {
 							seccompProfile: type: "RuntimeDefault"
@@ -69,7 +50,7 @@ let Objects = {
 							runAsNonRoot: true
 							runAsUser:    1000
 						}
-						serviceAccountName:            "bank-of-holos"
+						serviceAccountName:            BankName
 						terminationGracePeriodSeconds: 5
 						containers: [{
 							env: [{
@@ -77,7 +58,7 @@ let Objects = {
 								value: #Organization.DisplayName
 							}, {
 								name:  "ENV_PLATFORM"
-								value: "local"
+								value: _Stack.Environment
 							}, {
 								name:  "VERSION"
 								value: "v0.6.5"

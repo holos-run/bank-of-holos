@@ -20,6 +20,8 @@ _Stack: {
 		host_prefix: string @tag(host_prefix, type=string)
 	}
 
+	Environment: Tags.environment
+
 	Frontend: Namespace: "\(Tags.prefix)bank-frontend"
 	Backend: Namespace:  "\(Tags.prefix)bank-backend"
 	Security: Namespace: "\(Tags.prefix)bank-security"

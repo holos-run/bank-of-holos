@@ -155,7 +155,7 @@ spec:
         - name: BANK_NAME
           value: Bank of Holos
         - name: ENV_PLATFORM
-          value: local
+          value: stage
         - name: VERSION
           value: v0.6.5
         - name: PORT
