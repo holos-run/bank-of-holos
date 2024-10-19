@@ -54,4 +54,7 @@ apply deploy/clusters/workload/components/httproutes/httproutes.gen.yaml
 # ArgoCD Applications
 apply deploy/clusters/workload/gitops
 
+# Wait for ExternalSecrets to be ready
+kubectl wait --for=condition=Available deployment/external-secrets-webhook -n external-secrets --timeout=300s
+
 exit 0

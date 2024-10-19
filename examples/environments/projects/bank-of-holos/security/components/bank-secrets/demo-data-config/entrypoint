@@ -31,7 +31,18 @@ set -o pipefail
 echo -n "$DEMO_LOGIN_PASSWORD" > DEMO_LOGIN_PASSWORD
 
 echo "bcrypt hashing DEMO_LOGIN_PASSWORD" >&2
-python3 -c "import bcrypt; import os; print(bcrypt.hashpw(os.getenv('DEMO_LOGIN_PASSWORD').encode('utf-8'), bcrypt.gensalt()).decode())" > DEFAULT_PASSHASH
+
+# Take care to avoid a trailing newline
+python3 <<EOF >DEFAULT_PASSHASH
+import bcrypt
+import os
+import sys
+
+password = os.getenv('DEMO_LOGIN_PASSWORD').encode('utf-8')
+hash = bcrypt.hashpw(password, bcrypt.gensalt()).decode()
+# write doesn't write a newline like print() does.
+sys.stdout.write(hash)
+EOF
 
 cd ..
 
