@@ -18,5 +18,5 @@ spec:
   project: sandbox-gary-bank-frontend
   source:
     path: examples/environments/deploy/clusters/workload/components/sandbox-gary-bank-frontend
-    repoURL: https://github.com/jeffmccune/bank-of-holos
+    repoURL: https://github.com/holos-run/bank-of-holos
     targetRevision: main

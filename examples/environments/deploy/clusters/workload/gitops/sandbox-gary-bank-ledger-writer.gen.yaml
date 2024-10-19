@@ -18,5 +18,5 @@ spec:
   project: sandbox-gary-bank-backend
   source:
     path: examples/environments/deploy/clusters/workload/components/sandbox-gary-bank-ledger-writer
-    repoURL: https://github.com/jeffmccune/bank-of-holos
+    repoURL: https://github.com/holos-run/bank-of-holos
     targetRevision: main

@@ -18,5 +18,5 @@ spec:
   project: dev-bank-backend
   source:
     path: examples/environments/deploy/clusters/workload/components/dev-bank-transaction-history
-    repoURL: https://github.com/jeffmccune/bank-of-holos
+    repoURL: https://github.com/holos-run/bank-of-holos
     targetRevision: main
