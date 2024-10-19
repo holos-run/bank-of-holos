@@ -1,0 +1,30 @@
+#! /bin/bash
+
+# cd to the repository root
+TOPLEVEL="$(cd $(dirname "$0") && git rev-parse --show-toplevel)"
+cd "${TOPLEVEL}/examples/environments"
+
+set -xeuo pipefail
+
+## Bank Prod
+
+# Generate the private-key in-cluster.
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-secrets/bank-secrets.gen.yaml
+kubectl wait --for=condition=complete job.batch/jwt-key-writer -n bank-security --timeout=300s
+
+# Bank Config
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-backend-config/bank-backend-config.gen.yaml
+# Bank Databases
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-accounts-db/bank-accounts-db.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-ledger-db/bank-ledger-db.gen.yaml
+# Bank Backend Services
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-contacts/bank-contacts.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-balance-reader/bank-balance-reader.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-userservice/bank-userservice.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-ledger-writer/bank-ledger-writer.gen.yaml
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-transaction-history/bank-transaction-history.gen.yaml
+# Bank Frontend
+kubectl apply --server-side=true -f deploy/clusters/workload/components/bank-frontend/bank-frontend.gen.yaml
+
+
+exit 0

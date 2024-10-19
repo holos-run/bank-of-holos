@@ -1,9 +1,8 @@
 package holos
 
-let Objects = {
-	Name: "httproutes"
-	Resources: HTTPRoute: #HTTPRoutes
-}
-
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan
+
+_Kubernetes: #Kubernetes & {
+	Resources: HTTPRoute: _HTTPRoutes
+}
