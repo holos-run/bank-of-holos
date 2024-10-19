@@ -17,6 +17,6 @@ spec:
     server: https://kubernetes.default.svc
   project: sandbox-jeff-bank-backend
   source:
-    path: deploy/clusters/workload/components/sandbox-jeff-bank-balance-reader
+    path: examples/environments/deploy/clusters/workload/components/sandbox-jeff-bank-balance-reader
     repoURL: https://github.com/jeffmccune/bank-of-holos
     targetRevision: main

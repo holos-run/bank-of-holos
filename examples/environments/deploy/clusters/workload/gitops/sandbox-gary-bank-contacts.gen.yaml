@@ -17,6 +17,6 @@ spec:
     server: https://kubernetes.default.svc
   project: sandbox-gary-bank-backend
   source:
-    path: deploy/clusters/workload/components/sandbox-gary-bank-contacts
+    path: examples/environments/deploy/clusters/workload/components/sandbox-gary-bank-contacts
     repoURL: https://github.com/jeffmccune/bank-of-holos
     targetRevision: main

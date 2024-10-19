@@ -10,6 +10,6 @@ spec:
     server: https://kubernetes.default.svc
   project: platform
   source:
-    path: deploy/clusters/workload/components/app-projects
+    path: examples/environments/deploy/clusters/workload/components/app-projects
     repoURL: https://github.com/jeffmccune/bank-of-holos
     targetRevision: main

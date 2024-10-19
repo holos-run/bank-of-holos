@@ -17,6 +17,6 @@ spec:
     server: https://kubernetes.default.svc
   project: dev-bank-security
   source:
-    path: deploy/clusters/workload/components/dev-bank-routes
+    path: examples/environments/deploy/clusters/workload/components/dev-bank-routes
     repoURL: https://github.com/jeffmccune/bank-of-holos
     targetRevision: main

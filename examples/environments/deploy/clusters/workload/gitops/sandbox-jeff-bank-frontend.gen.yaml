@@ -17,6 +17,6 @@ spec:
     server: https://kubernetes.default.svc
   project: sandbox-jeff-bank-frontend
   source:
-    path: deploy/clusters/workload/components/sandbox-jeff-bank-frontend
+    path: examples/environments/deploy/clusters/workload/components/sandbox-jeff-bank-frontend
     repoURL: https://github.com/jeffmccune/bank-of-holos
     targetRevision: main

@@ -17,6 +17,6 @@ spec:
     server: https://kubernetes.default.svc
   project: prod-bank-backend
   source:
-    path: deploy/clusters/workload/components/prod-bank-ledger-writer
+    path: examples/environments/deploy/clusters/workload/components/prod-bank-ledger-writer
     repoURL: https://github.com/jeffmccune/bank-of-holos
     targetRevision: main

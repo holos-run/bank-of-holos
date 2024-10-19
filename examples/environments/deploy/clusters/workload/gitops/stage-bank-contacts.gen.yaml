@@ -17,6 +17,6 @@ spec:
     server: https://kubernetes.default.svc
   project: stage-bank-backend
   source:
-    path: deploy/clusters/workload/components/stage-bank-contacts
+    path: examples/environments/deploy/clusters/workload/components/stage-bank-contacts
     repoURL: https://github.com/jeffmccune/bank-of-holos
     targetRevision: main
