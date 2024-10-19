@@ -35,7 +35,9 @@ fi
 
 # ArgoCD
 kubectl apply --server-side=true -f deploy/clusters/workload/components/argocd/argocd.gen.yaml
+# We need to add all app projects before Applications
 kubectl apply --server-side=true -f deploy/clusters/workload/components/app-projects/app-projects.gen.yaml
+find deploy -type d | grep -- -projects | xargs -n1 kubectl apply --server-side=true -f
 
 # Istio ()
 kubectl apply --server-side=true -f deploy/clusters/workload/components/istio-base/istio-base.gen.yaml
