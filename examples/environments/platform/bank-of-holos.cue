@@ -7,9 +7,14 @@ _Stacks: {
 	stage: #StackTemplate & {Env: "stage"}
 	prod: #StackTemplate & {Env: "prod"}
 	// Personal sandbox envrionemnts
-	jeff: #StackTemplate & {Env: "sandbox", Owner: "jeff"}
-	gary: #StackTemplate & {Env: "sandbox", Owner: "gary"}
-	nate: #StackTemplate & {Env: "sandbox", Owner: "nate"}
+	for name, stack in _Sandboxes {
+		(name): stack
+	}
+}
+
+// Sandbox environments for individual contributors.
+_Sandboxes: #Sandbox & {
+	jeff: _
 }
 
 // Manage the stacks on all workload clusters.
@@ -26,6 +31,11 @@ for Cluster in #Fleets.workload.clusters {
 			}
 		}
 	}
+}
+
+// Sandbox represents the schema of a sandbox environment.
+#Sandbox: {
+	[NAME=string]: #StackTemplate & {Env: "sandbox", Owner: NAME}
 }
 
 // StackTemplate represents a template of the collection of components composing
