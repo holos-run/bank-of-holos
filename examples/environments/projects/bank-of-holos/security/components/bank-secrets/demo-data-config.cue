@@ -10,22 +10,7 @@ let SecretName = "demo-data-config"
 _GeneratedSecrets: (SecretName): _
 
 _Kubernetes: #Kubernetes & {
-	KustomizeConfig: {
-		Kustomization: {
-			configMapGenerator: [{
-				name: SecretName
-				files: ["\(SecretName)/entrypoint"]
-				options: disableNameSuffixHash: true
-			}]
-		}
-		// Add all configMapGenerator files as Holos File generators, so they get
-		// copied into place when Holos runs kustomize.
-		for x in Kustomization.configMapGenerator {
-			for file in x.files {
-				Files: (file): _
-			}
-		}
-	}
+	KustomizeConfig: Kustomization: _configMapGenerators: (SecretName): _
 
 	Resources: {
 		Job: (SecretName): batchv1.#Job & {

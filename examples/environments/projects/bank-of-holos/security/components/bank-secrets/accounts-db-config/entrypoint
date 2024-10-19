@@ -1,0 +1,46 @@
+#! /bin/bash
+#
+# Generate a secret to replace the insecure accounts-db-config ConfigMap
+# https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/v0.6.5/kubernetes-manifests/accounts-db.yaml#L17-L20
+
+tmpdir="$(mktemp -d)"
+finish() {
+  status=$?
+  rm -rf "${tmpdir}"
+  return $status
+}
+trap finish EXIT
+
+set -euo pipefail
+
+cd "$tmpdir"
+mkdir secret
+cd secret
+
+export LC_ALL=C
+
+POSTGRES_DB="accounts-db"
+POSTGRES_USER="accounts-admin"
+set +o pipefail
+POSTGRES_PASSWORD="$(tr -dc A-Za-z0-9 </dev/urandom | head -c 20)"
+set -o pipefail
+ACCOUNTS_DB_URI="postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_DB}:5432/${POSTGRES_DB}"
+
+echo -n "$POSTGRES_DB" > POSTGRES_DB
+echo -n "$POSTGRES_USER" > POSTGRES_USER
+echo -n "$POSTGRES_PASSWORD" > POSTGRES_PASSWORD
+echo -n "$ACCOUNTS_DB_URI" > ACCOUNTS_DB_URI
+cp /config/1-load-testdata.sh .
+
+cd ..
+
+echo "copying secret into kubernetes manifest secret.yaml" >&2
+kubectl create secret generic accounts-db-config --from-file=secret --dry-run=client -o yaml > secret.yaml
+
+echo "applying secret.yaml" >&2
+kubectl apply --server-side=true -f secret.yaml
+
+echo "cleaning up" >&2
+rm -rf secret secret.yaml
+
+echo "ok done" >&2

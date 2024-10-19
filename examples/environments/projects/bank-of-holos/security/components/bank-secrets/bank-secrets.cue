@@ -26,7 +26,7 @@ _GeneratedSecrets: {
 #JobSpec: {
 	_configMap:         string
 	serviceAccountName: Writer
-	restartPolicy:      "OnFailure"
+	restartPolicy:      string | *"OnFailure"
 	securityContext: {
 		seccompProfile: type: "RuntimeDefault"
 		runAsNonRoot: true
@@ -65,6 +65,30 @@ let AllowedName = _Stack.BankName
 
 _Kubernetes: #Kubernetes & {
 	Namespace: _Stack.Security.Namespace
+
+	KustomizeConfig: {
+		Kustomization: {
+			// Hidden struct to register config map generators
+			_configMapGenerators: {
+				[NAME=string]: {
+					name: NAME
+					_files: {[FILE=string]: file: FILE}
+					_files: "\(NAME)/entrypoint": _
+					files: [for x in _files {x.file}]
+					options: disableNameSuffixHash: true
+				}
+			}
+			// Build the list once
+			configMapGenerator: [for x in _configMapGenerators {x}]
+		}
+		// Add all configMapGenerator files as Holos File generators, so they get
+		// copied into place when Holos runs kustomize.
+		for x in Kustomization.configMapGenerator {
+			for file in x.files {
+				Files: (file): _
+			}
+		}
+	}
 
 	Resources: [_]: [_]: metadata: namespace:    Namespace
 	Resources: [_]: [ID=string]: metadata: name: string | *ID

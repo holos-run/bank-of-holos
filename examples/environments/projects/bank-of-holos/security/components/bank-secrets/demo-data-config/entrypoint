@@ -25,7 +25,9 @@ echo -n 'True' > USE_DEMO_DATA
 echo -n testuser > DEMO_LOGIN_USERNAME
 
 echo "generating DEMO_LOGIN_PASSWORD" >&2
+set +o pipefail
 export DEMO_LOGIN_PASSWORD="$(tr -dc A-Za-z0-9 </dev/urandom | head -c 20)"
+set -o pipefail
 echo -n "$DEMO_LOGIN_PASSWORD" > DEMO_LOGIN_PASSWORD
 
 echo "bcrypt hashing DEMO_LOGIN_PASSWORD" >&2
