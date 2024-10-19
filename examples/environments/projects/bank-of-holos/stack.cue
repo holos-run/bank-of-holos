@@ -120,8 +120,8 @@ _Stack: {
 			data: {
 				USE_DEMO_DATA:       "True"
 				DEMO_LOGIN_USERNAME: "testuser"
-				// All demo user accounts are hardcoded to use the login password 'bankofanthos'
-				DEMO_LOGIN_PASSWORD: "bankofanthos"
+				// All demo user accounts are configured with the password defined here.
+				DEMO_LOGIN_PASSWORD: "bankofholos"
 			}
 		}
 	}
