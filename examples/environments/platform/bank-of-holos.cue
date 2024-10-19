@@ -1,20 +1,22 @@
 package holos
 
-_Stacks: {
-	// Shared environments
-	dev: #StackTemplate & {Env: "dev"}
-	test: #StackTemplate & {Env: "test"}
-	stage: #StackTemplate & {Env: "stage"}
-	prod: #StackTemplate & {Env: "prod"}
-	// Personal sandbox envrionemnts
-	for name, stack in _Sandboxes {
-		(name): stack
-	}
+_SharedEnvironments: #Environment & {
+	prod: _
+	dev:  _
 }
 
 // Sandbox environments for individual contributors.
-_Sandboxes: #Sandbox & {
+_SandboxEnvironments: #Sandbox & {
 	jeff: _
+}
+
+// Stacks represents the collection of stacks across all environments.
+_Stacks: {
+	// Shared environments
+	for name, stack in _SharedEnvironments {(name): stack}
+
+	// Personal sandbox envrionemnts
+	for name, stack in _SandboxEnvironments {(name): stack}
 }
 
 // Manage the stacks on all workload clusters.
@@ -31,6 +33,11 @@ for Cluster in #Fleets.workload.clusters {
 			}
 		}
 	}
+}
+
+// Environment represents the schema of a shared environment.
+#Environment: {
+	[NAME=string]: #StackTemplate & {Env: NAME}
 }
 
 // Sandbox represents the schema of a sandbox environment.
