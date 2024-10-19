@@ -1,21 +1,21 @@
 package holos
 
-let Stacks = {
+_Stacks: {
 	// Shared environments
-	dev:   (StackTemplate & {Env: "dev"}).Stack
-	test:  (StackTemplate & {Env: "test"}).Stack
-	stage: (StackTemplate & {Env: "stage"}).Stack
-	prod:  (StackTemplate & {Env: "prod"}).Stack
+	dev: #StackTemplate & {Env: "dev"}
+	test: #StackTemplate & {Env: "test"}
+	stage: #StackTemplate & {Env: "stage"}
+	prod: #StackTemplate & {Env: "prod"}
 	// Personal sandbox envrionemnts
-	jeff: (StackTemplate & {Env: "sandbox", Owner: "jeff"}).Stack
-	gary: (StackTemplate & {Env: "sandbox", Owner: "gary"}).Stack
-	nate: (StackTemplate & {Env: "sandbox", Owner: "nate"}).Stack
+	jeff: #StackTemplate & {Env: "sandbox", Owner: "jeff"}
+	gary: #StackTemplate & {Env: "sandbox", Owner: "gary"}
+	nate: #StackTemplate & {Env: "sandbox", Owner: "nate"}
 }
 
 // Manage the stacks on all workload clusters.
 for Cluster in #Fleets.workload.clusters {
 	// For each bank of holos stack (dev, test, stage, prod, sandboxes)
-	for Stack in Stacks {
+	for Stack in _Stacks {
 		// For each component composing the stack
 		for Component in Stack.Components {
 			#Platform: Components: "\(Cluster.name):\(Component.name)": {
@@ -34,7 +34,7 @@ for Cluster in #Fleets.workload.clusters {
 // second use case is to deploy the stack for an individual developer, for
 // example Bob joins the company and wants to deploy the stack into his own
 // personal sandbox.
-let StackTemplate = {
+#StackTemplate: {
 	Env:   "dev" | "test" | "stage" | "prod" | "sandbox"
 	Owner: string
 
@@ -79,47 +79,46 @@ let StackTemplate = {
 		HostPrefix: NamespacePrefix
 	}
 
-	Stack: {
-		Components: {
-			"bank-projects":            Security
-			"bank-namespaces":          Security
-			"bank-secrets":             Security
-			"bank-routes":              Security
-			"bank-frontend":            Frontend
-			"bank-backend-config":      Backend
-			"bank-userservice":         Backend
-			"bank-ledger-writer":       Backend
-			"bank-balance-reader":      Backend
-			"bank-transaction-history": Backend
-			"bank-contacts":            Backend
-			"bank-accounts-db":         Database
-			"bank-ledger-db":           Database
+	Components: {
+		"bank-projects":            Security
+		"bank-namespaces":          Security
+		"bank-secrets":             Security
+		"bank-routes":              Security
+		"bank-frontend":            Frontend
+		"bank-backend-config":      Backend
+		"bank-userservice":         Backend
+		"bank-ledger-writer":       Backend
+		"bank-balance-reader":      Backend
+		"bank-transaction-history": Backend
+		"bank-contacts":            Backend
+		"bank-accounts-db":         Database
+		"bank-ledger-db":           Database
 
-			[NAME=string]: {
-				name:  NamespacePrefix + NAME
-				env:   Env
-				owner: string
-				team:  "frontend" | "backend" | "security"
-				tier:  "foundation" | "database" | "backend" | "web"
-				// the path to the source component
-				path: "projects/bank-of-holos/\(team)/components/\(NAME)"
+		[NAME=string]: {
+			name:  NamespacePrefix + NAME
+			env:   Env
+			owner: string
+			team:  "frontend" | "backend" | "security"
+			tier:  "foundation" | "database" | "backend" | "web"
+			// path to the source component
+			path: "projects/bank-of-holos/\(team)/components/\(NAME)"
 
-				let OWNER = owner
-				let TIER = tier
+			let OWNER = owner
+			let TIER = tier
 
-				// Tags to inject
-				tags: owner:       OWNER
-				tags: environment: Env
-				tags: tier:        TIER
-				tags: prefix:      NamespacePrefix
-				tags: host_prefix: HostPrefix
+			// Tag variables to inject when rendering the component.
+			tags: {
+				owner:       OWNER
+				environment: Env
+				tier:        TIER
+				prefix:      NamespacePrefix
+				host_prefix: HostPrefix
 			}
-
-			let Security = {owner: Owners.security, team: "security", tier: "foundation"}
-			let Frontend = {owner: Owners.frontend, team: "frontend", tier: "web"}
-			let Backend = {owner: Owners.backend, team: "backend", tier: string | *"backend"}
-			let Database = Backend & {tier: "database"}
-
 		}
+
+		let Security = {owner: Owners.security, team: "security", tier: "foundation"}
+		let Frontend = {owner: Owners.frontend, team: "frontend", tier: "web"}
+		let Backend = {owner: Owners.backend, team: "backend", tier: string | *"backend"}
+		let Database = Backend & {tier: "database"}
 	}
 }
