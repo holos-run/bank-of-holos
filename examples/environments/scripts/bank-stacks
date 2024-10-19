@@ -34,10 +34,9 @@ apply() {
   kubectl apply --server-side=true -f deploy/clusters/workload/components/${stack}-bank-routes/${stack}-bank-routes.gen.yaml
 }
 
-apply dev
-# apply test
-# apply stage
 apply prod
+apply dev
+apply sandbox-jeff
 
 
 exit 0
