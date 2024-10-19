@@ -59,7 +59,7 @@ _Kubernetes: #Kubernetes & {
 							envFrom: [{
 								configMapRef: name: "environment-config"
 							}, {
-								configMapRef: name: "accounts-db-config"
+								secretRef: name: "accounts-db-config"
 							}]
 							image: "us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/userservice:v0.6.5@sha256:f91e0e5bd6cdb16f6b867b2e3e874b23dd01f11592de006776f1dfb136702941"
 							name:  "userservice"

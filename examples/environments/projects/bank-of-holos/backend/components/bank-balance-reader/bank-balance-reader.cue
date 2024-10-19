@@ -69,7 +69,7 @@ _Kubernetes: #Kubernetes & {
 							envFrom: [{
 								configMapRef: name: "environment-config"
 							}, {
-								configMapRef: name: "ledger-db-config"
+								secretRef: name: "ledger-db-config"
 							}]
 							image: "us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/balancereader:v0.6.5@sha256:de01f16554ae2d0b49ac85116e6307da8c0f8a35f50a0cf25e1e4a4fe18dca83"
 							livenessProbe: {

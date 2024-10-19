@@ -84,13 +84,13 @@ _Kubernetes: #Kubernetes & {
 								value: "info"
 							}, {
 								name: "DEFAULT_USERNAME"
-								valueFrom: configMapKeyRef: {
+								valueFrom: secretKeyRef: {
 									key:  "DEMO_LOGIN_USERNAME"
 									name: "demo-data-config"
 								}
 							}, {
 								name: "DEFAULT_PASSWORD"
-								valueFrom: configMapKeyRef: {
+								valueFrom: secretKeyRef: {
 									key:  "DEMO_LOGIN_PASSWORD"
 									name: "demo-data-config"
 								}

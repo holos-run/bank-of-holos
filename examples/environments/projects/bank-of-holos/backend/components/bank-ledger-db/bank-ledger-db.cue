@@ -13,19 +13,14 @@ _Kubernetes: #Kubernetes & {
 
 	// https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/release/v0.6.5/kubernetes-manifests
 	Resources: {
-		ConfigMap: "ledger-db-config": {
-			apiVersion: "v1"
-			metadata: {
-				name: "ledger-db-config"
-				labels: app: "ledger-db"
-			}
-			data: {
-				POSTGRES_DB:                "postgresdb"
-				POSTGRES_PASSWORD:          "password"
-				POSTGRES_USER:              "admin"
-				SPRING_DATASOURCE_PASSWORD: "password"
-				SPRING_DATASOURCE_URL:      "jdbc:postgresql://ledger-db:5432/postgresdb"
-				SPRING_DATASOURCE_USERNAME: "admin"
+		ExternalSecret: "ledger-db-config": {
+			metadata: name: string
+			spec: {
+				target: name: metadata.name
+				dataFrom: [{extract: {key: metadata.name}}]
+				refreshInterval: "5s"
+				secretStoreRef: kind: "SecretStore"
+				secretStoreRef: name: _Stack.Resources.SecretStore[BankName].metadata.name
 			}
 		}
 
@@ -59,9 +54,9 @@ _Kubernetes: #Kubernetes & {
 							envFrom: [{
 								configMapRef: name: "environment-config"
 							}, {
-								configMapRef: name: "ledger-db-config"
+								secretRef: name: "ledger-db-config"
 							}, {
-								configMapRef: name: "demo-data-config"
+								secretRef: name: "demo-data-config"
 							}]
 							image: "us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/ledger-db:v0.6.5@sha256:cc4fd25f301ab6d46b1312244d6931babc4c6cb66c5cb6d31d4a1adfa318a321"
 							name:  "postgres"

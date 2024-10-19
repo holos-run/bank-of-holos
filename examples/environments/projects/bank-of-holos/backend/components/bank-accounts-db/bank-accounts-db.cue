@@ -13,18 +13,14 @@ _Kubernetes: #Kubernetes & {
 
 	// https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/release/v0.6.5/kubernetes-manifests/accounts-db.yaml
 	Resources: {
-		ConfigMap: "accounts-db-config": {
-			apiVersion: "v1"
-			data: {
-				ACCOUNTS_DB_URI:   "postgresql://accounts-admin:foo123@accounts-db:5432/accounts-db"
-				POSTGRES_DB:       "accounts-db"
-				POSTGRES_PASSWORD: "foo123"
-				POSTGRES_USER:     "accounts-admin"
-			}
-			kind: "ConfigMap"
-			metadata: {
-				labels: app: "accounts-db"
-				name: "accounts-db-config"
+		ExternalSecret: "accounts-db-config": {
+			metadata: name: string
+			spec: {
+				target: name: metadata.name
+				dataFrom: [{extract: {key: metadata.name}}]
+				refreshInterval: "5s"
+				secretStoreRef: kind: "SecretStore"
+				secretStoreRef: name: _Stack.Resources.SecretStore[BankName].metadata.name
 			}
 		}
 
@@ -59,9 +55,9 @@ _Kubernetes: #Kubernetes & {
 							envFrom: [{
 								configMapRef: name: "environment-config"
 							}, {
-								configMapRef: name: "accounts-db-config"
+								secretRef: name: "accounts-db-config"
 							}, {
-								configMapRef: name: "demo-data-config"
+								secretRef: name: "demo-data-config"
 							}]
 							image: "us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/accounts-db:v0.6.5@sha256:abb955756a82b115e0fd9c5fa1527ae1a744b398b357fd6d7a26348feccad181"
 							name:  "accounts-db"
@@ -80,13 +76,21 @@ _Kubernetes: #Kubernetes & {
 								mountPath: "/var/lib/postgresql/data"
 								name:      "postgresdb"
 								subPath:   "postgres"
-							}]
+							}, {
+								mountPath: "/docker-entrypoint-initdb.d/1-load-testdata.sh"
+								name:      "accounts-db-config"
+								subPath:   "1-load-testdata.sh"
+							},
+							]
 						}]
 						serviceAccount:     BankName
 						serviceAccountName: BankName
 						volumes: [{
 							emptyDir: {}
 							name: "postgresdb"
+						}, {
+							name: "accounts-db-config"
+							secret: secretName: "accounts-db-config"
 						}]
 					}
 				}

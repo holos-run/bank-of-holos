@@ -35,9 +35,7 @@ _Kubernetes: #Kubernetes & {
 			spec: {
 				selector: matchLabels: app: "ledgerwriter"
 				template: {
-					metadata: {
-						labels: app: "ledgerwriter"
-					}
+					metadata: labels: app: "ledgerwriter"
 					spec: {
 						containers: [{
 							env: [{
@@ -67,7 +65,7 @@ _Kubernetes: #Kubernetes & {
 							}, {
 								configMapRef: name: "service-api-config"
 							}, {
-								configMapRef: name: "ledger-db-config"
+								secretRef: name: "ledger-db-config"
 							}]
 							image: "us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/ledgerwriter:v0.6.5@sha256:5b66d6888b87993c8ebe260fe33005c4e4bc2bdae4b5682874e1a078d37ff3b2"
 							name:  "ledgerwriter"

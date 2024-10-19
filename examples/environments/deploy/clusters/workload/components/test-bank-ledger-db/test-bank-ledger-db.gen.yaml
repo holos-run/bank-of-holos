@@ -1,28 +1,4 @@
 apiVersion: v1
-data:
-  POSTGRES_DB: postgresdb
-  POSTGRES_PASSWORD: password
-  POSTGRES_USER: admin
-  SPRING_DATASOURCE_PASSWORD: password
-  SPRING_DATASOURCE_URL: jdbc:postgresql://ledger-db:5432/postgresdb
-  SPRING_DATASOURCE_USERNAME: admin
-kind: ConfigMap
-metadata:
-  labels:
-    app: ledger-db
-    application: bank-of-holos
-    argocd.argoproj.io/instance: test-bank-ledger-db
-    environment: test
-    example.com/environment.name: test
-    example.com/owner.name: backend
-    example.com/tier.name: database
-    holos.run/component.name: test-bank-ledger-db
-    team: backend
-    tier: database
-  name: ledger-db-config
-  namespace: test-bank-backend
----
-apiVersion: v1
 kind: Service
 metadata:
   labels:
@@ -103,9 +79,9 @@ spec:
       - envFrom:
         - configMapRef:
             name: environment-config
-        - configMapRef:
+        - secretRef:
             name: ledger-db-config
-        - configMapRef:
+        - secretRef:
             name: demo-data-config
         image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/ledger-db:v0.6.5@sha256:cc4fd25f301ab6d46b1312244d6931babc4c6cb66c5cb6d31d4a1adfa318a321
         name: postgres
@@ -126,3 +102,29 @@ spec:
       volumes:
       - emptyDir: {}
         name: postgresdb
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: test-bank-ledger-db
+    environment: test
+    example.com/environment.name: test
+    example.com/owner.name: backend
+    example.com/tier.name: database
+    holos.run/component.name: test-bank-ledger-db
+    team: backend
+    tier: database
+  name: ledger-db-config
+  namespace: test-bank-backend
+spec:
+  dataFrom:
+  - extract:
+      key: ledger-db-config
+  refreshInterval: 5s
+  secretStoreRef:
+    kind: SecretStore
+    name: test-bank-security
+  target:
+    name: ledger-db-config
