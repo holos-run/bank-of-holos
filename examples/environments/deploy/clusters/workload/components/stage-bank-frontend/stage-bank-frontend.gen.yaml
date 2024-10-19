@@ -111,6 +111,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    link.argocd.argoproj.io/external-link: https://stage-bank.holos.localhost/
   labels:
     application: bank-of-holos
     argocd.argoproj.io/instance: stage-bank-frontend

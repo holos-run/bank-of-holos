@@ -137,6 +137,9 @@ _Stack: {
 		team:        Tags.owner
 		tier:        Tags.tier
 	}
+
+	// Expose a way to get the bank frontend hostname, unified with the HTTPRoute.
+	Hostname: HTTPRoutes["\(Tags.host_prefix)bank"].spec.hostnames[0]
 }
 
 // CommonLabels

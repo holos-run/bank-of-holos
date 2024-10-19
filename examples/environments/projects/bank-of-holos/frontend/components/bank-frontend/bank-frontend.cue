@@ -35,6 +35,8 @@ _Kubernetes: #Kubernetes & {
 		Deployment: frontend: {
 			metadata: name: "frontend"
 			metadata: labels: application: BankName
+			// https://argo-cd.readthedocs.io/en/stable/user-guide/external-url/
+			metadata: annotations: "link.argocd.argoproj.io/external-link": "https://\(_Stack.Hostname)/"
 			spec: {
 				selector: matchLabels: {
 					app:         "frontend"
