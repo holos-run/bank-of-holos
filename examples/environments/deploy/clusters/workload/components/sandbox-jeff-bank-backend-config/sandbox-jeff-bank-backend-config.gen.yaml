@@ -16,26 +16,6 @@ metadata:
 ---
 apiVersion: v1
 data:
-  DEMO_LOGIN_PASSWORD: bankofholos
-  DEMO_LOGIN_USERNAME: testuser
-  USE_DEMO_DATA: "True"
-kind: ConfigMap
-metadata:
-  labels:
-    application: bank-of-holos
-    argocd.argoproj.io/instance: sandbox-jeff-bank-backend-config
-    environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: backend
-    holos.run/component.name: sandbox-jeff-bank-backend-config
-    team: jeff
-    tier: backend
-  name: demo-data-config
-  namespace: sandbox-jeff-bank-backend
----
-apiVersion: v1
-data:
   LOCAL_ROUTING_NUM: "883745000"
   PUB_KEY_PATH: /tmp/.ssh/publickey
 kind: ConfigMap
@@ -74,6 +54,32 @@ metadata:
     tier: backend
   name: service-api-config
   namespace: sandbox-jeff-bank-backend
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: sandbox-jeff-bank-backend-config
+    environment: sandbox
+    example.com/environment.name: sandbox
+    example.com/owner.name: jeff
+    example.com/tier.name: backend
+    holos.run/component.name: sandbox-jeff-bank-backend-config
+    team: jeff
+    tier: backend
+  name: demo-data-config
+  namespace: sandbox-jeff-bank-backend
+spec:
+  dataFrom:
+  - extract:
+      key: demo-data-config
+  refreshInterval: 5s
+  secretStoreRef:
+    kind: SecretStore
+    name: sandbox-jeff-bank-security
+  target:
+    name: demo-data-config
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret

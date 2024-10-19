@@ -113,15 +113,14 @@ _Stack: {
 			}
 		}
 
-		ConfigMap: "demo-data-config": k8s.#ConfigMap & {
-			apiVersion: "v1"
-			kind:       "ConfigMap"
+		ExternalSecret: "demo-data-config": es.#ExternalSecret & {
 			metadata: name: "demo-data-config"
-			data: {
-				USE_DEMO_DATA:       "True"
-				DEMO_LOGIN_USERNAME: "testuser"
-				// All demo user accounts are configured with the password defined here.
-				DEMO_LOGIN_PASSWORD: "bankofholos"
+			spec: {
+				target: name: metadata.name
+				dataFrom: [{extract: {key: metadata.name}}]
+				refreshInterval: "5s"
+				secretStoreRef: kind: "SecretStore"
+				secretStoreRef: name: SecretStore[BankName].metadata.name
 			}
 		}
 	}

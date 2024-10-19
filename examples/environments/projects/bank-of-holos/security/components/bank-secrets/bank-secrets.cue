@@ -16,6 +16,13 @@ let SecretName = "jwt-key"
 let Reader = "\(SecretName)-reader"
 let Writer = "\(SecretName)-writer"
 
+// Registration point for role bindings
+_GeneratedSecrets: {
+	[NAME=string]: {name: NAME}
+
+	(SecretName): _
+}
+
 #JobSpec: {
 	_configMap:         string
 	serviceAccountName: Writer
@@ -109,7 +116,7 @@ _Kubernetes: #Kubernetes & {
 			rules: [{
 				apiGroups: [""]
 				resources: ["secrets"]
-				resourceNames: [SecretName]
+				resourceNames: [for x in _GeneratedSecrets {x.name}]
 				verbs: ["get"]
 			}]
 		}
