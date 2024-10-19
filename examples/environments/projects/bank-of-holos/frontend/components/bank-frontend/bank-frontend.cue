@@ -60,7 +60,13 @@ _Kubernetes: #Kubernetes & {
 								value: #Organization.DisplayName
 							}, {
 								name:  "ENV_PLATFORM"
-								value: _Stack.Environment
+								value: "local"
+							}, {
+								name:  "CLUSTER_NAME"
+								value: "env=\(_Stack.Environment)"
+							}, {
+								name:  "POD_ZONE"
+								value: "owner=\(_Stack.Tags.owner)"
 							}, {
 								name:  "VERSION"
 								value: "v0.6.5"

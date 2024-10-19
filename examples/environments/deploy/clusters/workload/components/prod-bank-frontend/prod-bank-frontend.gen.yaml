@@ -157,7 +157,11 @@ spec:
         - name: BANK_NAME
           value: Bank of Holos
         - name: ENV_PLATFORM
-          value: prod
+          value: local
+        - name: CLUSTER_NAME
+          value: env=prod
+        - name: POD_ZONE
+          value: owner=frontend
         - name: VERSION
           value: v0.6.5
         - name: PORT
