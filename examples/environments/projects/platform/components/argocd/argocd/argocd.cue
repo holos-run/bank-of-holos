@@ -10,8 +10,8 @@ _Helm: #Helm & {
 
 	Chart: {
 		name:    "argo-cd"
-		version: "7.5.2"
 		release: "argocd"
+		version: _ArgoCD.ChartVersion
 		repository: {
 			name: "argocd"
 			url:  "https://argoproj.github.io/argo-helm"
@@ -19,11 +19,11 @@ _Helm: #Helm & {
 	}
 	EnableHooks: true
 
-	// Mix-in resources.
-	Resources: [_]: [_]: metadata: namespace: Namespace
 	// Grant the Gateway namespace the ability to refer to the backend service
 	// from HTTPRoute resources.
-	Resources: ReferenceGrant: (#Istio.Gateway.Namespace): #ReferenceGrant
+	Resources: ReferenceGrant: (#Istio.Gateway.Namespace): #ReferenceGrant & {
+		metadata: namespace: Namespace
+	}
 
 	Values: #Values & {
 		kubeVersionOverride: "1.29.0"

@@ -2,12 +2,16 @@ package holos
 
 // #ArgoCD represents platform wide configuration
 #ArgoCD: {
-	Version:   string
-	Namespace: string
+	AppVersion:   string
+	ChartVersion: string
+	Namespace:    string
 }
+
 _ArgoCD: #ArgoCD & {
-	Version:   "2.12.3"
-	Namespace: "argocd"
+	// helm search repo argocd to get current versions
+	AppVersion:   "2.12.6"
+	ChartVersion: "7.6.12"
+	Namespace:    "argocd"
 }
 
 // Register namespaces
