@@ -35,7 +35,7 @@ apply() {
   # Routes
   kubectl apply --server-side=true -f deploy/clusters/workload/components/${stack}-bank-routes/${stack}-bank-routes.gen.yaml
   set +x
-  echo "🌐 https://argocd.holos.localhost/applications/argocd/${stack}-frontend?view=tree&resource=" >&2
+  echo "🌐 https://argocd.holos.localhost/" >&2
   set -x
   # Wait
   if [[ -z "${NO_WAIT:-}" ]]; then
