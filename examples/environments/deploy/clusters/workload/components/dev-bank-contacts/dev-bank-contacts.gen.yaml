@@ -5,10 +5,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-contacts
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-contacts
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
+    stack.example.com/version: v1
     team: backend
     tier: backend
   name: contacts
@@ -23,10 +25,12 @@ spec:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-contacts
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-contacts
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
+    stack.example.com/version: v1
     team: backend
     tier: backend
   type: ClusterIP
@@ -38,10 +42,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-contacts
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-contacts
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
+    stack.example.com/version: v1
     team: backend
     tier: backend
   name: contacts
@@ -53,10 +59,12 @@ spec:
       application: bank-of-holos
       argocd.argoproj.io/instance: dev-bank-contacts
       environment: dev
-      example.com/environment.name: dev
-      example.com/owner.name: backend
-      example.com/tier.name: backend
+      environment.example.com/name: dev
       holos.run/component.name: dev-bank-contacts
+      owner.example.com/name: backend
+      stack.example.com/name: bank-of-holos
+      stack.example.com/tier: backend
+      stack.example.com/version: v1
       team: backend
       tier: backend
   template:
@@ -66,10 +74,12 @@ spec:
         application: bank-of-holos
         argocd.argoproj.io/instance: dev-bank-contacts
         environment: dev
-        example.com/environment.name: dev
-        example.com/owner.name: backend
-        example.com/tier.name: backend
+        environment.example.com/name: dev
         holos.run/component.name: dev-bank-contacts
+        owner.example.com/name: backend
+        stack.example.com/name: bank-of-holos
+        stack.example.com/tier: backend
+        stack.example.com/version: v1
         team: backend
         tier: backend
     spec:

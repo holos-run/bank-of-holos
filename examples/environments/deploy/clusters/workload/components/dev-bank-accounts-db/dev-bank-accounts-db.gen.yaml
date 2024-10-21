@@ -5,10 +5,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-accounts-db
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: database
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-accounts-db
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
+    stack.example.com/version: v1
     team: backend
     tier: database
   name: accounts-db
@@ -24,10 +26,12 @@ spec:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-accounts-db
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: database
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-accounts-db
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
+    stack.example.com/version: v1
     team: backend
     tier: database
   type: ClusterIP
@@ -39,10 +43,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-accounts-db
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: database
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-accounts-db
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
+    stack.example.com/version: v1
     team: backend
     tier: database
   name: accounts-db
@@ -55,10 +61,12 @@ spec:
       application: bank-of-holos
       argocd.argoproj.io/instance: dev-bank-accounts-db
       environment: dev
-      example.com/environment.name: dev
-      example.com/owner.name: backend
-      example.com/tier.name: database
+      environment.example.com/name: dev
       holos.run/component.name: dev-bank-accounts-db
+      owner.example.com/name: backend
+      stack.example.com/name: bank-of-holos
+      stack.example.com/tier: database
+      stack.example.com/version: v1
       team: backend
       tier: database
   serviceName: accounts-db
@@ -69,10 +77,12 @@ spec:
         application: bank-of-holos
         argocd.argoproj.io/instance: dev-bank-accounts-db
         environment: dev
-        example.com/environment.name: dev
-        example.com/owner.name: backend
-        example.com/tier.name: database
+        environment.example.com/name: dev
         holos.run/component.name: dev-bank-accounts-db
+        owner.example.com/name: backend
+        stack.example.com/name: bank-of-holos
+        stack.example.com/tier: database
+        stack.example.com/version: v1
         team: backend
         tier: database
     spec:
@@ -118,10 +128,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-accounts-db
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: database
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-accounts-db
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
+    stack.example.com/version: v1
     team: backend
     tier: database
   name: accounts-db-config

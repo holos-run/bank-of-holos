@@ -11,13 +11,18 @@ import (
 _Stack: {
 	BankName: string | *"bank-of-holos"
 
+	// Tags represent attributes injected from platform rendering.
 	Tags: {
 		owner:       string @tag(owner, type=string)
 		environment: string @tag(environment, type=string)
 		tier:        string @tag(tier, type=string)
 		// prefix represents the resource prefix.
-		prefix:      string @tag(prefix, type=string)
+		prefix: string @tag(prefix, type=string)
+		// host_prefix represents the DNS hostname prefix.
 		host_prefix: string @tag(host_prefix, type=string)
+		// Stack version of the bank software stack so different stacks in different
+		// environments can refer to different versions.
+		stack_version: string @tag(stack_version, type=string)
 	}
 
 	Environment: Tags.environment
@@ -89,6 +94,18 @@ _Stack: {
 			}
 		}
 
+		// Source: https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/v0.6.5/kubernetes-manifests/config.yaml#L34-L42
+		ExternalSecret: "demo-data-config": es.#ExternalSecret & {
+			metadata: name: "demo-data-config"
+			spec: {
+				target: name: metadata.name
+				dataFrom: [{extract: {key: metadata.name}}]
+				refreshInterval: "5s"
+				secretStoreRef: kind: "SecretStore"
+				secretStoreRef: name: _Stack.Resources.SecretStore[_Stack.BankName].metadata.name
+			}
+		}
+
 		// https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/release/v0.6.5/kubernetes-manifests/config.yaml
 		ConfigMap: "environment-config": k8s.#ConfigMap & {
 			apiVersion: "v1"
@@ -112,23 +129,14 @@ _Stack: {
 				USERSERVICE_API_ADDR:  "userservice.\(Backend.Namespace).svc:8080"
 			}
 		}
-
-		ExternalSecret: "demo-data-config": es.#ExternalSecret & {
-			metadata: name: "demo-data-config"
-			spec: {
-				target: name: metadata.name
-				dataFrom: [{extract: {key: metadata.name}}]
-				refreshInterval: "5s"
-				secretStoreRef: kind: "SecretStore"
-				secretStoreRef: name: SecretStore[BankName].metadata.name
-			}
-		}
 	}
 
 	CommonLabels: {
-		"\(#Organization.Domain)/owner.name":       Tags.owner
-		"\(#Organization.Domain)/environment.name": Tags.environment
-		"\(#Organization.Domain)/tier.name":        Tags.tier
+		"environment.\(#Organization.Domain)/name": Tags.environment
+		"owner.\(#Organization.Domain)/name":       Tags.owner
+		"stack.\(#Organization.Domain)/name":       BankName
+		"stack.\(#Organization.Domain)/version":    Tags.stack_version
+		"stack.\(#Organization.Domain)/tier":       Tags.tier
 
 		// These are the common labels from upstream
 		application: BankName

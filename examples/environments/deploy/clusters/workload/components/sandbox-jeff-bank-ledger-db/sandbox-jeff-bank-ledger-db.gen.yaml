@@ -5,10 +5,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-db
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: database
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-ledger-db
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
+    stack.example.com/version: v1
     team: jeff
     tier: database
   name: ledger-db
@@ -23,10 +25,12 @@ spec:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-db
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: database
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-ledger-db
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
+    stack.example.com/version: v1
     team: jeff
     tier: database
   type: ClusterIP
@@ -38,10 +42,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-db
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: database
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-ledger-db
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
+    stack.example.com/version: v1
     team: jeff
     tier: database
   name: ledger-db
@@ -54,10 +60,12 @@ spec:
       application: bank-of-holos
       argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-db
       environment: sandbox
-      example.com/environment.name: sandbox
-      example.com/owner.name: jeff
-      example.com/tier.name: database
+      environment.example.com/name: sandbox
       holos.run/component.name: sandbox-jeff-bank-ledger-db
+      owner.example.com/name: jeff
+      stack.example.com/name: bank-of-holos
+      stack.example.com/tier: database
+      stack.example.com/version: v1
       team: jeff
       tier: database
   serviceName: ledger-db
@@ -68,10 +76,12 @@ spec:
         application: bank-of-holos
         argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-db
         environment: sandbox
-        example.com/environment.name: sandbox
-        example.com/owner.name: jeff
-        example.com/tier.name: database
+        environment.example.com/name: sandbox
         holos.run/component.name: sandbox-jeff-bank-ledger-db
+        owner.example.com/name: jeff
+        stack.example.com/name: bank-of-holos
+        stack.example.com/tier: database
+        stack.example.com/version: v1
         team: jeff
         tier: database
     spec:
@@ -110,10 +120,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-db
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: database
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-ledger-db
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
+    stack.example.com/version: v1
     team: jeff
     tier: database
   name: ledger-db-config

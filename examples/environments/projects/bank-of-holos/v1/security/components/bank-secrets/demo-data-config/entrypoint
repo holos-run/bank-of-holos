@@ -1,7 +1,10 @@
 #! /bin/bash
 #
-# Generate a secret containing a random password instead of the hard-coded
-# password used at 
+# Securely generate the demo-data-config Secret using a randomly generated
+# password.  We use a simple bash script in a Job, but this could also be a
+# secret generated in Vault, or a cloud Secret Manager.
+#
+# Replaces the hard-coded DEFAULT_PASSHASH variable at:
 # https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/v0.6.5/src/accounts/accounts-db/initdb/1-load-testdata.sh#L102
 
 tmpdir="$(mktemp -d)"

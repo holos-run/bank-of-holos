@@ -7,7 +7,7 @@ _SharedEnvironments: #Environment & {
 
 // Sandbox environments for individual contributors.
 _SandboxEnvironments: #Sandbox & {
-	jeff: _
+	jeff: Version: "v1"
 }
 
 // Stacks represents the collection of stacks across all environments.
@@ -54,6 +54,13 @@ for Cluster in #Fleets.workload.clusters {
 #StackTemplate: {
 	Env:   "dev" | "test" | "stage" | "prod" | "sandbox"
 	Owner: string
+
+	// Version represents the stack version, used to branch environments
+	Version: string | *"v1"
+
+	// Tags represents additional tags to inject, useful when developing a new
+	// stack version.
+	Tags: {[string]: string}
 
 	// NamespacePrefix represents the namespace prefix for the stack.  The most
 	// significant information should be on the left, which is the environment.
@@ -112,24 +119,26 @@ for Cluster in #Fleets.workload.clusters {
 		"bank-ledger-db":           Database
 
 		[NAME=string]: {
-			name:  NamespacePrefix + NAME
-			env:   Env
-			owner: string
-			team:  "frontend" | "backend" | "security"
-			tier:  "foundation" | "database" | "backend" | "web"
+			name:    NamespacePrefix + NAME
+			env:     Env
+			owner:   string
+			version: Version
+			team:    "frontend" | "backend" | "security"
+			tier:    "foundation" | "database" | "backend" | "web"
 			// path to the source component
-			path: "projects/bank-of-holos/\(team)/components/\(NAME)"
+			path: "projects/bank-of-holos/\(version)/\(team)/components/\(NAME)"
 
 			let OWNER = owner
 			let TIER = tier
 
 			// Tag variables to inject when rendering the component.
-			tags: {
-				owner:       OWNER
-				environment: Env
-				tier:        TIER
-				prefix:      NamespacePrefix
-				host_prefix: HostPrefix
+			tags: Tags & {
+				owner:         OWNER
+				environment:   Env
+				tier:          TIER
+				prefix:        NamespacePrefix
+				host_prefix:   HostPrefix
+				stack_version: version
 			}
 		}
 

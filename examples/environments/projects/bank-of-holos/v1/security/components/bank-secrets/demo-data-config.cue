@@ -9,6 +9,7 @@ let SecretName = "demo-data-config"
 // Register the secret for rbac rules.
 _GeneratedSecrets: (SecretName): _
 
+// Securely generate the demo-data-config Secret with a Job.
 _Kubernetes: #Kubernetes & {
 	KustomizeConfig: Kustomization: _configMapGenerators: (SecretName): _
 

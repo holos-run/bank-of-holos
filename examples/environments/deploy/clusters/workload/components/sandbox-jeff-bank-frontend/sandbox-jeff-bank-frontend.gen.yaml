@@ -5,10 +5,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: web
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
+    stack.example.com/version: v1
     team: jeff
     tier: web
   name: bank-of-holos
@@ -24,10 +26,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: web
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
+    stack.example.com/version: v1
     team: jeff
     tier: web
   name: environment-config
@@ -46,10 +50,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: web
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
+    stack.example.com/version: v1
     team: jeff
     tier: web
   name: service-api-config
@@ -62,10 +68,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: web
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
+    stack.example.com/version: v1
     team: jeff
     tier: web
   name: frontend
@@ -81,10 +89,12 @@ spec:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: web
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
+    stack.example.com/version: v1
     team: jeff
     tier: web
 ---
@@ -97,10 +107,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: web
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
+    stack.example.com/version: v1
     team: jeff
     tier: web
   name: frontend
@@ -112,10 +124,12 @@ spec:
       application: bank-of-holos
       argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
       environment: sandbox
-      example.com/environment.name: sandbox
-      example.com/owner.name: jeff
-      example.com/tier.name: web
+      environment.example.com/name: sandbox
       holos.run/component.name: sandbox-jeff-bank-frontend
+      owner.example.com/name: jeff
+      stack.example.com/name: bank-of-holos
+      stack.example.com/tier: web
+      stack.example.com/version: v1
       team: jeff
       tier: web
   template:
@@ -125,10 +139,12 @@ spec:
         application: bank-of-holos
         argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
         environment: sandbox
-        example.com/environment.name: sandbox
-        example.com/owner.name: jeff
-        example.com/tier.name: web
+        environment.example.com/name: sandbox
         holos.run/component.name: sandbox-jeff-bank-frontend
+        owner.example.com/name: jeff
+        stack.example.com/name: bank-of-holos
+        stack.example.com/tier: web
+        stack.example.com/version: v1
         team: jeff
         tier: web
     spec:
@@ -241,10 +257,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: web
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
+    stack.example.com/version: v1
     team: jeff
     tier: web
   name: demo-data-config
@@ -267,10 +285,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: web
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
+    stack.example.com/version: v1
     team: jeff
     tier: web
   name: jwt-key
@@ -293,10 +313,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: web
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
+    stack.example.com/version: v1
     team: jeff
     tier: web
   name: sandbox-jeff-bank-security
@@ -322,10 +344,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-frontend
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: web
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
+    stack.example.com/version: v1
     team: jeff
     tier: web
   name: istio-ingress

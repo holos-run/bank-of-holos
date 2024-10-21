@@ -11,5 +11,5 @@ spec:
   project: platform
   source:
     path: examples/environments/deploy/clusters/workload/components/istio-base
-    repoURL: https://github.com/holos-run/bank-of-holos
-    targetRevision: main
+    repoURL: https://github.com/jeffmccune/bank-of-holos
+    targetRevision: demo
