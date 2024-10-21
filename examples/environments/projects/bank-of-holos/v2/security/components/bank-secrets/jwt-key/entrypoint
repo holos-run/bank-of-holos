@@ -1,0 +1,35 @@
+#! /bin/bash
+#
+# Generate a JWT private key instead of using a static key
+# Source: https://github.com/GoogleCloudPlatform/bank-of-anthos/tree/v0.6.5/extras/jwt
+
+tmpdir="$(mktemp -d)"
+finish() {
+  status=$?
+  rm -rf "${tmpdir}"
+  return $status
+}
+trap finish EXIT
+
+set -euo pipefail
+
+cd "$tmpdir"
+mkdir secret
+cd secret
+
+echo "generating private key" >&2
+ssh-keygen -t rsa -b 4096 -m PEM -f jwtRS256.key -q -N ""
+echo "generating public key" >&2
+ssh-keygen -e -m PKCS8 -f jwtRS256.key > jwtRS256.key.pub
+cd ..
+
+echo "copying secret into kubernetes manifest secret.yaml" >&2
+kubectl create secret generic jwt-key --from-file=secret --dry-run=client -o yaml > secret.yaml
+
+echo "applying secret.yaml" >&2
+kubectl apply --server-side=true -f secret.yaml
+
+echo "cleaning up" >&2
+rm -rf secret secret.yaml
+
+echo "ok done" >&2

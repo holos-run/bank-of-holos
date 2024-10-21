@@ -3,25 +3,17 @@ package holos
 import (
 	corev1 "k8s.io/api/core/v1"
 	rbacv1 "k8s.io/api/rbac/v1"
-	batchv1 "k8s.io/api/batch/v1"
 )
 
 // Produce a kubernetes objects build plan.
 _Kubernetes.BuildPlan
-
-// This may be useful to copy and generate other secrets.
-let SecretName = "jwt-key"
 
 // Roles for reading and writing secrets
 let Reader = "bank-secrets-reader"
 let Writer = "bank-secrets-writer"
 
 // Registration point for role bindings
-_GeneratedSecrets: {
-	[NAME=string]: {name: NAME}
-
-	(SecretName): _
-}
+_GeneratedSecrets: [NAME=string]: {name: NAME}
 
 // DEMO:SECRETS ⓘ JobSpec for secret generators.
 #JobSpec: {
@@ -119,22 +111,6 @@ _Kubernetes: #Kubernetes & {
 			}]
 		}
 
-		Job: (Writer): batchv1.#Job & {
-			spec: template: spec: #JobSpec & {
-				_configMap: Writer
-			}
-		}
-
-		Job: (Writer): batchv1.#Job & {
-			spec: template: spec: #JobSpec & {
-				_configMap: Writer
-			}
-		}
-
-		ConfigMap: (Writer): corev1.#ConfigMap & {
-			data: entrypoint: ENTRYPOINT
-		}
-
 		// DEMO:SECRETS ⓘ Role to allow SecretStore read access.
 		// Allow the SecretStore in the frontend and backend namespaces to read the
 		// secret.
@@ -166,41 +142,6 @@ _Kubernetes: #Kubernetes & {
 			},
 			]
 		}
+
 	}
 }
-
-let ENTRYPOINT = """
-	#! /bin/bash
-	#
-
-	tmpdir="$(mktemp -d)"
-	finish() {
-	  status=$?
-	  rm -rf "${tmpdir}"
-	  return $status
-	}
-	trap finish EXIT
-
-	set -euo pipefail
-
-	cd "$tmpdir"
-	mkdir secret
-	cd secret
-
-	echo "generating private key" >&2
-	ssh-keygen -t rsa -b 4096 -m PEM -f jwtRS256.key -q -N "" -C \(AllowedName)
-	echo "generating public key" >&2
-	ssh-keygen -e -m PKCS8 -f jwtRS256.key > jwtRS256.key.pub
-	cd ..
-
-	echo "copying secret into kubernetes manifest secret.yaml" >&2
-	kubectl create secret generic \(SecretName) --from-file=secret --dry-run=client -o yaml > secret.yaml
-
-	echo "applying secret.yaml" >&2
-	kubectl apply --server-side=true -f secret.yaml
-
-	echo "cleaning up" >&2
-	rm -rf secret secret.yaml
-
-	echo "ok done" >&2
-	"""
