@@ -1,11 +1,13 @@
 package holos
 
+// DEMO:ENVS ⓘ Shared environments defined here.
 _SharedEnvironments: #Environment & {
 	prod: _
 	dev:  _
 }
 
 // Sandbox environments for individual contributors.
+// DEMO:ENVS ☞ Add a new developer here.
 _SandboxEnvironments: #Sandbox & {
 	jeff: Version: "v1"
 }
@@ -25,6 +27,7 @@ for Cluster in #Fleets.workload.clusters {
 	for Stack in _Stacks {
 		// For each component composing the stack
 		for Component in Stack.Components {
+			// DEMO:ENVS ⓘ Stack components are added to the Platform here.
 			#Platform: Components: "\(Cluster.name):\(Component.name)": {
 				name:      Component.name
 				component: Component.path
@@ -51,6 +54,7 @@ for Cluster in #Fleets.workload.clusters {
 // second use case is to deploy the stack for an individual developer, for
 // example Bob joins the company and wants to deploy the stack into his own
 // personal sandbox.
+// DEMO:ENVS ⓘ StackTemplate to stamp out multiple copies of the stack.
 #StackTemplate: {
 	Env:   "dev" | "test" | "stage" | "prod" | "sandbox"
 	Owner: string
@@ -103,6 +107,7 @@ for Cluster in #Fleets.workload.clusters {
 		HostPrefix: NamespacePrefix
 	}
 
+	// DEMO:ENVS ⓘ Stack template components organized by team
 	Components: {
 		"bank-projects":            Security
 		"bank-namespaces":          Security
