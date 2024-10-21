@@ -5,10 +5,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-projects
     environment: prod
-    example.com/environment.name: prod
-    example.com/owner.name: security
-    example.com/tier.name: foundation
+    environment.example.com/name: prod
     holos.run/component.name: prod-bank-projects
+    owner.example.com/name: security
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: security
     tier: foundation
   name: prod-bank-backend
@@ -31,10 +32,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-projects
     environment: prod
-    example.com/environment.name: prod
-    example.com/owner.name: security
-    example.com/tier.name: foundation
+    environment.example.com/name: prod
     holos.run/component.name: prod-bank-projects
+    owner.example.com/name: security
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: security
     tier: foundation
   name: prod-bank-frontend
@@ -57,10 +59,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: prod-bank-projects
     environment: prod
-    example.com/environment.name: prod
-    example.com/owner.name: security
-    example.com/tier.name: foundation
+    environment.example.com/name: prod
     holos.run/component.name: prod-bank-projects
+    owner.example.com/name: security
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: security
     tier: foundation
   name: prod-bank-security

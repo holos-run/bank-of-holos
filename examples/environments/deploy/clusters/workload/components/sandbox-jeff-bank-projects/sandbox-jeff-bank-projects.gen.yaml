@@ -5,10 +5,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-projects
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: foundation
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-projects
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: jeff
     tier: foundation
   name: sandbox-jeff-bank-backend
@@ -31,10 +32,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-projects
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: foundation
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-projects
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: jeff
     tier: foundation
   name: sandbox-jeff-bank-frontend
@@ -57,10 +59,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-projects
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: foundation
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-projects
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: jeff
     tier: foundation
   name: sandbox-jeff-bank-security

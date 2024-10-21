@@ -4,10 +4,11 @@ metadata:
   labels:
     application: bank-of-holos
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-transaction-history
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: backend
     tier: backend
   name: dev-bank-transaction-history
@@ -18,5 +19,5 @@ spec:
   project: dev-bank-backend
   source:
     path: examples/environments/deploy/clusters/workload/components/dev-bank-transaction-history
-    repoURL: https://github.com/holos-run/bank-of-holos
-    targetRevision: main
+    repoURL: https://github.com/jeffmccune/bank-of-holos
+    targetRevision: demo

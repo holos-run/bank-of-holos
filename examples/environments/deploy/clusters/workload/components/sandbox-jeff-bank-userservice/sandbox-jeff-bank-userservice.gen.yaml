@@ -5,10 +5,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-userservice
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: backend
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-userservice
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: jeff
     tier: backend
   name: userservice
@@ -24,10 +25,11 @@ spec:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-userservice
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: backend
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-userservice
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: jeff
     tier: backend
 ---
@@ -38,10 +40,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-userservice
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: backend
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-userservice
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: jeff
     tier: backend
   name: userservice
@@ -53,10 +56,11 @@ spec:
       application: bank-of-holos
       argocd.argoproj.io/instance: sandbox-jeff-bank-userservice
       environment: sandbox
-      example.com/environment.name: sandbox
-      example.com/owner.name: jeff
-      example.com/tier.name: backend
+      environment.example.com/name: sandbox
       holos.run/component.name: sandbox-jeff-bank-userservice
+      owner.example.com/name: jeff
+      stack.example.com/name: bank-of-holos
+      stack.example.com/tier: backend
       team: jeff
       tier: backend
   template:
@@ -66,10 +70,11 @@ spec:
         application: bank-of-holos
         argocd.argoproj.io/instance: sandbox-jeff-bank-userservice
         environment: sandbox
-        example.com/environment.name: sandbox
-        example.com/owner.name: jeff
-        example.com/tier.name: backend
+        environment.example.com/name: sandbox
         holos.run/component.name: sandbox-jeff-bank-userservice
+        owner.example.com/name: jeff
+        stack.example.com/name: bank-of-holos
+        stack.example.com/tier: backend
         team: jeff
         tier: backend
     spec:

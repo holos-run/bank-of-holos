@@ -4,10 +4,11 @@ metadata:
   labels:
     application: bank-of-holos
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: database
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-ledger-db
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
     team: backend
     tier: database
   name: dev-bank-ledger-db
@@ -18,5 +19,5 @@ spec:
   project: dev-bank-backend
   source:
     path: examples/environments/deploy/clusters/workload/components/dev-bank-ledger-db
-    repoURL: https://github.com/holos-run/bank-of-holos
-    targetRevision: main
+    repoURL: https://github.com/jeffmccune/bank-of-holos
+    targetRevision: demo

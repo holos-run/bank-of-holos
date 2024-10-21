@@ -5,11 +5,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-namespaces
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: security
-    example.com/tier.name: foundation
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-namespaces
     kubernetes.io/metadata.name: dev-bank-backend
+    owner.example.com/name: security
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: security
     tier: foundation
   name: dev-bank-backend
@@ -21,11 +22,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-namespaces
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: security
-    example.com/tier.name: foundation
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-namespaces
     kubernetes.io/metadata.name: dev-bank-frontend
+    owner.example.com/name: security
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: security
     tier: foundation
   name: dev-bank-frontend
@@ -37,11 +39,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-namespaces
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: security
-    example.com/tier.name: foundation
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-namespaces
     kubernetes.io/metadata.name: dev-bank-security
+    owner.example.com/name: security
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: security
     tier: foundation
   name: dev-bank-security

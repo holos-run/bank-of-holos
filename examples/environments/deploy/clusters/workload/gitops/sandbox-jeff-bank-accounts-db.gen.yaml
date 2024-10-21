@@ -4,10 +4,11 @@ metadata:
   labels:
     application: bank-of-holos
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: database
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-accounts-db
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
     team: jeff
     tier: database
   name: sandbox-jeff-bank-accounts-db
@@ -18,5 +19,5 @@ spec:
   project: sandbox-jeff-bank-backend
   source:
     path: examples/environments/deploy/clusters/workload/components/sandbox-jeff-bank-accounts-db
-    repoURL: https://github.com/holos-run/bank-of-holos
-    targetRevision: main
+    repoURL: https://github.com/jeffmccune/bank-of-holos
+    targetRevision: demo

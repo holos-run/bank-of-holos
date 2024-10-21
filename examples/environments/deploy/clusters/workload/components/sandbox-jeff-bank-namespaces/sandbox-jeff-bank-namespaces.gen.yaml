@@ -5,11 +5,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: foundation
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-backend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: jeff
     tier: foundation
   name: sandbox-jeff-bank-backend
@@ -21,11 +22,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: foundation
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-frontend
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: jeff
     tier: foundation
   name: sandbox-jeff-bank-frontend
@@ -37,11 +39,12 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-namespaces
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: foundation
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-namespaces
     kubernetes.io/metadata.name: sandbox-jeff-bank-security
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: jeff
     tier: foundation
   name: sandbox-jeff-bank-security

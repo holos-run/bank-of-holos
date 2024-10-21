@@ -4,10 +4,11 @@ metadata:
   labels:
     application: bank-of-holos
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: foundation
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-namespaces
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: foundation
     team: jeff
     tier: foundation
   name: sandbox-jeff-bank-namespaces
@@ -18,5 +19,5 @@ spec:
   project: sandbox-jeff-bank-security
   source:
     path: examples/environments/deploy/clusters/workload/components/sandbox-jeff-bank-namespaces
-    repoURL: https://github.com/holos-run/bank-of-holos
-    targetRevision: main
+    repoURL: https://github.com/jeffmccune/bank-of-holos
+    targetRevision: demo

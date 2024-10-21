@@ -4,10 +4,11 @@ metadata:
   labels:
     application: bank-of-holos
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: frontend
-    example.com/tier.name: web
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-frontend
+    owner.example.com/name: frontend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: web
     team: frontend
     tier: web
   name: dev-bank-frontend
@@ -18,5 +19,5 @@ spec:
   project: dev-bank-frontend
   source:
     path: examples/environments/deploy/clusters/workload/components/dev-bank-frontend
-    repoURL: https://github.com/holos-run/bank-of-holos
-    targetRevision: main
+    repoURL: https://github.com/jeffmccune/bank-of-holos
+    targetRevision: demo

@@ -5,10 +5,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-ledger-db
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: database
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-ledger-db
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
     team: backend
     tier: database
   name: ledger-db
@@ -23,10 +24,11 @@ spec:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-ledger-db
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: database
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-ledger-db
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
     team: backend
     tier: database
   type: ClusterIP
@@ -38,10 +40,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-ledger-db
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: database
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-ledger-db
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
     team: backend
     tier: database
   name: ledger-db
@@ -54,10 +57,11 @@ spec:
       application: bank-of-holos
       argocd.argoproj.io/instance: dev-bank-ledger-db
       environment: dev
-      example.com/environment.name: dev
-      example.com/owner.name: backend
-      example.com/tier.name: database
+      environment.example.com/name: dev
       holos.run/component.name: dev-bank-ledger-db
+      owner.example.com/name: backend
+      stack.example.com/name: bank-of-holos
+      stack.example.com/tier: database
       team: backend
       tier: database
   serviceName: ledger-db
@@ -68,10 +72,11 @@ spec:
         application: bank-of-holos
         argocd.argoproj.io/instance: dev-bank-ledger-db
         environment: dev
-        example.com/environment.name: dev
-        example.com/owner.name: backend
-        example.com/tier.name: database
+        environment.example.com/name: dev
         holos.run/component.name: dev-bank-ledger-db
+        owner.example.com/name: backend
+        stack.example.com/name: bank-of-holos
+        stack.example.com/tier: database
         team: backend
         tier: database
     spec:
@@ -81,7 +86,7 @@ spec:
             name: environment-config
         - secretRef:
             name: ledger-db-config
-        - secretRef:
+        - configMapRef:
             name: demo-data-config
         image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/ledger-db:v0.6.5@sha256:cc4fd25f301ab6d46b1312244d6931babc4c6cb66c5cb6d31d4a1adfa318a321
         name: postgres
@@ -110,10 +115,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-ledger-db
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: database
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-ledger-db
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: database
     team: backend
     tier: database
   name: ledger-db-config

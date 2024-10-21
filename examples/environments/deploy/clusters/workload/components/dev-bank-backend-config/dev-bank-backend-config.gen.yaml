@@ -1,17 +1,43 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  annotations:
+    stack.example.com/version: v1
   labels:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-backend-config
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-backend-config
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: backend
     tier: backend
   name: bank-of-holos
+  namespace: dev-bank-backend
+---
+apiVersion: v1
+data:
+  DEMO_LOGIN_PASSWORD: bankofanthos
+  DEMO_LOGIN_USERNAME: testuser
+  USE_DEMO_DATA: "True"
+kind: ConfigMap
+metadata:
+  annotations:
+    stack.example.com/version: v1
+  labels:
+    application: bank-of-holos
+    argocd.argoproj.io/instance: dev-bank-backend-config
+    environment: dev
+    environment.example.com/name: dev
+    holos.run/component.name: dev-bank-backend-config
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
+    team: backend
+    tier: backend
+  name: demo-data-config
   namespace: dev-bank-backend
 ---
 apiVersion: v1
@@ -20,14 +46,17 @@ data:
   PUB_KEY_PATH: /tmp/.ssh/publickey
 kind: ConfigMap
 metadata:
+  annotations:
+    stack.example.com/version: v1
   labels:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-backend-config
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-backend-config
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: backend
     tier: backend
   name: environment-config
@@ -42,14 +71,17 @@ data:
   USERSERVICE_API_ADDR: userservice.dev-bank-backend.svc:8080
 kind: ConfigMap
 metadata:
+  annotations:
+    stack.example.com/version: v1
   labels:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-backend-config
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-backend-config
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: backend
     tier: backend
   name: service-api-config
@@ -58,40 +90,17 @@ metadata:
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
+  annotations:
+    stack.example.com/version: v1
   labels:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-backend-config
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-backend-config
-    team: backend
-    tier: backend
-  name: demo-data-config
-  namespace: dev-bank-backend
-spec:
-  dataFrom:
-  - extract:
-      key: demo-data-config
-  refreshInterval: 5s
-  secretStoreRef:
-    kind: SecretStore
-    name: dev-bank-security
-  target:
-    name: demo-data-config
----
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  labels:
-    application: bank-of-holos
-    argocd.argoproj.io/instance: dev-bank-backend-config
-    environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
-    holos.run/component.name: dev-bank-backend-config
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: backend
     tier: backend
   name: jwt-key
@@ -110,14 +119,17 @@ spec:
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
+  annotations:
+    stack.example.com/version: v1
   labels:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-backend-config
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-backend-config
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: backend
     tier: backend
   name: dev-bank-security
@@ -139,14 +151,17 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
 metadata:
+  annotations:
+    stack.example.com/version: v1
   labels:
     application: bank-of-holos
     argocd.argoproj.io/instance: dev-bank-backend-config
     environment: dev
-    example.com/environment.name: dev
-    example.com/owner.name: backend
-    example.com/tier.name: backend
+    environment.example.com/name: dev
     holos.run/component.name: dev-bank-backend-config
+    owner.example.com/name: backend
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: backend
     tier: backend
   name: istio-ingress

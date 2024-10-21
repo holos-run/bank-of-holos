@@ -5,10 +5,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-writer
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: backend
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-ledger-writer
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: jeff
     tier: backend
   name: ledgerwriter
@@ -23,10 +24,11 @@ spec:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-writer
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: backend
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-ledger-writer
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: jeff
     tier: backend
   type: ClusterIP
@@ -38,10 +40,11 @@ metadata:
     application: bank-of-holos
     argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-writer
     environment: sandbox
-    example.com/environment.name: sandbox
-    example.com/owner.name: jeff
-    example.com/tier.name: backend
+    environment.example.com/name: sandbox
     holos.run/component.name: sandbox-jeff-bank-ledger-writer
+    owner.example.com/name: jeff
+    stack.example.com/name: bank-of-holos
+    stack.example.com/tier: backend
     team: jeff
     tier: backend
   name: ledgerwriter
@@ -53,10 +56,11 @@ spec:
       application: bank-of-holos
       argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-writer
       environment: sandbox
-      example.com/environment.name: sandbox
-      example.com/owner.name: jeff
-      example.com/tier.name: backend
+      environment.example.com/name: sandbox
       holos.run/component.name: sandbox-jeff-bank-ledger-writer
+      owner.example.com/name: jeff
+      stack.example.com/name: bank-of-holos
+      stack.example.com/tier: backend
       team: jeff
       tier: backend
   template:
@@ -66,10 +70,11 @@ spec:
         application: bank-of-holos
         argocd.argoproj.io/instance: sandbox-jeff-bank-ledger-writer
         environment: sandbox
-        example.com/environment.name: sandbox
-        example.com/owner.name: jeff
-        example.com/tier.name: backend
+        environment.example.com/name: sandbox
         holos.run/component.name: sandbox-jeff-bank-ledger-writer
+        owner.example.com/name: jeff
+        stack.example.com/name: bank-of-holos
+        stack.example.com/tier: backend
         team: jeff
         tier: backend
     spec:
