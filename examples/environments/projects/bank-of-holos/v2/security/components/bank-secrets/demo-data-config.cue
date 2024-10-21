@@ -13,6 +13,7 @@ _GeneratedSecrets: (SecretName): _
 _Kubernetes: #Kubernetes & {
 	KustomizeConfig: Kustomization: _configMapGenerators: (SecretName): _
 
+	// DEMO:SECRETS:v2 ⓘ Job to generate demo-data-config
 	Resources: {
 		Job: (SecretName): batchv1.#Job & {
 			spec: template: spec: #JobSpec & {

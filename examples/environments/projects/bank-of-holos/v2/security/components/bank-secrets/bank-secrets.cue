@@ -23,6 +23,7 @@ _GeneratedSecrets: {
 	(SecretName): _
 }
 
+// DEMO:SECRETS:v2 ⓘ JobSpec for secret generators.
 #JobSpec: {
 	_configMap:         string
 	serviceAccountName: Writer
@@ -134,6 +135,7 @@ _Kubernetes: #Kubernetes & {
 			data: entrypoint: ENTRYPOINT
 		}
 
+		// DEMO:SECRETS:v2 ⓘ Role to allow SecretStore read access.
 		// Allow the SecretStore in the frontend and backend namespaces to read the
 		// secret.
 		Role: (Reader): rbacv1.#Role & {

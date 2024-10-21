@@ -81,6 +81,32 @@ _Stack: {
 			}
 		}
 
+		// Source: https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/v0.6.5/kubernetes-manifests/config.yaml#L34-L42
+		// DEMO:SECRETS:v2 ☞ Replace ConfigMap with an ExternalSecret
+		ConfigMap: "demo-data-config": k8s.#ConfigMap & {
+			apiVersion: "v1"
+			kind:       "ConfigMap"
+			metadata: name: "demo-data-config"
+			data: {
+				USE_DEMO_DATA:       "True"
+				DEMO_LOGIN_USERNAME: "testuser"
+				// DEMO:SECRETS:v2 ☞ Hard coded password here.
+				DEMO_LOGIN_PASSWORD: "bankofanthos"
+			}
+		}
+
+		// DEMO:SECRETS:v2 ☞ Uncomment ExternalSecret to replace ConfigMap.
+		// ExternalSecret: "demo-data-config": es.#ExternalSecret & {
+		// 	metadata: name: "demo-data-config"
+		// 	spec: {
+		// 		target: name: metadata.name
+		// 		dataFrom: [{extract: {key: metadata.name}}]
+		// 		refreshInterval: "5s"
+		// 		secretStoreRef: kind: "SecretStore"
+		// 		secretStoreRef: name: _Stack.Resources.SecretStore[_Stack.BankName].metadata.name
+		// 	}
+		// }
+
 		// We do not check the private key into version control.
 		// https://github.com/GoogleCloudPlatform/bank-of-anthos/tree/v0.6.5/extras/jwt
 		ExternalSecret: "jwt-key": es.#ExternalSecret & {
@@ -91,18 +117,6 @@ _Stack: {
 				refreshInterval: "5s"
 				secretStoreRef: kind: "SecretStore"
 				secretStoreRef: name: SecretStore[BankName].metadata.name
-			}
-		}
-
-		// Source: https://github.com/GoogleCloudPlatform/bank-of-anthos/blob/v0.6.5/kubernetes-manifests/config.yaml#L34-L42
-		ExternalSecret: "demo-data-config": es.#ExternalSecret & {
-			metadata: name: "demo-data-config"
-			spec: {
-				target: name: metadata.name
-				dataFrom: [{extract: {key: metadata.name}}]
-				refreshInterval: "5s"
-				secretStoreRef: kind: "SecretStore"
-				secretStoreRef: name: _Stack.Resources.SecretStore[_Stack.BankName].metadata.name
 			}
 		}
 

@@ -57,7 +57,8 @@ _Kubernetes: #Kubernetes & {
 							}, {
 								secretRef: name: "accounts-db-config"
 							}, {
-								secretRef: name: "demo-data-config"
+								// DEMO:SECRETS:v2 ☞ Change this to a secretRef.
+								configMapRef: name: "demo-data-config"
 							}]
 							image: "us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/accounts-db:v0.6.5@sha256:abb955756a82b115e0fd9c5fa1527ae1a744b398b357fd6d7a26348feccad181"
 							name:  "accounts-db"
