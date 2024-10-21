@@ -56,7 +56,8 @@ _Kubernetes: #Kubernetes & {
 							}, {
 								secretRef: name: "ledger-db-config"
 							}, {
-								secretRef: name: "demo-data-config"
+								// DEMO:SECRETS:v1 ☞ Change this to a secretRef.
+								configMapRef: name: "demo-data-config"
 							}]
 							image: "us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/ledger-db:v0.6.5@sha256:cc4fd25f301ab6d46b1312244d6931babc4c6cb66c5cb6d31d4a1adfa318a321"
 							name:  "postgres"

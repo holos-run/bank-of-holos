@@ -90,6 +90,7 @@ create_accounts() {
 
 
 main() {
+  # DEMO:SECRETS:v1 ☞ Remove hard coded password hash.
   if [[ -z "${DEFAULT_PASSHASH}" ]]; then
     echo "WARNING: INSECURE hard coded password hash.  Provide DEFAULT_PASSHASH instead." >&2
     DEFAULT_PASSHASH='\x243262243132244c48334f54422e70653274596d6834534b756673727563564b3848774630494d2f34717044746868366e42352e744b575978314e61'
