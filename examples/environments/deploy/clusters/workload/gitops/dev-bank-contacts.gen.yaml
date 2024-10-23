@@ -19,5 +19,5 @@ spec:
   project: dev-bank-backend
   source:
     path: examples/environments/deploy/clusters/workload/components/dev-bank-contacts
-    repoURL: https://github.com/jeffmccune/bank-of-holos
-    targetRevision: demo
+    repoURL: https://github.com/holos-run/bank-of-holos
+    targetRevision: main

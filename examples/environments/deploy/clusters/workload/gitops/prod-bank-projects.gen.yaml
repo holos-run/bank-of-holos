@@ -19,5 +19,5 @@ spec:
   project: prod-bank-security
   source:
     path: examples/environments/deploy/clusters/workload/components/prod-bank-projects
-    repoURL: https://github.com/jeffmccune/bank-of-holos
-    targetRevision: demo
+    repoURL: https://github.com/holos-run/bank-of-holos
+    targetRevision: main
