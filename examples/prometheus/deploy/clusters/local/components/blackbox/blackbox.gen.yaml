@@ -9,7 +9,7 @@ metadata:
     argocd.argoproj.io/instance: blackbox
     helm.sh/chart: prometheus-blackbox-exporter-9.0.1
     holos.run/component.name: blackbox
-  name: prometheus-blackbox-exporter
+  name: blackbox
   namespace: default
 ---
 apiVersion: v1
@@ -35,7 +35,7 @@ metadata:
     argocd.argoproj.io/instance: blackbox
     helm.sh/chart: prometheus-blackbox-exporter-9.0.1
     holos.run/component.name: blackbox
-  name: prometheus-blackbox-exporter
+  name: blackbox
   namespace: default
 ---
 apiVersion: v1
@@ -49,12 +49,12 @@ metadata:
     argocd.argoproj.io/instance: blackbox
     helm.sh/chart: prometheus-blackbox-exporter-9.0.1
     holos.run/component.name: blackbox
-  name: prometheus-blackbox-exporter
+  name: blackbox
   namespace: default
 spec:
   ports:
   - name: http
-    port: 9115
+    port: 80
     protocol: TCP
     targetPort: http
   selector:
@@ -75,7 +75,7 @@ metadata:
     argocd.argoproj.io/instance: blackbox
     helm.sh/chart: prometheus-blackbox-exporter-9.0.1
     holos.run/component.name: blackbox
-  name: prometheus-blackbox-exporter
+  name: blackbox
   namespace: default
 spec:
   replicas: 1
@@ -133,8 +133,8 @@ spec:
           name: config
       hostNetwork: false
       restartPolicy: Always
-      serviceAccountName: prometheus-blackbox-exporter
+      serviceAccountName: blackbox
       volumes:
       - configMap:
-          name: prometheus-blackbox-exporter
+          name: blackbox
         name: config
