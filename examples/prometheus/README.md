@@ -924,3 +924,111 @@ deploy
             └── prometheus
                 └── prometheus.gen.yaml
 ```
+
+Now is a good time to commit.
+
+```
+git add .
+git commit -m 'demo: prometheus: add httpbin'
+```
+
+Finally let's apply it.
+
+```bash
+kubectl apply -f deploy/clusters/local/components/httpbin/httpbin.gen.yaml           
+```
+```txt
+service/httpbin created
+deployment.apps/httpbin created
+```
+
+Looks good:
+
+```bash
+kubectl get svc/httpbin deployment/httpbin
+```
+```txt
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/httpbin   ClusterIP   10.43.140.222   <none>        80/TCP    41s
+
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/httpbin   1/1     1            1           41s
+```
+
+Finally we can verify the probe is all wired up.
+
+Port forward prometheus.
+
+```
+k -n default port-forward svc/prometheus-server 8081:80
+```
+
+Browse to http://localhost:8081/targets?search=httpbin
+
+We forgot the annotation.  It can be quite a lot of toil to hand-craft a
+Kustomize patch in raw YAML.  Luckily it's a lot easier now that we have CUE.
+
+```bash
+cat <<EOF >projects/platform/components/httpbin/httpbin.cue
+package holos
+
+import "encoding/yaml"
+
+// Produce a Kustomize BuildPlan for Holos
+_Kustomize.BuildPlan
+
+// https://github.com/mccutchen/go-httpbin/blob/v2.15.0/kustomize/README.md
+_Kustomize: #Kustomize & {
+	KustomizeConfig: Resources: "github.com/mccutchen/go-httpbin/kustomize": _
+	KustomizeConfig: Kustomization: {
+		commonLabels: "app.kubernetes.io/name": "httpbin"
+		_patches: probe: {
+			target: kind: "Service"
+			target: name: "httpbin"
+			patch: yaml.Marshal([{
+				op:    "add"
+				path:  "/metadata/annotations/prometheus.io~1probe"
+				value: "true"
+			}])
+		}
+		patches: [for x in _patches {x}]
+	}
+}
+```
+
+Render again:
+
+```bash
+holos render platform ./platform
+```
+
+```txt
+rendered blackbox for cluster local in 182.518625ms
+rendered prometheus for cluster local in 225.122125ms
+rendered httpbin for cluster local in 1.43441875s
+rendered platform in 1.434524708s
+```
+
+And check for the annotation:
+
+```bash
+git diff deploy 
+```
+```diff
+diff --git a/examples/prometheus/deploy/clusters/local/components/httpbin/httpbin.gen.yaml b/examples/prometheus/deploy/clusters/local/components/httpbin/httpbin.gen.yaml
+index a802712..e6ebdf4 100644
+--- a/examples/prometheus/deploy/clusters/local/components/httpbin/httpbin.gen.yaml
++++ b/examples/prometheus/deploy/clusters/local/components/httpbin/httpbin.gen.yaml
+@@ -1,6 +1,8 @@
+ apiVersion: v1
+ kind: Service
+ metadata:
++  annotations:
++    prometheus.io/probe: "true"
+   labels:
+     app.kubernetes.io/name: httpbin
+     argocd.argoproj.io/instance: httpbin
+
+```
+
+Looks good, let's commit and apply again.

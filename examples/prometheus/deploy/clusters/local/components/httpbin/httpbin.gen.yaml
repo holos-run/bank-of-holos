@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    prometheus.io/probe: "true"
   labels:
     app.kubernetes.io/name: httpbin
     argocd.argoproj.io/instance: httpbin
