@@ -1,0 +1,140 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/instance: prometheus-blackbox-exporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-blackbox-exporter
+    app.kubernetes.io/version: v0.25.0
+    argocd.argoproj.io/instance: blackbox
+    helm.sh/chart: prometheus-blackbox-exporter-9.0.1
+    holos.run/component.name: blackbox
+  name: blackbox
+  namespace: default
+---
+apiVersion: v1
+data:
+  blackbox.yaml: |
+    modules:
+      http_2xx:
+        http:
+          follow_redirects: true
+          preferred_ip_protocol: ip4
+          valid_http_versions:
+          - HTTP/1.1
+          - HTTP/2.0
+        prober: http
+        timeout: 5s
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: prometheus-blackbox-exporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-blackbox-exporter
+    app.kubernetes.io/version: v0.25.0
+    argocd.argoproj.io/instance: blackbox
+    helm.sh/chart: prometheus-blackbox-exporter-9.0.1
+    holos.run/component.name: blackbox
+  name: blackbox
+  namespace: default
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: prometheus-blackbox-exporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-blackbox-exporter
+    app.kubernetes.io/version: v0.25.0
+    argocd.argoproj.io/instance: blackbox
+    helm.sh/chart: prometheus-blackbox-exporter-9.0.1
+    holos.run/component.name: blackbox
+  name: blackbox
+  namespace: default
+spec:
+  ports:
+  - name: http
+    port: 9115
+    protocol: TCP
+    targetPort: http
+  selector:
+    app.kubernetes.io/instance: prometheus-blackbox-exporter
+    app.kubernetes.io/name: prometheus-blackbox-exporter
+    argocd.argoproj.io/instance: blackbox
+    holos.run/component.name: blackbox
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: prometheus-blackbox-exporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-blackbox-exporter
+    app.kubernetes.io/version: v0.25.0
+    argocd.argoproj.io/instance: blackbox
+    helm.sh/chart: prometheus-blackbox-exporter-9.0.1
+    holos.run/component.name: blackbox
+  name: blackbox
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: prometheus-blackbox-exporter
+      app.kubernetes.io/name: prometheus-blackbox-exporter
+      argocd.argoproj.io/instance: blackbox
+      holos.run/component.name: blackbox
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        checksum/config: f43e733459690a84886aec93596a01748c2f936776a534eeaeb9f084e62ebb91
+      labels:
+        app.kubernetes.io/instance: prometheus-blackbox-exporter
+        app.kubernetes.io/name: prometheus-blackbox-exporter
+        argocd.argoproj.io/instance: blackbox
+        holos.run/component.name: blackbox
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - args:
+        - --config.file=/config/blackbox.yaml
+        image: quay.io/prometheus/blackbox-exporter:v0.25.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /-/healthy
+            port: http
+        name: blackbox-exporter
+        ports:
+        - containerPort: 9115
+          name: http
+        readinessProbe:
+          httpGet:
+            path: /-/healthy
+            port: http
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 1000
+          runAsNonRoot: true
+          runAsUser: 1000
+        volumeMounts:
+        - mountPath: /config
+          name: config
+      hostNetwork: false
+      restartPolicy: Always
+      serviceAccountName: blackbox
+      volumes:
+      - configMap:
+          name: blackbox
+        name: config
