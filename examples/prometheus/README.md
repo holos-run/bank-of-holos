@@ -612,3 +612,112 @@ rendered blackbox for cluster local in 198.379084ms
 rendered prometheus for cluster local in 218.384916ms
 rendered platform in 218.444959ms
 ```
+
+Let's take a look at the fully rendered service in
+`deploy/clusters/local/components/blackbox/blackbox.gen.yaml` and see if it's
+named `blackbox` listening on port `80`.
+
+Looks good:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: prometheus-blackbox-exporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-blackbox-exporter
+    app.kubernetes.io/version: v0.25.0
+    argocd.argoproj.io/instance: blackbox
+    helm.sh/chart: prometheus-blackbox-exporter-9.0.1
+    holos.run/component.name: blackbox
+  name: blackbox
+  namespace: default
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app.kubernetes.io/instance: prometheus-blackbox-exporter
+    app.kubernetes.io/name: prometheus-blackbox-exporter
+    argocd.argoproj.io/instance: blackbox
+    holos.run/component.name: blackbox
+  type: ClusterIP
+```
+
+We could stop here, but we'd leave a pitfall for the next person to come along this path.  If the prometheus chart changes the default configuration from `blackbox:80` to something else then the integration will break.
+
+Holos and CUE allow us to keep the two charts in lock step with the same value.
+Let's configure the prometheus chart like we configured the blackbox chart.
+
+First, import the values.yaml into CUE.
+
+```
+cue import -p holos -o- -l '#Values:' projects/platform/components/prometheus/vendor/25.27.0/prometheus/values.yaml > projects/platform/components/prometheus/va
+lues.schema.cue
+```
+
+We'll modify the prometheus values directly to use the same values we provided
+to the blackbox chart.
+
+```diff
+diff --git a/examples/prometheus/projects/platform/components/prometheus/values.schema.cue b/examples/prometheus/projects/platform/components/prometheus/values.schema.cue
+index 9cb8c9f..41fbe2a 100644
+--- a/examples/prometheus/projects/platform/components/prometheus/values.schema.cue
++++ b/examples/prometheus/projects/platform/components/prometheus/values.schema.cue
+@@ -1083,7 +1083,7 @@ package holos
+                                        target_label: "__param_target"
+                                }, {
+                                        target_label: "__address__"
+-                                       replacement:  "blackbox"
++                                       replacement:  "\(_Prometheus.BlackboxServiceName):\(_Prometheus.BlackboxServicePort)"
+                                }, {
+                                        source_labels: ["__param_target"]
+                                        target_label: "instance"
+```
+
+Second, have holos inject the values into helm.
+
+```bash
+cat <<EOF >projects/platform/components/prometheus/values.cue
+package holos
+
+_Helm: Values: #Values & {}
+EOF
+```
+
+Now when we render the platform both charts are using the same value for the
+blackbox endpoint.  We've integrated them together holistically.
+
+```bash
+holos render platform ./platform
+```
+```txt
+rendered blackbox for cluster local in 175.419417ms
+rendered prometheus for cluster local in 218.181125ms
+rendered platform in 218.24475ms
+```
+
+```bash
+git diff deploy
+```
+
+```diff
+diff --git a/examples/prometheus/deploy/clusters/local/components/prometheus/prometheus.gen.yaml b/examples/prometheus/deploy/clusters/local/components/prometheus/prometheus.gen.yaml
+index ade06a5..9599c26 100644
+--- a/examples/prometheus/deploy/clusters/local/components/prometheus/prometheus.gen.yaml
++++ b/examples/prometheus/deploy/clusters/local/components/prometheus/prometheus.gen.yaml
+@@ -609,7 +609,7 @@ data:
+       - source_labels:
+         - __address__
+         target_label: __param_target
+-      - replacement: blackbox
++      - replacement: blackbox:80
+         target_label: __address__
+       - source_labels:
+         - __param_target
+```
+
+Let's add and commit this change now.
