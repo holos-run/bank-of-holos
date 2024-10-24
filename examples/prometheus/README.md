@@ -452,3 +452,163 @@ deploy
 
 Let's add and commit this, then we need to get them to agree on the service
 endpoint.
+
+```bash
+git add .
+git commit -m 'add prometheus and blackbox'
+```
+
+## CUE
+
+First, we define a structure both prometheus and blackbox derive their
+configuration from.  We start to see how CUE helps with strong typing checking
+and goes further with constraints.
+
+With CUE and Holos, we need to think about the structure up-front, which can be
+a bit more of an investment, but the pay off in reliability and safety down the
+road is worth it.
+
+```bash
+cat <<EOF > projects/prometheus.cue
+package holos
+
+#Prometheus: {
+	// Types
+	BlackboxServiceName: string
+	BlackboxServicePort: number
+
+	// Constraints
+	BlackboxServiceName: =~"blackbox"
+	BlackboxServicePort: >0
+	BlackboxServicePort: <=65535
+}
+
+// Concrete values
+_Prometheus: #Prometheus & {
+	BlackboxServiceName: "blackbox"
+	BlackboxServicePort: 80
+}
+EOF
+```
+
+Now let's feed these two values to the blackbox chart like we did previously.
+
+Holos and CUE allow us to type check all the input values.
+
+Let's import the chart's values.yaml file into CUE
+
+```bash
+cue import -p holos -o- -l '#Values:' projects/platform/components/blackbox/vendor/9.0.1/prometheus-blackbox-exporter/values.yaml > projects/platform/components/blackbox/values.schema.cue
+```
+
+Set the name and port:
+
+```bash
+cat <<EOF > projects/platform/components/blackbox/values.cue
+package holos
+
+_Helm: Values: #Values & {
+	fullnameOverride: _Prometheus.BlackboxServiceName
+	service: port: _Prometheus.BlackboxServicePort
+}
+EOF
+```
+
+Let's render the platform:
+
+```bash
+holos render platform ./platform
+```
+
+```txt
+could not run: could not marshal json projects/platform/components/blackbox: cue: marshal error: _Helm.Values.service.port: conflicting values 80 and 9115 at internal/builder/builder.go:63
+_Helm.Values.service.port: conflicting values 80 and 9115:
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/projects/platform/components/blackbox/values.cue:3:16
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/projects/platform/components/blackbox/values.cue:5:17
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/projects/platform/components/blackbox/values.schema.cue:195:9
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/projects/prometheus.cue:17:23
+could not run: could not render component: exit status 1 at builder/v1alpha4/builder.go:95
+```
+
+Notice the error: `conflicting values 80 and 9115`.  When we imported the default values.yaml file, CUE imported the default values as concrete values which cannot be changed.
+
+We need to modify `values.schema.cue` to make 9115 the default value instead.
+
+We do this by changing `9115` to `number | *9115` in CUE.  The asterisk
+indicates a default value.
+
+```diff
+diff --git a/examples/prometheus/projects/platform/components/blackbox/values.schema.cue b/examples/prometheus/projects/platform/components/blackbox/values.schema.cue
+index 8a603f8..51a5ab3 100644
+--- a/examples/prometheus/projects/platform/components/blackbox/values.schema.cue
++++ b/examples/prometheus/projects/platform/components/blackbox/values.schema.cue
+@@ -192,7 +192,7 @@ package holos
+                annotations: {}
+                labels: {}
+                type: "ClusterIP"
+-               port: 9115
++               port: number | *9115
+                ipDualStack: {
+                        enabled: false
+                        ipFamilies: ["IPv6", "IPv4"]
+```
+
+Now we get a different error when we render:
+
+```bash
+holos render platform ./platform
+```
+
+```txt
+could not run: could not marshal json projects/platform/components/blackbox: cue: marshal error: _Helm.Values.fullnameOverride: field not allowed at internal/builder/builder.go:63
+_Helm.Values.fullnameOverride: field not allowed:
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/cue.mod/gen/github.com/holos-run/holos/api/author/v1alpha4/definitions_go_gen.cue:160:10
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/cue.mod/gen/github.com/holos-run/holos/api/core/v1alpha4/types_go_gen.cue:242:11
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/projects/platform/components/blackbox/blackbox.cue:6:8
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/projects/platform/components/blackbox/values.cue:3:16
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/projects/platform/components/blackbox/values.cue:4:2
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/projects/platform/components/blackbox/values.schema.cue:3:10
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/schema.cue:51:14
+    /Users/jeff/Holos/bank-of-holos/examples/prometheus/schema.cue:53:2
+could not run: could not render component: exit status 1 at builder/v1alpha4/builder.go:95
+```
+
+That's strange...  `fullnameOverride` should be allowed, it worked when we ran the `helm install --set fullnameOverride=blackbox` command.
+
+The helm chart authors forgot to include this value in the default `values.yaml`
+file.  Holos and CUE make this easy to fix, we just need to add the field and define it as a string with a default value of `""`.
+
+This matches the behavior of helm create when creating a new chart.
+
+```bash
+helm create foo; grep fullnameOverride foo/values.yaml; rm -rf foo
+```
+
+```
+Creating foo
+fullnameOverride: ""
+```
+
+We can add the missing field to a new file so if we import the chart again it
+won't get written over.
+
+```bash
+cat <<EOF >projects/platform/components/blackbox/values.fixes.cue
+package holos
+
+// Define the fullnameOverride field, missing in the upstream values.yaml file.
+#Values: fullnameOverride: string | *""
+EOF
+```
+
+Now we're good to go:
+
+```bash
+holos render platform ./platform
+```
+
+```txt
+rendered blackbox for cluster local in 198.379084ms
+rendered prometheus for cluster local in 218.384916ms
+rendered platform in 218.444959ms
+```
