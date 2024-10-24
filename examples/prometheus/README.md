@@ -349,3 +349,106 @@ for Fleet in _Fleets {
 }
 EOF
 ```
+
+Now we can render the platform:
+
+```
+holos render platform ./platform
+```
+
+```
+cached prometheus 25.27.0
+rendered prometheus for cluster local in 1.877683333s
+rendered platform in 1.877744333s
+```
+
+This command wrote a fully rendered manifest to the following file.
+
+```
+deploy/clusters/local/components/prometheus/prometheus.gen.yaml
+```
+
+This file contains the output of the `helm template` command.
+
+Next, we'll add the blackbox component.
+
+```bash
+mkdir -p projects/platform/components/blackbox
+```
+
+```bash
+cat <<EOF >projects/platform/components/blackbox/blackbox.cue
+package holos
+
+// Produce a helm chart build plan.
+_Helm.BuildPlan
+
+_Helm: #Helm & {
+	Chart: {
+		name:    "prometheus-blackbox-exporter"
+		version: "9.0.1"
+		repository: {
+			name: "prometheus-community"
+			url:  "https://prometheus-community.github.io/helm-charts"
+		}
+	}
+}
+EOF
+```
+
+Basically the same as before except for the chart name and version fields.
+
+We need to register the blackbox component like we did prometheus:
+
+```bash
+cat <<EOF >platform/blackbox.cue
+package holos
+
+// Manage the Component on every Cluster in the Platform
+for Fleet in _Fleets {
+	for Cluster in Fleet.clusters {
+		_Platform: Components: "\(Cluster.name):blackbox": {
+			name:      "blackbox"
+			component: "projects/platform/components/blackbox"
+			cluster:   Cluster.name
+		}
+	}
+}
+EOF
+```
+
+Same as before, just `blackbox` instead of `prometheus` this time.
+
+Now we have both when we render the platform:
+
+```bash
+holos render platform ./platform
+```
+
+```txt
+rendered prometheus for cluster local in 244.35525ms
+cached prometheus-blackbox-exporter 9.0.1
+rendered blackbox for cluster local in 1.332973875s
+rendered platform in 1.333053333s
+```
+
+Now we have two fully rendered manifests:
+
+```bash
+tree deploy 
+```
+```txt
+deploy
+└── clusters
+    └── local
+        └── components
+            ├── blackbox
+            │   └── blackbox.gen.yaml
+            └── prometheus
+                └── prometheus.gen.yaml
+
+6 directories, 2 files
+```
+
+Let's add and commit this, then we need to get them to agree on the service
+endpoint.
