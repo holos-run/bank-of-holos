@@ -821,3 +821,106 @@ configmap/blackbox created
 service/blackbox created
 deployment.apps/blackbox created
 ```
+
+Looks good:
+
+```bash
+kubectl get svc
+```
+```txt
+NAME                                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+blackbox                              ClusterIP   10.43.138.179   <none>        9115/TCP   104s
+kubernetes                            ClusterIP   10.43.0.1       <none>        443/TCP    3m2s
+prometheus-alertmanager               ClusterIP   10.43.112.160   <none>        9093/TCP   104s
+prometheus-alertmanager-headless      ClusterIP   None            <none>        9093/TCP   104s
+prometheus-kube-state-metrics         ClusterIP   10.43.56.40     <none>        8080/TCP   104s
+prometheus-prometheus-node-exporter   ClusterIP   10.43.29.207    <none>        9100/TCP   104s
+prometheus-prometheus-pushgateway     ClusterIP   10.43.132.67    <none>        9091/TCP   104s
+prometheus-server                     ClusterIP   10.43.27.187    <none>        80/TCP     104s
+```
+
+We still need to deploy the httpbin pod though.  Holos also makes it easy to
+integrate Kustomize bases along side helm charts.
+
+```bash
+mkdir -p projects/platform/components/httpbin
+```
+
+A kustomize component looks like this.  We don't need to write a
+`kustomization.yaml` file, Holos will take care of writing it out from what we
+define in CUE.
+
+```bash
+cat <<EOF >projects/platform/components/httpbin/httpbin.cue
+package holos
+
+// Produce a Kustomize BuildPlan for Holos
+_Kustomize.BuildPlan
+
+// https://github.com/mccutchen/go-httpbin/blob/v2.15.0/kustomize/README.md
+_Kustomize: #Kustomize & {
+	KustomizeConfig: Resources: "github.com/mccutchen/go-httpbin/kustomize": _
+	KustomizeConfig: Kustomization: commonLabels: "app.kubernetes.io/name": "httpbin"
+}
+EOF
+```
+
+The above is equivalent to a static `kustomization.yaml` file that looks like
+the following, but now it's in CUE so we can inject data easily when we need to.
+
+```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app.kubernetes.io/name: httpbin
+resources:
+  - github.com/mccutchen/go-httpbin/kustomize
+```
+
+We need to register the component with the platform.
+
+```bash
+cat <<EOF >platform/httpbin.cue
+package holos
+
+// Manage the Component on every Cluster in the Platform
+for Fleet in _Fleets {
+	for Cluster in Fleet.clusters {
+		_Platform: Components: "\(Cluster.name):httpbin": {
+			name:      "httpbin"
+			component: "projects/platform/components/httpbin"
+			cluster:   Cluster.name
+		}
+	}
+}
+EOF
+```
+
+Render the platform and we have a third fully rendered manifest.
+
+```bash
+holos render platform ./platform
+```
+
+```txt
+rendered blackbox for cluster local in 179.023333ms
+rendered prometheus for cluster local in 221.369708ms
+rendered httpbin for cluster local in 1.4167515s
+rendered platform in 1.416865708s
+```
+
+```bash
+tree deploy 
+```
+```
+deploy
+└── clusters
+    └── local
+        └── components
+            ├── blackbox
+            │   └── blackbox.gen.yaml
+            ├── httpbin
+            │   └── httpbin.gen.yaml
+            └── prometheus
+                └── prometheus.gen.yaml
+```
