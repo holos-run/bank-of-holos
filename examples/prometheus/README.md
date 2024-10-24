@@ -1031,4 +1031,28 @@ index a802712..e6ebdf4 100644
 
 ```
 
-Looks good, let's commit and apply again.
+Looks good, let's commit.
+
+```bash
+git add .
+git commit -m 'demo: prometheus: add probe annotation to httpbin'
+```
+
+And apply again.
+
+```bash
+kubectl apply -f deploy/clusters/local/components/httpbin/httpbin.gen.yaml
+```
+
+```txt
+service/httpbin configured
+deployment.apps/httpbin unchanged
+```
+
+After a few moments we'll see the probe in the prometheus web ui.
+
+```
+kubernetes-services (1/1 up)
+http://blackbox:9115/probe
+module="http_2xx"target="httpbin.default.svc:80"
+```
