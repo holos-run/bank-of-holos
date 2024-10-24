@@ -721,3 +721,103 @@ index ade06a5..9599c26 100644
 ```
 
 Let's add and commit this change now.
+
+Then let's make sure they really are in lock step.  Let's change the port back
+to the blackbox default.
+
+Make this change:
+
+```diff
+diff --git a/examples/prometheus/projects/prometheus.cue b/examples/prometheus/projects/prometheus.cue
+index 4f83651..acb9e3e 100644
+--- a/examples/prometheus/projects/prometheus.cue
++++ b/examples/prometheus/projects/prometheus.cue
+@@ -14,5 +14,5 @@ package holos
+ // Concrete values
+ _Prometheus: #Prometheus & {
+        BlackboxServiceName: "blackbox"
+-       BlackboxServicePort: 80
++       BlackboxServicePort: 9115
+ }
+
+```
+
+Render the platform
+
+```
+holos render platform ./platform
+```
+
+Both helm charts fully render in lock step now:
+
+```bash
+git diff deploy
+```
+
+```diff
+diff --git a/examples/prometheus/deploy/clusters/local/components/blackbox/blackbox.gen.yaml b/examples/prometheus/deploy/clusters/local/components/blackbox/blackbox.gen.yaml
+index 276e3fa..c3484f2 100644
+--- a/examples/prometheus/deploy/clusters/local/components/blackbox/blackbox.gen.yaml
++++ b/examples/prometheus/deploy/clusters/local/components/blackbox/blackbox.gen.yaml
+@@ -54,7 +54,7 @@ metadata:
+ spec:
+   ports:
+   - name: http
+-    port: 80
++    port: 9115
+     protocol: TCP
+     targetPort: http
+   selector:
+diff --git a/examples/prometheus/deploy/clusters/local/components/prometheus/prometheus.gen.yaml b/examples/prometheus/deploy/clusters/local/components/prometheus/prometheus.gen.yaml
+index 9599c26..348c886 100644
+--- a/examples/prometheus/deploy/clusters/local/components/prometheus/prometheus.gen.yaml
++++ b/examples/prometheus/deploy/clusters/local/components/prometheus/prometheus.gen.yaml
+@@ -609,7 +609,7 @@ data:
+       - source_labels:
+         - __address__
+         target_label: __param_target
+-      - replacement: blackbox:80
++      - replacement: blackbox:9115
+         target_label: __address__
+       - source_labels:
+         - __param_target
+
+```
+
+Let's apply these two manifest files to our cluster.
+
+```bas
+kubectl apply \
+  -f deploy/clusters/local/components/prometheus/prometheus.gen.yaml \
+  -f deploy/clusters/local/components/blackbox/blackbox.gen.yaml
+```
+
+```txt
+serviceaccount/prometheus-alertmanager created
+serviceaccount/prometheus-kube-state-metrics created
+serviceaccount/prometheus-prometheus-node-exporter created
+serviceaccount/prometheus-prometheus-pushgateway created
+serviceaccount/prometheus-server created
+clusterrole.rbac.authorization.k8s.io/prometheus-kube-state-metrics created
+clusterrole.rbac.authorization.k8s.io/prometheus-server created
+clusterrolebinding.rbac.authorization.k8s.io/prometheus-kube-state-metrics created
+clusterrolebinding.rbac.authorization.k8s.io/prometheus-server created
+configmap/prometheus-alertmanager created
+configmap/prometheus-server created
+service/prometheus-alertmanager created
+service/prometheus-alertmanager-headless created
+service/prometheus-kube-state-metrics created
+service/prometheus-prometheus-node-exporter created
+service/prometheus-prometheus-pushgateway created
+service/prometheus-server created
+persistentvolumeclaim/prometheus-server created
+deployment.apps/prometheus-kube-state-metrics created
+deployment.apps/prometheus-prometheus-pushgateway created
+deployment.apps/prometheus-server created
+statefulset.apps/prometheus-alertmanager created
+daemonset.apps/prometheus-prometheus-node-exporter created
+serviceaccount/blackbox created
+configmap/blackbox created
+service/blackbox created
+deployment.apps/blackbox created
+```

@@ -54,7 +54,7 @@ metadata:
 spec:
   ports:
   - name: http
-    port: 80
+    port: 9115
     protocol: TCP
     targetPort: http
   selector:

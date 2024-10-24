@@ -14,5 +14,5 @@ package holos
 // Concrete values
 _Prometheus: #Prometheus & {
 	BlackboxServiceName: "blackbox"
-	BlackboxServicePort: 80
+	BlackboxServicePort: 9115
 }
