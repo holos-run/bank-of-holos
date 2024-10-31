@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    example.com/owner.email: sg-dev-team@example.com
+    example.com/owner.name: dev-team
+    example.com/project.name: experiment
+    holos.run/component.name: podinfo
+  name: podinfo
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: experiment
+  source:
+    path: deploy/clusters/local/components/podinfo
+    repoURL: https://github.com/holos-run/bank-of-holos
+    targetRevision: main

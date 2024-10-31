@@ -2,7 +2,7 @@ package holos
 
 _Kubernetes: #Kubernetes & {
 	Name: "namespaces"
-	Resources: Namespace: #Namespaces
+	Resources: Namespace: _Namespaces
 }
 
 // Produce a kubernetes objects build plan.

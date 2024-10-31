@@ -1,3 +1,3 @@
 package holos
 
-#ArgoConfig: AppProject: #Projects.experiment.Name
+#ArgoConfig: AppProject: _Projects.experiment.Name

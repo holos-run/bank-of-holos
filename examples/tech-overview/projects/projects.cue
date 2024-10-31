@@ -5,7 +5,7 @@ import api "github.com/holos-run/holos/api/author/v1alpha4"
 // Projects defines the structure other teams register with to manage project
 // resources.  The platform team defines the schema, development teams provide
 // the values.
-#Projects: api.#Projects & {
+_Projects: api.#Projects & {
 	[NAME=string]: {
 		Name: NAME
 		// The platform team requires the development teams to indicate an owner of
@@ -14,7 +14,7 @@ import api "github.com/holos-run/holos/api/author/v1alpha4"
 		// The default value for the owner email address is derived from the owner
 		// name, but development teams can provide a different email address if
 		// needed.
-		Owner: Email: string | *"sg-\(Owner.Name)@\(#Organization.Domain)"
+		Owner: Email: string | *"sg-\(Owner.Name)@\(_Organization.Domain)"
 		// The platform team constrains the project to a single namespace.
 		Namespaces: close({(NAME): Name: NAME})
 		// The platform team constrains the exposed services to the project
@@ -27,16 +27,16 @@ import api "github.com/holos-run/holos/api/author/v1alpha4"
 		}
 
 		CommonLabels: {
-			"\(#Organization.Domain)/project.name": Name
-			"\(#Organization.Domain)/owner.name":   Owner.Name
-			"\(#Organization.Domain)/owner.email":  Owner.Email
+			"\(_Organization.Domain)/project.name": Name
+			"\(_Organization.Domain)/owner.name":   Owner.Name
+			"\(_Organization.Domain)/owner.email":  Owner.Email
 		}
 	}
 }
 
-for Project in #Projects {
+for Project in _Projects {
 	// Register project namespaces with the namespaces component.
-	#Namespaces: {
+	_Namespaces: {
 		for Namespace in Project.Namespaces {
 			(Namespace.Name): metadata: labels: Project.CommonLabels
 		}

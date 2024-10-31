@@ -10,7 +10,7 @@ _Kubernetes.BuildPlan
 _Kubernetes: #Kubernetes & {
 	Name: "projects"
 	Resources: {
-		for Project in #Projects {
+		for Project in _Projects {
 			// Manage standard resources in each project namespace.
 			for Namespace in Project.Namespaces {
 				// Grant the project team admin access to their namespace.

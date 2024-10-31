@@ -6,10 +6,10 @@ _Kubernetes.BuildPlan
 _Kubernetes: #Kubernetes & {
 	Name: "httproutes"
 	Resources: {
-		for Project in #Projects {
+		for Project in _Projects {
 			for Hostname in Project.Hostnames {
 				HTTPRoute: "\(Project.Name)/\(Hostname.Name)": {
-					metadata: name:      Hostname.Name + "." + #Organization.Domain
+					metadata: name:      Hostname.Name + "." + _Organization.Domain
 					metadata: namespace: IngressNamespace
 					metadata: labels:    Project.CommonLabels
 					spec: hostnames: [metadata.name]
