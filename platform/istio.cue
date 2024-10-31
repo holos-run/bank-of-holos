@@ -2,8 +2,8 @@ package holos
 
 // #Istio represents platform wide configuration
 // Manage istio on workload clusters
-for Cluster in #Fleets.workload.clusters {
-	#Platform: Components: {
+for Cluster in _Fleets.workload.clusters {
+	_Platform: Components: {
 		"\(Cluster.name):istio-base": {
 			name:      "istio-base"
 			component: "projects/platform/components/istio/base"

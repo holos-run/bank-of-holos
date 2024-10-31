@@ -3,7 +3,7 @@ package holos
 // Produce a kubernetes objects build plan.
 (#Kubernetes & Objects).BuildPlan
 
-let BankName = #BankOfHolos.Name
+let BankName = _BankOfHolos.Name
 
 let CommonLabels = {
 	application: BankName
@@ -14,7 +14,7 @@ let CommonLabels = {
 
 let Objects = {
 	Name:      "bank-ledger-db"
-	Namespace: #BankOfHolos.Backend.Namespace
+	Namespace: _BankOfHolos.Backend.Namespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace

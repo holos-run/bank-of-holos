@@ -55,7 +55,7 @@ _Stack: {
 	}
 
 	// Annotate with stack version
-	Resources: [_]: [_]: metadata: annotations: "stack.\(#Organization.Domain)/version": Tags.stack_version
+	Resources: [_]: [_]: metadata: annotations: "stack.\(_Organization.Domain)/version": Tags.stack_version
 
 	// Resources to make available in each of the namespaces.
 	Resources: {
@@ -149,10 +149,10 @@ _Stack: {
 	}
 
 	CommonLabels: {
-		"environment.\(#Organization.Domain)/name": Tags.environment
-		"owner.\(#Organization.Domain)/name":       Tags.owner
-		"stack.\(#Organization.Domain)/name":       BankName
-		"stack.\(#Organization.Domain)/tier":       Tags.tier
+		"environment.\(_Organization.Domain)/name": Tags.environment
+		"owner.\(_Organization.Domain)/name":       Tags.owner
+		"stack.\(_Organization.Domain)/name":       BankName
+		"stack.\(_Organization.Domain)/tier":       Tags.tier
 
 		// These are the common labels from upstream
 		application: BankName

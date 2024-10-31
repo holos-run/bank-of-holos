@@ -5,16 +5,17 @@ import (
 	ks "sigs.k8s.io/kustomize/api/types"
 )
 
-_Kustomization: {
+// Produce a kustomize build plan
+_Kustomize.BuildPlan
+
+_Kustomize: #Kustomize & {
 	Name: "external-secrets-crds"
 
 	KustomizeConfig: {
-		Resources: "https://raw.githubusercontent.com/external-secrets/external-secrets/v\(#ExternalSecrets.Version)/deploy/crds/bundle.yaml": _
+		Resources: "https://raw.githubusercontent.com/external-secrets/external-secrets/v\(_ExternalSecrets.Version)/deploy/crds/bundle.yaml": _
 		Kustomization: patches: [for x in KustomizePatches {x}]
 	}
 }
-
-(#Kustomize & _Kustomization).BuildPlan
 
 #KustomizePatches: [ArbitraryLabel=string]: ks.#Patch
 

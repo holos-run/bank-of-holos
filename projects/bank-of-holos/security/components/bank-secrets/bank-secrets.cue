@@ -18,11 +18,11 @@ let Writer = "\(SecretName)-writer"
 
 // AllowedName represents the service account allowed to read the generated
 // secret.
-let AllowedName = #BankOfHolos.Name
+let AllowedName = _BankOfHolos.Name
 
 let Objects = {
 	Name:      "bank-secrets"
-	Namespace: #BankOfHolos.Security.Namespace
+	Namespace: _BankOfHolos.Security.Namespace
 
 	Resources: [_]: [_]: metadata: namespace:    Namespace
 	Resources: [_]: [ID=string]: metadata: name: string | *ID
@@ -117,11 +117,11 @@ let Objects = {
 			subjects: [{
 				kind:      "ServiceAccount"
 				name:      AllowedName
-				namespace: #BankOfHolos.Frontend.Namespace
+				namespace: _BankOfHolos.Frontend.Namespace
 			}, {
 				kind:      "ServiceAccount"
 				name:      AllowedName
-				namespace: #BankOfHolos.Backend.Namespace
+				namespace: _BankOfHolos.Backend.Namespace
 			},
 			]
 		}

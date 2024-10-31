@@ -1,11 +1,11 @@
 package holos
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan
 
-let Objects = {
+_Kubernetes: #Kubernetes & {
 	Name:      "istio-gateway"
-	Namespace: #Istio.Gateway.Namespace
+	Namespace: _Istio.Gateway.Namespace
 
 	Resources: {
 		// The default gateway with all listeners attached to tls certs.
@@ -39,7 +39,7 @@ let Objects = {
 		Certificate: "gateway-cert": {
 			metadata: name:      "gateway-cert"
 			metadata: namespace: Namespace
-			spec: commonName:    #Organization.Domain
+			spec: commonName:    _Organization.Domain
 			spec: dnsNames: [spec.commonName, "*.\(spec.commonName)"]
 			spec: secretName: metadata.name
 			spec: issuerRef: {

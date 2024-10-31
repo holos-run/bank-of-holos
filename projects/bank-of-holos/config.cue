@@ -6,9 +6,9 @@ import (
 	ss "external-secrets.io/secretstore/v1beta1"
 )
 
-let BankName = #BankOfHolos.Name
+let BankName = _BankOfHolos.Name
 
-#BankOfHolos: {
+_BankOfHolos: {
 	// Resources to make available in each of the project namespaces.
 	Resources: {
 		ServiceAccount: (BankName): core.#ServiceAccount & {
@@ -19,10 +19,10 @@ let BankName = #BankOfHolos.Name
 
 		// SecretStore to fetch secrets owned by the security team
 		SecretStore: (BankName): ss.#SecretStore & {
-			metadata: name: #BankOfHolos.Security.Namespace
+			metadata: name: _BankOfHolos.Security.Namespace
 			spec: provider: {
 				kubernetes: {
-					remoteNamespace: #BankOfHolos.Security.Namespace
+					remoteNamespace: _BankOfHolos.Security.Namespace
 					auth: serviceAccount: name: ServiceAccount[BankName].metadata.name
 					server: {
 						url: "https://kubernetes.default.svc"
@@ -65,11 +65,11 @@ let BankName = #BankOfHolos.Name
 			kind:       "ConfigMap"
 			metadata: name: "service-api-config"
 			data: {
-				TRANSACTIONS_API_ADDR: "ledgerwriter.\(#BankOfHolos.Backend.Namespace).svc:8080"
-				BALANCES_API_ADDR:     "balancereader.\(#BankOfHolos.Backend.Namespace).svc:8080"
-				HISTORY_API_ADDR:      "transactionhistory.\(#BankOfHolos.Backend.Namespace).svc:8080"
-				CONTACTS_API_ADDR:     "contacts.\(#BankOfHolos.Backend.Namespace).svc:8080"
-				USERSERVICE_API_ADDR:  "userservice.\(#BankOfHolos.Backend.Namespace).svc:8080"
+				TRANSACTIONS_API_ADDR: "ledgerwriter.\(_BankOfHolos.Backend.Namespace).svc:8080"
+				BALANCES_API_ADDR:     "balancereader.\(_BankOfHolos.Backend.Namespace).svc:8080"
+				HISTORY_API_ADDR:      "transactionhistory.\(_BankOfHolos.Backend.Namespace).svc:8080"
+				CONTACTS_API_ADDR:     "contacts.\(_BankOfHolos.Backend.Namespace).svc:8080"
+				USERSERVICE_API_ADDR:  "userservice.\(_BankOfHolos.Backend.Namespace).svc:8080"
 			}
 		}
 

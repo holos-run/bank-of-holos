@@ -1,9 +1,9 @@
 package holos
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+_Kubernetes.BuildPlan
 
-let BankName = #BankOfHolos.Name
+let BankName = _BankOfHolos.Name
 
 let CommonLabels = {
 	application: BankName
@@ -11,9 +11,9 @@ let CommonLabels = {
 	tier:        "backend"
 }
 
-let Objects = {
+_Kubernetes: #Kubernetes & {
 	Name:      "bank-backend-config"
-	Namespace: #BankOfHolos.Backend.Namespace
+	Namespace: _BankOfHolos.Backend.Namespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace
@@ -23,11 +23,9 @@ let Objects = {
 	Resources: {
 		// Allow HTTPRoutes in the ingress gateway namespace to reference Services
 		// in this namespace.
-		ReferenceGrant: grant: #ReferenceGrant & {
-			metadata: namespace: Namespace
-		}
+		ReferenceGrant: grant: _ReferenceGrant
 
 		// Include shared resources
-		#BankOfHolos.Resources
+		_BankOfHolos.Resources
 	}
 }

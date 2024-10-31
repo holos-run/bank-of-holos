@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    holos.run/component.name: bank-userservice
-  name: bank-userservice
+    holos.run/component.name: istio-cni
+  name: istio-cni
   namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
-  project: bank-backend
+  project: platform
   source:
-    path: deploy/clusters/workload/components/bank-userservice
+    path: deploy/clusters/local/components/istio-cni
     repoURL: https://github.com/holos-run/bank-of-holos
     targetRevision: main

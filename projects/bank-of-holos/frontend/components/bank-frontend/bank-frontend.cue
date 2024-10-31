@@ -5,7 +5,7 @@ package holos
 
 let Objects = {
 	Name:      "bank-frontend"
-	Namespace: #BankOfHolos.Frontend.Namespace
+	Namespace: _BankOfHolos.Frontend.Namespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace
@@ -75,7 +75,7 @@ let Objects = {
 						containers: [{
 							env: [{
 								name:  "BANK_NAME"
-								value: #Organization.DisplayName
+								value: _Organization.DisplayName
 							}, {
 								name:  "ENV_PLATFORM"
 								value: "local"
@@ -191,11 +191,11 @@ let Objects = {
 
 		// Allow HTTPRoutes in the ingress gateway namespace to reference Services
 		// in this namespace.
-		ReferenceGrant: grant: #ReferenceGrant & {
+		ReferenceGrant: grant: _ReferenceGrant & {
 			metadata: namespace: Namespace
 		}
 
 		// Include shared resources
-		#BankOfHolos.Resources
+		_BankOfHolos.Resources
 	}
 }

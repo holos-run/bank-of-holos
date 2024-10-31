@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    holos.run/component.name: httproutes
-  name: httproutes
+    holos.run/component.name: cert-manager
+  name: cert-manager
   namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
   project: platform
   source:
-    path: deploy/clusters/workload/components/httproutes
+    path: deploy/clusters/local/components/cert-manager
     repoURL: https://github.com/holos-run/bank-of-holos
     targetRevision: main

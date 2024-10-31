@@ -10,11 +10,11 @@ _HelmChart.BuildPlan
 
 _HelmChart: #Helm & {
 	Name:      "istio-base"
-	Namespace: #Istio.System.Namespace
+	Namespace: _Istio.System.Namespace
 
 	Chart: {
 		name:    "base"
-		version: #Istio.Version
+		version: _Istio.Version
 		repository: {
 			name: "istio"
 			url:  "https://istio-release.storage.googleapis.com/charts"
@@ -23,7 +23,7 @@ _HelmChart: #Helm & {
 
 	KustomizeConfig: Kustomization: patches: [for x in KustomizePatches {x}]
 
-	Values: #Istio.Values
+	Values: _Istio.Values
 }
 
 #KustomizePatches: [ArbitraryLabel=string]: ks.#Patch

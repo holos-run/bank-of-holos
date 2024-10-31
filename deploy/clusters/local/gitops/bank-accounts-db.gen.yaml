@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    holos.run/component.name: app-projects
-  name: app-projects
+    holos.run/component.name: bank-accounts-db
+  name: bank-accounts-db
   namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
-  project: platform
+  project: bank-backend
   source:
-    path: deploy/clusters/workload/components/app-projects
+    path: deploy/clusters/local/components/bank-accounts-db
     repoURL: https://github.com/holos-run/bank-of-holos
     targetRevision: main

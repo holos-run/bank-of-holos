@@ -1,3 +1,3 @@
 package holos
 
-#ArgoConfig: AppProject: #AppProjects["bank-security"].metadata.name
+_ArgoConfig: AppProject: _AppProjects["bank-security"].metadata.name

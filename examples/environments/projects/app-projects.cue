@@ -5,7 +5,7 @@ import ap "argoproj.io/appproject/v1alpha1"
 #AppProject: ap.#AppProject & {
 	metadata: name:      string
 	metadata: namespace: _ArgoCD.Namespace
-	spec: description:   string | *"Holos managed AppProject for \(#Organization.DisplayName)"
+	spec: description:   string | *"Holos managed AppProject for \(_Organization.DisplayName)"
 	spec: clusterResourceWhitelist: [{group: "*", kind: "*"}]
 	spec: destinations: [{namespace: "*", server: "*"}]
 	spec: sourceRepos: ["*"]

@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    holos.run/component.name: bank-balance-reader
-  name: bank-balance-reader
+    holos.run/component.name: namespaces
+  name: namespaces
   namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
-  project: bank-backend
+  project: platform
   source:
-    path: deploy/clusters/workload/components/bank-balance-reader
+    path: deploy/clusters/local/components/namespaces
     repoURL: https://github.com/holos-run/bank-of-holos
     targetRevision: main

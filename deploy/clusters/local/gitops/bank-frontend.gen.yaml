@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    holos.run/component.name: external-secrets-crds
-  name: external-secrets-crds
+    holos.run/component.name: bank-frontend
+  name: bank-frontend
   namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
-  project: platform
+  project: bank-frontend
   source:
-    path: deploy/clusters/workload/components/external-secrets-crds
+    path: deploy/clusters/local/components/bank-frontend
     repoURL: https://github.com/holos-run/bank-of-holos
     targetRevision: main

@@ -3,11 +3,11 @@ package holos
 import "strings"
 
 // Produce a helm chart build plan.
-(#Helm & Chart).BuildPlan
+_Helm.BuildPlan
 
-let Chart = {
+_Helm: #Helm & {
 	Name:      "argocd"
-	Namespace: #ArgoCD.Namespace
+	Namespace: _ArgoCD.Namespace
 
 	Chart: {
 		name:    "argo-cd"
@@ -24,14 +24,14 @@ let Chart = {
 	Resources: [_]: [_]: metadata: namespace: Namespace
 	// Grant the Gateway namespace the ability to refer to the backend service
 	// from HTTPRoute resources.
-	Resources: ReferenceGrant: (#Istio.Gateway.Namespace): #ReferenceGrant
+	Resources: ReferenceGrant: (_Istio.Gateway.Namespace): _ReferenceGrant
 
 	Values: #Values & {
 		kubeVersionOverride: "1.29.0"
 		// handled in the argo-crds component
 		crds: install: false
 		// Configure the same fqdn the HTTPRoute is configured with.
-		global: domain: #HTTPRoutes.argocd.spec.hostnames[0]
+		global: domain: _HTTPRoutes.argocd.spec.hostnames[0]
 		dex: enabled:   false
 		// the platform handles mutual tls to the backend
 		configs: params: "server.insecure": true

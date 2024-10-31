@@ -57,7 +57,7 @@ _Kubernetes: #Kubernetes & {
 						containers: [{
 							env: [{
 								name:  "BANK_NAME"
-								value: #Organization.DisplayName
+								value: _Organization.DisplayName
 							}, {
 								name:  "ENV_PLATFORM"
 								value: "local"

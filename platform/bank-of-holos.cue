@@ -17,9 +17,9 @@ let COMPONENTS = {
 }
 
 // Manage on workload clusters only
-for Cluster in #Fleets.workload.clusters {
+for Cluster in _Fleets.workload.clusters {
 	for Component in COMPONENTS {
-		#Platform: Components: "\(Cluster.name):\(Component.name)": {
+		_Platform: Components: "\(Cluster.name):\(Component.name)": {
 			name:      Component.name
 			component: "projects/bank-of-holos/\(Component.owner)/components/\(Component.name)"
 			cluster:   Cluster.name

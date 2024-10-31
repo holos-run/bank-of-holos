@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    holos.run/component.name: namespaces
-  name: namespaces
+    holos.run/component.name: local-ca
+  name: local-ca
   namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
   project: platform
   source:
-    path: deploy/clusters/workload/components/namespaces
+    path: deploy/clusters/local/components/local-ca
     repoURL: https://github.com/holos-run/bank-of-holos
     targetRevision: main

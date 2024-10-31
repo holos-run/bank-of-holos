@@ -5,10 +5,10 @@ _HelmChart.BuildPlan
 
 _HelmChart: #Helm & {
 	Name:      "cert-manager"
-	Namespace: #CertManager.Namespace
+	Namespace: _CertManager.Namespace
 
 	Chart: {
-		version: #CertManager.Version
+		version: _CertManager.Version
 		repository: {
 			name: "jetstack"
 			url:  "https://charts.jetstack.io"

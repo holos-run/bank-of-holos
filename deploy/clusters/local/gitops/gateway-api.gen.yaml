@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    holos.run/component.name: istio-ztunnel
-  name: istio-ztunnel
+    holos.run/component.name: gateway-api
+  name: gateway-api
   namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
   project: platform
   source:
-    path: deploy/clusters/workload/components/istio-ztunnel
+    path: deploy/clusters/local/components/gateway-api
     repoURL: https://github.com/holos-run/bank-of-holos
     targetRevision: main

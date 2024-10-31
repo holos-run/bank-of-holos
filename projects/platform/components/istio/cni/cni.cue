@@ -1,20 +1,20 @@
 package holos
 
 // Produce a helm chart build plan.
-(#Helm & Chart).BuildPlan
+_Helm.BuildPlan
 
-let Chart = {
+_Helm: #Helm & {
 	Name:      "istio-cni"
-	Namespace: #Istio.System.Namespace
+	Namespace: _Istio.System.Namespace
 
 	Chart: {
 		name:    "cni"
-		version: #Istio.Version
+		version: _Istio.Version
 		repository: {
 			name: "istio"
 			url:  "https://istio-release.storage.googleapis.com/charts"
 		}
 	}
 
-	Values: #Istio.Values
+	Values: _Istio.Values
 }
