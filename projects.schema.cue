@@ -41,7 +41,7 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 				parameters: {
 					project:       NAME
 					cluster:       CLUSTER.name
-					outputBaseDir: "projects/\(NAME)/clusters/\(CLUSTER.name)"
+					outputBaseDir: "clusters/\(CLUSTER.name)/projects/\(NAME)"
 				}
 			}
 		}
