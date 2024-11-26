@@ -11,6 +11,7 @@
     "admissionregistration",
     "apiextensions",
     "applicationset",
+    "appproject",
     "argoproj",
     "authcode",
     "authorizationpolicies",

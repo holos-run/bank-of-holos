@@ -5,6 +5,7 @@ metadata:
     app.holos.run/cluster.name: management
     app.holos.run/component.name: namespaces
     app.holos.run/project.name: addons
+    app.holos.run/team.name: platform
     kubernetes.io/metadata.name: cert-manager
   name: cert-manager
 ---
@@ -15,5 +16,6 @@ metadata:
     app.holos.run/cluster.name: management
     app.holos.run/component.name: namespaces
     app.holos.run/project.name: addons
+    app.holos.run/team.name: platform
     kubernetes.io/metadata.name: external-secrets
   name: external-secrets
