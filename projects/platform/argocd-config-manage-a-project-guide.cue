@@ -1,3 +1,4 @@
 package holos
 
-_ArgoConfig: AppProject: _AppProjects.platform.metadata.name
+// TODO: Manage ArgoCD Applications and associate with projects.
+ArgoConfig: AppProject: AppProjects.platform.metadata.name

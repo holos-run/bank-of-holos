@@ -8,7 +8,7 @@ package holos
 }
 
 // #Istio represents platform wide configuration
-_Istio: {
+Istio: #Istio & {
 	Version: "1.23.1"
 	System: Namespace:  "istio-system"
 	Gateway: Namespace: "istio-ingress"
@@ -16,10 +16,9 @@ _Istio: {
 	// Constrain Helm values for safer, easier upgrades and consistency across
 	// platform components.
 	Values: global: istioNamespace: System.Namespace
-
 	// Configure ambient mode
 	Values: profile: "ambient"
 }
 
 // Register the Namespaces
-_Namespaces: (_Istio.System.Namespace): _
+Namespaces: (Istio.System.Namespace): _

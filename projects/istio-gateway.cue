@@ -1,4 +1,4 @@
 package holos
 
 // Register the Namespaces
-_Namespaces: (_Istio.Gateway.Namespace): _
+Namespaces: (Istio.Gateway.Namespace): _

@@ -1,7 +1,7 @@
 package holos
 
 // _ArgoCD represents platform wide configuration
-_ArgoCD: #ArgoCD & {
+ArgoCD: #ArgoCD & {
 	Version:   "2.12.3"
 	Namespace: "argocd"
 }
@@ -12,7 +12,7 @@ _ArgoCD: #ArgoCD & {
 }
 
 // Register namespaces
-_Namespaces: (_ArgoCD.Namespace): _
+Namespaces: (ArgoCD.Namespace): _
 
 // Register the HTTPRoute to the backend Service
-_HTTPRoutes: argocd: _backendRefs: "argocd-server": namespace: _ArgoCD.Namespace
+_HTTPRoutes: argocd: _backendRefs: "argocd-server": namespace: ArgoCD.Namespace

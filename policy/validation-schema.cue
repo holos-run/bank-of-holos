@@ -1,9 +1,13 @@
 package policy
 
-import apps "k8s.io/api/apps/v1"
+import (
+	core "k8s.io/api/core/v1"
+	apps "k8s.io/api/apps/v1"
+)
 
 // Block Secret resources. kind will not unify with "Secret"
-secret: kind: "Use an ExternalSecret instead.  Forbidden by security policy."
+secret: [NAME=string]: kind: "Use an ExternalSecret instead.  Forbidden by security policy."
 
-// Validate Deployment against Kubernetes type definitions.
-deployment: apps.#Deployment
+// Validate against Kubernetes type definitions.
+namespace: [_]:  core.#Namespace
+deployment: [_]: apps.#Deployment

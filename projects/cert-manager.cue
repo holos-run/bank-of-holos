@@ -6,10 +6,10 @@ package holos
 }
 
 // Platform wide configuration
-_CertManager: {
+CertManager: #CertManager & {
 	Version:   "v1.16.1"
 	Namespace: "cert-manager"
 }
 
 // Register the namespace
-_Namespaces: (_CertManager.Namespace): _
+Namespaces: (CertManager.Namespace): _

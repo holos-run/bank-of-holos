@@ -6,10 +6,10 @@ package holos
 	Namespace: string
 }
 
-_ExternalSecrets: #ExternalSecrets & {
+ExternalSecrets: #ExternalSecrets & {
 	Version:   "0.10.3"
 	Namespace: "external-secrets"
 }
 
 // Register the namespace
-_Namespaces: (_ExternalSecrets.Namespace): _
+Namespaces: (ExternalSecrets.Namespace): _

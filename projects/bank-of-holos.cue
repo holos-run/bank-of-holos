@@ -11,7 +11,7 @@ package holos
 	Resources: #Resources
 }
 
-_BankOfHolos: #BankOfHolos & {
+BankOfHolos: #BankOfHolos & {
 	Name: "bank-of-holos"
 
 	Frontend: Namespace: "bank-frontend"
@@ -20,12 +20,12 @@ _BankOfHolos: #BankOfHolos & {
 }
 
 // Register namespaces
-_Namespaces: (_BankOfHolos.Frontend.Namespace): _
-_Namespaces: (_BankOfHolos.Backend.Namespace):  _
-_Namespaces: (_BankOfHolos.Security.Namespace): _
+Namespaces: (BankOfHolos.Frontend.Namespace): _
+Namespaces: (BankOfHolos.Backend.Namespace):  _
+Namespaces: (BankOfHolos.Security.Namespace): _
 
 // Register projects
-_AppProjects: {
+AppProjects: {
 	"bank-frontend": _
 	"bank-backend":  _
 	"bank-security": _
@@ -33,4 +33,4 @@ _AppProjects: {
 
 // Register HTTPRoutes.
 // bank.example.com routes to Service frontend in the bank-frontend namespace.
-_HTTPRoutes: bank: _backendRefs: frontend: namespace: _BankOfHolos.Frontend.Namespace
+_HTTPRoutes: bank: _backendRefs: frontend: namespace: BankOfHolos.Frontend.Namespace
