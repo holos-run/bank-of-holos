@@ -30,10 +30,11 @@ import (
 		}
 	}
 
-	// TODO: Loop over environments too.
 	for CLUSTER in clusters {
-		// Manage namespaces associated with the project.
-		let NAMESPACE_COMPONENT = #ProjectClusterComponent & {
+		// Manage namespaces associated with the project.  Note the namespaces
+		// component itself is not associated with a project because it's a
+		// foundational component used by all projects.
+		let NAMESPACE_COMPONENT = #SharedComponent & {
 			_project:   NAME
 			_cluster:   CLUSTER.name
 			_component: "namespaces"
@@ -69,7 +70,7 @@ import (
 	name: "project:\(_project):cluster:\(_cluster):component:\(_component)"
 	component: core.#Component & {
 		name: _component
-		path: "teams/\(_team)/components/\(_component)"
+		path: string | *"projects/\(_project)/components/\(_component)"
 		labels: {
 			"app.holos.run/project.name":   _project
 			"app.holos.run/cluster.name":   _cluster
@@ -85,6 +86,13 @@ import (
 	}
 }
 
+// #SharedComponent represents a component shared across multiple projects.  For
+// example, namespace management.
+#SharedComponent: #ProjectClusterComponent & {
+	_component: _
+	component: path: "components/\(_component)"
+}
+
 // ArgoCD AppProject
 #AppProject: ap.#AppProject & {
 	metadata: name:      string
@@ -93,28 +101,6 @@ import (
 	spec: clusterResourceWhitelist: [{group: "*", kind: "*"}]
 	spec: destinations: [{namespace: "*", server: "*"}]
 	spec: sourceRepos: ["*"]
-}
-
-#ClusterComponent: {
-	_cluster:   string
-	_component: string
-	_team:      string
-
-	name: "cluster:\(_cluster):component:\(_component)"
-	component: core.#Component & {
-		name: _component
-		path: "teams/\(_team)/components/\(_component)"
-		labels: {
-			"app.holos.run/cluster.name":   _cluster
-			"app.holos.run/team.name":      _team
-			"app.holos.run/component.name": _component
-		}
-		annotations: "app.holos.run/description": "\(name) for on cluster \(_cluster)"
-		parameters: {
-			cluster:       _cluster
-			outputBaseDir: "clusters/\(_cluster)"
-		}
-	}
 }
 
 // Registration point for AppProjects

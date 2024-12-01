@@ -11,6 +11,7 @@ Projects: #Projects & {
 		namespaces: "external-secrets": _
 		namespaces: "cert-manager":     _
 	}
+
 	jeff: #ProjectBuilder & {
 		namespaces: jeff: _
 	}
