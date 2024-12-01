@@ -4,7 +4,11 @@ Projects: #Projects & {
 	argocd: #ProjectBuilder & {
 		namespaces: argocd: _
 		// Additional components to manage on every cluster.
-		_components: projects: name: "app-projects"
+		_components: {
+			projects: name: "app-projects"
+			crds:   _
+			argocd: _
+		}
 	}
 
 	addons: #ProjectBuilder & {

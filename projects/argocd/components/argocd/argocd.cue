@@ -1,13 +1,16 @@
 package holos
 
-import "strings"
+import (
+	"strings"
+	rg "gateway.networking.k8s.io/referencegrant/v1beta1"
+)
 
 // Produce a helm chart build plan.
-_Helm.BuildPlan
+holos: Component.BuildPlan
 
-_Helm: #Helm & {
+Component: #Helm & {
 	Name:      "argocd"
-	Namespace: _ArgoCD.Namespace
+	Namespace: ArgoCD.Namespace
 
 	Chart: {
 		name:    "argo-cd"
@@ -24,14 +27,25 @@ _Helm: #Helm & {
 	Resources: [_]: [_]: metadata: namespace: Namespace
 	// Grant the Gateway namespace the ability to refer to the backend service
 	// from HTTPRoute resources.
-	Resources: ReferenceGrant: (_Istio.Gateway.Namespace): _ReferenceGrant
+	Resources: ReferenceGrant: "istio-ingress": rg.#ReferenceGrant & {
+		metadata: name: "istio-ingress"
+		spec: from: [{
+			group:     "gateway.networking.k8s.io"
+			kind:      "HTTPRoute"
+			namespace: "istio-ingress"
+		}]
+		spec: to: [{
+			group: ""
+			kind:  "Service"
+		}]
+	}
 
 	Values: #Values & {
 		kubeVersionOverride: "1.29.0"
 		// handled in the argo-crds component
 		crds: install: false
 		// Configure the same fqdn the HTTPRoute is configured with.
-		global: domain: _HTTPRoutes.argocd.spec.hostnames[0]
+		global: domain: "argocd.holos.localhost"
 		dex: enabled:   false
 		// the platform handles mutual tls to the backend
 		configs: params: "server.insecure": true

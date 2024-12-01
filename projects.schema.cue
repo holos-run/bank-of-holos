@@ -21,7 +21,9 @@ import (
 #ProjectBuilder: #Project & {
 	name: _
 	let NAME = name
-	_components: #Components
+	_components: #Components & {
+		[NAME=string]: name: string | *NAME
+	}
 
 	clusters: _
 	for ClusterSet in ClusterSets {
