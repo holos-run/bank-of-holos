@@ -1,6 +1,7 @@
 package holos
 
-_Kustomize: #Kustomize & {
+holos: Component.BuildPlan
+Component: #Kustomize & {
 	Name: "gateway-api"
 
 	KustomizeConfig: Files: {
@@ -11,6 +12,3 @@ _Kustomize: #Kustomize & {
 		"standard/gateway.networking.k8s.io_referencegrants.yaml": _
 	}
 }
-
-// Produce a kubectl kustomize build plan.
-_Kustomize.BuildPlan

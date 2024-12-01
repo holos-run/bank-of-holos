@@ -60,3 +60,24 @@ spec:
     server: '*'
   sourceRepos:
   - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: app-projects
+    app.holos.run/project.name: argocd
+    app.holos.run/team.name: platform
+  name: network
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'

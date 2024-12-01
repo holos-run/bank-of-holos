@@ -1,6 +1,12 @@
 package holos
 
 Projects: #Projects & {
+	network: #ProjectBuilder & {
+		_components: {
+			"gateway-api": _
+		}
+	}
+
 	argocd: #ProjectBuilder & {
 		namespaces: argocd: _
 		// Additional components to manage on every cluster.
