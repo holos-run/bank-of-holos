@@ -19,7 +19,8 @@ import (
 
 // Manage the base structure of the project on all clusters.
 #ProjectBuilder: #Project & {
-	name: _
+	name:       _
+	namespaces: _
 	let NAME = name
 	_components: #Components & {
 		[NAME=string]: name: string | *NAME
@@ -33,16 +34,18 @@ import (
 	}
 
 	for CLUSTER in clusters {
-		// Manage namespaces associated with the project.  Note the namespaces
-		// component itself is not associated with a project because it's a
-		// foundational component used by all projects.
-		let NAMESPACE_COMPONENT = #SharedComponent & {
-			_project:   NAME
-			_cluster:   CLUSTER.name
-			_component: "namespaces"
-			_team:      "platform"
+		if len(namespaces) > 0 {
+			// Manage namespaces associated with the project.  Note the namespaces
+			// component itself is not associated with a project because it's a
+			// foundational component used by all projects.
+			let NAMESPACE_COMPONENT = #SharedComponent & {
+				_project:   NAME
+				_cluster:   CLUSTER.name
+				_component: "namespaces"
+				_team:      "platform"
+			}
+			components: (NAMESPACE_COMPONENT.name): NAMESPACE_COMPONENT.component
 		}
-		components: (NAMESPACE_COMPONENT.name): NAMESPACE_COMPONENT.component
 
 		// Mix in additional components
 		for MIXIN_COMPONENT in _components {
