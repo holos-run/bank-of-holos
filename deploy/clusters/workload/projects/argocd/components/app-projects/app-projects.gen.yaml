@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   labels:
-    app.holos.run/cluster.name: local
+    app.holos.run/cluster.name: workload
     app.holos.run/component.name: app-projects
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
@@ -23,7 +23,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   labels:
-    app.holos.run/cluster.name: local
+    app.holos.run/cluster.name: workload
     app.holos.run/component.name: app-projects
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
@@ -44,7 +44,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   labels:
-    app.holos.run/cluster.name: local
+    app.holos.run/cluster.name: workload
     app.holos.run/component.name: app-projects
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform

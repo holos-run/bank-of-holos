@@ -1,12 +1,6 @@
 package holos
 
-Clusters: #Clusters & {
-	// Management Cluster
-	management: region: "local"
-	management: set:    "management"
-	// Local Clusters
-	local: region: "local"
-}
+Clusters: #Clusters
 
 // ClusterSets is dynamically built from the Clusters structure.
 ClusterSets: #ClusterSets & {
