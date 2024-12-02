@@ -7,6 +7,18 @@ metadata:
     app.holos.run/project.name: security
     app.holos.run/team.name: security
     argocd.argoproj.io/instance: security-namespaces
+    kubernetes.io/metadata.name: bank-security
+  name: bank-security
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: security
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: security-namespaces
     kubernetes.io/metadata.name: cert-manager
   name: cert-manager
 ---
