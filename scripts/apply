@@ -6,46 +6,67 @@ cd "$TOPLEVEL"
 
 set -xeuo pipefail
 
+apply() {
+  local file="${1%.gen.yaml}.gen.yaml"
+  local cluster="${2:-workload}"
+
+  find "deploy/clusters/${cluster}" -name "${file}" \
+    | xargs -I% -n1 bash -c 'test -s % && echo % || true' \
+    | xargs -I% -n1 kubectl apply --server-side=true -f %
+}
+
+applyDir() {
+  local dir="${1}"
+  local cluster="${2:-workload}"
+
+  find "deploy/clusters/${cluster}" -type d -name "${dir}" \
+    | xargs -I% -n1 kubectl apply --server-side=true -f %
+}
+
 # Namespaces first
-kubectl apply --server-side=true -f deploy/clusters/local/components/namespaces/namespaces.gen.yaml
+apply namespaces
 
 # Custom Resource Definitions
-kubectl apply --server-side=true -f deploy/clusters/local/components/argocd-crds/argocd-crds.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/gateway-api/gateway-api.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/external-secrets-crds/external-secrets-crds.gen.yaml
+apply argocd-crds
+apply gateway-api
+apply external-secrets-crds
 kubectl wait --for=condition=Established crd --all --timeout=300s
 
 # External Secrets
-kubectl apply --server-side=true -f deploy/clusters/local/components/external-secrets/external-secrets.gen.yaml
-
+apply external-secrets
 # Cert Manager (CRDs are included)
-kubectl apply --server-side=true -f deploy/clusters/local/components/cert-manager/cert-manager.gen.yaml
+apply cert-manager
 # Wait for cert manager to be available so we can manage the cluster issuer
 kubectl wait --for=condition=Available deployment/cert-manager-webhook -n cert-manager --timeout=300s
-# Manage the cluster issuer
-kubectl apply --server-side=true -f deploy/clusters/local/components/local-ca/local-ca.gen.yaml
+
+# Manage the cluster issuer (local-ca)
+apply local-ca
 if ! kubectl wait --for=condition=Ready clusterissuer/local-ca --timeout=30s; then
   echo 'Did you forget to apply your local CA?  See: https://holos.run/docs/guides/local-cluster/#reset-the-cluster' >&2
   exit 1
 fi
 
 # ArgoCD
-kubectl apply --server-side=true -f deploy/clusters/local/components/argocd/argocd.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/app-projects/app-projects.gen.yaml
+apply argocd
+apply app-projects
 
-# Istio ()
-kubectl apply --server-side=true -f deploy/clusters/local/components/istio-base/istio-base.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/istiod/istiod.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/istio-cni/istio-cni.gen.yaml
+# Istio
+apply istio-base
+apply istiod
+apply istio-cni
 if ! kubectl wait --for=condition=Ready pod -l k8s-app=istio-cni-node --timeout=300s -n istio-system; then
   echo 'istio-cni-node not ready, try: holos generate component istio-k3d' >&2
   exit 1
 fi
-kubectl apply --server-side=true -f deploy/clusters/local/components/istio-ztunnel/istio-ztunnel.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/istio-gateway/istio-gateway.gen.yaml
-
+apply istio-ztunnel
+apply istio-gateway
 # Routes should be accepted, but all backends aren't valid yet.
-kubectl apply --server-side=true -f deploy/clusters/local/components/httproutes/httproutes.gen.yaml
+apply httproutes
+
+# ArgoCD Applications
+applyDir gitops
+
+exit 0
 
 # Generate the private-key in-cluster.
 kubectl apply --server-side=true -f deploy/clusters/local/components/bank-secrets/bank-secrets.gen.yaml
@@ -64,8 +85,5 @@ kubectl apply --server-side=true -f deploy/clusters/local/components/bank-ledger
 kubectl apply --server-side=true -f deploy/clusters/local/components/bank-transaction-history/bank-transaction-history.gen.yaml
 # Bank Frontend
 kubectl apply --server-side=true -f deploy/clusters/local/components/bank-frontend/bank-frontend.gen.yaml
-
-# ArgoCD Applications
-kubectl apply --server-side=true -f deploy/clusters/local/gitops
 
 exit 0

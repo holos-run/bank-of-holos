@@ -1,7 +1,0 @@
-#! /bin/bash
-#
-set -euo pipefail
-
-TOPLEVEL="$(cd $(dirname "$0") && git rev-parse --show-toplevel)"
-
-cd "${TOPLEVEL}" && npx cspell README.md ./doc/md/**/*.{md,mdx,markdown}

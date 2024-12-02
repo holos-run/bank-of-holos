@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: management
+        app.holos.run/component.name: argocd
+        app.holos.run/project.name: argocd
+        app.holos.run/team.name: platform
+    name: argocd-argocd
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: argocd
+    source:
+        path: deploy/clusters/management/projects/argocd/components/argocd
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: main

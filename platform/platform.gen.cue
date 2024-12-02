@@ -1,10 +1,10 @@
 package holos
 
-import api "github.com/holos-run/holos/api/author/v1alpha4"
+import "github.com/holos-run/holos/api/author/v1alpha5:author"
 
-_Platform: api.#Platform & {
+Platform: author.#Platform & {
 	Name: "default"
 }
 
 // Render a Platform resource for holos to process
-_Platform.Resource
+holos: Platform.Resource
