@@ -69,16 +69,14 @@ applyDir gitops
 # Bank of Holos
 for env in dev test stage prod; do
   # Generate the private-key in-cluster.
-  apply "${env}-bank-secrets"
+  apply "secrets"
 done
 for env in dev test stage prod; do
   kubectl wait --for=condition=complete job.batch/jwt-key-writer -n "${env}-bank-security" --timeout=300s
 done
 
-for env in dev test stage prod; do
-  # Bank Config
-  apply "${env}-bank-backend-config"
-done
+# Bank Config
+apply config
 
 
 exit 0

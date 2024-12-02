@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: management
+        app.holos.run/component.name: frontend
+        app.holos.run/environment.name: stage
+        app.holos.run/project.name: stage-bank-frontend
+        app.holos.run/stack.name: bank-of-holos
+        app.holos.run/team.name: frontend
+    name: stage-bank-frontend-frontend
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: stage-bank-frontend
+    source:
+        path: deploy/clusters/management/projects/stage-bank-frontend/components/frontend
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: main

@@ -30,7 +30,7 @@ for ENV in BankOfHolos.configuration.environments {
 		namespaces: BankOfHolos.configuration.environments[ENV.name].namespaces
 
 		_components: {
-			"\(ENV.name)-bank-secrets": path: "projects/security/components/bank-secrets"
+			secrets: path: "projects/security/components/bank-secrets"
 		}
 	}
 
@@ -40,7 +40,7 @@ for ENV in BankOfHolos.configuration.environments {
 		environment: ENV.name
 
 		_components: {
-			"\(ENV.name)-bank-backend-config": path: "projects/bank-backend/components/bank-backend-config"
+			config: path: "projects/bank-backend/components/bank-backend-config"
 		}
 	}
 
@@ -50,7 +50,7 @@ for ENV in BankOfHolos.configuration.environments {
 		environment: ENV.name
 
 		_components: {
-			"\(ENV.name)-bank-frontend": path: "projects/bank-frontend/components/bank-frontend"
+			frontend: path: "projects/bank-frontend/components/bank-frontend"
 		}
 	}
 
