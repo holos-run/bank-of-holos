@@ -3,7 +3,7 @@ package holos
 // imported from the 1.23.1 base chart
 // cue import components/istio/base/vendor/base/values.yaml
 
-_Istio: Values: {
+Istio: Values: {
 	// "defaults" is a workaround for Helm limitations. Users should NOT set ".defaults" explicitly, but rather directly set the fields internally.
 	// For instance, instead of `--set defaults.foo=bar`, just set `--set foo=bar`.
 	defaults: {

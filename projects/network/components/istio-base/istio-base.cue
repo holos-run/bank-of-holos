@@ -6,15 +6,15 @@ import (
 )
 
 // Produce a helm chart build plan.
-_HelmChart.BuildPlan
+holos: Component.BuildPlan
 
-_HelmChart: #Helm & {
+Component: #Helm & {
 	Name:      "istio-base"
-	Namespace: _Istio.System.Namespace
+	Namespace: Istio.System.Namespace
 
 	Chart: {
 		name:    "base"
-		version: _Istio.Version
+		version: Istio.Version
 		repository: {
 			name: "istio"
 			url:  "https://istio-release.storage.googleapis.com/charts"
@@ -23,7 +23,7 @@ _HelmChart: #Helm & {
 
 	KustomizeConfig: Kustomization: patches: [for x in KustomizePatches {x}]
 
-	Values: _Istio.Values
+	Values: Istio.Values
 }
 
 #KustomizePatches: [ArbitraryLabel=string]: ks.#Patch
