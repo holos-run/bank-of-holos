@@ -1,3 +1,4 @@
+@if(!NoBank)
 package holos
 
 import (
@@ -6,11 +7,13 @@ import (
 	ss "external-secrets.io/secretstore/v1beta1"
 )
 
-let BankName = _BankOfHolos.Name
+let BankName = BankOfHolos.Name
+let SecurityNamespace = BankOfHolos.configuration.environments[EnvironmentName].security.namespace
+let BackendNamespace = BankOfHolos.configuration.environments[EnvironmentName].backend.namespace
 
-_BankOfHolos: {
+_Bank: {
 	// Resources to make available in each of the project namespaces.
-	Resources: {
+	Resources: #Resources & {
 		ServiceAccount: (BankName): core.#ServiceAccount & {
 			apiVersion: "v1"
 			kind:       "ServiceAccount"
@@ -19,10 +22,10 @@ _BankOfHolos: {
 
 		// SecretStore to fetch secrets owned by the security team
 		SecretStore: (BankName): ss.#SecretStore & {
-			metadata: name: _BankOfHolos.Security.Namespace
+			metadata: name: SecurityNamespace
 			spec: provider: {
 				kubernetes: {
-					remoteNamespace: _BankOfHolos.Security.Namespace
+					remoteNamespace: SecurityNamespace
 					auth: serviceAccount: name: ServiceAccount[BankName].metadata.name
 					server: {
 						url: "https://kubernetes.default.svc"
@@ -65,11 +68,11 @@ _BankOfHolos: {
 			kind:       "ConfigMap"
 			metadata: name: "service-api-config"
 			data: {
-				TRANSACTIONS_API_ADDR: "ledgerwriter.\(_BankOfHolos.Backend.Namespace).svc:8080"
-				BALANCES_API_ADDR:     "balancereader.\(_BankOfHolos.Backend.Namespace).svc:8080"
-				HISTORY_API_ADDR:      "transactionhistory.\(_BankOfHolos.Backend.Namespace).svc:8080"
-				CONTACTS_API_ADDR:     "contacts.\(_BankOfHolos.Backend.Namespace).svc:8080"
-				USERSERVICE_API_ADDR:  "userservice.\(_BankOfHolos.Backend.Namespace).svc:8080"
+				TRANSACTIONS_API_ADDR: "ledgerwriter.\(BackendNamespace).svc:8080"
+				BALANCES_API_ADDR:     "balancereader.\(BackendNamespace).svc:8080"
+				HISTORY_API_ADDR:      "transactionhistory.\(BackendNamespace).svc:8080"
+				CONTACTS_API_ADDR:     "contacts.\(BackendNamespace).svc:8080"
+				USERSERVICE_API_ADDR:  "userservice.\(BackendNamespace).svc:8080"
 			}
 		}
 

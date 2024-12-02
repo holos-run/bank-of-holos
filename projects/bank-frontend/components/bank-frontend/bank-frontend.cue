@@ -1,11 +1,12 @@
 package holos
 
-// Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+import rg "gateway.networking.k8s.io/referencegrant/v1beta1"
 
-let Objects = {
-	Name:      "bank-frontend"
-	Namespace: _BankOfHolos.Frontend.Namespace
+// Produce a kubernetes objects build plan.
+holos: Component.BuildPlan
+
+Component: #Kubernetes & {
+	Namespace: BankOfHolos.configuration.environments[EnvironmentName].frontend.namespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace
@@ -15,17 +16,16 @@ let Objects = {
 		Service: frontend: {
 			metadata: name: "frontend"
 			metadata: labels: {
-				application: "bank-of-holos"
-				environment: "development"
+				application: BankOfHolos.Name
+				environment: EnvironmentName
 				team:        "frontend"
 				tier:        "web"
 			}
 			spec: {
 				selector: {
 					app:         "frontend"
-					application: "bank-of-holos"
-					environment: "development"
-					team:        "frontend"
+					application: BankOfHolos.Name
+					environment: EnvironmentName
 					tier:        "web"
 				}
 				_ports: http: {
@@ -41,24 +41,22 @@ let Objects = {
 		Deployment: frontend: {
 			metadata: name: "frontend"
 			metadata: labels: {
-				application: "bank-of-holos"
-				environment: "development"
+				application: BankOfHolos.Name
+				environment: EnvironmentName
 				team:        "frontend"
 				tier:        "web"
 			}
 			spec: {
 				selector: matchLabels: {
 					app:         "frontend"
-					application: "bank-of-holos"
-					environment: "development"
-					team:        "frontend"
-					tier:        "web"
+					application: BankOfHolos.Name
+					environment: EnvironmentName
 				}
 				template: {
 					metadata: labels: {
 						app:         "frontend"
-						application: "bank-of-holos"
-						environment: "development"
+						application: BankOfHolos.Name
+						environment: EnvironmentName
 						team:        "frontend"
 						tier:        "web"
 					}
@@ -75,7 +73,7 @@ let Objects = {
 						containers: [{
 							env: [{
 								name:  "BANK_NAME"
-								value: _Organization.DisplayName
+								value: Organization.DisplayName
 							}, {
 								name:  "ENV_PLATFORM"
 								value: "local"
@@ -189,13 +187,20 @@ let Objects = {
 			}
 		}
 
-		// Allow HTTPRoutes in the ingress gateway namespace to reference Services
-		// in this namespace.
-		ReferenceGrant: grant: _ReferenceGrant & {
-			metadata: namespace: Namespace
+		ReferenceGrant: "istio-ingress": rg.#ReferenceGrant & {
+			metadata: name: "istio-ingress"
+			spec: from: [{
+				group:     "gateway.networking.k8s.io"
+				kind:      "HTTPRoute"
+				namespace: "istio-ingress"
+			}]
+			spec: to: [{
+				group: ""
+				kind:  "Service"
+			}]
 		}
 
 		// Include shared resources
-		_BankOfHolos.Resources
+		_Bank.Resources
 	}
 }

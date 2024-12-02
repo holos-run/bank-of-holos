@@ -34,6 +34,16 @@ for ENV in BankOfHolos.configuration.environments {
 		}
 	}
 
+	Projects: "\(ENV.name)-bank-frontend": #ProjectBuilder & {
+		team:        "frontend"
+		stack:       BankOfHolos.Name
+		environment: ENV.name
+
+		_components: {
+			"\(ENV.name)-bank-frontend": path: "projects/bank-frontend/components/bank-frontend"
+		}
+	}
+
 	// Register the HTTPRoute to the backend Service
 	HTTPRoutes: "bank.\(ENV.name)": _backendRefs: frontend: namespace: ENV.frontend.namespace
 }
