@@ -21,7 +21,7 @@ BankOfHolos: #BankOfHolos & {
 
 // Projects are security boundaries, so manage one project for each environment
 // and team combination.
-for ENV in BankOfHolos.Environments {
+for ENV in BankOfHolos.configuration.environments {
 	Projects: "\(ENV.name)-bank-security": #ProjectBuilder & {
 		team:        "security"
 		stack:       BankOfHolos.Name
@@ -33,10 +33,10 @@ for ENV in BankOfHolos.Environments {
 			"\(ENV.name)-bank-secrets": path: "projects/security/components/bank-secrets"
 		}
 	}
-}
 
-// Register the HTTPRoute to the backend Service
-// HTTPRoutes: bank: _backendRefs: frontend: namespace: BankOfHolos.Frontend.Namespace
+	// Register the HTTPRoute to the backend Service
+	HTTPRoutes: "bank.\(ENV.name)": _backendRefs: frontend: namespace: ENV.frontend.namespace
+}
 
 // Platform wide schema definition.
 #BankOfHolos: {
@@ -52,6 +52,7 @@ for ENV in BankOfHolos.Environments {
 	// Configuration constructed from the above fields.
 	configuration: {
 		environments: [NAME=string]: {
+			name:       NAME
 			namespaces: #Namespaces
 			frontend: namespace: "\(NAME)-bank-frontend"
 			backend: namespace:  "\(NAME)-bank-backend"
