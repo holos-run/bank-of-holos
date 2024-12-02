@@ -1,3 +1,4 @@
+@if(!NoIstio)
 package holos
 
 import v1 "gateway.networking.k8s.io/httproute/v1"
@@ -5,14 +6,14 @@ import v1 "gateway.networking.k8s.io/httproute/v1"
 // Struct containing HTTPRoute configurations. These resources are managed in
 // the istio-ingress namespace.  Other components define the routes they need
 // close to the root of configuration.
-_HTTPRoutes: #HTTPRoutes
+HTTPRoutes: #HTTPRoutes
 
 // #HTTPRoutes defines the schema of managed HTTPRoute resources for the
 // platform.
 #HTTPRoutes: {
 	// For the guides, we simplify this down to a flat namespace.
 	[Name=string]: v1.#HTTPRoute & {
-		let HOST = Name + "." + _Organization.Domain
+		let HOST = Name + "." + Organization.Domain
 
 		_backendRefs: [NAME=string]: {
 			name:      NAME
@@ -21,7 +22,7 @@ _HTTPRoutes: #HTTPRoutes
 		}
 
 		metadata: name:      Name
-		metadata: namespace: _Istio.Gateway.Namespace
+		metadata: namespace: Istio.Gateway.Namespace
 		metadata: labels: app: Name
 		spec: hostnames: [HOST]
 		spec: parentRefs: [{

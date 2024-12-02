@@ -2,5 +2,6 @@
 package holos
 
 Organization: {
-	Domain: "holos.localhost"
+	DisplayName: "Bank of Holos"
+	Domain:      "holos.localhost"
 }

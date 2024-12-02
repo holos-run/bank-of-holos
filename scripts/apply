@@ -52,11 +52,10 @@ if ! kubectl wait --for=condition=Ready pod -l k8s-app=istio-cni-node --timeout=
 fi
 apply istio-ztunnel
 apply istio-gateway
+# Routes should be accepted, but all backends aren't valid yet.
+apply httproutes
 
 exit 0
-
-# Routes should be accepted, but all backends aren't valid yet.
-kubectl apply --server-side=true -f deploy/clusters/local/components/httproutes/httproutes.gen.yaml
 
 # Generate the private-key in-cluster.
 kubectl apply --server-side=true -f deploy/clusters/local/components/bank-secrets/bank-secrets.gen.yaml

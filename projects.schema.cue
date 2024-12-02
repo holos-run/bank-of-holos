@@ -1,9 +1,6 @@
 package holos
 
-import (
-	"github.com/holos-run/holos/api/core/v1alpha5:core"
-	ap "argoproj.io/appproject/v1alpha1"
-)
+import "github.com/holos-run/holos/api/core/v1alpha5:core"
 
 #Components: [string]: core.#Component
 
@@ -100,16 +97,3 @@ import (
 	_component: _
 	component: path: "components/\(_component)"
 }
-
-// ArgoCD AppProject
-#AppProject: ap.#AppProject & {
-	metadata: name:      string
-	metadata: namespace: string | *"argocd"
-	spec: description:   string | *"Holos managed AppProject"
-	spec: clusterResourceWhitelist: [{group: "*", kind: "*"}]
-	spec: destinations: [{namespace: "*", server: "*"}]
-	spec: sourceRepos: ["*"]
-}
-
-// Registration point for AppProjects
-#AppProjects: [NAME=string]: #AppProject & {metadata: name: NAME}

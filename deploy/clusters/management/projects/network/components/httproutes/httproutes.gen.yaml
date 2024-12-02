@@ -1,0 +1,26 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: argocd
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: httproutes
+    app.holos.run/project.name: network
+    app.holos.run/team.name: platform
+  name: argocd
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - argocd.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: argocd-server
+      namespace: argocd
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /

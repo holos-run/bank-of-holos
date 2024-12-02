@@ -10,6 +10,7 @@ Projects: network: {
 		"istio-cni":     _
 		"istio-ztunnel": _
 		"istio-gateway": _
+		"httproutes":    _
 	}
 }
 
