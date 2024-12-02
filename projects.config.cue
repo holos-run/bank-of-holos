@@ -8,6 +8,7 @@ Projects: #Projects & {
 	}
 
 	security: #ProjectBuilder & {
+		team: "security"
 		namespaces: "external-secrets": _
 		namespaces: "cert-manager":     _
 		_components: {

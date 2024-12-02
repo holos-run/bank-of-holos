@@ -6,6 +6,7 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 
 #Project: {
 	name:         string
+	team:         string
 	namespaces:   #Namespaces
 	environments: #Environments
 	clusters:     #Clusters
@@ -18,6 +19,7 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 #ProjectBuilder: #Project & {
 	name:       _
 	namespaces: _
+	team:       string | *"platform"
 	let NAME = name
 	_components: #Components & {
 		[NAME=string]: core.#Component & {
@@ -41,7 +43,7 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 				_project:   NAME
 				_cluster:   CLUSTER.name
 				_component: "namespaces"
-				_team:      "platform"
+				_team:      team
 			}
 			components: (NAMESPACE_COMPONENT.name): NAMESPACE_COMPONENT.component
 		}
