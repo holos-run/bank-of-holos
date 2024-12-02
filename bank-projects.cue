@@ -34,6 +34,16 @@ for ENV in BankOfHolos.configuration.environments {
 		}
 	}
 
+	Projects: "\(ENV.name)-bank-backend": #ProjectBuilder & {
+		team:        "backend"
+		stack:       BankOfHolos.Name
+		environment: ENV.name
+
+		_components: {
+			"\(ENV.name)-bank-backend-config": path: "projects/bank-backend/components/bank-backend-config"
+		}
+	}
+
 	Projects: "\(ENV.name)-bank-frontend": #ProjectBuilder & {
 		team:        "frontend"
 		stack:       BankOfHolos.Name
