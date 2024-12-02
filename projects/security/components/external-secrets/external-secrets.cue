@@ -1,6 +1,9 @@
 package holos
 
-_Helm: #Helm & {
+// Produce a helm chart build plan.
+holos: Component.BuildPlan
+
+Component: #Helm & {
 	Name:      "external-secrets"
 	Namespace: "external-secrets"
 
@@ -14,6 +17,3 @@ _Helm: #Helm & {
 
 	Values: installCRDs: false
 }
-
-// Produce a helm chart build plan.
-_Helm.BuildPlan

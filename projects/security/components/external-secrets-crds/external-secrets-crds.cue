@@ -6,13 +6,13 @@ import (
 )
 
 // Produce a kustomize build plan
-_Kustomize.BuildPlan
+holos: Component.BuildPlan
 
-_Kustomize: #Kustomize & {
+Component: #Kustomize & {
 	Name: "external-secrets-crds"
 
 	KustomizeConfig: {
-		Resources: "https://raw.githubusercontent.com/external-secrets/external-secrets/v\(_ExternalSecrets.Version)/deploy/crds/bundle.yaml": _
+		Resources: "https://raw.githubusercontent.com/external-secrets/external-secrets/v\(ExternalSecrets.Version)/deploy/crds/bundle.yaml": _
 		Kustomization: patches: [for x in KustomizePatches {x}]
 	}
 }

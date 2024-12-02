@@ -1,4 +1,4 @@
-@if(workload)
+@if(!NoWorkload)
 package holos
 
 Clusters: {

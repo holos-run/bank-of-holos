@@ -1,4 +1,4 @@
-@if(validate)
+@if(!NoValidate)
 package holos
 
 // Configure all component kinds to validate against the policy directory.

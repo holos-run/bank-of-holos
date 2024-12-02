@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: security
+    app.holos.run/team.name: platform
+    kubernetes.io/metadata.name: cert-manager
+  name: cert-manager
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: security
+    app.holos.run/team.name: platform
+    kubernetes.io/metadata.name: external-secrets
+  name: external-secrets

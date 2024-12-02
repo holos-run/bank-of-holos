@@ -6,27 +6,6 @@ metadata:
     app.holos.run/component.name: app-projects
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
-  name: addons
-  namespace: argocd
-spec:
-  clusterResourceWhitelist:
-  - group: '*'
-    kind: '*'
-  description: Holos managed AppProject
-  destinations:
-  - namespace: '*'
-    server: '*'
-  sourceRepos:
-  - '*'
----
-apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  labels:
-    app.holos.run/cluster.name: management
-    app.holos.run/component.name: app-projects
-    app.holos.run/project.name: argocd
-    app.holos.run/team.name: platform
   name: argocd
   namespace: argocd
 spec:
@@ -49,6 +28,48 @@ metadata:
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
   name: jeff
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: app-projects
+    app.holos.run/project.name: argocd
+    app.holos.run/team.name: platform
+  name: network
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Holos managed AppProject
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: app-projects
+    app.holos.run/project.name: argocd
+    app.holos.run/team.name: platform
+  name: security
   namespace: argocd
 spec:
   clusterResourceWhitelist:

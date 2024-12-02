@@ -1,14 +1,14 @@
 package holos
 
 // Produce a helm chart build plan.
-_HelmChart.BuildPlan
+holos: Component.BuildPlan
 
-_HelmChart: #Helm & {
+Component: #Helm & {
 	Name:      "cert-manager"
-	Namespace: _CertManager.Namespace
+	Namespace: CertManager.Namespace
 
 	Chart: {
-		version: _CertManager.Version
+		version: CertManager.Version
 		repository: {
 			name: "jetstack"
 			url:  "https://charts.jetstack.io"

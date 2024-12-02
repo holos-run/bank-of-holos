@@ -1,4 +1,4 @@
-@if(management)
+@if(!NoManagement)
 package holos
 
 Clusters: {

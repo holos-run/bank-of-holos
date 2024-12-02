@@ -23,7 +23,9 @@ import (
 	namespaces: _
 	let NAME = name
 	_components: #Components & {
-		[NAME=string]: name: string | *NAME
+		[NAME=string]: core.#Component & {
+			name: string | *NAME
+		}
 	}
 
 	clusters: _
@@ -54,6 +56,7 @@ import (
 				_cluster:   CLUSTER.name
 				_component: MIXIN_COMPONENT.name
 				_team:      "platform"
+				component: path: MIXIN_COMPONENT.path
 			}
 			components: (COMPONENT.name): COMPONENT.component
 		}

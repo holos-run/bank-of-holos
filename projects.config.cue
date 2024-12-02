@@ -7,19 +7,26 @@ Projects: #Projects & {
 		}
 	}
 
+	security: #ProjectBuilder & {
+		namespaces: "external-secrets": _
+		namespaces: "cert-manager":     _
+		_components: {
+			"external-secrets-crds": _
+			"external-secrets":      _
+			"cert-manager":          _
+			"local-ca":              _
+		}
+	}
+
 	argocd: #ProjectBuilder & {
 		namespaces: argocd: _
 		// Additional components to manage on every cluster.
 		_components: {
 			projects: name: "app-projects"
-			crds:   _
+			crds: name:     "argocd-crds"
+			crds: path:     "projects/argocd/components/crds"
 			argocd: _
 		}
-	}
-
-	addons: #ProjectBuilder & {
-		namespaces: "external-secrets": _
-		namespaces: "cert-manager":     _
 	}
 
 	jeff: #ProjectBuilder & {
