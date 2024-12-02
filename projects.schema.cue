@@ -7,19 +7,22 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 #Project: {
 	name:         string
 	team:         string
+	environment?: string
+	stack?:       string
 	namespaces:   #Namespaces
-	environments: #Environments
-	clusters:     #Clusters
 	components:   #Components
+	clusters:     #Clusters
 }
 
 #Projects: [NAME=string]: #Project & {name: NAME}
 
 // Manage the base structure of the project on all clusters.
 #ProjectBuilder: #Project & {
-	name:       _
-	namespaces: _
-	team:       string | *"platform"
+	name:         _
+	namespaces:   _
+	team:         string | *"platform"
+	environment?: _
+	stack?:       _
 	let NAME = name
 	_components: #Components & {
 		[NAME=string]: core.#Component & {
@@ -44,6 +47,12 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 				_cluster:   CLUSTER.name
 				_component: "namespaces"
 				_team:      team
+				if stack != _|_ {
+					_stack: stack
+				}
+				if environment != _|_ {
+					_environment: environment
+				}
 			}
 			components: (NAMESPACE_COMPONENT.name): NAMESPACE_COMPONENT.component
 		}
@@ -54,7 +63,13 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 				_project:   NAME
 				_cluster:   CLUSTER.name
 				_component: MIXIN_COMPONENT.name
-				_team:      "platform"
+				_team:      team
+				if stack != _|_ {
+					_stack: stack
+				}
+				if environment != _|_ {
+					_environment: environment
+				}
 				component: path: MIXIN_COMPONENT.path
 			}
 			components: (COMPONENT.name): COMPONENT.component
@@ -69,10 +84,12 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 // The component definition is located in a team specific path for OWNERS
 // support.
 #ProjectClusterComponent: {
-	_project:   string
-	_cluster:   string
-	_component: string
-	_team:      string
+	_project:      string
+	_cluster:      string
+	_component:    string
+	_team:         string
+	_environment?: string
+	_stack?:       string
 
 	name: "project:\(_project):cluster:\(_cluster):component:\(_component)"
 	component: core.#Component & {
@@ -83,11 +100,20 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 			"app.holos.run/cluster.name":   _cluster
 			"app.holos.run/team.name":      _team
 			"app.holos.run/component.name": _component
+			if _environment != _|_ {
+				"app.holos.run/environment.name": _environment
+			}
+			if _stack != _|_ {
+				"app.holos.run/stack.name": _stack
+			}
 		}
 		annotations: "app.holos.run/description": "\(name) for project \(_project) on cluster \(_cluster)"
 		parameters: {
-			project:       _project
-			cluster:       _cluster
+			project: _project
+			cluster: _cluster
+			if _environment != _|_ {
+				EnvironmentName: _environment
+			}
 			outputBaseDir: "clusters/\(_cluster)/projects/\(_project)"
 		}
 	}

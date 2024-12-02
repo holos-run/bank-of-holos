@@ -21,8 +21,7 @@ let Writer = "\(SecretName)-writer"
 let AllowedName = BankOfHolos.Name
 
 Component: #Kubernetes & {
-	Name:      "bank-secrets"
-	Namespace: BankOfHolos.Security.Namespace
+	Namespace: BankOfHolos.configuration.environments[EnvironmentName].security.namespace
 
 	Resources: [_]: [_]: metadata: namespace:    Namespace
 	Resources: [_]: [ID=string]: metadata: name: string | *ID
@@ -117,11 +116,11 @@ Component: #Kubernetes & {
 			subjects: [{
 				kind:      "ServiceAccount"
 				name:      AllowedName
-				namespace: BankOfHolos.Frontend.Namespace
+				namespace: BankOfHolos.configuration.environments[EnvironmentName].frontend.namespace
 			}, {
 				kind:      "ServiceAccount"
 				name:      AllowedName
-				namespace: BankOfHolos.Backend.Namespace
+				namespace: BankOfHolos.configuration.environments[EnvironmentName].backend.namespace
 			},
 			]
 		}

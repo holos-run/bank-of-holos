@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: management
+        app.holos.run/component.name: namespaces
+        app.holos.run/environment.name: stage
+        app.holos.run/project.name: stage-bank-security
+        app.holos.run/stack.name: bank-of-holos
+        app.holos.run/team.name: security
+    name: stage-bank-security-namespaces
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: stage-bank-security
+    source:
+        path: deploy/clusters/management/projects/stage-bank-security/components/namespaces
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: main

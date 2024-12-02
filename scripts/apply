@@ -66,11 +66,16 @@ apply httproutes
 # ArgoCD Applications
 applyDir gitops
 
-exit 0
+# Bank of Holos
+for env in dev test stage prod; do
+  # Generate the private-key in-cluster.
+  apply "${env}-bank-secrets"
+done
+for env in dev test stage prod; do
+  kubectl wait --for=condition=complete job.batch/jwt-key-writer -n "${env}-bank-security" --timeout=300s
+done
 
-# Generate the private-key in-cluster.
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-secrets/bank-secrets.gen.yaml
-kubectl wait --for=condition=complete job.batch/jwt-key-writer -n bank-security --timeout=300s
+exit 0
 
 # Bank Config
 kubectl apply --server-side=true -f deploy/clusters/local/components/bank-backend-config/bank-backend-config.gen.yaml
