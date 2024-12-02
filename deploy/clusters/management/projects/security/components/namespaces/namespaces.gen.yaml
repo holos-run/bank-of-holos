@@ -6,6 +6,7 @@ metadata:
     app.holos.run/component.name: namespaces
     app.holos.run/project.name: security
     app.holos.run/team.name: security
+    argocd.argoproj.io/instance: security-namespaces
     kubernetes.io/metadata.name: cert-manager
   name: cert-manager
 ---
@@ -17,5 +18,6 @@ metadata:
     app.holos.run/component.name: namespaces
     app.holos.run/project.name: security
     app.holos.run/team.name: security
+    argocd.argoproj.io/instance: security-namespaces
     kubernetes.io/metadata.name: external-secrets
   name: external-secrets

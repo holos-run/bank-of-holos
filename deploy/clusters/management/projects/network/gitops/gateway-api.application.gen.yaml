@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: management
+        app.holos.run/component.name: gateway-api
+        app.holos.run/project.name: network
+        app.holos.run/team.name: platform
+    name: network-gateway-api
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: network
+    source:
+        path: deploy/clusters/management/projects/network/components/gateway-api
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: main

@@ -8,6 +8,7 @@ metadata:
     app.holos.run/team.name: platform
     app.kubernetes.io/name: ztunnel
     app.kubernetes.io/part-of: istio
+    argocd.argoproj.io/instance: network-istio-ztunnel
   name: ztunnel
   namespace: istio-system
 ---
@@ -21,6 +22,7 @@ metadata:
     app.holos.run/team.name: platform
     app.kubernetes.io/name: ztunnel
     app.kubernetes.io/part-of: istio
+    argocd.argoproj.io/instance: network-istio-ztunnel
   name: ztunnel
   namespace: istio-system
 spec:

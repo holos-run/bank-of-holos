@@ -6,6 +6,7 @@ metadata:
     app.holos.run/component.name: istio-gateway
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-gateway
     gateway.istio.io/managed: istio.io-gateway-controller
     gateway.networking.k8s.io/gateway-name: default
     istio.io/gateway-name: default
@@ -20,6 +21,7 @@ metadata:
     app.holos.run/component.name: istio-gateway
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-gateway
   name: gateway-cert
   namespace: istio-ingress
 spec:
@@ -40,6 +42,7 @@ metadata:
     app.holos.run/component.name: istio-gateway
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-gateway
   name: default
   namespace: istio-ingress
 spec:

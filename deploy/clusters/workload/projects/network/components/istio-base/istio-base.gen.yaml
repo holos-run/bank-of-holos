@@ -9,6 +9,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     istio: security
@@ -598,6 +599,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     release: istio
@@ -5872,6 +5874,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     release: istio
@@ -6202,6 +6205,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     release: istio
@@ -6715,6 +6719,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     istio: security
@@ -6928,6 +6933,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     release: istio
@@ -7012,6 +7018,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     istio: security
@@ -7475,6 +7482,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     release: istio
@@ -8051,6 +8059,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     release: istio
@@ -9471,6 +9480,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     istio: telemetry
@@ -10250,6 +10260,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     release: istio
@@ -13184,6 +13195,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     release: istio
@@ -13480,6 +13492,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     release: istio
@@ -13778,6 +13791,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     chart: istio
     heritage: Tiller
     release: istio
@@ -14394,6 +14408,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     release: base
   name: istio-reader-service-account
   namespace: istio-system
@@ -14407,6 +14422,7 @@ metadata:
     app.holos.run/component.name: istio-base
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-base
     istio: istiod
     istio.io/rev: default
     release: base

@@ -11,6 +11,7 @@ metadata:
     app.holos.run/component.name: gateway-api
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-gateway-api
   name: gatewayclasses.gateway.networking.k8s.io
 spec:
   group: gateway.networking.k8s.io
@@ -541,6 +542,7 @@ metadata:
     app.holos.run/component.name: gateway-api
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-gateway-api
   name: gateways.gateway.networking.k8s.io
 spec:
   group: gateway.networking.k8s.io
@@ -2641,6 +2643,7 @@ metadata:
     app.holos.run/component.name: gateway-api
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-gateway-api
   name: grpcroutes.gateway.networking.k8s.io
 spec:
   group: gateway.networking.k8s.io
@@ -7041,6 +7044,7 @@ metadata:
     app.holos.run/component.name: gateway-api
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-gateway-api
   name: httproutes.gateway.networking.k8s.io
 spec:
   group: gateway.networking.k8s.io
@@ -13093,6 +13097,7 @@ metadata:
     app.holos.run/component.name: gateway-api
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-gateway-api
   name: referencegrants.gateway.networking.k8s.io
 spec:
   group: gateway.networking.k8s.io

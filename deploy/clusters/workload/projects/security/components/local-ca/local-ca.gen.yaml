@@ -6,6 +6,7 @@ metadata:
     app.holos.run/component.name: local-ca
     app.holos.run/project.name: security
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: security-local-ca
   name: local-ca
   namespace: cert-manager
 spec:

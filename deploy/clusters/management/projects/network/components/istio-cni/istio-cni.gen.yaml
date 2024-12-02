@@ -7,6 +7,7 @@ metadata:
     app.holos.run/component.name: istio-cni
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-cni
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     operator.istio.io/component: Cni
@@ -23,6 +24,7 @@ metadata:
     app.holos.run/component.name: istio-cni
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-cni
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     operator.istio.io/component: Cni
@@ -49,6 +51,7 @@ metadata:
     app.holos.run/component.name: istio-cni
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-cni
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     operator.istio.io/component: Cni
@@ -72,6 +75,7 @@ metadata:
     app.holos.run/component.name: istio-cni
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-cni
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     operator.istio.io/component: Cni
@@ -103,6 +107,7 @@ metadata:
     app.holos.run/component.name: istio-cni
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-cni
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     operator.istio.io/component: Cni
@@ -125,6 +130,7 @@ metadata:
     app.holos.run/component.name: istio-cni
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-cni
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     k8s-app: istio-cni-repair
@@ -148,6 +154,7 @@ metadata:
     app.holos.run/component.name: istio-cni
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-cni
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     k8s-app: istio-cni-repair
@@ -187,6 +194,7 @@ metadata:
     app.holos.run/component.name: istio-cni
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-cni
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     operator.istio.io/component: Cni
@@ -202,6 +210,7 @@ metadata:
     app.holos.run/component.name: istio-cni
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istio-cni
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     k8s-app: istio-cni-node

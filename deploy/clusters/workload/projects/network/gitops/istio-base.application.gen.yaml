@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: workload
+        app.holos.run/component.name: istio-base
+        app.holos.run/project.name: network
+        app.holos.run/team.name: platform
+    name: network-istio-base
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: network
+    source:
+        path: deploy/clusters/workload/projects/network/components/istio-base
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: main

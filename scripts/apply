@@ -15,6 +15,14 @@ apply() {
     | xargs -I% -n1 kubectl apply --server-side=true -f %
 }
 
+applyDir() {
+  local dir="${1}"
+  local cluster="${2:-workload}"
+
+  find "deploy/clusters/${cluster}" -type d -name "${dir}" \
+    | xargs -I% -n1 kubectl apply --server-side=true -f %
+}
+
 # Namespaces first
 apply namespaces
 
@@ -55,6 +63,9 @@ apply istio-gateway
 # Routes should be accepted, but all backends aren't valid yet.
 apply httproutes
 
+# ArgoCD Applications
+applyDir gitops
+
 exit 0
 
 # Generate the private-key in-cluster.
@@ -74,8 +85,5 @@ kubectl apply --server-side=true -f deploy/clusters/local/components/bank-ledger
 kubectl apply --server-side=true -f deploy/clusters/local/components/bank-transaction-history/bank-transaction-history.gen.yaml
 # Bank Frontend
 kubectl apply --server-side=true -f deploy/clusters/local/components/bank-frontend/bank-frontend.gen.yaml
-
-# ArgoCD Applications
-kubectl apply --server-side=true -f deploy/clusters/local/gitops
 
 exit 0

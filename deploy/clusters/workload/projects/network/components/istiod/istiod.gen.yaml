@@ -7,6 +7,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     release: istiod
   name: istiod
   namespace: istio-system
@@ -20,6 +21,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     release: istiod
   name: istiod
   namespace: istio-system
@@ -66,6 +68,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     release: istiod
   name: istio-reader-clusterrole-istio-system
 rules:
@@ -178,6 +181,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     release: istiod
   name: istiod-clusterrole-istio-system
 rules:
@@ -375,6 +379,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     release: istiod
   name: istiod-gateway-controller-istio-system
 rules:
@@ -424,6 +429,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     release: istiod
   name: istiod
   namespace: istio-system
@@ -445,6 +451,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     release: istiod
   name: istio-reader-clusterrole-istio-system
 roleRef:
@@ -465,6 +472,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     release: istiod
   name: istiod-clusterrole-istio-system
 roleRef:
@@ -485,6 +493,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     release: istiod
   name: istiod-gateway-controller-istio-system
 roleRef:
@@ -519,6 +528,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     operator.istio.io/component: Pilot
@@ -2494,6 +2504,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     operator.istio.io/component: Pilot
@@ -2510,6 +2521,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     install.operator.istio.io/owning-resource: unknown
     istio: pilot
     istio.io/rev: default
@@ -2545,6 +2557,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     install.operator.istio.io/owning-resource: unknown
     istio: pilot
     istio.io/rev: default
@@ -2713,6 +2726,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     install.operator.istio.io/owning-resource: unknown
     istio: pilot
     istio.io/rev: default
@@ -2736,6 +2750,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     operator.istio.io/component: Pilot
@@ -2766,6 +2781,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     install.operator.istio.io/owning-resource: unknown
     istio.io/rev: default
     operator.istio.io/component: Pilot
@@ -2922,6 +2938,7 @@ metadata:
     app.holos.run/component.name: istiod
     app.holos.run/project.name: network
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-istiod
     istio: istiod
     istio.io/rev: default
     release: istiod

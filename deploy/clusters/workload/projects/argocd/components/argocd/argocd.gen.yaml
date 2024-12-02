@@ -13,6 +13,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-application-controller
   namespace: argocd
@@ -32,6 +33,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-applicationset-controller
   namespace: argocd
@@ -51,6 +53,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-notifications-controller
   namespace: argocd
@@ -73,6 +76,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-redis-secret-init
   namespace: argocd
@@ -92,6 +96,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-repo-server
   namespace: argocd
@@ -111,6 +116,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-server
   namespace: argocd
@@ -129,6 +135,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-application-controller
   namespace: argocd
@@ -185,6 +192,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-applicationset-controller
   namespace: argocd
@@ -285,6 +293,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-notifications-controller
   namespace: argocd
@@ -342,6 +351,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-redis-secret-init
   namespace: argocd
@@ -375,6 +385,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-repo-server
   namespace: argocd
@@ -394,6 +405,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-server
   namespace: argocd
@@ -447,6 +459,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-application-controller
 rules:
@@ -475,6 +488,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-notifications-controller
 rules:
@@ -528,6 +542,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-server
 rules:
@@ -589,6 +604,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-application-controller
   namespace: argocd
@@ -615,6 +631,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-applicationset-controller
   namespace: argocd
@@ -641,6 +658,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-notifications-controller
   namespace: argocd
@@ -670,6 +688,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-redis-secret-init
   namespace: argocd
@@ -695,6 +714,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-repo-server
   namespace: argocd
@@ -721,6 +741,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-server
   namespace: argocd
@@ -747,6 +768,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-application-controller
 roleRef:
@@ -772,6 +794,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-notifications-controller
 roleRef:
@@ -797,6 +820,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-server
 roleRef:
@@ -833,6 +857,7 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-cm
   namespace: argocd
@@ -881,6 +906,7 @@ metadata:
     app.kubernetes.io/name: argocd-cmd-params-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-cmd-params-cm
   namespace: argocd
@@ -898,6 +924,7 @@ metadata:
     app.kubernetes.io/name: argocd-gpg-keys-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-gpg-keys-cm
   namespace: argocd
@@ -919,6 +946,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-notifications-cm
   namespace: argocd
@@ -946,6 +974,7 @@ metadata:
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-rbac-cm
   namespace: argocd
@@ -991,6 +1020,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-redis-health-configmap
   namespace: argocd
@@ -1024,6 +1054,7 @@ metadata:
     app.kubernetes.io/name: argocd-ssh-known-hosts-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-ssh-known-hosts-cm
   namespace: argocd
@@ -1041,6 +1072,7 @@ metadata:
     app.kubernetes.io/name: argocd-tls-certs-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-tls-certs-cm
   namespace: argocd
@@ -1059,6 +1091,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-notifications-secret
   namespace: argocd
@@ -1079,6 +1112,7 @@ metadata:
     app.kubernetes.io/name: argocd-secret
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-secret
   namespace: argocd
@@ -1098,6 +1132,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-applicationset-controller
   namespace: argocd
@@ -1125,6 +1160,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-redis
   namespace: argocd
@@ -1151,6 +1187,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-repo-server
   namespace: argocd
@@ -1178,6 +1215,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-server
   namespace: argocd
@@ -1211,6 +1249,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-applicationset-controller
   namespace: argocd
@@ -1460,6 +1499,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-notifications-controller
   namespace: argocd
@@ -1583,6 +1623,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-redis
   namespace: argocd
@@ -1671,6 +1712,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-repo-server
   namespace: argocd
@@ -2048,6 +2090,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-server
   namespace: argocd
@@ -2453,6 +2496,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-application-controller
   namespace: argocd
@@ -2767,6 +2811,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-secret-init
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.12.3
+    argocd.argoproj.io/instance: argocd-argocd
     helm.sh/chart: argo-cd-7.5.2
   name: argocd-redis-secret-init
   namespace: argocd
@@ -2812,6 +2857,7 @@ metadata:
     app.holos.run/component.name: argocd
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: argocd-argocd
   name: istio-ingress
   namespace: argocd
 spec:

@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: management
+        app.holos.run/component.name: namespaces
+        app.holos.run/project.name: network
+        app.holos.run/team.name: platform
+    name: network-namespaces
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: network
+    source:
+        path: deploy/clusters/management/projects/network/components/namespaces
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: main
