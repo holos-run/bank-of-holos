@@ -65,7 +65,12 @@ for ENV in BankOfHolos.configuration.environments {
 	}
 
 	// Register the HTTPRoute to the backend Service
-	HTTPRoutes: "bank.\(ENV.name)": _backendRefs: frontend: namespace: ENV.frontend.namespace
+	if ENV.name == "prod" {
+		HTTPRoutes: bank: _backendRefs: frontend: namespace: ENV.frontend.namespace
+	}
+	if ENV.name != "prod" {
+		HTTPRoutes: "\(ENV.name)-bank": _backendRefs: frontend: namespace: ENV.frontend.namespace
+	}
 }
 
 // Platform wide schema definition.
@@ -76,8 +81,6 @@ for ENV in BankOfHolos.configuration.environments {
 	Environments: #Environments
 	// Namespaces to manage in each environment.
 	EnvironmentNamespaces: #NamedObjects
-	// Resources to manage in each of the namespaces.
-	NamespaceResources: #Resources
 
 	// Configuration constructed from the above fields.
 	configuration: {
