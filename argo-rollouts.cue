@@ -7,7 +7,7 @@ ArgoRollouts: {
 
 // Register the ArgoCD Project namespaces and components
 Projects: {
-	argocd: #ProjectBuilder & {
+	argocd: {
 		namespaces: (ArgoRollouts.Namespace): _
 		_components: {
 			"rollouts-crds": _

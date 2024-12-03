@@ -51,6 +51,9 @@ fi
 apply argocd
 apply app-projects
 apply rollouts
+# Kargo
+apply kargo-secrets
+apply kargo
 
 # Istio
 apply istio-base
