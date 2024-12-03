@@ -43,7 +43,7 @@ kubectl wait --for=condition=Available deployment/cert-manager-webhook -n cert-m
 # Manage the cluster issuer (local-ca)
 apply local-ca
 if ! kubectl wait --for=condition=Ready clusterissuer/local-ca --timeout=30s; then
-  echo 'Did you forget to apply your local CA?  See: https://holos.run/docs/guides/local-cluster/#reset-the-cluster' >&2
+  echo 'Did you forget to apply your local CA?  See: https://holos.run/docs/local-cluster/#reset-the-cluster' >&2
   exit 1
 fi
 
@@ -61,7 +61,7 @@ apply istio-base
 apply istiod
 apply istio-cni
 if ! kubectl wait --for=condition=Ready pod -l k8s-app=istio-cni-node --timeout=300s -n istio-system; then
-  echo 'istio-cni-node not ready, try: holos generate component istio-k3d' >&2
+  echo 'istio-cni-node not ready' >&2
   exit 1
 fi
 apply istio-ztunnel
