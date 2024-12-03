@@ -8,7 +8,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
@@ -334,7 +334,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
@@ -1119,7 +1119,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
@@ -4523,7 +4523,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
@@ -8505,7 +8505,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: crds
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -12487,7 +12487,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: crds
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -12760,7 +12760,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -12780,7 +12780,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cainjector
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -12800,7 +12800,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -12819,7 +12819,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cainjector
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -12856,7 +12856,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -12884,7 +12884,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -12921,7 +12921,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -12957,7 +12957,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cainjector
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13032,7 +13032,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13060,7 +13060,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13088,7 +13088,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13164,7 +13164,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13214,7 +13214,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13326,7 +13326,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13379,7 +13379,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13455,7 +13455,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13508,7 +13508,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13581,7 +13581,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13631,7 +13631,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13673,7 +13673,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13698,7 +13698,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cainjector
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13725,7 +13725,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13752,7 +13752,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13779,7 +13779,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13806,7 +13806,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cainjector
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13832,7 +13832,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13858,7 +13858,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13884,7 +13884,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13910,7 +13910,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13936,7 +13936,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13962,7 +13962,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -13988,7 +13988,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -14014,7 +14014,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -14040,7 +14040,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -14066,7 +14066,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -14096,7 +14096,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cainjector
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -14125,7 +14125,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -14159,7 +14159,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -14246,7 +14246,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: cainjector
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -14317,7 +14317,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -14421,7 +14421,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
@@ -14463,7 +14463,7 @@ metadata:
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: cert-manager
     app.holos.run/project.name: security
-    app.holos.run/team.name: platform
+    app.holos.run/team.name: security
     app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm

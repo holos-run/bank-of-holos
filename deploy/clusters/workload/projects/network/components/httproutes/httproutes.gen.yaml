@@ -25,3 +25,115 @@ spec:
     - path:
         type: PathPrefix
         value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: bank
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: httproutes
+    app.holos.run/project.name: network
+    app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-httproutes
+  name: bank
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - bank.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: frontend
+      namespace: prod-bank-frontend
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: dev-bank
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: httproutes
+    app.holos.run/project.name: network
+    app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-httproutes
+  name: dev-bank
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - dev-bank.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: frontend
+      namespace: dev-bank-frontend
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: stage-bank
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: httproutes
+    app.holos.run/project.name: network
+    app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-httproutes
+  name: stage-bank
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - stage-bank.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: frontend
+      namespace: stage-bank-frontend
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: test-bank
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: httproutes
+    app.holos.run/project.name: network
+    app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-httproutes
+  name: test-bank
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - test-bank.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: frontend
+      namespace: test-bank-frontend
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /

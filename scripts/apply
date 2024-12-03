@@ -11,8 +11,8 @@ apply() {
   local cluster="${2:-workload}"
 
   find "deploy/clusters/${cluster}" -name "${file}" \
-    | xargs -I% -n1 bash -c 'test -s % && echo % || true' \
-    | xargs -I% -n1 kubectl apply --server-side=true -f %
+    | xargs -S1024 -I% -n1 bash -c 'test -s % && echo % || true' \
+    | xargs -S1024 -I% -n1 kubectl apply --server-side=true -f %
 }
 
 applyDir() {
@@ -66,24 +66,26 @@ apply httproutes
 # ArgoCD Applications
 applyDir gitops
 
-exit 0
-
+## Bank of Holos
 # Generate the private-key in-cluster.
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-secrets/bank-secrets.gen.yaml
-kubectl wait --for=condition=complete job.batch/jwt-key-writer -n bank-security --timeout=300s
-
+apply "secrets"
+for env in dev test stage prod; do
+  kubectl wait --for=condition=complete job.batch/jwt-key-writer -n "${env}-bank-security" --timeout=300s
+done
 # Bank Config
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-backend-config/bank-backend-config.gen.yaml
+apply config
 # Bank Databases
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-accounts-db/bank-accounts-db.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-ledger-db/bank-ledger-db.gen.yaml
+apply accounts-db
+apply ledger-db
+
 # Bank Backend Services
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-contacts/bank-contacts.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-balance-reader/bank-balance-reader.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-userservice/bank-userservice.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-ledger-writer/bank-ledger-writer.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-transaction-history/bank-transaction-history.gen.yaml
-# Bank Frontend
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-frontend/bank-frontend.gen.yaml
+apply contacts
+apply balance-reader
+apply userservice
+apply ledger-writer
+apply transaction-history
+
+# Bank Web Frontend
+apply frontend
 
 exit 0

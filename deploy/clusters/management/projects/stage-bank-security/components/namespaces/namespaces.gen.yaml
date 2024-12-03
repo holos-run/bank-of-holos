@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: namespaces
+    app.holos.run/environment.name: stage
+    app.holos.run/project.name: stage-bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: stage-bank-security-namespaces
+    kubernetes.io/metadata.name: stage-bank-backend
+  name: stage-bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: namespaces
+    app.holos.run/environment.name: stage
+    app.holos.run/project.name: stage-bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: stage-bank-security-namespaces
+    kubernetes.io/metadata.name: stage-bank-frontend
+  name: stage-bank-frontend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: namespaces
+    app.holos.run/environment.name: stage
+    app.holos.run/project.name: stage-bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: stage-bank-security-namespaces
+    kubernetes.io/metadata.name: stage-bank-security
+  name: stage-bank-security
