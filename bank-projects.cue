@@ -41,12 +41,13 @@ for ENV in BankOfHolos.configuration.environments {
 
 		_components: {
 			// Configuration
-			config: path: "projects/bank-backend/components/bank-backend-config"
+			"config": path: "projects/bank-backend/components/bank-backend-config"
 			// Databases
 			"accounts-db": path: "projects/bank-backend/components/bank-accounts-db"
 			"ledger-db": path:   "projects/bank-backend/components/bank-ledger-db"
 			// Services
-			contacts: path: "projects/bank-backend/components/bank-contacts"
+			"contacts": path:       "projects/bank-backend/components/bank-contacts"
+			"balance-reader": path: "projects/bank-backend/components/bank-balance-reader"
 		}
 	}
 
