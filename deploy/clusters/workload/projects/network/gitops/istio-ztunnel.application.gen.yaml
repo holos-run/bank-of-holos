@@ -14,5 +14,5 @@ spec:
     project: network
     source:
         path: deploy/clusters/workload/projects/network/components/istio-ztunnel
-        repoURL: https://github.com/holos-run/bank-of-holos.git
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
         targetRevision: main
