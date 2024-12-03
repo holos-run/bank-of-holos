@@ -52,6 +52,7 @@ apply argocd
 apply app-projects
 apply rollouts
 # Kargo
+kubectl wait --for=condition=Available deployment/external-secrets-webhook -n external-secrets --timeout=300s
 apply kargo-secrets
 apply kargo
 
