@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: workload
+        app.holos.run/component.name: contacts
+        app.holos.run/environment.name: prod
+        app.holos.run/project.name: prod-bank-backend
+        app.holos.run/stack.name: bank-of-holos
+        app.holos.run/team.name: backend
+    name: prod-bank-backend-contacts
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: prod-bank-backend
+    source:
+        path: deploy/clusters/workload/projects/prod-bank-backend/components/contacts
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: main

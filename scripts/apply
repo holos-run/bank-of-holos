@@ -78,21 +78,20 @@ apply config
 apply accounts-db
 apply ledger-db
 
+# Bank Backend Services
+apply contacts
+# kubectl apply --server-side=true -f deploy/clusters/local/components/bank-contacts/bank-contacts.gen.yaml
+# kubectl apply --server-side=true -f deploy/clusters/local/components/bank-balance-reader/bank-balance-reader.gen.yaml
+# kubectl apply --server-side=true -f deploy/clusters/local/components/bank-userservice/bank-userservice.gen.yaml
+# kubectl apply --server-side=true -f deploy/clusters/local/components/bank-ledger-writer/bank-ledger-writer.gen.yaml
+# kubectl apply --server-side=true -f deploy/clusters/local/components/bank-transaction-history/bank-transaction-history.gen.yaml
+
 exit 0
 
 for env in dev test stage prod; do
   apply "${env}-bank-frontend"
 done
 
-# Bank Databases
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-accounts-db/bank-accounts-db.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-ledger-db/bank-ledger-db.gen.yaml
-# Bank Backend Services
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-contacts/bank-contacts.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-balance-reader/bank-balance-reader.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-userservice/bank-userservice.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-ledger-writer/bank-ledger-writer.gen.yaml
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-transaction-history/bank-transaction-history.gen.yaml
 # Bank Frontend
 kubectl apply --server-side=true -f deploy/clusters/local/components/bank-frontend/bank-frontend.gen.yaml
 
