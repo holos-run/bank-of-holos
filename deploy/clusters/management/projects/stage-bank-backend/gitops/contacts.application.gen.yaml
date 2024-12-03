@@ -16,5 +16,5 @@ spec:
     project: stage-bank-backend
     source:
         path: deploy/clusters/management/projects/stage-bank-backend/components/contacts
-        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        repoURL: https://github.com/holos-run/bank-of-holos.git
         targetRevision: main

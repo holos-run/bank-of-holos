@@ -1,4 +1,4 @@
-@if(k3d && !NoIstio)
+@if(!NoK3D && !NoIstio)
 package holos
 
 // If you are using k3d with the default Flannel CNI, you must append some

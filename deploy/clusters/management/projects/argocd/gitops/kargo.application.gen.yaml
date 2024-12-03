@@ -3,16 +3,16 @@ kind: Application
 metadata:
     labels:
         app.holos.run/cluster.name: management
-        app.holos.run/component.name: argocd-crds
+        app.holos.run/component.name: kargo
         app.holos.run/project.name: argocd
         app.holos.run/team.name: platform
-    name: argocd-argocd-crds
+    name: argocd-kargo
     namespace: argocd
 spec:
     destination:
         server: https://kubernetes.default.svc
     project: argocd
     source:
-        path: deploy/clusters/management/projects/argocd/components/argocd-crds
+        path: deploy/clusters/management/projects/argocd/components/kargo
         repoURL: https://github.com/holos-run/bank-of-holos.git
         targetRevision: main

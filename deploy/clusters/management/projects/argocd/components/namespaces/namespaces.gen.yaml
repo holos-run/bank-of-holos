@@ -21,3 +21,15 @@ metadata:
     argocd.argoproj.io/instance: argocd-namespaces
     kubernetes.io/metadata.name: argocd
   name: argocd
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: argocd
+    app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: argocd-namespaces
+    kubernetes.io/metadata.name: kargo
+  name: kargo
