@@ -83,15 +83,9 @@ apply contacts
 apply balance-reader
 apply userservice
 apply ledger-writer
-# kubectl apply --server-side=true -f deploy/clusters/local/components/bank-transaction-history/bank-transaction-history.gen.yaml
+apply transaction-history
 
-exit 0
-
-for env in dev test stage prod; do
-  apply "${env}-bank-frontend"
-done
-
-# Bank Frontend
-kubectl apply --server-side=true -f deploy/clusters/local/components/bank-frontend/bank-frontend.gen.yaml
+# Bank Web Frontend
+apply frontend
 
 exit 0

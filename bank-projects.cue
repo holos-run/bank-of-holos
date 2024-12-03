@@ -46,10 +46,11 @@ for ENV in BankOfHolos.configuration.environments {
 			"accounts-db": path: "projects/bank-backend/components/bank-accounts-db"
 			"ledger-db": path:   "projects/bank-backend/components/bank-ledger-db"
 			// Services
-			"contacts": path:       "projects/bank-backend/components/bank-contacts"
-			"balance-reader": path: "projects/bank-backend/components/bank-balance-reader"
-			"userservice": path:    "projects/bank-backend/components/bank-userservice"
-			"ledger-writer": path:  "projects/bank-backend/components/bank-ledger-writer"
+			"contacts": path:            "projects/bank-backend/components/bank-contacts"
+			"balance-reader": path:      "projects/bank-backend/components/bank-balance-reader"
+			"userservice": path:         "projects/bank-backend/components/bank-userservice"
+			"ledger-writer": path:       "projects/bank-backend/components/bank-ledger-writer"
+			"transaction-history": path: "projects/bank-backend/components/bank-transaction-history"
 		}
 	}
 
