@@ -40,7 +40,9 @@ for ENV in BankOfHolos.configuration.environments {
 		environment: ENV.name
 
 		_components: {
-			config: path: "projects/bank-backend/components/bank-backend-config"
+			config: path:        "projects/bank-backend/components/bank-backend-config"
+			"accounts-db": path: "projects/bank-backend/components/bank-accounts-db"
+			"ledger-db": path:   "projects/bank-backend/components/bank-ledger-db"
 		}
 	}
 
