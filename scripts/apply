@@ -28,6 +28,7 @@ apply namespaces
 
 # Custom Resource Definitions
 apply argocd-crds
+apply rollouts-crds
 apply gateway-api
 apply external-secrets-crds
 kubectl wait --for=condition=Established crd --all --timeout=300s
@@ -49,6 +50,7 @@ fi
 # ArgoCD
 apply argocd
 apply app-projects
+apply rollouts
 
 # Istio
 apply istio-base

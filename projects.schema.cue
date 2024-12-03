@@ -4,6 +4,7 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 
 #Components: [string]: core.#Component
 
+// #Project represents a security boundary.
 #Project: {
 	name:         string
 	team:         string
