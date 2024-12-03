@@ -51,7 +51,7 @@ metadata:
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
     argocd.argoproj.io/instance: argocd-app-projects
-  name: dev-bank-frontend
+  name: dev-bank-security
   namespace: argocd
 spec:
   clusterResourceWhitelist:
@@ -73,7 +73,7 @@ metadata:
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
     argocd.argoproj.io/instance: argocd-app-projects
-  name: dev-bank-security
+  name: dev-bank-web
   namespace: argocd
 spec:
   clusterResourceWhitelist:
@@ -139,7 +139,7 @@ metadata:
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
     argocd.argoproj.io/instance: argocd-app-projects
-  name: prod-bank-frontend
+  name: prod-bank-security
   namespace: argocd
 spec:
   clusterResourceWhitelist:
@@ -161,7 +161,7 @@ metadata:
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
     argocd.argoproj.io/instance: argocd-app-projects
-  name: prod-bank-security
+  name: prod-bank-web
   namespace: argocd
 spec:
   clusterResourceWhitelist:
@@ -227,7 +227,7 @@ metadata:
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
     argocd.argoproj.io/instance: argocd-app-projects
-  name: stage-bank-frontend
+  name: stage-bank-security
   namespace: argocd
 spec:
   clusterResourceWhitelist:
@@ -249,7 +249,7 @@ metadata:
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
     argocd.argoproj.io/instance: argocd-app-projects
-  name: stage-bank-security
+  name: stage-bank-web
   namespace: argocd
 spec:
   clusterResourceWhitelist:
@@ -293,7 +293,7 @@ metadata:
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
     argocd.argoproj.io/instance: argocd-app-projects
-  name: test-bank-frontend
+  name: test-bank-security
   namespace: argocd
 spec:
   clusterResourceWhitelist:
@@ -315,7 +315,7 @@ metadata:
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
     argocd.argoproj.io/instance: argocd-app-projects
-  name: test-bank-security
+  name: test-bank-web
   namespace: argocd
 spec:
   clusterResourceWhitelist:

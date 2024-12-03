@@ -44,7 +44,7 @@ for ENV in BankOfHolos.configuration.environments {
 		}
 	}
 
-	Projects: "\(ENV.name)-bank-frontend": #ProjectBuilder & {
+	Projects: "\(ENV.name)-bank-web": #ProjectBuilder & {
 		team:        "frontend"
 		stack:       BankOfHolos.Name
 		environment: ENV.name
