@@ -86,6 +86,34 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   labels:
+    app: kargo
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: httproutes
+    app.holos.run/project.name: network
+    app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-httproutes
+  name: kargo
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - kargo.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: kargo-api
+      namespace: kargo
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
     app: stage-bank
     app.holos.run/cluster.name: workload
     app.holos.run/component.name: httproutes

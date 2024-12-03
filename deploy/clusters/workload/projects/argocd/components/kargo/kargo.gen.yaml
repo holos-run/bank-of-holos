@@ -4281,16 +4281,13 @@ apiVersion: v1
 data:
   ADMIN_ACCOUNT_ENABLED: "true"
   ADMIN_ACCOUNT_TOKEN_AUDIENCE: localhost
-  ADMIN_ACCOUNT_TOKEN_ISSUER: https://localhost
+  ADMIN_ACCOUNT_TOKEN_ISSUER: http://localhost
   ADMIN_ACCOUNT_TOKEN_TTL: 24h
   KARGO_NAMESPACE: kargo
   LOG_LEVEL: INFO
   PERMISSIVE_CORS_POLICY_ENABLED: "false"
   ROLLOUTS_INTEGRATION_ENABLED: "true"
   SECRET_MANAGEMENT_ENABLED: "true"
-  TLS_CERT_PATH: /etc/kargo/tls.crt
-  TLS_ENABLED: "true"
-  TLS_KEY_PATH: /etc/kargo/tls.key
 kind: ConfigMap
 metadata:
   labels:
@@ -4310,7 +4307,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  API_SERVER_BASE_URL: https://localhost
+  API_SERVER_BASE_URL: http://localhost
   ARGOCD_INTEGRATION_ENABLED: "true"
   ARGOCD_NAMESPACE: argocd
   ARGOCD_WATCH_ARGOCD_NAMESPACE_ONLY: "false"
@@ -4425,7 +4422,7 @@ metadata:
   namespace: kargo
 spec:
   ports:
-  - port: 443
+  - port: 80
     protocol: TCP
     targetPort: 8080
   selector:
@@ -4491,7 +4488,7 @@ spec:
   template:
     metadata:
       annotations:
-        configmap/checksum: 87e64a2c3627c13631f2f52f6caa355f64749d940603e104c716f7d87af26753
+        configmap/checksum: 4d06d3e3841d2e23f4614c31e19ca4b2884d81ede6af86c5ea46896b8d056f56
         secret/checksum: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
       labels:
         app.kubernetes.io/component: api
@@ -4517,8 +4514,6 @@ spec:
             command:
             - /usr/local/bin/grpc_health_probe
             - -addr=:8080
-            - -tls
-            - -tls-no-verify
           initialDelaySeconds: 10
         name: api
         ports:
@@ -4530,26 +4525,9 @@ spec:
             command:
             - /usr/local/bin/grpc_health_probe
             - -addr=:8080
-            - -tls
-            - -tls-no-verify
           initialDelaySeconds: 5
         resources: {}
-        volumeMounts:
-        - mountPath: /etc/kargo
-          name: config
-          readOnly: true
       serviceAccount: kargo-api
-      volumes:
-      - name: config
-        projected:
-          sources:
-          - secret:
-              items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-              name: kargo-api-cert
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -4580,7 +4558,7 @@ spec:
   template:
     metadata:
       annotations:
-        configmap/checksum: 7c2be37b11c4e428432526afab811afb9e26749739183b6fea4919228dab201a
+        configmap/checksum: cf6d41daa5bd745a15bd173fdc5dcf48c25a6c74c4ddb8dca3a0d6045be7aae7
       labels:
         app.kubernetes.io/component: controller
         app.kubernetes.io/instance: kargo
@@ -4780,31 +4758,6 @@ metadata:
     app.holos.run/component.name: kargo
     app.holos.run/project.name: argocd
     app.holos.run/team.name: platform
-    app.kubernetes.io/component: api
-    app.kubernetes.io/instance: kargo
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: kargo
-    app.kubernetes.io/version: v1.0.3
-    argocd.argoproj.io/instance: argocd-kargo
-    helm.sh/chart: kargo-1.0.3
-  name: kargo-api
-  namespace: kargo
-spec:
-  dnsNames:
-  - localhost
-  issuerRef:
-    kind: Issuer
-    name: kargo-selfsigned-cert-issuer
-  secretName: kargo-api-cert
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  labels:
-    app.holos.run/cluster.name: workload
-    app.holos.run/component.name: kargo
-    app.holos.run/project.name: argocd
-    app.holos.run/team.name: platform
     argocd.argoproj.io/instance: argocd-kargo
   name: kargo-webhooks-server
   namespace: kargo
@@ -4829,6 +4782,26 @@ metadata:
   namespace: kargo
 spec:
   selfSigned: {}
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: kargo
+    app.holos.run/project.name: argocd
+    app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: argocd-kargo
+  name: istio-ingress
+  namespace: kargo
+spec:
+  from:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    namespace: istio-ingress
+  to:
+  - group: ""
+    kind: Service
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
