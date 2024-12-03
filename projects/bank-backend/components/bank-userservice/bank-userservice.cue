@@ -1,20 +1,20 @@
 package holos
 
 // Produce a kubernetes objects build plan.
-(#Kubernetes & Objects).BuildPlan
+holos: Component.BuildPlan
 
-let BankName = _BankOfHolos.Name
+let BankName = BankOfHolos.Name
+let BackendNamespace = BankOfHolos.configuration.environments[EnvironmentName].backend.namespace
 
 let CommonLabels = {
 	application: BankName
-	environment: "development"
+	environment: EnvironmentName
 	team:        "accounts"
 	tier:        "backend"
 }
 
-let Objects = {
-	Name:      "bank-userservice"
-	Namespace: _BankOfHolos.Backend.Namespace
+Component: #Kubernetes & {
+	Namespace: BackendNamespace
 
 	// Ensure resources go in the correct namespace
 	Resources: [_]: [_]: metadata: namespace: Namespace
