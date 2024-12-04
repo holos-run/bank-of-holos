@@ -16,5 +16,10 @@ k3d cluster create workload \
   --port "443:443@loadbalancer" \
   --k3s-arg "--disable=traefik@server:0"
 
-kubectl apply --server-side=true -f "$(mkcert -CAROOT)/namespace.yaml"
-kubectl apply --server-side=true -n cert-manager -f "$(mkcert -CAROOT)/local-ca.yaml"
+CAROOT="$(mkcert -CAROOT)"
+kubectl apply --server-side=true -f "${CAROOT}/namespace.yaml"
+kubectl apply --server-side=true -n cert-manager -f "${CAROOT}/local-ca.yaml"
+# Kargo secret
+if [[ -f "${CAROOT}/kargo.yaml" ]]; then
+  kubectl apply --server-side=true -f "${CAROOT}/kargo.yaml"
+fi
