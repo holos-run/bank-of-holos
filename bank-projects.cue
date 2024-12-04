@@ -61,6 +61,7 @@ for ENV in BankOfHolos.configuration.environments {
 
 		_components: {
 			frontend: path: "projects/bank-frontend/components/bank-frontend"
+			podinfo: path: "projects/bank-frontend/components/podinfo"
 		}
 	}
 
