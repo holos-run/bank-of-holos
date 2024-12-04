@@ -298,3 +298,25 @@ spec:
   to:
   - group: ""
     kind: Service
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: frontend
+    app.holos.run/environment.name: stage
+    app.holos.run/project.name: stage-bank-web
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: frontend
+    argocd.argoproj.io/instance: stage-bank-web-frontend
+  name: frontend
+  namespace: stage-bank-frontend
+spec:
+  interval: 5m0s
+  subscriptions:
+  - image:
+      discoveryLimit: 5
+      repoURL: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend
+      semverConstraint: ^v0.6.5
+      strictSemvers: true
