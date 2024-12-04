@@ -9,12 +9,28 @@ import (
 #ComponentConfig: {
 	Name:          _
 	OutputBaseDir: _
-	_ArgoAppName:  string
-
 	// Application resources are Cluster scoped.  BuildPlan metadata.name values
 	// are Project scoped.  Construct a unique cluster scoped named to resolve
 	// conflicts within ArgoCD.
 	_ArgoAppName: "\(ProjectName)-\(Name)"
+
+	// Allow other aspects of the platform configuration to refer to
+	// `Component._ArgoApplication` to get a handle on the Application resource.
+	_ArgoApplication: app.#Application & {
+		metadata: name:      _ArgoAppName
+		metadata: namespace: "argocd"
+		metadata: labels:    Labels
+		// metadata: annotations: "kargo.akuity.io/authorized-stage": "\(ProjectName):\(EnvironmentName)"
+		spec: {
+			destination: server: "https://kubernetes.default.svc"
+			project: ProjectName
+			source: {
+				path:           ResourcesPath
+				repoURL:        Organization.RepoURL
+				targetRevision: string | *"main"
+			}
+		}
+	}
 
 	let ArtifactPath = path.Join([OutputBaseDir, "gitops", "\(Name).application.gen.yaml"], path.Unix)
 	let ResourcesPath = path.Join(["deploy", OutputBaseDir, "components", Name], path.Unix)
@@ -38,20 +54,7 @@ import (
 		generators: [{
 			kind:   "Resources"
 			output: artifact
-			resources: Application: (_ArgoAppName): app.#Application & {
-				metadata: name:      _ArgoAppName
-				metadata: namespace: "argocd"
-				metadata: labels:    Labels
-				spec: {
-					destination: server: "https://kubernetes.default.svc"
-					project: ProjectName
-					source: {
-						path:           ResourcesPath
-						repoURL:        Organization.RepoURL
-						targetRevision: "main"
-					}
-				}
-			}
+			resources: Application: (_ArgoAppName): _ArgoApplication
 		}]
 	}
 }
