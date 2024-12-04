@@ -9,17 +9,18 @@ import (
 #ComponentConfig: {
 	Name:          _
 	OutputBaseDir: _
+	_ArgoAppName:  string
 
 	// Application resources are Cluster scoped.  BuildPlan metadata.name values
 	// are Project scoped.  Construct a unique cluster scoped named to resolve
 	// conflicts within ArgoCD.
-	let UniqueName = "\(ProjectName)-\(Name)"
+	_ArgoAppName: "\(ProjectName)-\(Name)"
 
 	let ArtifactPath = path.Join([OutputBaseDir, "gitops", "\(Name).application.gen.yaml"], path.Unix)
 	let ResourcesPath = path.Join(["deploy", OutputBaseDir, "components", Name], path.Unix)
 
 	// Add the argocd Application instance label to GitOps so resources are in sync.
-	KustomizeConfig: CommonLabels: "argocd.argoproj.io/instance": UniqueName
+	KustomizeConfig: CommonLabels: "argocd.argoproj.io/instance": _ArgoAppName
 
 	// Labels for the Application itself.  We filter the argocd application
 	// instance label so ArgoCD doesn't think the Application resource manages
@@ -37,8 +38,8 @@ import (
 		generators: [{
 			kind:   "Resources"
 			output: artifact
-			resources: Application: (UniqueName): app.#Application & {
-				metadata: name:      UniqueName
+			resources: Application: (_ArgoAppName): app.#Application & {
+				metadata: name:      _ArgoAppName
 				metadata: namespace: "argocd"
 				metadata: labels:    Labels
 				spec: {
