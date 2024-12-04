@@ -131,7 +131,7 @@ spec:
   rules:
   - backendRefs:
     - name: frontend
-      namespace: stage-bank-frontend
+      namespace: test-bank-frontend
       port: 80
     matches:
     - path:

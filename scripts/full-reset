@@ -1,0 +1,17 @@
+#! /bin/bash
+
+# Reset the cluster as described at
+# https://holos.run/docs/guides/local-cluster/#reset-the-cluster
+
+# cd to the repository root
+TOPLEVEL="$(cd $(dirname "$0") && git rev-parse --show-toplevel)"
+cd "$TOPLEVEL"
+
+set -xeuo pipefail
+
+git rm -rf deploy
+rm -rf deploy
+time holos render platform -t $USER
+git add deploy
+./scripts/reset-cluster
+./scripts/apply

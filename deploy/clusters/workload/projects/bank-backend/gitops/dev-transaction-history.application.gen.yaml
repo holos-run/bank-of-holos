@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: workload
+        app.holos.run/component.name: dev-transaction-history
+        app.holos.run/environment.name: dev
+        app.holos.run/project.name: bank-backend
+        app.holos.run/stack.name: bank-of-holos
+        app.holos.run/team.name: backend
+    name: bank-backend-dev-transaction-history
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: bank-backend
+    source:
+        path: deploy/clusters/workload/projects/bank-backend/components/dev-transaction-history
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: main

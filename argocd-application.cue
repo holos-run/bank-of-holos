@@ -20,7 +20,6 @@ import (
 		metadata: name:      _ArgoAppName
 		metadata: namespace: "argocd"
 		metadata: labels:    Labels
-		// metadata: annotations: "kargo.akuity.io/authorized-stage": "\(ProjectName):\(EnvironmentName)"
 		spec: {
 			destination: server: "https://kubernetes.default.svc"
 			project: ProjectName

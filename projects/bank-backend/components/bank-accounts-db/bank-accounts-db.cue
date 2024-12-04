@@ -8,7 +8,7 @@ let BackendNamespace = BankOfHolos.configuration.environments[EnvironmentName].b
 
 let CommonLabels = {
 	application: BankName
-	environment: "development"
+	environment: EnvironmentName
 	team:        "accounts"
 	tier:        "db"
 }

@@ -6,10 +6,12 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 
 // #Project represents a security boundary.
 #Project: {
-	name:         string
-	team:         string
+	name: string
+	team: string
+	// TODO: deprecate the singular environment, use environments instead.
 	environment?: string
 	stack?:       string
+	environments: #Environments
 	namespaces:   #Namespaces
 	components:   #Components
 	clusters:     #Clusters

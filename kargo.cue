@@ -95,3 +95,4 @@ HTTPRoutes: kargo: _backendRefs: "kargo-api": namespace: Kargo.Namespace
 		}
 	}
 }
+projects: {[CLUSTER=string]: [NAME=string]: metadata: name: NAME}
