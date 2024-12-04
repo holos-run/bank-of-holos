@@ -22,7 +22,7 @@ BankOfHolos: #BankOfHolos & {
 // Projects are security boundaries, so manage one project for each environment
 // and team combination.
 for ENV in BankOfHolos.configuration.environments {
-	Projects: "\(ENV.name)-bank-security": #ProjectBuilder & {
+	Projects: "\(ENV.name)-bank-security": #KargoProjectBuilder & {
 		team:        "security"
 		stack:       BankOfHolos.Name
 		environment: ENV.name
@@ -94,7 +94,10 @@ for ENV in BankOfHolos.configuration.environments {
 
 		for ENV in Environments {
 			for NS in EnvironmentNamespaces {
-				environments: (ENV.name): namespaces: "\(ENV.name)-\(NS.metadata.name)": _
+				// Adopts the namespace into a Kargo Project.  Manages a Kargo Project
+				// cluster resources via the label.
+				// https://docs.kargo.io/how-to-guides/working-with-projects#namespace-adoption
+				environments: (ENV.name): namespaces: "\(ENV.name)-\(NS.metadata.name)": metadata: labels: "kargo.akuity.io/project": "true"
 			}
 		}
 	}

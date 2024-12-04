@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: management
+        app.holos.run/component.name: projects
+        app.holos.run/environment.name: test
+        app.holos.run/project.name: test-bank-security
+        app.holos.run/stack.name: bank-of-holos
+        app.holos.run/team.name: security
+    name: test-bank-security-projects
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: test-bank-security
+    source:
+        path: deploy/clusters/management/projects/test-bank-security/components/projects
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: main

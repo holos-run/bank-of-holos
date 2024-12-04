@@ -54,7 +54,8 @@ apply rollouts
 # Kargo
 kubectl wait --for=condition=Available deployment/external-secrets-webhook -n external-secrets --timeout=300s
 apply kargo-secrets
-apply kargo
+apply kargo # includes crds
+apply projects
 
 # Istio
 apply istio-base

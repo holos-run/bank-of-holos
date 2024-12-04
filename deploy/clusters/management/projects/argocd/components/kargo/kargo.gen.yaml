@@ -3522,6 +3522,14 @@ rules:
   - create
   - patch
 - apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
   - kargo.akuity.io
   resources:
   - projects
@@ -3593,32 +3601,6 @@ rules:
   - get
   - list
   - patch
-  - watch
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.holos.run/cluster.name: management
-    app.holos.run/component.name: kargo
-    app.holos.run/project.name: argocd
-    app.holos.run/team.name: platform
-    app.kubernetes.io/component: controller
-    app.kubernetes.io/instance: kargo
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: kargo
-    app.kubernetes.io/version: v1.0.3
-    argocd.argoproj.io/instance: argocd-kargo
-    helm.sh/chart: kargo-1.0.3
-  name: kargo-controller-read-secrets
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - secrets
-  verbs:
-  - get
-  - list
   - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -4314,7 +4296,7 @@ data:
   GITCLIENT_EMAIL: no-reply@kargo.io
   GITCLIENT_NAME: Kargo
   GITCLIENT_SIGNING_KEY_TYPE: gpg
-  GLOBAL_CREDENTIALS_NAMESPACES: ""
+  GLOBAL_CREDENTIALS_NAMESPACES: kargo
   LOG_LEVEL: INFO
   ROLLOUTS_CONTROLLER_INSTANCE_ID: ""
   ROLLOUTS_INTEGRATION_ENABLED: "true"
@@ -4364,6 +4346,7 @@ apiVersion: v1
 data:
   KARGO_NAMESPACE: kargo
   LOG_LEVEL: INFO
+  MANAGE_CONTROLLER_ROLE_BINDINGS: "false"
 kind: ConfigMap
 metadata:
   labels:
@@ -4558,7 +4541,7 @@ spec:
   template:
     metadata:
       annotations:
-        configmap/checksum: cf6d41daa5bd745a15bd173fdc5dcf48c25a6c74c4ddb8dca3a0d6045be7aae7
+        configmap/checksum: 6b243732e7e4c920dda8395eb9f4d97c796850efc4916b7cd7a1c3be851ff4be
       labels:
         app.kubernetes.io/component: controller
         app.kubernetes.io/instance: kargo
@@ -4609,7 +4592,7 @@ spec:
   template:
     metadata:
       annotations:
-        configmap/checksum: 09e2c02a7e3a377e96d59d1fd0a1e95757a1ad39024466f12c612d082962bc75
+        configmap/checksum: d5c3143a94d57af29a3836414d147d76b5406bcb3cf780e3fd38acab01ee984f
       labels:
         app.kubernetes.io/component: management-controller
         app.kubernetes.io/instance: kargo

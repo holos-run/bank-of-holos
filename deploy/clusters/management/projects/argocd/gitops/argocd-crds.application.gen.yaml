@@ -14,5 +14,5 @@ spec:
     project: argocd
     source:
         path: deploy/clusters/management/projects/argocd/components/argocd-crds
-        repoURL: https://github.com/holos-run/bank-of-holos.git
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
         targetRevision: main

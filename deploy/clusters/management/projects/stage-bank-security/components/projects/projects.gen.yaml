@@ -1,0 +1,41 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Project
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: projects
+    app.holos.run/environment.name: stage
+    app.holos.run/project.name: stage-bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: stage-bank-security-projects
+  name: stage-bank-backend
+spec: {}
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Project
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: projects
+    app.holos.run/environment.name: stage
+    app.holos.run/project.name: stage-bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: stage-bank-security-projects
+  name: stage-bank-frontend
+spec: {}
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Project
+metadata:
+  labels:
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: projects
+    app.holos.run/environment.name: stage
+    app.holos.run/project.name: stage-bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: stage-bank-security-projects
+  name: stage-bank-security
+spec: {}

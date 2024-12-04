@@ -9,6 +9,7 @@ metadata:
     app.holos.run/stack.name: bank-of-holos
     app.holos.run/team.name: security
     argocd.argoproj.io/instance: stage-bank-security-namespaces
+    kargo.akuity.io/project: "true"
     kubernetes.io/metadata.name: stage-bank-backend
   name: stage-bank-backend
 ---
@@ -23,6 +24,7 @@ metadata:
     app.holos.run/stack.name: bank-of-holos
     app.holos.run/team.name: security
     argocd.argoproj.io/instance: stage-bank-security-namespaces
+    kargo.akuity.io/project: "true"
     kubernetes.io/metadata.name: stage-bank-frontend
   name: stage-bank-frontend
 ---
@@ -37,5 +39,6 @@ metadata:
     app.holos.run/stack.name: bank-of-holos
     app.holos.run/team.name: security
     argocd.argoproj.io/instance: stage-bank-security-namespaces
+    kargo.akuity.io/project: "true"
     kubernetes.io/metadata.name: stage-bank-security
   name: stage-bank-security
