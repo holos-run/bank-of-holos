@@ -204,9 +204,10 @@ for NS in BankOfHolos.configuration.tiers.prod.frontend.namespaces {
 }
 
 // nonprod httproutes
-HTTPRoutes: "dev-bank": _backendRefs: frontend: namespace:   BankOfHolos.configuration.environments.dev.frontend.namespace
-HTTPRoutes: "test-bank": _backendRefs: frontend: namespace:  BankOfHolos.configuration.environments.test.frontend.namespace
-HTTPRoutes: "stage-bank": _backendRefs: frontend: namespace: BankOfHolos.configuration.environments.test.frontend.namespace
+for ENV in BankOfHolos.configuration.tiers.nonprod.environments {
+	let NAMESPACE = BankOfHolos.configuration.environments[ENV.name].frontend.namespace
+	HTTPRoutes: "\(ENV.name)-bank": _backendRefs: frontend: namespace: NAMESPACE
+}
 
 // Platform wide schema definition.
 #BankOfHolos: {
@@ -222,11 +223,15 @@ HTTPRoutes: "stage-bank": _backendRefs: frontend: namespace: BankOfHolos.configu
 		tiers: [NAME=string]: {
 			name: NAME
 			frontend: namespaces: [NAME=string]: name: NAME
+			environments: #Environments
 		}
 
 		// Map environments to their tier.
 		for ENV in environments {
-			tiers: (Environments[ENV.name].tier): frontend: namespaces: (ENV.frontend.namespace): _
+			tiers: (Environments[ENV.name].tier): {
+				frontend: namespaces: (ENV.frontend.namespace): _
+				environments: (ENV.name): Environments[ENV.name]
+			}
 		}
 
 		environments: [NAME=string]: {
