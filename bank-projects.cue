@@ -10,10 +10,11 @@ BankOfHolos: #BankOfHolos & {
 	Name: string | *"bank-of-holos"
 
 	Environments: {
-		dev: tier:   "nonprod"
-		test: tier:  "nonprod"
-		stage: tier: "nonprod"
-		prod: tier:  "prod"
+		dev: tier:         "nonprod"
+		test: tier:        "nonprod"
+		stage: tier:       "nonprod"
+		"prod-east": tier: "prod"
+		"prod-west": tier: "prod"
 	}
 
 	#BankProject: #Project & {
@@ -189,7 +190,10 @@ BankOfHolos: #BankOfHolos & {
 Projects: BankOfHolos.Projects
 
 // prod httproutes
-HTTPRoutes: bank: _backendRefs: frontend: namespace: BankOfHolos.configuration.environments.prod.frontend.namespace
+for NS in BankOfHolos.configuration.tiers.prod.frontend.namespaces {
+	HTTPRoutes: bank: _backendRefs: (NS.name): namespace: NS.name
+}
+
 // nonprod httproutes
 HTTPRoutes: "dev-bank": _backendRefs: frontend: namespace:   BankOfHolos.configuration.environments.dev.frontend.namespace
 HTTPRoutes: "test-bank": _backendRefs: frontend: namespace:  BankOfHolos.configuration.environments.test.frontend.namespace
@@ -206,6 +210,16 @@ HTTPRoutes: "stage-bank": _backendRefs: frontend: namespace: BankOfHolos.configu
 
 	// Configuration constructed from the above fields.
 	configuration: {
+		tiers: [NAME=string]: {
+			name: NAME
+			frontend: namespaces: [NAME=string]: name: NAME
+		}
+
+		// Map environments to their tier.
+		for ENV in environments {
+			tiers: (Environments[ENV.name].tier): frontend: namespaces: (ENV.frontend.namespace): _
+		}
+
 		environments: [NAME=string]: {
 			name: NAME
 			frontend: namespace: "\(NAME)-bank-frontend"

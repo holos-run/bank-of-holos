@@ -46,8 +46,11 @@ spec:
     namespace: istio-ingress
   rules:
   - backendRefs:
-    - name: frontend
-      namespace: prod-bank-frontend
+    - name: prod-east-bank-frontend
+      namespace: prod-east-bank-frontend
+      port: 80
+    - name: prod-west-bank-frontend
+      namespace: prod-west-bank-frontend
       port: 80
     matches:
     - path:
