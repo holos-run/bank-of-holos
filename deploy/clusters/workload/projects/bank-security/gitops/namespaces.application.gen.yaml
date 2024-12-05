@@ -15,5 +15,5 @@ spec:
     project: bank-security
     source:
         path: deploy/clusters/workload/projects/bank-security/components/namespaces
-        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        repoURL: https://github.com/holos-run/bank-of-holos.git
         targetRevision: main
