@@ -1,0 +1,143 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: stages
+    app.holos.run/project.name: prod-bank-web
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: frontend
+    argocd.argoproj.io/instance: prod-bank-web-stages
+  name: prod-east-frontend
+  namespace: prod-bank-web
+spec:
+  promotionTemplate:
+    spec:
+      steps:
+      - config:
+          checkout:
+          - branch: main
+            path: ./src
+          - branch: stage/prod-east
+            path: ./out
+          repoURL: https://github.com/holos-run/bank-of-holos.git
+        uses: git-clone
+      - config:
+          path: ./out
+        uses: git-clear
+      - as: update-image
+        config:
+          images:
+          - image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend
+          path: ./src/deploy/clusters/workload/projects/prod-bank-web/components/prod-east-frontend
+        uses: kustomize-set-image
+      - config:
+          outPath: ./out/deploy/clusters/workload/projects/prod-bank-web/components/prod-east-frontend/prod-east-frontend.gen.yaml
+          path: ./src/deploy/clusters/workload/projects/prod-bank-web/components/prod-east-frontend
+        uses: kustomize-build
+      - as: commit
+        config:
+          messageFromSteps:
+          - update-image
+          path: ./out
+        uses: git-commit
+      - config:
+          path: ./out
+          targetBranch: stage/prod-east
+        uses: git-push
+      - config:
+          apps:
+          - name: prod-bank-web-prod-east-frontend
+            sources:
+            - desiredCommitFromStep: commit
+              repoURL: https://github.com/holos-run/bank-of-holos.git
+        uses: argocd-update
+  requestedFreight:
+  - origin:
+      kind: Warehouse
+      name: frontend
+    sources:
+      direct: true
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: stages
+    app.holos.run/project.name: prod-bank-web
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: frontend
+    argocd.argoproj.io/instance: prod-bank-web-stages
+  name: prod-west-frontend
+  namespace: prod-bank-web
+spec:
+  promotionTemplate:
+    spec:
+      steps:
+      - config:
+          checkout:
+          - branch: main
+            path: ./src
+          - branch: stage/prod-west
+            path: ./out
+          repoURL: https://github.com/holos-run/bank-of-holos.git
+        uses: git-clone
+      - config:
+          path: ./out
+        uses: git-clear
+      - as: update-image
+        config:
+          images:
+          - image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend
+          path: ./src/deploy/clusters/workload/projects/prod-bank-web/components/prod-west-frontend
+        uses: kustomize-set-image
+      - config:
+          outPath: ./out/deploy/clusters/workload/projects/prod-bank-web/components/prod-west-frontend/prod-west-frontend.gen.yaml
+          path: ./src/deploy/clusters/workload/projects/prod-bank-web/components/prod-west-frontend
+        uses: kustomize-build
+      - as: commit
+        config:
+          messageFromSteps:
+          - update-image
+          path: ./out
+        uses: git-commit
+      - config:
+          path: ./out
+          targetBranch: stage/prod-west
+        uses: git-push
+      - config:
+          apps:
+          - name: prod-bank-web-prod-west-frontend
+            sources:
+            - desiredCommitFromStep: commit
+              repoURL: https://github.com/holos-run/bank-of-holos.git
+        uses: argocd-update
+  requestedFreight:
+  - origin:
+      kind: Warehouse
+      name: frontend
+    sources:
+      stages:
+      - prod-east-frontend
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: stages
+    app.holos.run/project.name: prod-bank-web
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: frontend
+    argocd.argoproj.io/instance: prod-bank-web-stages
+  name: frontend
+  namespace: prod-bank-web
+spec:
+  interval: 5m0s
+  subscriptions:
+  - image:
+      discoveryLimit: 5
+      repoURL: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend
+      semverConstraint: ^v0.6.5
+      strictSemvers: true

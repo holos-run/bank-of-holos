@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    annotations:
+        kargo.akuity.io/authorized-stage: nonprod-bank-web:stage-frontend
+    labels:
+        app.holos.run/cluster.name: workload
+        app.holos.run/component.name: stage-frontend
+        app.holos.run/environment.name: stage
+        app.holos.run/project.name: nonprod-bank-web
+        app.holos.run/stack.name: bank-of-holos
+        app.holos.run/team.name: frontend
+    name: nonprod-bank-web-stage-frontend
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: nonprod-bank-web
+    source:
+        path: deploy/clusters/workload/projects/nonprod-bank-web/components/stage-frontend
+        repoURL: https://github.com/holos-run/bank-of-holos.git
+        targetRevision: stage/stage

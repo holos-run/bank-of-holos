@@ -16,7 +16,7 @@ HTTPRoutes: #HTTPRoutes
 		let HOST = Name + "." + Organization.Domain
 
 		_backendRefs: [NAME=string]: {
-			name:      NAME
+			name:      string | *NAME
 			namespace: string
 			port:      number | *80
 		}

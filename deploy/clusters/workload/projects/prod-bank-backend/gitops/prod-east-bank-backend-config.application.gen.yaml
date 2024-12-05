@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: workload
+        app.holos.run/component.name: prod-east-bank-backend-config
+        app.holos.run/environment.name: prod-east
+        app.holos.run/project.name: prod-bank-backend
+        app.holos.run/stack.name: bank-of-holos
+        app.holos.run/team.name: backend
+    name: prod-bank-backend-prod-east-bank-backend-config
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: prod-bank-backend
+    source:
+        path: deploy/clusters/workload/projects/prod-bank-backend/components/prod-east-bank-backend-config
+        repoURL: https://github.com/holos-run/bank-of-holos.git
+        targetRevision: main

@@ -23,6 +23,15 @@ applyDir() {
     | xargs -I% -n1 kubectl apply --force-conflicts --server-side=true -f %
 }
 
+applyProject() {
+  local project="${1}"
+  local cluster="${2:-workload}"
+
+  find "deploy/clusters/${cluster}/projects/${project}/components" -name "*.gen.yaml" \
+    | xargs -S1024 -I% -n1 bash -c 'test -s % && echo % || true' \
+    | xargs -t -S1024 -I% -n1 kubectl apply --force-conflicts --server-side=true -f %
+}
+
 # Namespaces first
 apply namespaces
 
@@ -74,45 +83,26 @@ apply httproutes
 # ArgoCD Applications
 applyDir gitops
 
-## Bank of Holos
-# Generate the private-key in-cluster.
-for env in dev test stage prod; do
-  apply "${env}-secrets"
-done
-for env in dev test stage prod; do
-  kubectl wait --for=condition=complete job.batch/jwt-key-writer -n "${env}-bank-security" --timeout=300s
-done
-
-for env in dev test stage prod; do
-  # Bank Config
-  apply "${env}-bank-backend-config"
-
-  # Bank Databases
-  apply "${env}-accounts-db"
-  apply "${env}-ledger-db"
-
-  # Bank Backend Services
-  apply "${env}-contacts"
-  apply "${env}-balance-reader"
-  apply "${env}-userservice"
-  apply "${env}-ledger-writer"
-  apply "${env}-transaction-history"
-
-  # Bank Web Frontend
-  apply "${env}-frontend"
-done
-
 # Kargo Projects.  They need the webhook but we don't need them until later.
 kubectl wait --for=condition=Available deployment/kargo-webhooks-server -n kargo --timeout=300s
-apply projects
-apply stages
+
+## nonprod Bank of Holos
+applyProject nonprod-bank-security
+applyProject nonprod-bank-backend
+applyProject nonprod-bank-web
+## prod Bank of Holos
+applyProject prod-bank-security
+applyProject prod-bank-backend
+applyProject prod-bank-web
 
 set +x
 echo
 echo "httproutes:"
-echo "  - https://kargo.holos.localhost"
 echo "  - https://argocd.holos.localhost"
-echo "  - https://bank.holos.localhost"
+echo "  - https://kargo.holos.localhost"
+echo "  - https://prod-east-bank-frontend.holos.localhost - Regional endpoint"
+echo "  - https://prod-west-bank-frontend.holos.localhost - Regional endpoint"
+echo "  - https://bank.holos.localhost                    - Routes to all prod environments"
 echo
 echo "Kargo admin password:"
 echo "  run: kubectl get secret -n kargo admin-credentials -o json | jq --exit-status -r '.data.password | @base64d'"

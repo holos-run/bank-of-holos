@@ -1,0 +1,25 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Project
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: projects
+    app.holos.run/project.name: nonprod-bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: nonprod-bank-security-projects
+  name: nonprod-bank-backend
+spec: {}
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Project
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: projects
+    app.holos.run/project.name: nonprod-bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: nonprod-bank-security-projects
+  name: nonprod-bank-web
+spec: {}
