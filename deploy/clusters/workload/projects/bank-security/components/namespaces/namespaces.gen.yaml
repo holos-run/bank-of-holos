@@ -1,0 +1,197 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kargo.akuity.io/project: "true"
+    kubernetes.io/metadata.name: bank-backend
+  name: bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kargo.akuity.io/project: "true"
+    kubernetes.io/metadata.name: bank-security
+  name: bank-security
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kargo.akuity.io/project: "true"
+    kubernetes.io/metadata.name: bank-web
+  name: bank-web
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: dev-bank-backend
+  name: dev-bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: dev-bank-frontend
+  name: dev-bank-frontend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: dev-bank-security
+  name: dev-bank-security
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: prod-bank-backend
+  name: prod-bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: prod-bank-frontend
+  name: prod-bank-frontend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: prod-bank-security
+  name: prod-bank-security
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: stage-bank-backend
+  name: stage-bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: stage-bank-frontend
+  name: stage-bank-frontend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: stage-bank-security
+  name: stage-bank-security
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: test-bank-backend
+  name: test-bank-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: test-bank-frontend
+  name: test-bank-frontend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.holos.run/cluster.name: workload
+    app.holos.run/component.name: namespaces
+    app.holos.run/project.name: bank-security
+    app.holos.run/stack.name: bank-of-holos
+    app.holos.run/team.name: security
+    argocd.argoproj.io/instance: bank-security-namespaces
+    kubernetes.io/metadata.name: test-bank-security
+  name: test-bank-security

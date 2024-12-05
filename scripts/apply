@@ -12,7 +12,7 @@ apply() {
 
   find "deploy/clusters/${cluster}" -name "${file}" \
     | xargs -S1024 -I% -n1 bash -c 'test -s % && echo % || true' \
-    | xargs -S1024 -I% -n1 kubectl apply --server-side=true -f %
+    | xargs -S1024 -I% -n1 kubectl apply --force-conflicts --server-side=true -f %
 }
 
 applyDir() {
@@ -20,7 +20,7 @@ applyDir() {
   local cluster="${2:-workload}"
 
   find "deploy/clusters/${cluster}" -type d -name "${dir}" \
-    | xargs -I% -n1 kubectl apply --server-side=true -f %
+    | xargs -I% -n1 kubectl apply --force-conflicts --server-side=true -f %
 }
 
 # Namespaces first
@@ -51,21 +51,23 @@ fi
 apply argocd
 apply app-projects
 apply rollouts
+
 # Kargo
 kubectl wait --for=condition=Available deployment/external-secrets-webhook -n external-secrets --timeout=300s
 apply kargo-secrets
-apply kargo
+apply kargo # includes crds
 
 # Istio
 apply istio-base
 apply istiod
 apply istio-cni
+apply istio-ztunnel
+apply istio-gateway
+
 if ! kubectl wait --for=condition=Ready pod -l k8s-app=istio-cni-node --timeout=300s -n istio-system; then
   echo 'istio-cni-node not ready' >&2
   exit 1
 fi
-apply istio-ztunnel
-apply istio-gateway
 # Routes should be accepted, but all backends aren't valid yet.
 apply httproutes
 
@@ -74,24 +76,47 @@ applyDir gitops
 
 ## Bank of Holos
 # Generate the private-key in-cluster.
-apply "secrets"
+for env in dev test stage prod; do
+  apply "${env}-secrets"
+done
 for env in dev test stage prod; do
   kubectl wait --for=condition=complete job.batch/jwt-key-writer -n "${env}-bank-security" --timeout=300s
 done
-# Bank Config
-apply config
-# Bank Databases
-apply accounts-db
-apply ledger-db
 
-# Bank Backend Services
-apply contacts
-apply balance-reader
-apply userservice
-apply ledger-writer
-apply transaction-history
+for env in dev test stage prod; do
+  # Bank Config
+  apply "${env}-bank-backend-config"
 
-# Bank Web Frontend
-apply frontend
+  # Bank Databases
+  apply "${env}-accounts-db"
+  apply "${env}-ledger-db"
+
+  # Bank Backend Services
+  apply "${env}-contacts"
+  apply "${env}-balance-reader"
+  apply "${env}-userservice"
+  apply "${env}-ledger-writer"
+  apply "${env}-transaction-history"
+
+  # Bank Web Frontend
+  apply "${env}-frontend"
+done
+
+# Kargo Projects.  They need the webhook but we don't need them until later.
+kubectl wait --for=condition=Available deployment/kargo-webhooks-server -n kargo --timeout=300s
+apply projects
+apply stages
+
+set +x
+echo
+echo "httproutes:"
+echo "  - https://kargo.holos.localhost"
+echo "  - https://argocd.holos.localhost"
+echo "  - https://bank.holos.localhost"
+echo
+echo "Kargo admin password:"
+echo "  run: kubectl get secret -n kargo admin-credentials -o json | jq --exit-status -r '.data.password | @base64d'"
+echo
+set -x
 
 exit 0
