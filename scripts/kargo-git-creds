@@ -1,0 +1,47 @@
+#! /bin/bash
+#
+# Store GitHub App Creds
+# https://docs.kargo.io/how-to-guides/managing-credentials/#github-app-authentication
+
+
+CAROOT="$(mkcert -CAROOT)"
+
+tmpdir="$(mktemp -d)"
+finish() {
+  rm -rf "$tmpdir"
+}
+trap finish EXIT
+
+cd "$tmpdir"
+
+set -euo pipefail
+
+cat <<EOF > kargo.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kubernetes.io/metadata.name: kargo
+  name: kargo
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  labels:
+    kargo.akuity.io/cred-type: git
+  name: bank-of-holos-git-creds
+  namespace: kargo
+type: Opaque
+stringData:
+  githubAppID: "${BANK_OF_HOLOS_APP_ID}"
+  githubAppInstallationID: "${BANK_OF_HOLOS_INSTALL_ID}"
+  githubAppPrivateKey: "$(base64 < $BANK_OF_HOLOS_APP_KEY)"
+  repoURL: "${BANK_OF_HOLOS_REPO_URL}"
+EOF
+
+cp kargo.yaml "${CAROOT}/kargo.yaml"
+
+echo "Secret created, apply with:" >&2
+echo "  kubectl apply -f '${CAROOT}/kargo.yaml'" >&2
+echo >&2
+echo "The reset-cluster script will automatically apply this secret going forward." >&2
