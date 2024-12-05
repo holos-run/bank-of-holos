@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    labels:
+        app.holos.run/cluster.name: workload
+        app.holos.run/component.name: stage-balance-reader
+        app.holos.run/environment.name: stage
+        app.holos.run/project.name: nonprod-bank-backend
+        app.holos.run/stack.name: bank-of-holos
+        app.holos.run/team.name: backend
+    name: nonprod-bank-backend-stage-balance-reader
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: nonprod-bank-backend
+    source:
+        path: deploy/clusters/workload/projects/nonprod-bank-backend/components/stage-balance-reader
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: main

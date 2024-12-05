@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    annotations:
+        kargo.akuity.io/authorized-stage: bank-security:prod-east-frontend
+    labels:
+        app.holos.run/cluster.name: workload
+        app.holos.run/component.name: prod-east-frontend
+        app.holos.run/environment.name: prod-east
+        app.holos.run/project.name: prod-bank-web
+        app.holos.run/stack.name: bank-of-holos
+        app.holos.run/team.name: frontend
+    name: prod-bank-web-prod-east-frontend
+    namespace: argocd
+spec:
+    destination:
+        server: https://kubernetes.default.svc
+    project: prod-bank-web
+    source:
+        path: deploy/clusters/workload/projects/prod-bank-web/components/prod-east-frontend
+        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        targetRevision: stage/prod-east

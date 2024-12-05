@@ -86,10 +86,14 @@ applyDir gitops
 # Kargo Projects.  They need the webhook but we don't need them until later.
 kubectl wait --for=condition=Available deployment/kargo-webhooks-server -n kargo --timeout=300s
 
-## Bank of Holos
-applyProject bank-security
-applyProject bank-backend
-applyProject bank-web
+## nonprod Bank of Holos
+applyProject nonprod-bank-security
+applyProject nonprod-bank-backend
+applyProject nonprod-bank-web
+## prod Bank of Holos
+applyProject prod-bank-security
+applyProject prod-bank-backend
+applyProject prod-bank-web
 
 set +x
 echo
