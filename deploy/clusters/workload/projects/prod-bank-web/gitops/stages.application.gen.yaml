@@ -4,16 +4,16 @@ metadata:
     labels:
         app.holos.run/cluster.name: workload
         app.holos.run/component.name: stages
-        app.holos.run/project.name: nonprod-bank-security
+        app.holos.run/project.name: prod-bank-web
         app.holos.run/stack.name: bank-of-holos
-        app.holos.run/team.name: security
-    name: nonprod-bank-security-stages
+        app.holos.run/team.name: frontend
+    name: prod-bank-web-stages
     namespace: argocd
 spec:
     destination:
         server: https://kubernetes.default.svc
-    project: nonprod-bank-security
+    project: prod-bank-web
     source:
-        path: deploy/clusters/workload/projects/nonprod-bank-security/components/stages
+        path: deploy/clusters/workload/projects/prod-bank-web/components/stages
         repoURL: https://github.com/jeffmccune/bank-of-holos.git
         targetRevision: main

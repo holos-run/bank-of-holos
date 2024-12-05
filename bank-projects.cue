@@ -42,15 +42,15 @@ BankOfHolos: #BankOfHolos & {
 				// And one special namespace for the Kargo Project for this Holos Project.
 				// https://docs.kargo.io/how-to-guides/working-with-projects#namespace-adoption
 				let KargoAdopt = {metadata: labels: "kargo.akuity.io/project": "true"}
-				namespaces: (BankSecurity): KargoAdopt
-				namespaces: (BankBackend):  KargoAdopt
-				namespaces: (BankWeb):      KargoAdopt
+				namespaces: (BankBackend): KargoAdopt
+				namespaces: (BankWeb):     KargoAdopt
+				// No need for a Kargo project for the bank security projects.
+				namespaces: (BankSecurity): _
 
 				// The security team manages the environment namespaces for the whole stack.
 				for CLUSTER in clusters {
-					_kargo_cluster_projects: (CLUSTER.name): (BankSecurity): _
-					_kargo_cluster_projects: (CLUSTER.name): (BankBackend):  _
-					_kargo_cluster_projects: (CLUSTER.name): (BankWeb):      _
+					_kargo_cluster_projects: (CLUSTER.name): (BankBackend): _
+					_kargo_cluster_projects: (CLUSTER.name): (BankWeb):     _
 
 					let NAMESPACES = #SharedComponent & {
 						_component: "namespaces"
@@ -72,19 +72,6 @@ BankOfHolos: #BankOfHolos & {
 					}
 					components: (PROJECTS.name): PROJECTS.component
 
-					// The stages component digs into Projects.foo._kargo_cluster_projects
-					// to configure Kargo warehouses and stages for the project.
-					let STAGES = #ProjectClusterComponent & {
-						_component: "stages"
-						_project:   name
-						_cluster:   CLUSTER.name
-						_team:      team
-						_stack:     Name
-						component: path: "./projects/bank-security/components/stages"
-						component: parameters: TierName: TIER.name
-					}
-					components: (STAGES.name): STAGES.component
-
 					for ENV in Tiers[TIER.name].environments {
 						namespaces: BankOfHolos.configuration.environments[ENV.name].namespaces
 
@@ -104,12 +91,14 @@ BankOfHolos: #BankOfHolos & {
 				}
 			}
 
-			(BankBackend): {
+			(BankBackend): #BankProject & {
 				name:     _
 				clusters: ClusterSets.workload.clusters
 				team:     "backend"
 
 				for CLUSTER in clusters {
+					_kargo_cluster_projects: (CLUSTER.name): (BankBackend): _
+
 					for ENV in Tiers[TIER.name].environments {
 						let BUILDER = #ProjectClusterComponent & {
 							_project:     name
@@ -173,12 +162,27 @@ BankOfHolos: #BankOfHolos & {
 				}
 			}
 
-			(BankWeb): {
+			(BankWeb): #BankProject & {
 				name:     _
 				clusters: ClusterSets.workload.clusters
 				team:     "frontend"
 
 				for CLUSTER in clusters {
+					_kargo_cluster_projects: (CLUSTER.name): (BankWeb): _
+
+					// The stages component digs into Projects.foo._kargo_cluster_projects
+					// to configure Kargo warehouses and stages for the project.
+					let STAGES = #ProjectClusterComponent & {
+						_component: "stages"
+						_project:   name
+						_cluster:   CLUSTER.name
+						_team:      team
+						_stack:     Name
+						component: path: "./projects/bank-frontend/components/stages"
+						component: parameters: TierName: TIER.name
+					}
+					components: (STAGES.name): STAGES.component
+
 					for ENV in Tiers[TIER.name].environments {
 						let BUILDER = #ProjectClusterComponent & {
 							_project:     name

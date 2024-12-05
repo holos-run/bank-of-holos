@@ -22,7 +22,6 @@ metadata:
     app.holos.run/stack.name: bank-of-holos
     app.holos.run/team.name: security
     argocd.argoproj.io/instance: prod-bank-security-namespaces
-    kargo.akuity.io/project: "true"
     kubernetes.io/metadata.name: prod-bank-security
   name: prod-bank-security
 ---

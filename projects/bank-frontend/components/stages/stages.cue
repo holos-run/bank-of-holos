@@ -25,9 +25,8 @@ Component: #Kubernetes & {
 			}
 		}
 
-		for ENV in BankOfHolos.Environments {
-			// TODO: Ideally this would be unified with the bank-frontend component
-			// parameters.
+		for ENV in BankOfHolos.Tiers[TierName].environments {
+			// TODO: Unify with the bank-frontend component somehow.
 			let FrontendName = "\(ENV.name)-frontend"
 			let OutPath = "deploy/clusters/\(ClusterName)/projects/bank-web/components/\(FrontendName)"
 
