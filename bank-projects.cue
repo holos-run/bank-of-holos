@@ -191,7 +191,16 @@ Projects: BankOfHolos.Projects
 
 // prod httproutes
 for NS in BankOfHolos.configuration.tiers.prod.frontend.namespaces {
-	HTTPRoutes: bank: _backendRefs: (NS.name): namespace: NS.name
+	// Split traffic between east and west, like a global load balancer.
+	// https://bank.holos.localhost
+	HTTPRoutes: bank: _backendRefs: (NS.name): {
+		name:      "frontend"
+		namespace: NS.name
+	}
+	// Route traffic to regional backend.
+	// https://prod-east-bank-frontend.holos.localhost
+	// https://prod-west-bank-frontend.holos.localhost
+	HTTPRoutes: (NS.name): _backendRefs: frontend: namespace: NS.name
 }
 
 // nonprod httproutes

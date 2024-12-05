@@ -46,10 +46,10 @@ spec:
     namespace: istio-ingress
   rules:
   - backendRefs:
-    - name: prod-east-bank-frontend
+    - name: frontend
       namespace: prod-east-bank-frontend
       port: 80
-    - name: prod-west-bank-frontend
+    - name: frontend
       namespace: prod-west-bank-frontend
       port: 80
     matches:
@@ -107,6 +107,62 @@ spec:
   - backendRefs:
     - name: kargo-api
       namespace: kargo
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: prod-east-bank-frontend
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: httproutes
+    app.holos.run/project.name: network
+    app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-httproutes
+  name: prod-east-bank-frontend
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - prod-east-bank-frontend.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: frontend
+      namespace: prod-east-bank-frontend
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: prod-west-bank-frontend
+    app.holos.run/cluster.name: management
+    app.holos.run/component.name: httproutes
+    app.holos.run/project.name: network
+    app.holos.run/team.name: platform
+    argocd.argoproj.io/instance: network-httproutes
+  name: prod-west-bank-frontend
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - prod-west-bank-frontend.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: frontend
+      namespace: prod-west-bank-frontend
       port: 80
     matches:
     - path:
