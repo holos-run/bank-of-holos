@@ -7,6 +7,39 @@ TierName: string @tag(TierName)
 BankOfHolos: #BankOfHolos & {
 	Name: string | *"bank-of-holos"
 
+	// Kargo promotion stages
+	Stages: {
+		// TODO: define this properly
+		[NAME=string]: {requestedFreight: [...{...}]}
+
+		let FrontendWarehouse = {
+			kind: "Warehouse"
+			name: "frontend"
+		}
+
+		"dev-frontend": requestedFreight: [{
+			origin: FrontendWarehouse
+			sources: direct: true
+		}]
+		"test-frontend": requestedFreight: [{
+			origin: FrontendWarehouse
+			sources: stages: ["dev-frontend"]
+		}]
+		"stage-frontend": requestedFreight: [{
+			origin: FrontendWarehouse
+			sources: stages: ["test-frontend"]
+		}]
+
+		"prod-east-frontend": requestedFreight: [{
+			origin: FrontendWarehouse
+			sources: direct: true
+		}]
+		"prod-west-frontend": requestedFreight: [{
+			origin: FrontendWarehouse
+			sources: stages: ["prod-east-frontend"]
+		}]
+	}
+
 	Environments: {
 		dev: tier:         "nonprod"
 		test: tier:        "nonprod"
@@ -239,6 +272,9 @@ for ENV in BankOfHolos.configuration.tiers.nonprod.environments {
 
 	// Environments organized by tiers.
 	Tiers: [NAME=string]: {name: NAME, environments: #Environments}
+
+	// Kargo Promotion stages
+	Stages: {...}
 
 	// Configuration constructed from the above fields.
 	configuration: {

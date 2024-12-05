@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
     annotations:
-        kargo.akuity.io/authorized-stage: bank-security:dev-frontend
+        kargo.akuity.io/authorized-stage: nonprod-bank-web:dev-frontend
     labels:
         app.holos.run/cluster.name: workload
         app.holos.run/component.name: dev-frontend

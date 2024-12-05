@@ -29,11 +29,11 @@ spec:
         config:
           images:
           - image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend
-          path: ./src/deploy/clusters/workload/projects/bank-web/components/dev-frontend
+          path: ./src/deploy/clusters/workload/projects/nonprod-bank-web/components/dev-frontend
         uses: kustomize-set-image
       - config:
-          outPath: ./out/deploy/clusters/workload/projects/bank-web/components/dev-frontend/dev-frontend.gen.yaml
-          path: ./src/deploy/clusters/workload/projects/bank-web/components/dev-frontend
+          outPath: ./out/deploy/clusters/workload/projects/nonprod-bank-web/components/dev-frontend/dev-frontend.gen.yaml
+          path: ./src/deploy/clusters/workload/projects/nonprod-bank-web/components/dev-frontend
         uses: kustomize-build
       - as: commit
         config:
@@ -47,7 +47,7 @@ spec:
         uses: git-push
       - config:
           apps:
-          - name: bank-web-dev-frontend
+          - name: nonprod-bank-web-dev-frontend
             sources:
             - desiredCommitFromStep: commit
               repoURL: https://github.com/jeffmccune/bank-of-holos.git
@@ -90,11 +90,11 @@ spec:
         config:
           images:
           - image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend
-          path: ./src/deploy/clusters/workload/projects/bank-web/components/stage-frontend
+          path: ./src/deploy/clusters/workload/projects/nonprod-bank-web/components/stage-frontend
         uses: kustomize-set-image
       - config:
-          outPath: ./out/deploy/clusters/workload/projects/bank-web/components/stage-frontend/stage-frontend.gen.yaml
-          path: ./src/deploy/clusters/workload/projects/bank-web/components/stage-frontend
+          outPath: ./out/deploy/clusters/workload/projects/nonprod-bank-web/components/stage-frontend/stage-frontend.gen.yaml
+          path: ./src/deploy/clusters/workload/projects/nonprod-bank-web/components/stage-frontend
         uses: kustomize-build
       - as: commit
         config:
@@ -108,7 +108,7 @@ spec:
         uses: git-push
       - config:
           apps:
-          - name: bank-web-stage-frontend
+          - name: nonprod-bank-web-stage-frontend
             sources:
             - desiredCommitFromStep: commit
               repoURL: https://github.com/jeffmccune/bank-of-holos.git
@@ -118,7 +118,8 @@ spec:
       kind: Warehouse
       name: frontend
     sources:
-      direct: true
+      stages:
+      - test-frontend
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
@@ -151,11 +152,11 @@ spec:
         config:
           images:
           - image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend
-          path: ./src/deploy/clusters/workload/projects/bank-web/components/test-frontend
+          path: ./src/deploy/clusters/workload/projects/nonprod-bank-web/components/test-frontend
         uses: kustomize-set-image
       - config:
-          outPath: ./out/deploy/clusters/workload/projects/bank-web/components/test-frontend/test-frontend.gen.yaml
-          path: ./src/deploy/clusters/workload/projects/bank-web/components/test-frontend
+          outPath: ./out/deploy/clusters/workload/projects/nonprod-bank-web/components/test-frontend/test-frontend.gen.yaml
+          path: ./src/deploy/clusters/workload/projects/nonprod-bank-web/components/test-frontend
         uses: kustomize-build
       - as: commit
         config:
@@ -169,7 +170,7 @@ spec:
         uses: git-push
       - config:
           apps:
-          - name: bank-web-test-frontend
+          - name: nonprod-bank-web-test-frontend
             sources:
             - desiredCommitFromStep: commit
               repoURL: https://github.com/jeffmccune/bank-of-holos.git
@@ -179,7 +180,8 @@ spec:
       kind: Warehouse
       name: frontend
     sources:
-      direct: true
+      stages:
+      - dev-frontend
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse

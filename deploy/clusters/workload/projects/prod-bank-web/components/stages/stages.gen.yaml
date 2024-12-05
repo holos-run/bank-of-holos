@@ -29,11 +29,11 @@ spec:
         config:
           images:
           - image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend
-          path: ./src/deploy/clusters/workload/projects/bank-web/components/prod-east-frontend
+          path: ./src/deploy/clusters/workload/projects/prod-bank-web/components/prod-east-frontend
         uses: kustomize-set-image
       - config:
-          outPath: ./out/deploy/clusters/workload/projects/bank-web/components/prod-east-frontend/prod-east-frontend.gen.yaml
-          path: ./src/deploy/clusters/workload/projects/bank-web/components/prod-east-frontend
+          outPath: ./out/deploy/clusters/workload/projects/prod-bank-web/components/prod-east-frontend/prod-east-frontend.gen.yaml
+          path: ./src/deploy/clusters/workload/projects/prod-bank-web/components/prod-east-frontend
         uses: kustomize-build
       - as: commit
         config:
@@ -47,7 +47,7 @@ spec:
         uses: git-push
       - config:
           apps:
-          - name: bank-web-prod-east-frontend
+          - name: prod-bank-web-prod-east-frontend
             sources:
             - desiredCommitFromStep: commit
               repoURL: https://github.com/jeffmccune/bank-of-holos.git
@@ -90,11 +90,11 @@ spec:
         config:
           images:
           - image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend
-          path: ./src/deploy/clusters/workload/projects/bank-web/components/prod-west-frontend
+          path: ./src/deploy/clusters/workload/projects/prod-bank-web/components/prod-west-frontend
         uses: kustomize-set-image
       - config:
-          outPath: ./out/deploy/clusters/workload/projects/bank-web/components/prod-west-frontend/prod-west-frontend.gen.yaml
-          path: ./src/deploy/clusters/workload/projects/bank-web/components/prod-west-frontend
+          outPath: ./out/deploy/clusters/workload/projects/prod-bank-web/components/prod-west-frontend/prod-west-frontend.gen.yaml
+          path: ./src/deploy/clusters/workload/projects/prod-bank-web/components/prod-west-frontend
         uses: kustomize-build
       - as: commit
         config:
@@ -108,7 +108,7 @@ spec:
         uses: git-push
       - config:
           apps:
-          - name: bank-web-prod-west-frontend
+          - name: prod-bank-web-prod-west-frontend
             sources:
             - desiredCommitFromStep: commit
               repoURL: https://github.com/jeffmccune/bank-of-holos.git
@@ -118,7 +118,8 @@ spec:
       kind: Warehouse
       name: frontend
     sources:
-      direct: true
+      stages:
+      - prod-east-frontend
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse

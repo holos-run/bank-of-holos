@@ -28,17 +28,11 @@ Component: #Kubernetes & {
 		for ENV in BankOfHolos.Tiers[TierName].environments {
 			// TODO: Unify with the bank-frontend component somehow.
 			let FrontendName = "\(ENV.name)-frontend"
-			let OutPath = "deploy/clusters/\(ClusterName)/projects/bank-web/components/\(FrontendName)"
+			let OutPath = "deploy/clusters/\(ClusterName)/projects/\(ProjectName)/components/\(FrontendName)"
 
 			Stage: (FrontendName): {
 				spec: {
-					requestedFreight: [{
-						origin: {
-							kind: "Warehouse"
-							name: Warehouse.frontend.metadata.name
-						}
-						sources: direct: true
-					}]
+					requestedFreight: BankOfHolos.Stages[FrontendName].requestedFreight
 					promotionTemplate: spec: {
 						let SRC = "./src"
 						let OUT = "./out"
@@ -99,7 +93,7 @@ Component: #Kubernetes & {
 								uses: "argocd-update"
 								config: {
 									apps: [{
-										name: "bank-web-\(FrontendName)"
+										name: "\(ProjectName)-\(FrontendName)"
 										sources: [{
 											repoURL:               Organization.RepoURL
 											desiredCommitFromStep: "commit"
