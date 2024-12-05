@@ -20,7 +20,7 @@ spec:
             path: ./src
           - branch: stage/dev
             path: ./out
-          repoURL: https://github.com/jeffmccune/bank-of-holos.git
+          repoURL: https://github.com/holos-run/bank-of-holos.git
         uses: git-clone
       - config:
           path: ./out
@@ -50,7 +50,7 @@ spec:
           - name: nonprod-bank-web-dev-frontend
             sources:
             - desiredCommitFromStep: commit
-              repoURL: https://github.com/jeffmccune/bank-of-holos.git
+              repoURL: https://github.com/holos-run/bank-of-holos.git
         uses: argocd-update
   requestedFreight:
   - origin:
@@ -81,7 +81,7 @@ spec:
             path: ./src
           - branch: stage/stage
             path: ./out
-          repoURL: https://github.com/jeffmccune/bank-of-holos.git
+          repoURL: https://github.com/holos-run/bank-of-holos.git
         uses: git-clone
       - config:
           path: ./out
@@ -111,7 +111,7 @@ spec:
           - name: nonprod-bank-web-stage-frontend
             sources:
             - desiredCommitFromStep: commit
-              repoURL: https://github.com/jeffmccune/bank-of-holos.git
+              repoURL: https://github.com/holos-run/bank-of-holos.git
         uses: argocd-update
   requestedFreight:
   - origin:
@@ -143,7 +143,7 @@ spec:
             path: ./src
           - branch: stage/test
             path: ./out
-          repoURL: https://github.com/jeffmccune/bank-of-holos.git
+          repoURL: https://github.com/holos-run/bank-of-holos.git
         uses: git-clone
       - config:
           path: ./out
@@ -173,7 +173,7 @@ spec:
           - name: nonprod-bank-web-test-frontend
             sources:
             - desiredCommitFromStep: commit
-              repoURL: https://github.com/jeffmccune/bank-of-holos.git
+              repoURL: https://github.com/holos-run/bank-of-holos.git
         uses: argocd-update
   requestedFreight:
   - origin:

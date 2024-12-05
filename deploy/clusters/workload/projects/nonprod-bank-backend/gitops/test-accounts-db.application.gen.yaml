@@ -16,5 +16,5 @@ spec:
     project: nonprod-bank-backend
     source:
         path: deploy/clusters/workload/projects/nonprod-bank-backend/components/test-accounts-db
-        repoURL: https://github.com/jeffmccune/bank-of-holos.git
+        repoURL: https://github.com/holos-run/bank-of-holos.git
         targetRevision: main
