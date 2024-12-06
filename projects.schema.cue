@@ -103,6 +103,8 @@ import "github.com/holos-run/holos/api/core/v1alpha5:core"
 			"app.holos.run/cluster.name":   _cluster
 			"app.holos.run/team.name":      _team
 			"app.holos.run/component.name": _component
+			// path separators are invalid label values.
+			// "app.holos.run/component.path": path
 			if _environment != _|_ {
 				"app.holos.run/environment.name": _environment
 			}
