@@ -231,6 +231,12 @@ BankOfHolos: #BankOfHolos & {
 							component: path: "projects/bank-frontend/components/bank-frontend"
 						}
 						components: (FRONTEND.name): FRONTEND.component
+
+						let PODINFO = BUILDER & {
+							_component: "\(ENV.name)-podinfo"
+							component: path: "projects/bank-frontend/components/podinfo"
+						}
+						components: (PODINFO.name): PODINFO.component
 					}
 				}
 			}
